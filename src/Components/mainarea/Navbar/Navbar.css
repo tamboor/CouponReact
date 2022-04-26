@@ -1,0 +1,29 @@
+.Navbar {
+    /* overflow: hidden;
+    background-color: #333; */
+    /* justify-content: center; */
+    /* display: block; */
+    /* flex-direction: row; */
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    border-style: solid;
+  }
+  
+  /* Navbar links */
+  .Navbar a {
+      border-left-style: solid;
+      border-right-style: solid;
+      text-align: center;
+      /* padding: 1vh 0.5vh; */
+      padding-inline: 3vh;
+      /* margin: 1vh 2vh; */
+    /* flex-grow: 1; */
+    /* float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none; */
+  }
+  
