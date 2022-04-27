@@ -26,9 +26,13 @@ function Allcoupons(): JSX.Element {
     <Box paddingY={3}>
       <Container>
         <Grid container spacing={5}>
-          <Coupon />
-          <p>{coupons.length > 0 ? coupons[0].title : "no coupon"}</p>
+          {/* <Coupon coupon={coupons.length > 0 ? coupons[0] : []} /> */}
+          {/* <p>{coupons.length > 0 ? coupons[0].title : "no coupon"}</p> */}
           {/* <Typography>{coupons[0].title}</Typography> */}
+          {/* <Coupon {...coupons[1]} /> */}
+          {coupons.map((c) => (
+            <Coupon {...c} />
+          ))}
         </Grid>
       </Container>
     </Box>

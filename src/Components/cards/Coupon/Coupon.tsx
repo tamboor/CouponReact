@@ -4,7 +4,19 @@ import "./Coupon.css";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import { CouponModel } from "../../../Models/CouponModel";
 
-function Coupon(): JSX.Element {
+interface couponProps {
+  amount: number;
+  category: string;
+  description: string;
+  endDate: number;
+  id: number;
+  image: string;
+  price: number;
+  startDate: number;
+  title: string;
+}
+
+function Coupon(props: couponProps): JSX.Element {
   //
   return (
     <Grid item xs={3}>
@@ -16,7 +28,7 @@ function Coupon(): JSX.Element {
         />
         <Box paddingX={2} paddingY={1}>
           <Typography variant="h4" component="h2">
-            {/* {props.title} */}
+            {props.title}
           </Typography>
           <Box>
             <Typography variant="h5" component="p">
