@@ -1,3 +1,4 @@
+import { Button } from "@mui/material";
 import "./Navbar.css";
 
 function Navbar(): JSX.Element {
@@ -8,9 +9,16 @@ function Navbar(): JSX.Element {
                 <li>2</li>
                 <li>3</li>
             </ul> */}
-            <a>1</a>
-            <a>2</a>
-            <a>3</a>
+            <Button variant="contained">
+           1
+            </Button>
+            <Button variant="contained">
+            2
+            </Button>
+            <Button variant="contained">
+            3
+            </Button>
+
         </div>
     );
 }
