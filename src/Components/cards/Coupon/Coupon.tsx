@@ -2,8 +2,10 @@ import { Container, Grid, Paper, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import "./Coupon.css";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import { CouponModel } from "../../../Models/CouponModel";
 
 function Coupon(): JSX.Element {
+  //
   return (
     <Grid item xs={3}>
       <Paper elevation={12}>
@@ -14,7 +16,7 @@ function Coupon(): JSX.Element {
         />
         <Box paddingX={2} paddingY={1}>
           <Typography variant="h4" component="h2">
-            Coupon.
+            {/* {props.title} */}
           </Typography>
           <Box>
             <Typography variant="h5" component="p">
