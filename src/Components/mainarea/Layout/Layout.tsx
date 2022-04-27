@@ -13,12 +13,15 @@ function Layout(): JSX.Element {
             <header>
                 <Header />
             </header>
-            <div className="navbar">
+
+            {/* <div className="navbar">
                 <Navbar />
-            </div>
+            </div> */}
+
             <main>
                 <Main />
                 </main>
+
                 <footer>
                 <Footer />
                 </footer>

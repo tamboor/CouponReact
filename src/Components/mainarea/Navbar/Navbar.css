@@ -4,19 +4,19 @@
     /* justify-content: center; */
     /* display: block; */
     /* flex-direction: row; */
-    display: flex;
+    /* display: flex;
     flex-direction: row;
     align-items: flex-start;
-    border-style: solid;
+    border-style: solid; */
   }
   
   /* Navbar links */
   .Navbar a {
-      border-left-style: solid;
+      /* border-left-style: solid;
       border-right-style: solid;
-      text-align: center;
+      text-align: center; */
       /* padding: 1vh 0.5vh; */
-      padding-inline: 3vh;
+      /* padding-inline: 3vh; */
       /* margin: 1vh 2vh; */
     /* flex-grow: 1; */
     /* float: left;
