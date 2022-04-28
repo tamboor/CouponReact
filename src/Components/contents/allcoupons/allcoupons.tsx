@@ -3,7 +3,7 @@ import Coupon from "../../cards/Coupon/Coupon";
 import "./allcoupons.css";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import { CouponModel } from "../../../Models/CouponModel";
+import { CouponModel } from "../../../Modals/CouponModal";
 
 function Allcoupons(): JSX.Element {
   const [coupons, setCoupons] = useState<CouponModel[]>([]);
