@@ -1,4 +1,4 @@
-import { Container, TextField } from "@mui/material";
+import { Container, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import "./LoginPanel.css";
 
@@ -13,6 +13,7 @@ function LoginPanel(props: LoginProps): JSX.Element {
   return (
     <Container>
       <Box>
+        <Typography>{props.userType}</Typography>
         <TextField id="email" label="Email" variant="standard" />
         <br />
         <TextField id="password" label="Password" variant="standard" />
