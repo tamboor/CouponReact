@@ -3,13 +3,17 @@ import { Box } from "@mui/system";
 import { useForm } from "react-hook-form";
 import "./LoginPanel.css";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 interface LoginProps {
   children?: JSX.Element;
   userType: string;
-  //   email: string;
-  //   password: string;
 }
+
+// interface LoginForm {
+//   userEmail: string;
+//   userPass: string;
+// }
 
 function LoginPanel(props: LoginProps): JSX.Element {
   //   return <div className="LoginPanel">This is Login , {props.userType}</div>;
@@ -25,8 +29,23 @@ function LoginPanel(props: LoginProps): JSX.Element {
   //   navigate("/");
   // };
   const onSubmit = (data: any) => {
-    console.log(data);
-    console.log(errors);
+    // console.log(data);
+    // console.log(errors);
+    // const url = `http://localhost:8080/${props.userType}/login`;
+    const url = `http://localhost:8080/admin/login`;
+    axios
+      .post(url, {
+        // role: props.userType,
+        role: "admin",
+        userName: data.userEmail,
+        userPass: data.userPass,
+      })
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
