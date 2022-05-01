@@ -2,7 +2,7 @@ import { Container, Grid, Paper, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import "./Coupon.css";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
-import { CouponModel } from "../../../Modals/CouponModal";
+import { CouponModel } from "../../../Modals/CouponModel";
 
 // interface couponProps {
 //   amount: number;
