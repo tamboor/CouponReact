@@ -26,6 +26,7 @@ function LoginPanel(props: LoginProps): JSX.Element {
   // };
   const onSubmit = (data: any) => {
     console.log(data);
+    console.log(errors);
   };
 
   return (
@@ -38,6 +39,7 @@ function LoginPanel(props: LoginProps): JSX.Element {
             label="Email"
             variant="standard"
           />
+          {errors.userEmail && <p>{errors.userEmail.message}</p>}
           <br />
           <TextField
             {...register("userPass", {
@@ -47,9 +49,8 @@ function LoginPanel(props: LoginProps): JSX.Element {
             label="Password"
             variant="standard"
           />
+          {errors.userPass && <p>{errors.userPass.message}</p>}
           <Button type="submit">Login</Button>
-          {/* <input type="submit" value="Login" />
-          {errors.userEmail && <span>{errors.userEmail.message}</span>} */}
         </form>
       </Box>
     </Container>
