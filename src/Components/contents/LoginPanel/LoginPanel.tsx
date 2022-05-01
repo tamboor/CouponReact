@@ -41,7 +41,8 @@ function LoginPanel(props: LoginProps): JSX.Element {
         userPass: data.userPass,
       })
       .then((response) => {
-        console.log(response);
+        console.log(response.headers.authorization);
+        navigate("customer/home");
       })
       .catch((error) => {
         console.log(error);
