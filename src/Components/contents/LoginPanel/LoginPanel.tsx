@@ -31,17 +31,17 @@ function LoginPanel(props: LoginProps): JSX.Element {
   const onSubmit = (data: any) => {
     // console.log(data);
     // console.log(errors);
-    // const url = `http://localhost:8080/${props.userType}/login`;
-    const url = `http://localhost:8080/admin/login`;
+    const url = `http://localhost:8080/${props.userType}/login`;
+    // const url = `http://localhost:8080/admin/login`;
     axios
       .post(url, {
-        // role: props.userType,
-        role: "admin",
+        role: props.userType,
+        // role: "admin",
         userName: data.userEmail,
         userPass: data.userPass,
       })
       .then((response) => {
-        console.log(response.data);
+        console.log(response);
       })
       .catch((error) => {
         console.log(error);
