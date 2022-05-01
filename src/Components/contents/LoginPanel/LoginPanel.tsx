@@ -3,6 +3,7 @@ import { Box } from "@mui/system";
 import "./LoginPanel.css";
 
 interface LoginProps {
+  children?: JSX.Element;
   userType: string;
   //   email: string;
   //   password: string;

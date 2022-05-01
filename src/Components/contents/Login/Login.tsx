@@ -14,6 +14,7 @@ function Login(): JSX.Element {
   //   }
   //
   //
+  console.log(value);
   console.log("entered login");
 
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
@@ -24,12 +25,15 @@ function Login(): JSX.Element {
     <Container sx={{ marginTop: 5 }}>
       <Card>
         <Box sx={{ borderBottom: 1, borderStyle: "solid", padding: 2 }}>
-          <Tabs onChange={handleChange}>
+          <Tabs onChange={handleChange} value={value}>
             <Tab label="Customer Login" value="customer" />
             <Tab label="Company Login" value="company" />
           </Tabs>
-          <LoginPanel userType={value} />
+          {/* <LoginPanel userType={value} /> */}
           {/* <LoginPanel userType="" */}
+          <LoginPanel userType={value} />
+          {/* <div>Hello Alon</div>
+          </LoginPanel> */}
         </Box>
       </Card>
     </Container>

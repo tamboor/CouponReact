@@ -27,7 +27,7 @@ function Allcoupons(): JSX.Element {
       <Container>
         <Grid container spacing={5}>
           {coupons.map((c) => (
-            <Coupon coupon={c} />
+            <Coupon coupon={c} key={c.id} />
           ))}
         </Grid>
       </Container>
