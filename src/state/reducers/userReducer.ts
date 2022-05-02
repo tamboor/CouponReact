@@ -7,7 +7,15 @@ interface UserState {
   userName: string;
 }
 
-const reducer = (state: UserState, action: Action): UserState => {
+const initialState = {
+  userRole: "guest",
+  userName: "Guest",
+};
+
+const reducer = (
+  state: UserState = initialState,
+  action: Action
+): UserState => {
   switch (action.type) {
     case ActionType.ADMIN_LOGIN:
       return {

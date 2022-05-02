@@ -2,7 +2,10 @@ import { Box, Card, Container, Tab, Tabs } from "@mui/material";
 import { useState } from "react";
 import LoginPanel from "../LoginPanel/LoginPanel";
 import "./Login.css";
+// import { Provider } from "react-redux";
+// import { store } from "../../../state";
 
+//todo: check if Provider needs to be moved to App
 function Login(): JSX.Element {
   const [value, setValue] = useState<string>("customer");
 
@@ -31,7 +34,10 @@ function Login(): JSX.Element {
           </Tabs>
           {/* <LoginPanel userType={value} /> */}
           {/* <LoginPanel userType="" */}
-          <LoginPanel userType={value} />
+          {/* <Provider store={store}> */}
+            <LoginPanel userType={value} />
+          {/* </Provider> */}
+
           {/* <div>Hello Alon</div>
           </LoginPanel> */}
         </Box>
