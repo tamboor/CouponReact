@@ -7,7 +7,7 @@ interface AdminLoginAction {
 interface CustomerLoginAction {
   type: ActionType.CUSTOMER_LOGIN;
   payload: {
-    userId: number;
+    // userId: number;
     userName: string;
   };
 }
@@ -15,12 +15,13 @@ interface CustomerLoginAction {
 interface CompanyLoginAction {
   type: ActionType.COMPANY_LOGIN;
   payload: {
-    userId: number;
+    //  userId: number;
     userName: string;
   };
 }
 interface LogoutAction {
   type: ActionType.LOGOUT;
+  payload?: string;
 }
 
 export type Action =
