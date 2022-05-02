@@ -3,52 +3,49 @@ import { Box } from "@mui/system";
 import { useForm } from "react-hook-form";
 import "./LoginPanel.css";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import { useDispatch } from "react-redux";
-import { actionCreators } from "../../../state";
+import { useActions } from "../../../hooks/useActions";
+import { useSelector } from "react-redux";
+import { useTypedSelector } from "../../../hooks/useTypedSelector";
 
 interface LoginProps {
   children?: JSX.Element;
   userType: string;
 }
 
-// interface LoginForm {
-//   userEmail: string;
-//   userPass: string;
-// }
-
 function LoginPanel(props: LoginProps): JSX.Element {
-  //   return <div className="LoginPanel">This is Login , {props.userType}</div>;
+  const { tryAdminLogin, tryCompanyLogin, tryCustomerLogin, tryLogout } =
+    useActions();
 
+  const state = useTypedSelector((state) => state);
   const navigate = useNavigate();
+
+  console.log(state);
+
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
-  // const onSubmit = (data: any) => {
-  //   console.log(data);
-  //   navigate("/");
-  // };
+
+  //TODO: cahnge to enum
   const onSubmit = (data: any) => {
-    // console.log(data);
-    // console.log(errors);
-    const url = `http://localhost:8080/${props.userType}/login`;
-    // const url = `http://localhost:8080/admin/login`;
-    axios
-      .post(url, {
-        role: props.userType,
-        // role: "admin",
-        userName: data.userEmail,
-        userPass: data.userPass,
-      })
-      .then((response) => {
-        console.log(response.headers.authorization);
-        navigate("customer/home");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    switch (props.userType) {
+      case "customer":
+        tryCustomerLogin(data.userEmail, data.userPass);
+        navigate("/");
+        break;
+      case "company":
+        tryCompanyLogin(data.userEmail, data.userPass);
+        break;
+      case "admin":
+        tryAdminLogin(data.userEmail, data.userPass);
+        break;
+      default:
+        tryLogout();
+    }
+
+    // if (localStorage.getItem("token") != undefined) {
+    // }
   };
 
   return (

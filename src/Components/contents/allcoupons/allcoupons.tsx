@@ -4,23 +4,20 @@ import "./allcoupons.css";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { CouponModel } from "../../../Modals/CouponModel";
+import { useTypedSelector } from "../../../hooks/useTypedSelector";
 
 function Allcoupons(): JSX.Element {
   const [coupons, setCoupons] = useState<CouponModel[]>([]);
 
-  // const getCoupons = async () => {
-  //   const url = "http://localhost:8080/guest/getAllCoupons";
-  //   const result = await axios.get(url);
-  //   return result.data[0];
-  // };
-
-  // let coupon: CouponModel;
   useEffect(() => {
     axios.get("http://localhost:8080/guest/getAllCoupons").then((response) => {
       console.log(response.data);
       setCoupons(response.data);
     });
   }, []);
+
+  const state = useTypedSelector((state) => state);
+  console.log(state);
 
   return (
     <Box paddingY={3}>

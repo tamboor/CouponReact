@@ -2,8 +2,9 @@ import axios from "axios";
 import { Dispatch } from "redux";
 import { ActionType } from "../action-types";
 import { Action } from "../actions";
+
 //todo: check if can add a helper method, read about async await.
-const tryAdminLogin = (userName: string, userPass: string) => {
+export const tryAdminLogin = (userName: string, userPass: string) => {
   return async (dispatch: Dispatch<Action>) => {
     const url = `http://localhost:8080/admin/login`;
     // const url = `http://localhost:8080/admin/login`;
@@ -18,16 +19,18 @@ const tryAdminLogin = (userName: string, userPass: string) => {
       dispatch({
         type: ActionType.ADMIN_LOGIN,
       });
-    } catch (err) {
+    } catch (err: any) {
+      localStorage.removeItem("token");
+
       dispatch({
         type: ActionType.LOGOUT,
-        payload: err.message,
+        payload: err?.message,
       });
     }
   };
 };
 
-const tryCompanyLogin = (userName: string, userPass: string) => {
+export const tryCompanyLogin = (userName: string, userPass: string) => {
   return async (dispatch: Dispatch<Action>) => {
     const url = `http://localhost:8080/company/login`;
     try {
@@ -45,16 +48,18 @@ const tryCompanyLogin = (userName: string, userPass: string) => {
         },
       });
     } catch (err: any) {
+      localStorage.removeItem("token");
+
       dispatch({
         type: ActionType.LOGOUT,
-        payload: err.message,
+        payload: err?.message,
       });
     }
   };
 };
 
-const tryCustomerLogin = (userName: string, userPass: string) => {
-  return async (dispatch: any) => {
+export const tryCustomerLogin = (userName: string, userPass: string) => {
+  return async (dispatch: Dispatch<Action>) => {
     const url = `http://localhost:8080/customer/login`;
     try {
       const { headers } = await axios.post(url, {
@@ -64,23 +69,29 @@ const tryCustomerLogin = (userName: string, userPass: string) => {
       });
 
       localStorage.setItem("token", headers.authorization);
+
       dispatch({
-        type: ActionType.COMPANY_LOGIN,
+        type: ActionType.CUSTOMER_LOGIN,
         payload: {
           userName,
         },
       });
+      console.log(headers);
     } catch (err: any) {
+      localStorage.removeItem("token");
+
       dispatch({
         type: ActionType.LOGOUT,
-        payload: err.message,
+        payload: err?.message,
       });
     }
   };
 };
 
-const tryLogout = (err?: Error) => {
-  return async (dispatch: any) => {
+export const tryLogout = (err?: Error) => {
+  return async (dispatch: Dispatch<Action>) => {
+    localStorage.removeItem("token");
+
     dispatch({
       type: ActionType.LOGOUT,
       payload: err?.message,
