@@ -1,4 +1,5 @@
 import { AppBar, Button, Toolbar, Typography } from "@mui/material";
+import { Navigate, useNavigate } from "react-router-dom";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import LoginButton from "../../header-content/LoginButton/LoginButton";
 import UserMenu from "../../header-content/UserMenu/UserMenu";
@@ -14,6 +15,7 @@ function Header(): JSX.Element {
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           Coupon Mania
         </Typography>
+
         {state.users.userRole === "guest" ? <LoginButton /> : <UserMenu />}
       </Toolbar>
     </AppBar>

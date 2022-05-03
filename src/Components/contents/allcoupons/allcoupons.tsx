@@ -13,6 +13,7 @@ function Allcoupons(): JSX.Element {
     axios.get("http://localhost:8080/guest/getAllCoupons").then((response) => {
       console.log(response.data);
       setCoupons(response.data);
+      console.log(coupons);
     });
   }, []);
 

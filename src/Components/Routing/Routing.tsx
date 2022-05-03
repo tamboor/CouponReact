@@ -25,9 +25,10 @@ function Routing(): JSX.Element {
         {/* <Notfound />
         </Route> */}
       </Routes>
-      //TODO: add 404 to * route
     </div>
   );
 }
 
 export default Routing;
+
+//TODO: add 404 to * route
