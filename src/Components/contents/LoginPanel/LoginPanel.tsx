@@ -16,10 +16,10 @@ function LoginPanel(props: LoginProps): JSX.Element {
   const { tryAdminLogin, tryCompanyLogin, tryCustomerLogin, tryLogout } =
     useActions();
 
-  const state = useTypedSelector((state) => state);
+  // const state = useTypedSelector((state) => state);
   const navigate = useNavigate();
 
-  console.log(state);
+  // console.log(state);
 
   const {
     register,

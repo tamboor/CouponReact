@@ -19,6 +19,8 @@ function Allcoupons(): JSX.Element {
   const state = useTypedSelector((state) => state);
   console.log(state);
 
+  console.log(localStorage.getItem("token"));
+
   return (
     <Box paddingY={3}>
       <Container>
