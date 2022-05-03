@@ -6,6 +6,7 @@ import "./Login.css";
 // import { store } from "../../../state";
 
 //todo: check if Provider needs to be moved to App
+//TODO: add admin login
 function Login(): JSX.Element {
   const [value, setValue] = useState<string>("customer");
 
@@ -17,6 +18,7 @@ function Login(): JSX.Element {
   //   }
   //
   //
+
   console.log(value);
   console.log("entered login");
 
@@ -35,7 +37,7 @@ function Login(): JSX.Element {
           {/* <LoginPanel userType={value} /> */}
           {/* <LoginPanel userType="" */}
           {/* <Provider store={store}> */}
-            <LoginPanel userType={value} />
+          <LoginPanel userType={value} />
           {/* </Provider> */}
 
           {/* <div>Hello Alon</div>

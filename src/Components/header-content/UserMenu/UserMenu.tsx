@@ -20,11 +20,14 @@ import React from "react";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import "./UserMenu.css";
 import { useActions } from "../../../hooks/useActions";
+import { useNavigate } from "react-router-dom";
 
 function UserMenu(): JSX.Element {
   const { tryLogout } = useActions();
   const state = useTypedSelector((state) => state);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const navigate = useNavigate();
+
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -32,9 +35,14 @@ function UserMenu(): JSX.Element {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  const handleLogout = () => {
-    tryLogout();
-  };
+  // const handleLogout = () => {
+  //   tryLogout();
+  //   navigate("/");
+  // };
+
+  // const handleMyAcount = () => {
+  //   navigate("/user");
+  // };
 
   return (
     <React.Fragment>
@@ -89,11 +97,22 @@ function UserMenu(): JSX.Element {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <MenuItem>
-          <Avatar /> My account
-        </MenuItem>
+        {state.users.userRole !== "admin" && (
+          <MenuItem
+            onClick={() => {
+              navigate("/my-acount");
+            }}
+          >
+            <Avatar /> My account
+          </MenuItem>
+        )}
         <Divider />
-        <MenuItem onClick={handleLogout}>
+        <MenuItem
+          onClick={() => {
+            tryLogout();
+            navigate("/");
+          }}
+        >
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>

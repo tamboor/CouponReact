@@ -5,6 +5,7 @@ import Notfound from "../contents/notfound/notfound";
 // import { Route, Routes } from "react-router-dom";
 import Login from "../contents/Login/Login";
 import { Route, Routes } from "react-router-dom";
+import UserInfo from "../contents/UserInfo/UserInfo";
 // import { Switch } from "react-router-dom";
 
 function Routing(): JSX.Element {
@@ -12,6 +13,9 @@ function Routing(): JSX.Element {
     <div className="Routing">
       <Routes>
         <Route path="/login" element={<Login />} />
+        {/* <Route path="/admin-login" element{<>} */}
+
+        <Route path="/my-acount" element={<UserInfo />} />
         {/* <Login />
         </Route> */}
         <Route path="/" element={<Allcoupons />} />
@@ -21,6 +25,7 @@ function Routing(): JSX.Element {
         {/* <Notfound />
         </Route> */}
       </Routes>
+      //TODO: add 404 to * route
     </div>
   );
 }
