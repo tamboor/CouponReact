@@ -1,8 +1,10 @@
-import { Container, Grid, Paper, Typography } from "@mui/material";
+import { Button, Container, Grid, Paper, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import "./Coupon.css";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import { CouponModel } from "../../../Modals/CouponModel";
+import { useTypedSelector } from "../../../hooks/useTypedSelector";
+import CouponMenu from "../../header-content/CouponMenu/CouponMenu";
 
 // interface couponProps {
 //   amount: number;
@@ -21,6 +23,17 @@ interface couponProps {
 
 function Coupon(props: couponProps): JSX.Element {
   //
+  const state = useTypedSelector((state) => state);
+
+  function renderSwitch() {
+    switch (state.users.userRole) {
+      case "customer":
+        return <Button>Add to cart</Button>;
+      case "company":
+        return <Button>Edit</Button>;
+    }
+  }
+
   return (
     <Grid item xs={3}>
       <Paper elevation={12}>
@@ -47,6 +60,7 @@ function Coupon(props: couponProps): JSX.Element {
               {props.coupon.description}
             </Typography>
           </Box>
+          {renderSwitch()}
         </Box>
       </Paper>
     </Grid>
@@ -54,3 +68,4 @@ function Coupon(props: couponProps): JSX.Element {
 }
 
 export default Coupon;
+//

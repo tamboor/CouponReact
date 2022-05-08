@@ -1,4 +1,12 @@
-import { Box, Container, Grid, Typography } from "@mui/material";
+import {
+  Box,
+  Container,
+  Drawer,
+  Grid,
+  List,
+  ListItem,
+  Typography,
+} from "@mui/material";
 import Coupon from "../../cards/Coupon/Coupon";
 import "./ShowCoupons.css";
 import axios from "axios";
@@ -20,28 +28,21 @@ function ShowCoupons(): JSX.Element {
 
   let { verb, filter } = useParams();
   //TODO: handle any
-  function fetchCoupons(verb: string, filter: string): any {
+  function fetchCoupons(verb: string, filter: string): void {
     const url =
       "http://localhost:8080/" + state.users.userRole + "/" + verb + filter;
 
     axios
       .get(url, { headers: { Authorization: token } })
       .then((response) => {
-        // console.log(response.data);
-        console.log(url);
-        console.log(response.data);
-        // setCoupons(response.data);
-        // console.log(coupons);
-
-        return response.data;
+        setCoupons(response.data);
       })
       .catch((error) => {
         //TODO: navigate to error
-
         console.log(error);
-        return [];
       });
   }
+
   useEffect(() => {
     const applyVerb =
       verb === "" || verb === undefined || verb === null
@@ -52,7 +53,7 @@ function ShowCoupons(): JSX.Element {
         ? ""
         : "/" + filter;
 
-    setCoupons(fetchCoupons(applyVerb, applyFilter));
+    fetchCoupons(applyVerb, applyFilter);
   }, []);
 
   // const state = useTypedSelector((state) => state);
@@ -62,6 +63,13 @@ function ShowCoupons(): JSX.Element {
 
   return (
     <Box paddingY={3}>
+      <Drawer anchor="left">
+        <List>
+          <ListItem>1</ListItem>
+          <ListItem>1</ListItem>
+          <ListItem>1</ListItem>
+        </List>
+      </Drawer>
       <Container>
         <Grid container spacing={5}>
           {coupons.map((c) => (

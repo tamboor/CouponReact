@@ -113,19 +113,43 @@ function CouponMenu(): JSX.Element {
           <Skateboarding />
           Xtreme
         </MenuItem>
-        <MenuItem onClick={handleClose} disableRipple>
+        <MenuItem
+          onClick={() => {
+            navigate("/show-coupons/getCouponsByCategory/tattoos");
+            handleClose();
+          }}
+          disableRipple
+        >
           <AutoAwesomeIcon />
           Tattoos
         </MenuItem>
-        <MenuItem onClick={handleClose} disableRipple>
+        <MenuItem
+          onClick={() => {
+            navigate("/show-coupons/getCouponsByCategory/food");
+            handleClose();
+          }}
+          disableRipple
+        >
           <FastfoodIcon />
           Food
         </MenuItem>
-        <MenuItem onClick={handleClose} disableRipple>
+        <MenuItem
+          onClick={() => {
+            navigate("/show-coupons/getCouponsByCategory/vacation");
+            handleClose();
+          }}
+          disableRipple
+        >
           <BeachAccessIcon />
           Vacations
         </MenuItem>
-        <MenuItem onClick={handleClose} disableRipple>
+        <MenuItem
+          onClick={() => {
+            navigate("/show-coupons/getCouponsByCategory/cars");
+            handleClose();
+          }}
+          disableRipple
+        >
           <DirectionsCarIcon />
           Cars
         </MenuItem>
