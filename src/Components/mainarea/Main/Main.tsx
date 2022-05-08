@@ -1,6 +1,5 @@
 import Coupon from "../../cards/Coupon/Coupon";
-import Allcoupons from "../../contents/allcoupons/allcoupons";
-import allcoupons from "../../contents/allcoupons/allcoupons";
+
 import Login from "../../contents/Login/Login";
 import Routing from "../../Routing/Routing";
 import Content from "../Content/Content";

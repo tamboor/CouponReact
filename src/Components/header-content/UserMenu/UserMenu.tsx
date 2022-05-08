@@ -100,7 +100,7 @@ function UserMenu(): JSX.Element {
         {state.users.userRole !== "admin" && (
           <MenuItem
             onClick={() => {
-              navigate("/my-acount");
+              navigate("/my-account");
             }}
           >
             <Avatar /> My account

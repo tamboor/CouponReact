@@ -43,6 +43,9 @@ function Coupon(props: couponProps): JSX.Element {
               />
               Date
             </Typography>
+            <Typography variant="h6" component="h2">
+              {props.coupon.description}
+            </Typography>
           </Box>
         </Box>
       </Paper>
