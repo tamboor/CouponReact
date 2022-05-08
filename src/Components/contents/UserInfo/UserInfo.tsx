@@ -25,7 +25,7 @@ function UserInfo(): JSX.Element {
         axios
           .get(url, { headers: { Authorization: token } })
           .then((response) => {
-            console.log(response.data);
+            // console.log(response.data);
             setUser(response.data);
           });
         break;
@@ -34,7 +34,7 @@ function UserInfo(): JSX.Element {
         axios
           .get(url, { headers: { Authorization: token } })
           .then((response) => {
-            console.log(response.data);
+            // console.log(response.data);
             setUser(response.data);
           });
         break;
