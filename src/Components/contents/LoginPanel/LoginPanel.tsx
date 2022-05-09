@@ -28,6 +28,7 @@ function LoginPanel(props: LoginProps): JSX.Element {
   } = useForm();
 
   //TODO: cahnge to enum
+  //todo: navigate each case to the right path
   const onSubmit = (data: any) => {
     switch (props.userType) {
       case "customer":
