@@ -3,6 +3,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import CouponMenu from "../../header-content/CouponMenu/CouponMenu";
 import LoginButton from "../../header-content/LoginButton/LoginButton";
+import ShoppingCart from "../../header-content/ShoppingCart/ShoppingCart";
 import UserMenu from "../../header-content/UserMenu/UserMenu";
 import Logo from "../Logo/Logo";
 import Navbar from "../Navbar/Navbar";
@@ -53,6 +54,7 @@ function Header(): JSX.Element {
           Coupon Mania
         </Typography>
         <Navbar>{renderSwitch()}</Navbar>
+        <ShoppingCart />
         {state.users.userRole === "guest" ? <LoginButton /> : <UserMenu />}
       </Toolbar>
     </AppBar>
