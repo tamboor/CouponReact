@@ -6,6 +6,7 @@ import Notfound from "../contents/notfound/notfound";
 import Login from "../contents/Login/Login";
 import { Route, Routes } from "react-router-dom";
 import UserInfo from "../contents/UserInfo/UserInfo";
+import CouponPurchase from "../contents/CouponPurchase/CouponPurchase";
 // import { Switch } from "react-router-dom";
 
 function Routing(): JSX.Element {
@@ -13,6 +14,7 @@ function Routing(): JSX.Element {
     <div className="Routing">
       <Routes>
         <Route path="/login" element={<Login />} />
+        <Route path="/purchase-coupons" element={<CouponPurchase />} />
         <Route path="/my-account" element={<UserInfo />} />
         <Route path="/show-coupons/:verb/:filter" element={<ShowCoupons />} />
         <Route path="*" element={<Notfound />} />
