@@ -5,7 +5,7 @@ import UserPanel from "../UserPanel/UserPanel";
 import "./ManageUsers.css";
 
 function ManageUsers(): JSX.Element {
-  const [value, setValue] = useState<string>("customers");
+  const [value, setValue] = useState<string>("Customers");
 
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);

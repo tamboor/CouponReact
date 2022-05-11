@@ -31,7 +31,7 @@ interface Column {
 const columns: readonly Column[] = [
   {
     id: "id",
-    label: "Size\u00a0(km\u00b2)",
+    label: "id",
     minWidth: 170,
     align: "right",
     format: (value: number) => value.toLocaleString("en-US"),
@@ -62,6 +62,8 @@ function UserPanel(props: UserTypeProps): JSX.Element {
   const getAllUrl = "http://localhost:8080/admin/getAll" + props.userType;
 
   useEffect(() => {
+    console.log(getAllUrl);
+    console.log(props.userType);
     axios
       .get(getAllUrl, { headers: { Authorization: token } })
       .then((response) => {
@@ -80,11 +82,10 @@ function UserPanel(props: UserTypeProps): JSX.Element {
     };
   };
 
-  const rows = [
-    (userDetails: UserModel[]) => {
-      userDetails.map((user) => createData(user));
-    },
-  ];
+  const rows: any[] = [];
+  const createRows = (userDetails: UserModel[]) => {
+    userDetails.map((user) => rows.push(createData(user)));
+  };
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
