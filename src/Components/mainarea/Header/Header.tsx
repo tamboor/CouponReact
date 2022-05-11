@@ -54,7 +54,8 @@ function Header(): JSX.Element {
           Coupon Mania
         </Typography>
         <Navbar>{renderSwitch()}</Navbar>
-        <ShoppingCart />
+
+        {state.users.userRole === "customer" && <ShoppingCart />}
         {state.users.userRole === "guest" ? <LoginButton /> : <UserMenu />}
       </Toolbar>
     </AppBar>
