@@ -13,9 +13,9 @@ function ShoppingCart(): JSX.Element {
   return (
     <Button href="/purchase-coupons">
       <Stack spacing={4} direction="row" sx={{ color: "action.active" }}>
-        <Badge color="secondary" badgeContent={0} max={99}>
-          <ShoppingCartIcon />
-        </Badge>
+        {/* <Badge color="secondary" badgeContent={0} max={99}> */}
+        <ShoppingCartIcon />
+        {/* </Badge> */}
       </Stack>
     </Button>
   );
