@@ -15,6 +15,10 @@ const root = ReactDOM.createRoot(
 
 let persistor = persistStore(store);
 
+// if (localStorage.getItem("cart") === null) {
+//   localStorage.setItem("cart", JSON.stringify([-1, -2]));
+// }
+
 root.render(
   <BrowserRouter>
     {/* <React.StrictMode> */}

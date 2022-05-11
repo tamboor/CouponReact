@@ -5,6 +5,7 @@ import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import { CouponModel } from "../../../Modals/CouponModel";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import CouponMenu from "../../header-content/CouponMenu/CouponMenu";
+import { useState } from "react";
 
 // interface couponProps {
 //   amount: number;
@@ -19,16 +20,32 @@ import CouponMenu from "../../header-content/CouponMenu/CouponMenu";
 // }
 interface couponProps {
   coupon: CouponModel;
+  isPurchased: boolean;
 }
 
 function Coupon(props: couponProps): JSX.Element {
-  //
   const state = useTypedSelector((state) => state);
+  const handleAddToCart = (event: any) => {
+    let items;
+    if (localStorage.getItem("cart") === null) {
+      localStorage.setItem("cart", JSON.stringify([]));
+    }
+    let currValues: number[] = JSON.parse(
+      localStorage.getItem("cart") as string
+    ) as number[];
+    currValues.push(props.coupon.id);
+    localStorage.setItem("cart", JSON.stringify(currValues));
+    console.log(localStorage.getItem("cart"));
+  };
 
   function renderSwitch() {
     switch (state.users.userRole) {
       case "customer":
-        return <Button>Add to cart</Button>;
+        return (
+          <Button onClick={handleAddToCart} disabled={props.isPurchased}>
+            Add to cart
+          </Button>
+        );
       case "company":
         return <Button>Edit</Button>;
     }
