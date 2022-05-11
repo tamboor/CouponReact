@@ -27,6 +27,7 @@ import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
 import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import { useNavigate } from "react-router-dom";
+import { Box, Typography } from "@mui/material";
 const StyledMenu = styled((props: MenuProps) => (
   <Menu
     elevation={0}
@@ -81,85 +82,91 @@ function CouponMenu(): JSX.Element {
   const navigate = useNavigate();
 
   return (
-    <div>
-      <Button
-        id="demo-customized-button"
-        aria-controls={open ? "demo-customized-menu" : undefined}
-        aria-haspopup="true"
-        aria-expanded={open ? "true" : undefined}
-        variant="contained"
-        disableElevation
-        onClick={handleClick}
-        endIcon={<KeyboardArrowDownIcon />}
-      >
+    <Box>
+      <Button color="inherit" href="/show-coupons">
         Find Coupons
       </Button>
-      <StyledMenu
-        id="demo-customized-menu"
-        MenuListProps={{
-          "aria-labelledby": "demo-customized-button",
-        }}
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-      >
-        <MenuItem
-          onClick={() => {
-            navigate("/show-coupons/getCouponsByCategory/xtreme");
-            handleClose();
-          }}
-          disableRipple
-        >
-          <Skateboarding />
-          Xtreme
-        </MenuItem>
-        <MenuItem
-          onClick={() => {
-            navigate("/show-coupons/getCouponsByCategory/tattoos");
-            handleClose();
-          }}
-          disableRipple
-        >
-          <AutoAwesomeIcon />
-          Tattoos
-        </MenuItem>
-        <MenuItem
-          onClick={() => {
-            navigate("/show-coupons/getCouponsByCategory/food");
-            handleClose();
-          }}
-          disableRipple
-        >
-          <FastfoodIcon />
-          Food
-        </MenuItem>
-        <MenuItem
-          onClick={() => {
-            navigate("/show-coupons/getCouponsByCategory/vacation");
-            handleClose();
-          }}
-          disableRipple
-        >
-          <BeachAccessIcon />
-          Vacations
-        </MenuItem>
-        <MenuItem
-          onClick={() => {
-            navigate("/show-coupons/getCouponsByCategory/cars");
-            handleClose();
-          }}
-          disableRipple
-        >
-          <DirectionsCarIcon />
-          Cars
-        </MenuItem>
-        <Divider sx={{ my: 0.5 }} />
-        <MenuItem onClick={handleClose} disableRipple>
-          <MonetizationOnIcon />
-          Find By Price
-        </MenuItem>
-      </StyledMenu>
-    </div>
+    </Box>
+
+    //   <div>
+    //   <Button
+    //     id="demo-customized-button"
+    //     aria-controls={open ? "demo-customized-menu" : undefined}
+    //     aria-haspopup="true"
+    //     aria-expanded={open ? "true" : undefined}
+    //     variant="contained"
+    //     disableElevation
+    //     onClick={handleClick}
+    //     endIcon={<KeyboardArrowDownIcon />}
+    //   >
+    //     Find Coupons
+    //   </Button>
+    //   <StyledMenu
+    //     id="demo-customized-menu"
+    //     MenuListProps={{
+    //       "aria-labelledby": "demo-customized-button",
+    //     }}
+    //     anchorEl={anchorEl}
+    //     open={open}
+    //     onClose={handleClose}
+    //   >
+    //     <MenuItem
+    //       onClick={() => {
+    //         navigate("/show-coupons/getCouponsByCategory/xtreme");
+    //         handleClose();
+    //       }}
+    //       disableRipple
+    //     >
+    //       <Skateboarding />
+    //       Xtreme
+    //     </MenuItem>
+    //     <MenuItem
+    //       onClick={() => {
+    //         navigate("/show-coupons/getCouponsByCategory/tattoos");
+    //         handleClose();
+    //       }}
+    //       disableRipple
+    //     >
+    //       <AutoAwesomeIcon />
+    //       Tattoos
+    //     </MenuItem>
+    //     <MenuItem
+    //       onClick={() => {
+    //         navigate("/show-coupons/getCouponsByCategory/food");
+    //         handleClose();
+    //       }}
+    //       disableRipple
+    //     >
+    //       <FastfoodIcon />
+    //       Food
+    //     </MenuItem>
+    //     <MenuItem
+    //       onClick={() => {
+    //         navigate("/show-coupons/getCouponsByCategory/vacation");
+    //         handleClose();
+    //       }}
+    //       disableRipple
+    //     >
+    //       <BeachAccessIcon />
+    //       Vacations
+    //     </MenuItem>
+    //     <MenuItem
+    //       onClick={() => {
+    //         navigate("/show-coupons/getCouponsByCategory/cars");
+    //         handleClose();
+    //       }}
+    //       disableRipple
+    //     >
+    //       <DirectionsCarIcon />
+    //       Cars
+    //     </MenuItem>
+    //     <Divider sx={{ my: 0.5 }} />
+    //     <MenuItem onClick={handleClose} disableRipple>
+    //       <MonetizationOnIcon />
+    //       Find By Price
+    //     </MenuItem>
+    //   </StyledMenu>
+    // </div>
   );
 }
 export default CouponMenu;

@@ -16,7 +16,8 @@ function Routing(): JSX.Element {
         <Route path="/login" element={<Login />} />
         <Route path="/purchase-coupons" element={<CouponPurchase />} />
         <Route path="/my-account" element={<UserInfo />} />
-        <Route path="/show-coupons/:verb/:filter" element={<ShowCoupons />} />
+        {/* <Route path="/show-coupons/:verb/:filter" element={<ShowCoupons />} /> */}
+        <Route path="/show-coupons" element={<ShowCoupons />} />
         <Route path="*" element={<Notfound />} />
       </Routes>
     </div>
