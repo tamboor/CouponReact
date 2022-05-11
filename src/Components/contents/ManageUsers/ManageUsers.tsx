@@ -1,5 +1,7 @@
-import { Container, Card, Box, Tabs, Tab } from "@mui/material";
+import { Container, Card, Box, Tabs, Tab, Button, Paper } from "@mui/material";
 import { useState } from "react";
+import AddCompanyForm from "../AddCompanyForm/AddCompanyForm";
+import AddCustomerForm from "../AddCustomerForm/AddCustomerForm";
 import LoginPanel from "../LoginPanel/LoginPanel";
 import UserPanel from "../UserPanel/UserPanel";
 import "./ManageUsers.css";
@@ -11,6 +13,25 @@ function ManageUsers(): JSX.Element {
     setValue(newValue);
   };
 
+
+  function renderSwitch() {
+    switch (value) {
+      case "Customers":
+        return <UserPanel userType={value} />;
+      case "Companies":
+        return <UserPanel userType={value} />;
+    }
+  }
+
+  function addButtonRenderSwitch() {
+    switch (value) {
+      case "Customers":
+        return <AddCustomerForm />;
+      case "Companies":
+        return <AddCompanyForm/>;
+    }
+  }
+
   return (
     <Container sx={{ marginTop: 5 }}>
       <Card>
@@ -19,7 +40,9 @@ function ManageUsers(): JSX.Element {
             <Tab label="Customers" value="Customers" />
             <Tab label="Companies" value="Companies" />
           </Tabs>
-          <UserPanel userType={value} />
+          {addButtonRenderSwitch()}
+          {renderSwitch()}
+          {/* <UserPanel userType={value} /> */}
         </Box>
       </Card>
     </Container>
