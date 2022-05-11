@@ -3,6 +3,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import CouponMenu from "../../header-content/CouponMenu/CouponMenu";
 import LoginButton from "../../header-content/LoginButton/LoginButton";
+import ManageUsersButton from "../../header-content/ManageUsersButton/ManageUsersButton";
 import ShoppingCart from "../../header-content/ShoppingCart/ShoppingCart";
 import UserMenu from "../../header-content/UserMenu/UserMenu";
 import Logo from "../Logo/Logo";
@@ -32,8 +33,7 @@ function Header(): JSX.Element {
       case "admin":
         return (
           <Box>
-            <Button color="inherit">hello amdin</Button>
-            <Button color="inherit">hello admin 2</Button>
+            <ManageUsersButton />
           </Box>
         );
       // break;

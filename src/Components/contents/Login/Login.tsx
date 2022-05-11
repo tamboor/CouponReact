@@ -33,6 +33,7 @@ function Login(): JSX.Element {
           <Tabs onChange={handleChange} value={value}>
             <Tab label="Customer Login" value="customer" />
             <Tab label="Company Login" value="company" />
+            <Tab label="Admin Login" value="admin" />
           </Tabs>
           {/* <LoginPanel userType={value} /> */}
           {/* <LoginPanel userType="" */}
