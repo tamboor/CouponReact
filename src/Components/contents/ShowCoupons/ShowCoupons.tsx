@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 import Coupon from "../../cards/Coupon/Coupon";
 import "./ShowCoupons.css";
-import axios from "axios";
+import axios, { AxiosResponse, AxiosResponseHeaders } from "axios";
 import React, { useState, useEffect } from "react";
 import { CouponModel } from "../../../Modals/CouponModel";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
@@ -36,6 +36,7 @@ interface CouponsState {
   valueRange: number[];
 }
 function ShowCoupons(): JSX.Element {
+  const state = useTypedSelector((state) => state);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [showState, setShowState] = useState<CouponsState>({
     coupons: [],
@@ -105,13 +106,10 @@ function ShowCoupons(): JSX.Element {
     return `${value}°C`;
   }
 
-  const state = useTypedSelector((state) => state);
   const token = localStorage.getItem("token") as string;
 
-  let { verb, filter } = useParams();
-
   //TODO: handle any
-  function fetchCoupons(verb: string, filter: string): void {
+  function fetchCoupons(): void {
     const url = "http://localhost:8080/guest/getAllCoupons";
     axios
       .get(url, { headers: { Authorization: token } })
@@ -123,22 +121,11 @@ function ShowCoupons(): JSX.Element {
         });
       })
       .catch((error) => {
-        //TODO: navigate to error
         console.log(error);
       });
   }
-  //TODO: remove fetchCoupons
   useEffect(() => {
-    const applyVerb =
-      verb === "" || verb === undefined || verb === null
-        ? "getAllCoupons"
-        : verb;
-    const applyFilter =
-      filter === "" || filter === undefined || filter === null
-        ? ""
-        : "/" + filter;
-
-    fetchCoupons(applyVerb, applyFilter);
+    fetchCoupons();
   }, []);
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -147,6 +134,21 @@ function ShowCoupons(): JSX.Element {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  // axios.get()
+  let userCoupons: number[] = [];
+  if (state.users.userRole == "customer") {
+    axios
+      .get("http://localhost:8080/customer/getCustomerCoupons", {
+        headers: { Authorization: token },
+      })
+      .then((res) => {
+        userCoupons = res.data.map((c: CouponModel) => c.id);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
   return (
     <Box paddingY={3}>
@@ -234,9 +236,20 @@ function ShowCoupons(): JSX.Element {
           <TextField id="outlined-basic" label="Search" variant="outlined" />
         </Box>
         <Grid container spacing={5} marginTop={0.005}>
-          {showState.couponsFiltered.map((c) => (
-            <Coupon coupon={c} key={c.id} />
-          ))}
+          {/* {showState.couponsFiltered.map((c) => (
+            <Coupon coupon={c} isPurchased={} key={c.id} />
+          ))} */}
+          {state.users.userRole === "customer"
+            ? showState.couponsFiltered.map((c) => (
+                <Coupon
+                  coupon={c}
+                  isPurchased={userCoupons.includes(c.id)}
+                  key={c.id}
+                />
+              ))
+            : showState.couponsFiltered.map((c) => (
+                <Coupon coupon={c} isPurchased={false} key={c.id} />
+              ))}
         </Grid>
       </Container>
     </Box>
