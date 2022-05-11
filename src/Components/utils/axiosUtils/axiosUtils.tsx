@@ -1,11 +1,3 @@
-import "./axiosUtils.css";
+import { AxiosError, AxiosResponse } from "axios";
 
-function AxiosUtils(): JSX.Element {
-    return (
-        <div className="axiosUtils">
-			
-        </div>
-    );
-}
-
-export default AxiosUtils;
+async function axiosGet(url: string) {}
