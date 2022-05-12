@@ -1,5 +1,6 @@
 import axios from "axios";
 import { Dispatch } from "redux";
+import { CouponModel } from "../../Modals/CouponModel";
 import { ActionType } from "../action-types";
 import { Action } from "../actions";
 
@@ -96,5 +97,24 @@ export const tryLogout = (err?: Error) => {
       type: ActionType.LOGOUT,
       payload: err?.message,
     });
+  };
+};
+
+export const addItem = (coupon: CouponModel) => {
+  // dispatch({type:ActionType.ADD_ITEM , payload:});
+  return (dispatch: Dispatch<Action>) => {
+    dispatch({ type: ActionType.ADD_ITEM, payload: { coupon: coupon } });
+  };
+};
+
+export const removeItem = (coupon: CouponModel) => {
+  return (dispatch: Dispatch<Action>) => {
+    dispatch({ type: ActionType.REMOVE_ITEM, payload: { coupon } });
+  };
+};
+
+export const clearCart = () => {
+  return (dispatch: Dispatch<Action>) => {
+    dispatch({ type: ActionType.CLEAR_CART });
   };
 };

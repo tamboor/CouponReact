@@ -6,6 +6,8 @@ import { CouponModel } from "../../../Modals/CouponModel";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import CouponMenu from "../../header-content/CouponMenu/CouponMenu";
 import { useState } from "react";
+import { addItem } from "../../../state/action-creators";
+import { useActions } from "../../../hooks/useActions";
 
 // interface couponProps {
 //   amount: number;
@@ -24,18 +26,12 @@ interface couponProps {
 }
 
 function Coupon(props: couponProps): JSX.Element {
+  const { addItem } = useActions();
+
   const state = useTypedSelector((state) => state);
+
   const handleAddToCart = (event: any) => {
-    let items;
-    if (localStorage.getItem("cart") === null) {
-      localStorage.setItem("cart", JSON.stringify([]));
-    }
-    let currValues: number[] = JSON.parse(
-      localStorage.getItem("cart") as string
-    ) as number[];
-    currValues.push(props.coupon.id);
-    localStorage.setItem("cart", JSON.stringify(currValues));
-    console.log(localStorage.getItem("cart"));
+    addItem(props.coupon);
   };
 
   function renderSwitch() {

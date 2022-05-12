@@ -1,15 +1,19 @@
+import { CouponModel } from "../../Modals/CouponModel";
 import { ActionType } from "../action-types";
 import { Action } from "../actions";
 
 interface UserState {
   userRole: string;
-  //userId: number;
   userName: string;
+  cart: CouponModel[];
 }
+
+const cartInit: CouponModel[] = [];
 
 const initialState = {
   userRole: "guest",
   userName: "Guest",
+  cart: cartInit,
 };
 
 const reducer = (
@@ -19,28 +23,51 @@ const reducer = (
   switch (action.type) {
     case ActionType.ADMIN_LOGIN:
       return {
+        ...state,
         userRole: "admin",
-        //userId: 0,
         userName: "Admin",
       };
     case ActionType.CUSTOMER_LOGIN:
       return {
+        ...state,
         userRole: "customer",
-        //userId: action.payload.userId,
         userName: action.payload.userName,
+        cart: state.cart as CouponModel[],
       };
     case ActionType.COMPANY_LOGIN:
       return {
+        ...state,
+        cart: state.cart as CouponModel[],
         userRole: "company",
-        //userId: action.payload.userId,
         userName: action.payload.userName,
       };
     case ActionType.LOGOUT:
-      //userId: -1
-      return { userRole: "guest", userName: "Guest" };
+      return {
+        ...state,
+        userRole: "guest",
+        userName: "Guest",
+        cart: state.cart as CouponModel[],
+      };
+    case ActionType.ADD_ITEM:
+      const newState: UserState = { ...state };
+      newState.cart.push(action.payload.coupon);
+      return newState;
+    case ActionType.REMOVE_ITEM:
+      const currState: UserState = { ...state };
+      console.log(currState.cart);
+      console.log(action.payload.coupon);
+      const removeIndex = currState.cart.indexOf(action.payload.coupon);
+      if (removeIndex > -1) {
+        currState.cart.splice(removeIndex, 1);
+      }
+      return currState;
+    case ActionType.CLEAR_CART:
+      return { ...state, cart: [] };
     default:
       return state;
   }
 };
+
+//TODO: clear cart on logout/login
 
 export default reducer;

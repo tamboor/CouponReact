@@ -1,3 +1,4 @@
+import { CouponModel } from "../../Modals/CouponModel";
 import { ActionType } from "../action-types";
 
 interface AdminLoginAction {
@@ -24,8 +25,27 @@ interface LogoutAction {
   payload?: string;
 }
 
+interface AddItemAction {
+  type: ActionType.ADD_ITEM;
+  payload: {
+    coupon: CouponModel;
+  };
+}
+interface RemoveItemAction {
+  type: ActionType.REMOVE_ITEM;
+  payload: {
+    coupon: CouponModel;
+  };
+}
+interface ClearCartAction {
+  type: ActionType.CLEAR_CART;
+}
+
 export type Action =
   | AdminLoginAction
   | CustomerLoginAction
   | CompanyLoginAction
-  | LogoutAction;
+  | LogoutAction
+  | AddItemAction
+  | RemoveItemAction
+  | ClearCartAction;

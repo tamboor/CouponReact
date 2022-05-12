@@ -3,4 +3,7 @@ export enum ActionType {
   CUSTOMER_LOGIN = "customerLogin",
   COMPANY_LOGIN = "companyLogin",
   LOGOUT = "logout",
+  ADD_ITEM = "addItem",
+  REMOVE_ITEM = "removeItem",
+  CLEAR_CART = "clearCart",
 }
