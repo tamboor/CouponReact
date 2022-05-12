@@ -54,8 +54,6 @@ const reducer = (
       return newState;
     case ActionType.REMOVE_ITEM:
       const currState: UserState = { ...state };
-      console.log(currState.cart);
-      console.log(action.payload.coupon);
       const removeIndex = currState.cart.indexOf(action.payload.coupon);
       if (removeIndex > -1) {
         currState.cart.splice(removeIndex, 1);
