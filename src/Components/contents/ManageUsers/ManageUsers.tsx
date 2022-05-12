@@ -1,34 +1,36 @@
 import { Container, Card, Box, Tabs, Tab, Button, Paper } from "@mui/material";
 import { useState } from "react";
-import AddCompanyForm from "../AddCompanyForm/AddCompanyForm";
-import AddCustomerForm from "../AddCustomerForm/AddCustomerForm";
+import GetAllCompanies from "../../admin/GetAllCompanies/GetAllCompanies";
+import AddClientForm from "../AddClientForm/AddClientForm";
 import LoginPanel from "../LoginPanel/LoginPanel";
-import UserPanel from "../UserPanel/UserPanel";
 import "./ManageUsers.css";
 
 function ManageUsers(): JSX.Element {
   const [value, setValue] = useState<string>("Customers");
 
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
+    console.log("new value: " + newValue);
     setValue(newValue);
+    console.log(value);
   };
-
 
   function renderSwitch() {
     switch (value) {
       case "Customers":
-        return <UserPanel userType={value} />;
+        return;
       case "Companies":
-        return <UserPanel userType={value} />;
+        return <GetAllCompanies />;
     }
   }
 
   function addButtonRenderSwitch() {
     switch (value) {
       case "Customers":
-        return <AddCustomerForm />;
+        console.log("this is customer button");
+        return <AddClientForm clientType="Customer" />;
       case "Companies":
-        return <AddCompanyForm/>;
+        console.log("this is company button");
+        return <AddClientForm clientType="Company" />;
     }
   }
 
@@ -40,8 +42,11 @@ function ManageUsers(): JSX.Element {
             <Tab label="Customers" value="Customers" />
             <Tab label="Companies" value="Companies" />
           </Tabs>
+          {/* <AddClientForm
+            clientType={value === "Customers" ? "Customer" : "Company"}
+          /> */}
           {addButtonRenderSwitch()}
-          {renderSwitch()}
+          {/* {renderSwitch()} */}
           {/* <UserPanel userType={value} /> */}
         </Box>
       </Card>

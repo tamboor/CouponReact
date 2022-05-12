@@ -2,18 +2,20 @@ import { useNavigate } from "react-router-dom";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import "./UserInfo.css";
 import axios, { AxiosResponse } from "axios";
-import { Paper, Box, Typography } from "@mui/material";
-import { UserModel } from "../../../Modals/UserModel";
+import { Paper, Box, Typography, Container } from "@mui/material";
 import { useState } from "react";
 import { useEffect } from "react";
-import UserDetails from "../../cards/UserDetails/UserDetails";
+import { CompanyModel } from "../../../Modals/CompanyModel";
+import { CustomerModel } from "../../../Modals/CustomerModel";
+import notify from "../../utils/Notify";
 
 //TODO: move axios to an import
 function UserInfo(): JSX.Element {
   const state = useTypedSelector((state) => state);
   const navigate = useNavigate();
-  //   const [user, setUser] = useState<CustomerModel | CompanyModel>();
-  const [user, setUser] = useState<UserModel>();
+
+  const [customer, setCustomer] = useState<CustomerModel>();
+  const [company, setCompany] = useState<CompanyModel>();
   const token = localStorage.getItem("token") as string;
 
   //todo: and 'catch' after every 'then'
@@ -24,19 +26,33 @@ function UserInfo(): JSX.Element {
         url = "http://localhost:8080/customer/getCustomerDetails";
         axios
           .get(url, { headers: { Authorization: token } })
-          .then((response) => {
-            // console.log(response.data);
-            setUser(response.data);
+          .then((res) => {
+            const headers = res.headers;
+            localStorage.setItem("token", headers.authorization);
+            setCustomer(res.data);
+          })
+          .catch((error) => {
+            console.log(error.response.status);
+            notify.error(error.response.data.description);
+            console.log(error);
           });
+
         break;
       case "company":
         url = "http://localhost:8080/company/getCompanyDetails";
         axios
           .get(url, { headers: { Authorization: token } })
-          .then((response) => {
-            // console.log(response.data);
-            setUser(response.data);
+          .then((res) => {
+            const headers = res.headers;
+            localStorage.setItem("token", headers.authorization);
+            setCompany(res.data);
+          })
+          .catch((error) => {
+            console.log(error.response.status);
+            notify.error(error.response.data.description);
+            console.log(error);
           });
+
         break;
       default:
         navigate("/404");
@@ -45,28 +61,51 @@ function UserInfo(): JSX.Element {
     // const value = localStorage.getItem("token")
   }, []);
 
+  function renderSwitch() {
+    switch (state.users.userRole) {
+      case "customer":
+        return (
+          <Paper elevation={12}>
+            <Box paddingX={2} paddingY={1}>
+              <Typography variant="h4" component="h2">
+                {customer?.firstName}
+              </Typography>
+              <Typography variant="h4" component="h2">
+                {customer?.lastName}
+              </Typography>
+              <Typography variant="h4" component="h2">
+                {customer?.email}
+              </Typography>
+              <Typography variant="h4" component="h2">
+                {customer?.password}
+              </Typography>
+            </Box>
+          </Paper>
+        );
+      case "company":
+        return (
+          <Paper elevation={12}>
+            <Box paddingX={2} paddingY={1}>
+              <Typography variant="h4" component="h2">
+                {company?.name}
+              </Typography>
+              <Typography variant="h4" component="h2">
+                {company?.email}
+              </Typography>
+              <Typography variant="h4" component="h2">
+                {company?.password}
+              </Typography>
+            </Box>
+          </Paper>
+        );
+    }
+  }
+
   //   if (state.users.userRole !== "admin") {
   //     const url = ``;
   //   }
   //todo: return a <UserDetails> component with 'user' as props
-  return (
-    <Paper elevation={12}>
-      <Box paddingX={2} paddingY={1}>
-        <Typography variant="h4" component="h2">
-          {user?.name}
-        </Typography>
-        <Typography variant="h4" component="h2">
-          {user?.lastName}
-        </Typography>
-        <Typography variant="h4" component="h2">
-          {user?.email}
-        </Typography>
-        <Typography variant="h4" component="h2">
-          {user?.password}
-        </Typography>
-      </Box>
-    </Paper>
-  );
+  return <Container sx={{ marginTop: 5 }}>{renderSwitch()}</Container>;
 }
 
 export default UserInfo;
