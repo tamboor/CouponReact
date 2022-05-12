@@ -45,6 +45,8 @@ function AddClientForm(props: formProps): JSX.Element {
 
   type forms = customerForm | companyForm;
 
+  // type forms = {};
+
   const {
     register,
     formState: { errors },
