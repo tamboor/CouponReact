@@ -42,7 +42,7 @@ function AddClientForm(props: formProps): JSX.Element {
   const handleClose = () => {
     setOpen(false);
   };
-
+  //todo: change to boolean conditioning
   type forms = customerForm | companyForm;
 
   // type forms = {};
