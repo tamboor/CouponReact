@@ -60,7 +60,7 @@ function AddClientForm(props: formProps): JSX.Element {
       .then((res) => {
         const headers = res.headers;
         localStorage.setItem("token", headers.authorization);
-        console.log("adding the customer");
+        console.log("adding the user to DB");
         navigate("/manage-users");
       })
       .catch((error) => {
