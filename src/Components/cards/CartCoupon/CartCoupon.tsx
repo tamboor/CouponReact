@@ -2,23 +2,16 @@ import axios from "axios";
 import { useEffect } from "react";
 import "./CartCoupon.css";
 
-interface cartItemProps{
-    id: number;
+interface cartItemProps {
+  id: number;
 }
 
-function CartCoupon(props:cartItemProps): JSX.Element {
+function CartCoupon(props: cartItemProps): JSX.Element {
+  // useEffect(()=>{
+  //     axios.get().then((res)=>{}).catch(()=>{})
+  // },[])
 
-    useEffect(()=>{
-        axios.get().then((res)=>{}).catch(()=>{})
-    },[])
-
-
-
-    return (
-        <div className="CartCoupon">
-			
-        </div>
-    );
+  return <div className="CartCoupon"></div>;
 }
 
 export default CartCoupon;
