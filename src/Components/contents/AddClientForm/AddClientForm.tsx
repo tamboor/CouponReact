@@ -55,6 +55,7 @@ function AddClientForm(props: formProps): JSX.Element {
   const navigate = useNavigate();
 
   const onSubmit: SubmitHandler<forms> = async (data) => {
+    // console.log("first try");
     await axios
       .post(url, data, { headers: { Authorization: token } })
       .then((res) => {
@@ -72,6 +73,7 @@ function AddClientForm(props: formProps): JSX.Element {
 
   return (
     <div>
+      {props.clientType}
       <br />
       <Button variant="outlined" onClick={handleClickOpen}>
         ADD {props.clientType}

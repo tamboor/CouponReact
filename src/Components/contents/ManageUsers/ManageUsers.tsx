@@ -9,7 +9,9 @@ function ManageUsers(): JSX.Element {
   const [value, setValue] = useState<string>("Customers");
 
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
+    console.log("new value: " + newValue);
     setValue(newValue);
+    console.log(value);
   };
 
   function renderSwitch() {
@@ -24,8 +26,10 @@ function ManageUsers(): JSX.Element {
   function addButtonRenderSwitch() {
     switch (value) {
       case "Customers":
+        console.log("this is customer button");
         return <AddClientForm clientType="Customer" />;
       case "Companies":
+        console.log("this is company button");
         return <AddClientForm clientType="Company" />;
     }
   }
@@ -38,11 +42,11 @@ function ManageUsers(): JSX.Element {
             <Tab label="Customers" value="Customers" />
             <Tab label="Companies" value="Companies" />
           </Tabs>
-          <AddClientForm
+          {/* <AddClientForm
             clientType={value === "Customers" ? "Customer" : "Company"}
-          />
-          {/* {addButtonRenderSwitch()} */}
-          {renderSwitch()}
+          /> */}
+          {addButtonRenderSwitch()}
+          {/* {renderSwitch()} */}
           {/* <UserPanel userType={value} /> */}
         </Box>
       </Card>
