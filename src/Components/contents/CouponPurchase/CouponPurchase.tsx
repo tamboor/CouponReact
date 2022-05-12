@@ -1,4 +1,14 @@
-import { Grid } from "@mui/material";
+import { Button, Grid } from "@mui/material";
+import axios from "axios";
+import { useState } from "react";
+import { json } from "stream/consumers";
+import { useActions } from "../../../hooks/useActions";
+import { useTypedSelector } from "../../../hooks/useTypedSelector";
+import { clearCart } from "../../../state/action-creators";
+
+import { CouponModel } from "../../../Modals/CouponModel";
+import CartCoupon from "../../cards/CartCoupon/CartCoupon";
+import getAuthHeaders, { getStoredToken } from "../../utils/tokenUtils";
 import "./CouponPurchase.css";
 
 const styles = {
@@ -7,26 +17,19 @@ const styles = {
 };
 //TODO: move cart to external file
 function CouponPurchase(): JSX.Element {
-  if (localStorage.getItem("cart") === null) {
-    localStorage.setItem("cart", JSON.stringify([]));
-  }
-  const userCoupons: number[] = JSON.parse(
-    localStorage.getItem("cart") as string
-  );
+  const [coupons, setCoupons] = useState<CouponModel[]>([]);
+  const { clearCart } = useActions();
 
-  const getCouponFromId = (num: number) => {
-    return <div>coupon</div>;
-  };
+  const state = useTypedSelector((state) => state);
 
   return (
     <div className="CouponPurchase">
+      <Button onClick={clearCart}>Clear Cart</Button>
       <Grid container spacing={3}>
         <Grid item xs={9} sx={styles}>
-          {userCoupons.length > 0 ? (
-            userCoupons.map((n: number) => getCouponFromId(n))
-          ) : (
-            <p>Cart is empty</p>
-          )}
+          {state.users.cart.map((c: CouponModel) => (
+            <CartCoupon coupon={c} key={c.id} />
+          ))}
         </Grid>
         <Grid item xs={3} sx={styles}>
           1asd
