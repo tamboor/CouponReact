@@ -11,24 +11,31 @@ import axios from "axios";
 import React, { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import notify from "../../utils/Notify";
-import "./AddCustomerForm.css";
+import "./AddClientForm.css";
 
+interface formProps {
+  clientType: string;
+}
 interface customerForm {
   email: string;
   firstName: string;
   lastName: string;
   password: string;
-  id?: Number;
 }
-function AddCustomerForm(): JSX.Element {
+
+interface companyForm {
+  email: string;
+  name: string;
+  password: string;
+}
+
+function AddClientForm(props: formProps): JSX.Element {
+  const state = useTypedSelector((state) => state);
   const [open, setOpen] = React.useState(false);
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
-  // const [firstName, setFirstName] = useState("");
-  // const [lastName, setLastName] = useState("");
   const token = localStorage.getItem("token") as string;
-  const url = "http://localhost:8080/admin/addCustomer";
+  const url = "http://localhost:8080/admin/add" + props.clientType;
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -36,15 +43,18 @@ function AddCustomerForm(): JSX.Element {
     setOpen(false);
   };
 
+  type forms = customerForm | companyForm;
+
   const {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm<customerForm>();
+    // } = useForm<customerForm>();
+  } = useForm<forms>();
 
   const navigate = useNavigate();
 
-  const onSubmit: SubmitHandler<customerForm> = async (data) => {
+  const onSubmit: SubmitHandler<forms> = async (data) => {
     await axios
       .post(url, data, { headers: { Authorization: token } })
       .then((res) => {
@@ -62,28 +72,44 @@ function AddCustomerForm(): JSX.Element {
 
   return (
     <div>
+      <br />
       <Button variant="outlined" onClick={handleClickOpen}>
-        Add Customer
+        ADD {props.clientType}
       </Button>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Add Customer</DialogTitle>
+        <DialogTitle> Add {props.clientType}</DialogTitle>
         <form onSubmit={handleSubmit(onSubmit)}>
           <DialogContent>
             <DialogContentText>
-              Please enter here the new customer's details:
+              Please enter here the new {props.clientType}'s details:
             </DialogContentText>
-            <TextField
-              {...register("firstName", { required: "this is required" })}
-              label="First Name"
-              variant="standard"
-            />
-            <br />
-            <TextField
-              {...register("lastName", { required: "this is required" })}
-              label="Last Name"
-              variant="standard"
-            />
-            <br />
+            {props.clientType === "Customer" && (
+              <TextField
+                {...register("firstName", { required: "this is required" })}
+                label="First Name"
+                variant="standard"
+              />
+            )}
+
+            {props.clientType === "Customer" && <br />}
+            {props.clientType === "Customer" && (
+              <TextField
+                {...register("lastName", { required: "this is required" })}
+                label="Last Name"
+                variant="standard"
+              />
+            )}
+
+            {props.clientType === "Customer" && <br />}
+
+            {props.clientType === "Company" && (
+              <TextField
+                {...register("name", { required: "this is required" })}
+                label="Name"
+                variant="standard"
+              />
+            )}
+            {props.clientType === "Company" && <br />}
             <TextField
               {...register("email", { required: "this is required" })}
               label="Email"
@@ -98,10 +124,10 @@ function AddCustomerForm(): JSX.Element {
             />
           </DialogContent>
           <DialogActions>
+            <Button onClick={handleClose}>Cancel</Button>
             <Button type="submit" onClick={handleClose}>
-              Cancel
+              Add
             </Button>
-            <Button type="submit">Add</Button>
           </DialogActions>
         </form>
       </Dialog>
@@ -109,4 +135,4 @@ function AddCustomerForm(): JSX.Element {
   );
 }
 
-export default AddCustomerForm;
+export default AddClientForm;
