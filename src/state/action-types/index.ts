@@ -6,4 +6,5 @@ export enum ActionType {
   ADD_ITEM = "addItem",
   REMOVE_ITEM = "removeItem",
   CLEAR_CART = "clearCart",
+  CLEAR_REDUX = "clearRedux",
 }

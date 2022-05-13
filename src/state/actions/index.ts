@@ -41,6 +41,10 @@ interface ClearCartAction {
   type: ActionType.CLEAR_CART;
 }
 
+interface ClearReduxAction {
+  type: ActionType.CLEAR_REDUX;
+}
+
 export type Action =
   | AdminLoginAction
   | CustomerLoginAction
@@ -48,4 +52,5 @@ export type Action =
   | LogoutAction
   | AddItemAction
   | RemoveItemAction
-  | ClearCartAction;
+  | ClearCartAction
+  | ClearReduxAction;

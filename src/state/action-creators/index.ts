@@ -118,3 +118,9 @@ export const clearCart = () => {
     dispatch({ type: ActionType.CLEAR_CART });
   };
 };
+
+export const clearRedux = () => {
+  return (dispatch: Dispatch<Action>) => {
+    dispatch({ type: ActionType.CLEAR_REDUX });
+  };
+};
