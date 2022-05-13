@@ -11,10 +11,13 @@ import Logo from "../Logo/Logo";
 import Navbar from "../Navbar/Navbar";
 import "./Header.css";
 
+/**
+ * @returns {JSX.Element} - the header of the page
+ */
 function Header(): JSX.Element {
   const state = useTypedSelector((state) => state);
 
-  const { clearRedux } = useActions();
+  // const { clearRedux } = useActions();
 
   function renderSwitch() {
     switch (state.users.userRole) {
@@ -24,7 +27,6 @@ function Header(): JSX.Element {
             <CouponMenu />
           </Box>
         );
-      // break;
       case "company":
         return (
           <Box>
@@ -32,19 +34,18 @@ function Header(): JSX.Element {
             <Button color="inherit">hello company 2</Button>
           </Box>
         );
-      // break;
       case "admin":
         return (
           <Box>
             <ManageUsersButton />
           </Box>
         );
-      // break;
       default:
         return (
           <Box>
             <Button color="inherit">hello guest</Button>
             <Button color="inherit">hello guest 2</Button>
+            <Button>Register</Button>
           </Box>
         );
     }

@@ -1,4 +1,4 @@
-import { Button, Card } from "@mui/material";
+import { Button, Card, Typography } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useActions } from "../../../hooks/useActions";
@@ -11,8 +11,14 @@ interface cartItemProps {
 }
 
 function CartCoupon(props: cartItemProps): JSX.Element {
-  const [coupon, setCoupon] = useState<CouponModel | null>();
+  const [coupon, setCoupon] = useState<CouponModel>({ ...new CouponModel() });
   const { removeItem } = useActions();
+
+  /**
+   * Checks the coupon in the database by the coupon id
+   * returns the coupon if its valid for purchase
+   * @param {CouponModel} coupon - the coupon to be removed
+   */
   useEffect(() => {
     axios
       .get(`http://localhost:8080/customer/checkCoupon/${props.coupon.id}`, {
@@ -28,14 +34,18 @@ function CartCoupon(props: cartItemProps): JSX.Element {
 
   return (
     <div className="CartCoupon">
-      <Button
-        onClick={() => {
-          removeItem(props.coupon);
-        }}
-      >
-        Remove Item
-      </Button>
-      <Card></Card>
+      <Card sx={{ margin: "1vh" }}>
+        <Typography>{coupon.title}</Typography>
+        <Typography>{coupon.description}</Typography>
+        <Typography>{coupon.price}</Typography>
+        <Button
+          onClick={() => {
+            removeItem(props.coupon);
+          }}
+        >
+          Remove Item
+        </Button>
+      </Card>
     </div>
   );
 }
