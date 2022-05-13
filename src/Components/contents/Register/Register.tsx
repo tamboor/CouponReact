@@ -1,8 +1,7 @@
-import AddClientForm from "../AddClientForm/AddClientForm";
 import "./Register.css";
 
 function Register(): JSX.Element {
-  return <AddClientForm />;
+  return <div>nir</div>;
 }
 
 export default Register;
