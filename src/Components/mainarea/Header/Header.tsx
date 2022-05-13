@@ -50,9 +50,9 @@ function Header(): JSX.Element {
     }
   }
 
-  const redoForms = () => {
-    clearRedux();
-  };
+  // const redoForms = () => {
+  //   clearRedux();
+  // };
 
   return (
     <AppBar position="sticky">
@@ -61,9 +61,9 @@ function Header(): JSX.Element {
           Coupon Mania
         </Typography>
         <Navbar>{renderSwitch()}</Navbar>
-        <Button onClick={redoForms} color="inherit">
+        {/* <Button onClick={redoForms} color="inherit">
           Clear redux
-        </Button>
+        </Button> */}
         {state.users.userRole === "customer" && <ShoppingCart />}
         {state.users.userRole === "guest" ? <LoginButton /> : <UserMenu />}
       </Toolbar>
