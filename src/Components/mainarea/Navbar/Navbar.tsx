@@ -5,7 +5,6 @@ interface NavBarProps {
   //userType: string;
 }
 function Navbar(props: NavBarProps): JSX.Element {
-  console.log("this is children" + props.children);
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid

@@ -30,17 +30,22 @@ function Coupon(props: couponProps): JSX.Element {
 
   const state = useTypedSelector((state) => state);
 
-  console.log("type from coupon: " + typeof state.users.cart);
+  // console.log("type from coupon: " + typeof state.users.cart);
 
   const handleAddToCart = (event: any) => {
     addItem(props.coupon);
   };
 
+  // console.log(!state.users.cart.includes(props.coupon));
+
   function renderSwitch() {
     switch (state.users.userRole) {
       case "customer":
         return (
-          <Button onClick={handleAddToCart} disabled={props.isPurchased}>
+          <Button
+            onClick={handleAddToCart}
+            disabled={state.users.cart.includes(props.coupon)}
+          >
             Add to cart
           </Button>
         );
