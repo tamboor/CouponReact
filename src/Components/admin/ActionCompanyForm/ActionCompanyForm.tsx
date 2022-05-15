@@ -193,7 +193,7 @@ function ActionCompanyForm(props: actionProps): JSX.Element {
       case AdminVerbs.UPDATE:
         return (
           <Dialog open={open} onClose={handleClose}>
-            <DialogTitle> Add Company</DialogTitle>
+            <DialogTitle> Update Company</DialogTitle>
             <form onSubmit={handleSubmit(onSubmit)}>
               <DialogContent>
                 <DialogContentText>

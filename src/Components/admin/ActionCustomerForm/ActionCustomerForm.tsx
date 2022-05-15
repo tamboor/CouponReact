@@ -206,7 +206,7 @@ function ActionCustomerForm(props: actionProps): JSX.Element {
       case AdminVerbs.UPDATE:
         return (
           <Dialog open={open} onClose={handleClose}>
-            <DialogTitle> Add Customer</DialogTitle>
+            <DialogTitle> Update Customer</DialogTitle>
             <form onSubmit={handleSubmit(onSubmit)}>
               <DialogContent>
                 <DialogContentText>
