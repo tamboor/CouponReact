@@ -1,14 +1,11 @@
-import styled from "@emotion/styled";
-import { Button, ButtonProps, Collapse } from "@mui/material";
-import { grey } from "@mui/material/colors";
 import axios, { AxiosError } from "axios";
-import { useEffect, useState } from "react";
-import { CompanyModel } from "../../../Modals/CompanyModel";
-import CompanyTable from "../CompanyTable/CompanyTable";
-import "./GetAllCompanies.css";
+import { useState, useEffect } from "react";
+import { CustomerModel } from "../../../Modals/CustomerModel";
+import CustomerTable from "../CustomerTable/CustomerTable";
+import "./GetAllCustomers.css";
 
-function GetAllCompanies(): JSX.Element {
-  const [companies, setCompanies] = useState<CompanyModel[]>([]);
+function GetAllCustomers(): JSX.Element {
+  const [customers, setCustomers] = useState<CustomerModel[]>([]);
   const [isLoad, setLoad] = useState<boolean>(false);
   const [isError, setError] = useState(false);
   const [myError, setMyError] = useState("");
@@ -16,13 +13,13 @@ function GetAllCompanies(): JSX.Element {
   const token = localStorage.getItem("token") as string;
 
   useEffect(() => {
-    const url = "http://localhost:8080/admin/getAllCompanies";
+    const url = "http://localhost:8080/admin/getAllCustomers";
     axios
       .get(url, { headers: { Authorization: token } })
       .then((response) => {
         console.log(response);
-        setCompanies(response.data);
-        console.log(companies);
+        setCustomers(response.data);
+        console.log(customers);
         if (response.data) {
           setLoad(true);
         }
@@ -51,14 +48,11 @@ function GetAllCompanies(): JSX.Element {
   //       backgroundColor: grey[600],
   //     },
   //   }));
-
   return (
-    <div id="CompanyTable">
-      {/* <Collapse in={collapse}> */}
-      <CompanyTable companies={companies} />
-      {/* </Collapse>{" "} */}
+    <div className="GetAllCustomers">
+      <CustomerTable customers={customers} />
     </div>
   );
 }
 
-export default GetAllCompanies;
+export default GetAllCustomers;

@@ -1,10 +1,13 @@
 import { Container, Card, Box, Tabs, Tab, Button, Paper } from "@mui/material";
 import { useState } from "react";
 import GetAllCompanies from "../../admin/GetAllCompanies/GetAllCompanies";
-import AddCompanyForm from "../AddCompanyForm/AddCompanyForm";
-import AddCustomerForm from "../AddCustomerForm/AddCustomerForm";
+// import AddCompanyForm from "../../admin/AddCompanyForm";
+import ActionCustomerForm from "../../admin/ActionCustomerForm/ActionCustomerForm";
+import ActionCompanyForm from "../../admin/ActionCompanyForm/ActionCompanyForm";
 import LoginPanel from "../LoginPanel/LoginPanel";
 import "./ManageUsers.css";
+import { AdminVerbs } from "../../admin/AdminVerbs";
+import GetAllCustomers from "../../admin/GetAllCustomers/GetAllCustomers";
 
 function ManageUsers(): JSX.Element {
   const [value, setValue] = useState<string>("Customers");
@@ -15,10 +18,14 @@ function ManageUsers(): JSX.Element {
     console.log(value);
   };
 
+  // const handleFormSubmit = (data: CustomerModel) => {
+  //   setCustomer(data);
+  // };
+
   function renderSwitch() {
     switch (value) {
       case "Customers":
-        return;
+        return <GetAllCustomers />;
       case "Companies":
         return <GetAllCompanies />;
     }
@@ -27,11 +34,19 @@ function ManageUsers(): JSX.Element {
   function addButtonRenderSwitch() {
     switch (value) {
       case "Customers":
-        console.log("this is customer button");
-        return <AddCustomerForm />;
+        return (
+          <ActionCustomerForm
+            verb={AdminVerbs.ADD}
+            // updateFunc={handleFormSubmit}
+          />
+        );
       case "Companies":
-        console.log("this is company button");
-        return <AddCompanyForm />;
+        return (
+          <ActionCompanyForm
+            verb={AdminVerbs.ADD}
+            // updateFunc={handleFormSubmit}
+          />
+        );
     }
   }
 
@@ -43,12 +58,9 @@ function ManageUsers(): JSX.Element {
             <Tab label="Customers" value="Customers" />
             <Tab label="Companies" value="Companies" />
           </Tabs>
-          {/* <AddClientForm
-            clientType={value === "Customers" ? "Customer" : "Company"}
-          /> */}
+
           {addButtonRenderSwitch()}
           {renderSwitch()}
-          {/* <UserPanel userType={value} /> */}
         </Box>
       </Card>
     </Container>
