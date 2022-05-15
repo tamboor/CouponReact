@@ -9,22 +9,6 @@ import "./Login.css";
 //TODO: add admin login
 function Login(): JSX.Element {
   const [value, setValue] = useState<string>("customer");
-
-<<<<<<< HEAD
-=======
-  //   function tabProps(index: number) {
-  //     return {
-  //       id: `simple-tab-${index}`,
-  //       "aria-controls": `login-tabpanel-${index}`,
-  //     };
-  //   }
-  //
-  //
-
-  // console.log(value);
-  // console.log("entered login");
-
->>>>>>> aa329ebcbb1b2b8230c8d1899de9c2c75b63d9ae
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
   };
