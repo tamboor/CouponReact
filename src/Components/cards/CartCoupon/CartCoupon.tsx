@@ -10,9 +10,22 @@ interface cartItemProps {
   coupon: CouponModel;
 }
 
+interface CartCouponState {
+  coupon: CouponModel;
+}
+
+interface ErrorState {
+  error?: string;
+  styles?: any;
+}
+
 function CartCoupon(props: cartItemProps): JSX.Element {
   const [coupon, setCoupon] = useState<CouponModel>({ ...new CouponModel() });
+  // const [valid , setValid] = useState<boolean>(false);
+  const [couponError, setCouponError] = useState<ErrorState>({});
   const { removeItem } = useActions();
+
+  // const extraStyles: any = {};
 
   /**
    * Checks the coupon in the database by the coupon id
@@ -28,16 +41,35 @@ function CartCoupon(props: cartItemProps): JSX.Element {
         setCoupon(res.data);
       })
       .catch((error) => {
-        console.log(error);
+        //TODO: make better 401 response in backend
+        setCouponError({
+          error: error.response.data.description,
+          styles: {
+            border: 1,
+            borderColor: "red",
+          },
+        });
       });
   }, []);
 
   return (
     <div className="CartCoupon">
-      <Card sx={{ margin: "1vh" }}>
-        <Typography>{coupon.title}</Typography>
-        <Typography>{coupon.description}</Typography>
-        <Typography>{coupon.price}</Typography>
+      <Card
+        sx={{
+          margin: "1vh  ",
+          ...(couponError.error && couponError.styles),
+        }}
+      >
+        {couponError.error !== null && (
+          <Typography color={"red"}>{couponError.error}</Typography>
+        )}
+        <Typography>{props.coupon.title}</Typography>
+        {!couponError.error && (
+          <div>
+            <Typography>{coupon.description}</Typography>
+            <Typography>{coupon.price}</Typography>
+          </div>
+        )}
         <Button
           onClick={() => {
             removeItem(props.coupon);

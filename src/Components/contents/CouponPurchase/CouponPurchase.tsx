@@ -17,18 +17,27 @@ const styles = {
 };
 //TODO: move cart to external file
 function CouponPurchase(): JSX.Element {
-  const [coupons, setCoupons] = useState<CouponModel[]>([]);
+  // const [coupons, setCoupons] = useState<CouponModel[]>([]);
   const { clearCart } = useActions();
 
   const state = useTypedSelector((state) => state);
 
+  console.log(state);
+
+  const stateCoupons = state.users.cart;
+  const coupons = stateCoupons.filter(function (
+    item: CouponModel,
+    pos: number
+  ) {
+    return stateCoupons.indexOf(item) == pos;
+  });
   return (
     <div className="CouponPurchase">
       <Button onClick={clearCart}>Clear Cart</Button>
       <Grid container spacing={3}>
         <Grid item xs={9} sx={styles}>
-          {state.users.cart.map((c: CouponModel) => (
-            <CartCoupon coupon={c} key={c.id} />
+          {coupons.map((c: CouponModel, index: number) => (
+            <CartCoupon coupon={c} key={index} />
           ))}
         </Grid>
         <Grid item xs={3} sx={styles}>
