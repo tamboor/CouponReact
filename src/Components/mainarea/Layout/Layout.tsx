@@ -22,9 +22,9 @@ function Layout(): JSX.Element {
         <Main />
       </main>
 
-      <footer>
+      {/* <footer>
         <Footer />
-      </footer>
+      </footer> */}
     </div>
   );
 }

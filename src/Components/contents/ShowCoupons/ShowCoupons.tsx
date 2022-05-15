@@ -86,7 +86,7 @@ function ShowCoupons(): JSX.Element {
     });
   };
 
-  console.log(state);
+  // console.log(state);
 
   //TODO: combine all handleChange
   const handleCheckbox = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -109,20 +109,9 @@ function ShowCoupons(): JSX.Element {
     return `${value}°C`;
   }
 
-  // const token = getStoredToken();
-
   //TODO: handle any
   function fetchCoupons(): void {
     console.log("fetching coupons");
-    // const url = "http://localhost:8080/guest/getAllCoupons";
-    // const url = () => {
-    //   switch (state.users.userRole) {
-    //     case "company":
-    //       return "http://localhost:8080/company/getCompanyCoupons";
-    //     default:
-    //       return "http://localhost:8080/guest/getAllCoupons";
-    //   }
-    // };
     axios
       .get(
         state.users.userRole === "company"
@@ -144,8 +133,9 @@ function ShowCoupons(): JSX.Element {
   }
 
   useEffect(() => {
+    console.log("useEffect");
     fetchCoupons();
-  }, []);
+  }, [state.users.userRole]);
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -154,7 +144,6 @@ function ShowCoupons(): JSX.Element {
     setAnchorEl(null);
   };
 
-  // axios.get()
   let userCoupons: number[] = [];
   if (state.users.userRole == "customer") {
     axios
@@ -164,14 +153,11 @@ function ShowCoupons(): JSX.Element {
       )
       .then((res: AxiosResponse) => {
         userCoupons = res.data.map((c: CouponModel) => c.id);
-        // localStorage.setItem("token", res.headers);
       })
       .catch((error) => {
         console.log(error);
       });
   }
-
-  const unsubscribe = store.subscribe(fetchCoupons);
 
   return (
     <Box paddingY={3}>

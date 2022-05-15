@@ -4,7 +4,7 @@ import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import ShowCoupons from "../ShowCoupons/ShowCoupons";
-import CouponList from "../CouponList/CouponList";
+// import CouponList from "../CouponList/CouponList";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -62,7 +62,7 @@ export default function BasicTabs() {
       </Tabs>
       {/* </Box> */}
       <TabPanel value={value} index={0}>
-        <CouponList />
+        <ShowCoupons />
       </TabPanel>
       <TabPanel value={value} index={1}></TabPanel>
       <TabPanel value={value} index={2}></TabPanel>

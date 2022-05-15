@@ -36,7 +36,7 @@ function Coupon(props: couponProps): JSX.Element {
     addItem(props.coupon);
   };
 
-  // console.log(!state.users.cart.includes(props.coupon));
+  console.log(state.users.cart.includes(props.coupon));
 
   function renderSwitch() {
     switch (state.users.userRole) {
