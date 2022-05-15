@@ -73,6 +73,6 @@ const reducer = (
   }
 };
 
-//TODO: clear cart on logout/login
+//TODO: clear cart on logout/login - most preferably on user switch
 
 export default reducer;

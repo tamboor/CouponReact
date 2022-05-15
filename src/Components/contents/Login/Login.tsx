@@ -19,8 +19,8 @@ function Login(): JSX.Element {
   //
   //
 
-  console.log(value);
-  console.log("entered login");
+  // console.log(value);
+  // console.log("entered login");
 
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);

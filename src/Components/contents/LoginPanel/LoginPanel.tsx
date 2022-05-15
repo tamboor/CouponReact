@@ -37,7 +37,7 @@ function LoginPanel(props: LoginProps): JSX.Element {
         break;
       case "company":
         tryCompanyLogin(data.userEmail, data.userPass);
-        navigate("/");
+        navigate("/company-home");
         break;
       case "admin":
         tryAdminLogin(data.userEmail, data.userPass);

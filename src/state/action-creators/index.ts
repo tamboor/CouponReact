@@ -57,6 +57,28 @@ export const tryCompanyLogin = (userName: string, userPass: string) => {
       });
     }
   };
+  // return (dispatch: Dispatch<Action>) => {
+  //   const url = `http://localhost:8080/company/login`;
+  //   axios
+  //     .post(url, { role: "company", userName: userName, userPass: userPass })
+  //     .then((res) => {
+  //       localStorage.setItem("token", res.headers.authorization);
+  //       dispatch({
+  //         type: ActionType.COMPANY_LOGIN,
+  //         payload: {
+  //           userName,
+  //         },
+  //       });
+  //     })
+  //     .catch((err) => {
+  //       localStorage.removeItem("token");
+
+  //       dispatch({
+  //         type: ActionType.LOGOUT,
+  //         payload: err?.message,
+  //       });
+  //     });
+  // };
 };
 
 export const tryCustomerLogin = (userName: string, userPass: string) => {

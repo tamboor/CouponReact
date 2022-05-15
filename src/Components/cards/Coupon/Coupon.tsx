@@ -30,13 +30,13 @@ function Coupon(props: couponProps): JSX.Element {
 
   const state = useTypedSelector((state) => state);
 
-  console.log("type from coupon: " + typeof state.users.cart);
+  // console.log("type from coupon: " + typeof state.users.cart);
 
   const handleAddToCart = (event: any) => {
     addItem(props.coupon);
   };
 
-  console.log(!state.users.cart.includes(props.coupon));
+  // console.log(!state.users.cart.includes(props.coupon));
 
   function renderSwitch() {
     switch (state.users.userRole) {

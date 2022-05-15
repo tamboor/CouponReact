@@ -20,9 +20,13 @@ import { CouponModel } from "../../../Modals/CouponModel";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { useParams } from "react-router-dom";
 import { TrueLiteral } from "typescript";
+import getAuthHeaders, { getStoredToken } from "../../utils/tokenUtils";
+import { store } from "../../../state/store";
+// import { store } from "../../../state";
 
 //TODO: change filtering to work on limited amount of coupons
 //TODO: change to category enum
+//TODO: handle searchbar
 interface CouponsState {
   coupons: CouponModel[];
   couponsFiltered: CouponModel[];
@@ -35,6 +39,7 @@ interface CouponsState {
   };
   valueRange: number[];
 }
+
 function ShowCoupons(): JSX.Element {
   const state = useTypedSelector((state) => state);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -79,9 +84,9 @@ function ShowCoupons(): JSX.Element {
       couponsFiltered: workCoupons,
       valueRange: newValue as number[],
     });
-    console.log("changed state");
-    console.log(showState);
   };
+
+  console.log(state);
 
   //TODO: combine all handleChange
   const handleCheckbox = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -98,22 +103,35 @@ function ShowCoupons(): JSX.Element {
       ...showState,
       couponsFiltered: workCoupons,
     });
-    console.log("changed state");
-    console.log(showState);
   };
 
   function valuetext(value: number) {
     return `${value}°C`;
   }
 
-  const token = localStorage.getItem("token") as string;
+  // const token = getStoredToken();
 
   //TODO: handle any
   function fetchCoupons(): void {
-    const url = "http://localhost:8080/guest/getAllCoupons";
+    console.log("fetching coupons");
+    // const url = "http://localhost:8080/guest/getAllCoupons";
+    // const url = () => {
+    //   switch (state.users.userRole) {
+    //     case "company":
+    //       return "http://localhost:8080/company/getCompanyCoupons";
+    //     default:
+    //       return "http://localhost:8080/guest/getAllCoupons";
+    //   }
+    // };
     axios
-      .get(url, { headers: { Authorization: token } })
+      .get(
+        state.users.userRole === "company"
+          ? "http://localhost:8080/company/getCompanyCoupons"
+          : "http://localhost:8080/guest/getAllCoupons",
+        getAuthHeaders()
+      )
       .then((response) => {
+        // console.log(response.data);
         setShowState({
           ...showState,
           coupons: response.data,
@@ -124,6 +142,7 @@ function ShowCoupons(): JSX.Element {
         console.log(error);
       });
   }
+
   useEffect(() => {
     fetchCoupons();
   }, []);
@@ -139,16 +158,20 @@ function ShowCoupons(): JSX.Element {
   let userCoupons: number[] = [];
   if (state.users.userRole == "customer") {
     axios
-      .get("http://localhost:8080/customer/getCustomerCoupons", {
-        headers: { Authorization: token },
-      })
-      .then((res) => {
+      .get(
+        "http://localhost:8080/customer/getCustomerCoupons",
+        getAuthHeaders()
+      )
+      .then((res: AxiosResponse) => {
         userCoupons = res.data.map((c: CouponModel) => c.id);
+        // localStorage.setItem("token", res.headers);
       })
       .catch((error) => {
         console.log(error);
       });
   }
+
+  const unsubscribe = store.subscribe(fetchCoupons);
 
   return (
     <Box paddingY={3}>

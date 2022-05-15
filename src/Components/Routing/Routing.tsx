@@ -8,6 +8,7 @@ import { Route, Routes } from "react-router-dom";
 import UserInfo from "../contents/UserInfo/UserInfo";
 import CouponPurchase from "../contents/CouponPurchase/CouponPurchase";
 import ManageUsers from "../contents/ManageUsers/ManageUsers";
+import CompanyHomepage from "../contents/CompanyHomepage/CompanyHomepage";
 // import { Switch } from "react-router-dom";
 
 function Routing(): JSX.Element {
@@ -17,6 +18,7 @@ function Routing(): JSX.Element {
         <Route path="/login" element={<Login />} />
         <Route path="/purchase-coupons" element={<CouponPurchase />} />
         <Route path="/my-account" element={<UserInfo />} />
+        <Route path="/company-home" element={<CompanyHomepage />} />
         {/* <Route path="/show-coupons/:verb/:filter" element={<ShowCoupons />} /> */}
         <Route path="/show-coupons" element={<ShowCoupons />} />
         <Route path="/manage-users" element={<ManageUsers />} />
