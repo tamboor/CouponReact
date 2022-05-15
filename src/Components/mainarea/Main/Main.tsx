@@ -1,3 +1,4 @@
+import { Box, Grid } from "@mui/material";
 import Coupon from "../../cards/Coupon/Coupon";
 
 import Login from "../../contents/Login/Login";
@@ -7,15 +8,13 @@ import "./Main.css";
 
 function Main(): JSX.Element {
   return (
-    <div className="Main">
-      {/* <div className="Content">
-            <Content />
-            </div> */}
-
-      {/* <Coupon /> */}
-      {/* <Allcoupons /> */}
-      <Routing />
-    </div>
+    // <div className="Main">
+    <Box>
+      <Grid>
+        <Routing />
+      </Grid>
+    </Box>
+    // </div>
   );
 }
 

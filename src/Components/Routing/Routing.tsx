@@ -7,7 +7,7 @@ import Login from "../contents/Login/Login";
 import { Route, Routes } from "react-router-dom";
 import UserInfo from "../contents/UserInfo/UserInfo";
 import CouponPurchase from "../contents/CouponPurchase/CouponPurchase";
-import ManageUsers from "../contents/ManageUsers/ManageUsers";
+import ManageUsers from "../admin/ManageUsers/ManageUsers";
 // import { Switch } from "react-router-dom";
 
 function Routing(): JSX.Element {
