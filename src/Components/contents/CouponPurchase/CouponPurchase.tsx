@@ -1,4 +1,4 @@
-import { Button, Grid } from "@mui/material";
+import { Button, Grid, Paper, Typography } from "@mui/material";
 import axios from "axios";
 import { useState } from "react";
 import { json } from "stream/consumers";
@@ -17,7 +17,6 @@ const styles = {
 };
 //TODO: move cart to external file
 function CouponPurchase(): JSX.Element {
-  // const [coupons, setCoupons] = useState<CouponModel[]>([]);
   const { clearCart } = useActions();
 
   const state = useTypedSelector((state) => state);
@@ -31,6 +30,15 @@ function CouponPurchase(): JSX.Element {
   ) {
     return stateCoupons.indexOf(item) == pos;
   });
+
+  const getSubTotal = () => {
+    let total = 0;
+    coupons.forEach((coupon) => {
+      total += coupon.price;
+    });
+    return total;
+  };
+
   return (
     <div className="CouponPurchase">
       <Button onClick={clearCart}>Clear Cart</Button>
@@ -41,7 +49,10 @@ function CouponPurchase(): JSX.Element {
           ))}
         </Grid>
         <Grid item xs={3} sx={styles}>
-          1asd
+          <Paper elevation={2}>
+            <Typography variant="h4">Subtotal:</Typography>
+            <Typography variant="h4">{getSubTotal()}</Typography>
+          </Paper>
         </Grid>
       </Grid>
     </div>
