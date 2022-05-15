@@ -26,6 +26,7 @@ function CustomerRow(props: customerSingleProp): JSX.Element {
 
   useEffect(() => {
     setCustomer(props.singleCustomer);
+    console.log(customer);
   }, []);
 
   //   const customer = props.singleCustomer;

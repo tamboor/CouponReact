@@ -17,7 +17,7 @@ function GetAllCustomers(): JSX.Element {
     axios
       .get(url, { headers: { Authorization: token } })
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         setCustomers(response.data);
         console.log(customers);
         if (response.data) {

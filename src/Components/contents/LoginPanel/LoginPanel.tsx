@@ -55,7 +55,6 @@ function LoginPanel(props: LoginProps): JSX.Element {
     <Container>
       <Box>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <Typography>{props.userType}</Typography>
           <TextField
             {...register("userEmail", { required: "this is required" })}
             label="Email"

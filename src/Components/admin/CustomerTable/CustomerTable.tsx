@@ -22,12 +22,12 @@ function CustomerTable(props: customerProps): JSX.Element {
   useEffect(() => {
     setCustomers(props.customers);
   }, []);
+  console.log(customers);
   const handleFormSubmit = (data: CustomerModel) => {
     // setCustomers({ ...customers, ...data });
-    const newCustomers = customers.filter((c) => c !== data);
-    setCustomers(newCustomers);
+    // const newCustomers = customers.filter((c) => c !== data);
+    // setCustomers(newCustomers);
   };
-  console.log(customers);
   return (
     <TableContainer component={Paper}>
       <Table aria-label="collapsible table">

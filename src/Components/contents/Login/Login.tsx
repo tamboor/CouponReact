@@ -10,18 +10,6 @@ import "./Login.css";
 function Login(): JSX.Element {
   const [value, setValue] = useState<string>("customer");
 
-  //   function tabProps(index: number) {
-  //     return {
-  //       id: `simple-tab-${index}`,
-  //       "aria-controls": `login-tabpanel-${index}`,
-  //     };
-  //   }
-  //
-  //
-
-  console.log(value);
-  console.log("entered login");
-
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
   };
@@ -35,14 +23,8 @@ function Login(): JSX.Element {
             <Tab label="Company Login" value="company" />
             <Tab label="Admin Login" value="admin" />
           </Tabs>
-          {/* <LoginPanel userType={value} /> */}
-          {/* <LoginPanel userType="" */}
-          {/* <Provider store={store}> */}
-          <LoginPanel userType={value} />
-          {/* </Provider> */}
 
-          {/* <div>Hello Alon</div>
-          </LoginPanel> */}
+          <LoginPanel userType={value} />
         </Box>
       </Card>
     </Container>

@@ -13,9 +13,7 @@ function ManageUsers(): JSX.Element {
   const [value, setValue] = useState<string>("Customers");
 
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
-    console.log("new value: " + newValue);
     setValue(newValue);
-    console.log(value);
   };
 
   // const handleFormSubmit = (data: CustomerModel) => {
