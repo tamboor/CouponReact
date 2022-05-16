@@ -1,7 +1,9 @@
 import { TableRow, TableCell } from "@mui/material";
 import React, { useEffect } from "react";
-import { CompanyModel } from "../../../Models/CompanyModel";
-import ActionCompanyForm from "../../forms/ActionCompanyForm/ActionCompanyForm";
+import { CompanyModel } from "../../../../Models/CompanyModel";
+import ActionCompanyForm from "../../../forms/ActionCompanyForm/ActionCompanyForm";
+// import { CompanyModel } from "../../../Models/CompanyModel";
+// import ActionCompanyForm from "../../forms/ActionCompanyForm/ActionCompanyForm";
 import { AdminVerbs } from "../AdminVerbs";
 import "./CompanyRow.css";
 interface companySingleProp {

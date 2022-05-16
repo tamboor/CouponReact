@@ -1,15 +1,7 @@
-import {
-  TableRow,
-  TableCell,
-  TableContainer,
-  Paper,
-  Table,
-  TableHead,
-  TableBody,
-} from "@mui/material";
+import { TableRow, TableCell } from "@mui/material";
 import React, { useEffect } from "react";
-import { CustomerModel } from "../../../Models/CustomerModel";
-import ActionCustomerForm from "../../forms/ActionCustomerForm/ActionCustomerForm";
+import { CustomerModel } from "../../../../Models/CustomerModel";
+import ActionCustomerForm from "../../../forms/ActionCustomerForm/ActionCustomerForm";
 import { AdminVerbs } from "../AdminVerbs";
 import "./CustomerRow.css";
 interface customerSingleProp {

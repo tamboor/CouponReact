@@ -1,4 +1,4 @@
-import { Box, Card, Container, Tab, Tabs } from "@mui/material";
+import { Box, Card, Container, Tab, Tabs, Typography } from "@mui/material";
 import { useState } from "react";
 import LoginPanel from "../LoginPanel/LoginPanel";
 
@@ -13,6 +13,8 @@ function Login(): JSX.Element {
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
   };
+
+  console.log("here");
 
   return (
     <Container sx={{ marginTop: 5 }}>

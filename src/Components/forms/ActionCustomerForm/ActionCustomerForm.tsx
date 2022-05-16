@@ -15,10 +15,10 @@ import { useNavigate } from "react-router-dom";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import notify from "../../../utils/Notify";
 import AddBoxIcon from "@mui/icons-material/AddBox";
-import { AdminVerbs } from "../../admin/AdminVerbs";
 import { CustomerModel } from "../../../Models/CustomerModel";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { AdminVerbs } from "../../user-specific/admin/AdminVerbs";
 interface actionProps {
   verb: AdminVerbs;
   customer?: CustomerModel;

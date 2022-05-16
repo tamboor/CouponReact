@@ -16,14 +16,16 @@ import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import notify from "../../../utils/Notify";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import { CompanyModel } from "../../../Models/CompanyModel";
-import { AdminVerbs } from "../../admin/AdminVerbs";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { AdminVerbs } from "../../user-specific/admin/AdminVerbs";
+import { Type } from "typescript";
 
 interface actionProps {
   verb: AdminVerbs;
   company?: CompanyModel;
   updateFunc?: Function;
+  // formType: Type;
 }
 interface companyForm {
   id: number;

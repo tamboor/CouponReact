@@ -3,9 +3,9 @@ import { Box } from "@mui/system";
 import { useForm } from "react-hook-form";
 import "./LoginPanel.css";
 import { useNavigate } from "react-router-dom";
-import { useActions } from "../../../hooks/useActions";
+import { useActions } from "../../../../hooks/useActions";
 import { useSelector } from "react-redux";
-import { useTypedSelector } from "../../../hooks/useTypedSelector";
+import { useTypedSelector } from "../../../../hooks/useTypedSelector";
 
 interface LoginProps {
   children?: JSX.Element;
