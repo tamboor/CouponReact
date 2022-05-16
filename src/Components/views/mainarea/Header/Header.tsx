@@ -1,7 +1,8 @@
 import { AppBar, Box, Button, Toolbar, Typography } from "@mui/material";
 import { Navigate, useNavigate } from "react-router-dom";
-import { useActions } from "../../../hooks/useActions";
-import { useTypedSelector } from "../../../hooks/useTypedSelector";
+import { useTypedSelector } from "../../../../hooks/useTypedSelector";
+// import { useActions } from "../../../hooks/useActions";
+// import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import CouponMenu from "../../header-content/CouponMenu/CouponMenu";
 import LoginButton from "../../header-content/LoginButton/LoginButton";
 import ManageUsersButton from "../../header-content/ManageUsersButton/ManageUsersButton";

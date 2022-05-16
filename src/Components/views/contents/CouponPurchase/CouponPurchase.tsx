@@ -2,13 +2,16 @@ import { Button, Grid, Paper, Typography } from "@mui/material";
 import axios from "axios";
 import { useState } from "react";
 import { json } from "stream/consumers";
-import { useActions } from "../../../hooks/useActions";
-import { useTypedSelector } from "../../../hooks/useTypedSelector";
-import { clearCart } from "../../../Redux/action-creators";
+import { useActions } from "../../../../hooks/useActions";
+import { useTypedSelector } from "../../../../hooks/useTypedSelector";
+import { CouponModel } from "../../../../Models/CouponModel";
+import CartCoupon from "../../../cards/CartCoupon/CartCoupon";
+// import { useActions } from "../../../hooks/useActions";
+// import { useTypedSelector } from "../../../hooks/useTypedSelector";
+// import { clearCart } from "../../../Redux/action-creators";
 
-import { CouponModel } from "../../../Models/CouponModel";
-import CartCoupon from "../../cards/CartCoupon/CartCoupon";
-import getAuthHeaders, { getStoredToken } from "../../utils/tokenUtils";
+// import { CouponModel } from "../../../Models/CouponModel";
+// import CartCoupon from "../../cards/CartCoupon/CartCoupon";
 import "./CouponPurchase.css";
 
 const styles = {

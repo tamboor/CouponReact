@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import React, { useEffect } from "react";
 import { CustomerModel } from "../../../Models/CustomerModel";
-import ActionCustomerForm from "../ActionCustomerForm/ActionCustomerForm";
+import ActionCustomerForm from "../../forms/ActionCustomerForm/ActionCustomerForm";
 import { AdminVerbs } from "../AdminVerbs";
 import "./CustomerRow.css";
 interface customerSingleProp {

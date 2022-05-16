@@ -2,12 +2,13 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
-import Layout from "./Components/mainarea/Layout/Layout";
+// import Layout from "./Components/mainarea/Layout/Layout";
 import { BrowserRouter } from "react-router-dom";
 import { store } from "./Redux";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistStore } from "redux-persist";
+import Layout from "./Components/views/mainarea/Layout/Layout";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement

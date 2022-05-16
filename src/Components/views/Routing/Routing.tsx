@@ -3,13 +3,15 @@ import "./Routing.css";
 import ShowCoupons from "../contents/ShowCoupons/ShowCoupons";
 import Notfound from "../contents/notfound/notfound";
 // import { Route, Routes } from "react-router-dom";
-import Login from "../guest/Login/Login";
+// import Login from "../guest/Login/Login";
 import { Route, Routes } from "react-router-dom";
 import UserInfo from "../contents/UserInfo/UserInfo";
 import CouponPurchase from "../contents/CouponPurchase/CouponPurchase";
 
-import ManageUsers from "../admin/ManageUsers/ManageUsers";
+// import ManageUsers from "../admin/ManageUsers/ManageUsers";
 import CompanyHomepage from "../contents/CompanyHomepage/CompanyHomepage";
+import { Login } from "@mui/icons-material";
+import ManageUsers from "../../admin/ManageUsers/ManageUsers";
 // import { Switch } from "react-router-dom";
 
 function Routing(): JSX.Element {

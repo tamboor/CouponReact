@@ -4,7 +4,7 @@ import "./Coupon.css";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import { CouponModel } from "../../../Models/CouponModel";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
-import CouponMenu from "../../header-content/CouponMenu/CouponMenu";
+import CouponMenu from "../../views/header-content/CouponMenu/CouponMenu";
 import { useState } from "react";
 import { addItem } from "../../../Redux/action-creators";
 import { useActions } from "../../../hooks/useActions";

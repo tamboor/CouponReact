@@ -17,9 +17,9 @@ import {
   Menu,
 } from "@mui/material";
 import React from "react";
-import { useTypedSelector } from "../../../hooks/useTypedSelector";
+import { useTypedSelector } from "../../../../hooks/useTypedSelector";
 import "./UserMenu.css";
-import { useActions } from "../../../hooks/useActions";
+import { useActions } from "../../../../hooks/useActions";
 import { useNavigate } from "react-router-dom";
 
 function UserMenu(): JSX.Element {

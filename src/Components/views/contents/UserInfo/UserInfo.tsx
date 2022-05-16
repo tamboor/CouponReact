@@ -1,13 +1,17 @@
 import { useNavigate } from "react-router-dom";
-import { useTypedSelector } from "../../../hooks/useTypedSelector";
+// import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import "./UserInfo.css";
 import axios, { AxiosResponse } from "axios";
 import { Paper, Box, Typography, Container } from "@mui/material";
 import { useState } from "react";
 import { useEffect } from "react";
-import { CompanyModel } from "../../../Models/CompanyModel";
-import { CustomerModel } from "../../../Models/CustomerModel";
-import notify from "../../utils/Notify";
+import { useTypedSelector } from "../../../../hooks/useTypedSelector";
+import { CompanyModel } from "../../../../Models/CompanyModel";
+import { CustomerModel } from "../../../../Models/CustomerModel";
+import notify from "../../../../utils/Notify";
+// import { CompanyModel } from "../../../Models/CompanyModel";
+// import { CustomerModel } from "../../../Models/CustomerModel";
+// import notify from "../../../utils/Notify";
 
 //TODO: move axios to an import
 function UserInfo(): JSX.Element {

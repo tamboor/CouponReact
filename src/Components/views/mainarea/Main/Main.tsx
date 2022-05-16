@@ -1,7 +1,7 @@
 import { Box, Grid } from "@mui/material";
-import Coupon from "../../cards/Coupon/Coupon";
+// import Coupon from "../../cards/Coupon/Coupon";
 
-import Login from "../../guest/Login/Login";
+// import Login from "../../guest/Login/Login";
 import Routing from "../../Routing/Routing";
 import Content from "../Content/Content";
 import "./Main.css";

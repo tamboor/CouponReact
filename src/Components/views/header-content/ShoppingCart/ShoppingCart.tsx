@@ -6,7 +6,7 @@ import MailIcon from "@mui/icons-material/Mail";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useState } from "react";
 import { Button } from "@mui/material";
-import { useTypedSelector } from "../../../hooks/useTypedSelector";
+import { useTypedSelector } from "../../../../hooks/useTypedSelector";
 function ShoppingCart(): JSX.Element {
   //   const state = useTypedSelector((state) => state);
   //   const [items, setItems] = useState<Number>(0);

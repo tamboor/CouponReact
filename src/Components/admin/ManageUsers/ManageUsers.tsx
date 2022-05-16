@@ -1,13 +1,12 @@
 import { Container, Card, Box, Tabs, Tab, Button, Paper } from "@mui/material";
 import { useState } from "react";
 import GetAllCompanies from "../GetAllCompanies/GetAllCompanies";
-// import AddCompanyForm from "../../admin/AddCompanyForm";
-import ActionCustomerForm from "../ActionCustomerForm/ActionCustomerForm";
-import ActionCompanyForm from "../ActionCompanyForm/ActionCompanyForm";
+import ActionCustomerForm from "../../forms/ActionCustomerForm/ActionCustomerForm";
 import LoginPanel from "../../guest/LoginPanel/LoginPanel";
 import "./ManageUsers.css";
 import { AdminVerbs } from "../AdminVerbs";
 import GetAllCustomers from "../GetAllCustomers/GetAllCustomers";
+import ActionCompanyForm from "../../forms/ActionCompanyForm/ActionCompanyForm";
 
 function ManageUsers(): JSX.Element {
   const [value, setValue] = useState<string>("Customers");

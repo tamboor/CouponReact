@@ -12,16 +12,20 @@ import {
   Slider,
   TextField,
 } from "@mui/material";
-import Coupon from "../../cards/Coupon/Coupon";
+// import Coupon from "../../cards/Coupon/Coupon";
 import "./ShowCoupons.css";
 import axios, { AxiosResponse, AxiosResponseHeaders } from "axios";
 import React, { useState, useEffect } from "react";
-import { CouponModel } from "../../../Models/CouponModel";
-import { useTypedSelector } from "../../../hooks/useTypedSelector";
+// import { CouponModel } from "../../../Models/CouponModel";
+// import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { useParams } from "react-router-dom";
 import { TrueLiteral } from "typescript";
-import getAuthHeaders, { getStoredToken } from "../../utils/tokenUtils";
-import { store } from "../../../Redux/store";
+import { useTypedSelector } from "../../../../hooks/useTypedSelector";
+import { CouponModel } from "../../../../Models/CouponModel";
+import getAuthHeaders from "../../../../utils/tokenUtils";
+import Coupon from "../../../cards/Coupon/Coupon";
+// import getAuthHeaders, { getStoredToken } from "../../../utils/tokenUtils";
+// import { store } from "../../../Redux/store";
 // import { store } from "../../../state";
 
 //TODO: change filtering to work on limited amount of coupons

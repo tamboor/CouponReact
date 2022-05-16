@@ -3,7 +3,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useActions } from "../../../hooks/useActions";
 import { CouponModel } from "../../../Models/CouponModel";
-import { getStoredToken } from "../../utils/tokenUtils";
+import { getStoredToken } from "../../../utils/tokenUtils";
 import "./CartCoupon.css";
 
 interface cartItemProps {

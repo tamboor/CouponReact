@@ -1,4 +1,4 @@
-import { CouponModel } from "../../Models/CouponModel";
+import { CouponModel } from "../Models/CouponModel";
 
 function addToCart(name: string, coupon: CouponModel) {
   const key = `cart_${name}`;

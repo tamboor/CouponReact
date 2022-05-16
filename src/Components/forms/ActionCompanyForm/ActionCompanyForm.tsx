@@ -13,10 +13,10 @@ import React, { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
-import notify from "../../utils/Notify";
+import notify from "../../../utils/Notify";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import { CompanyModel } from "../../../Models/CompanyModel";
-import { AdminVerbs } from "../AdminVerbs";
+import { AdminVerbs } from "../../admin/AdminVerbs";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 
