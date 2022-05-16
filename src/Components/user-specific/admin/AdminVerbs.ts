@@ -1,5 +1,5 @@
 export enum AdminVerbs {
-  ADD = "add",
-  UPDATE = "update",
+  ADD = "Add",
+  UPDATE = "Update",
   DELETE = "delete",
 }
