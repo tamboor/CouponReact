@@ -2,7 +2,7 @@ import { Button, Card, Typography } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useActions } from "../../../hooks/useActions";
-import { CouponModel } from "../../../Modals/CouponModel";
+import { CouponModel } from "../../../Models/CouponModel";
 import { getStoredToken } from "../../utils/tokenUtils";
 import "./CartCoupon.css";
 

@@ -2,7 +2,7 @@ import { Button, Container, Grid, Paper, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import "./Coupon.css";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
-import { CouponModel } from "../../../Modals/CouponModel";
+import { CouponModel } from "../../../Models/CouponModel";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import CouponMenu from "../../header-content/CouponMenu/CouponMenu";
 import { useState } from "react";

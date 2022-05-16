@@ -13,7 +13,7 @@ import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import { CompanyModel } from "../../../Modals/CompanyModel";
+import { CompanyModel } from "../../../Models/CompanyModel";
 import CompanyRow from "../CompanyRow/CompanyRow";
 // import AddCompanyForm from "../../admin/AddCompanyForm";
 

@@ -1,4 +1,4 @@
-import { CouponModel } from "../../Modals/CouponModel";
+import { CouponModel } from "../../Models/CouponModel";
 import { ActionType } from "../action-types";
 import { Action } from "../actions";
 

@@ -15,7 +15,7 @@ import { useNavigate } from "react-router-dom";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import notify from "../../utils/Notify";
 import AddBoxIcon from "@mui/icons-material/AddBox";
-import { CompanyModel } from "../../../Modals/CompanyModel";
+import { CompanyModel } from "../../../Models/CompanyModel";
 import { AdminVerbs } from "../AdminVerbs";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";

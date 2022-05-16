@@ -1,6 +1,6 @@
 import { TableRow, TableCell } from "@mui/material";
 import React, { useEffect } from "react";
-import { CompanyModel } from "../../../Modals/CompanyModel";
+import { CompanyModel } from "../../../Models/CompanyModel";
 import ActionCompanyForm from "../ActionCompanyForm/ActionCompanyForm";
 import ActionCustomerForm from "../ActionCustomerForm/ActionCustomerForm";
 import { AdminVerbs } from "../AdminVerbs";

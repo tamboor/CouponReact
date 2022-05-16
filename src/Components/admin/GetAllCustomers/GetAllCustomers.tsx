@@ -1,6 +1,6 @@
 import axios, { AxiosError } from "axios";
 import { useState, useEffect } from "react";
-import { CustomerModel } from "../../../Modals/CustomerModel";
+import { CustomerModel } from "../../../Models/CustomerModel";
 import CustomerTable from "../CustomerTable/CustomerTable";
 import "./GetAllCustomers.css";
 

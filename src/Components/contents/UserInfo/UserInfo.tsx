@@ -5,8 +5,8 @@ import axios, { AxiosResponse } from "axios";
 import { Paper, Box, Typography, Container } from "@mui/material";
 import { useState } from "react";
 import { useEffect } from "react";
-import { CompanyModel } from "../../../Modals/CompanyModel";
-import { CustomerModel } from "../../../Modals/CustomerModel";
+import { CompanyModel } from "../../../Models/CompanyModel";
+import { CustomerModel } from "../../../Models/CustomerModel";
 import notify from "../../utils/Notify";
 
 //TODO: move axios to an import

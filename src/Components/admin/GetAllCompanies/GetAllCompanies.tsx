@@ -3,7 +3,7 @@ import { Button, ButtonProps, Collapse } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import axios, { AxiosError } from "axios";
 import { useEffect, useState } from "react";
-import { CompanyModel } from "../../../Modals/CompanyModel";
+import { CompanyModel } from "../../../Models/CompanyModel";
 import CompanyTable from "../CompanyTable/CompanyTable";
 import "./GetAllCompanies.css";
 

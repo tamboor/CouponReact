@@ -16,7 +16,7 @@ import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import notify from "../../utils/Notify";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import { AdminVerbs } from "../AdminVerbs";
-import { CustomerModel } from "../../../Modals/CustomerModel";
+import { CustomerModel } from "../../../Models/CustomerModel";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 interface actionProps {

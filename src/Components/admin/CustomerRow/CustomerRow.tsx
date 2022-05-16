@@ -8,7 +8,7 @@ import {
   TableBody,
 } from "@mui/material";
 import React, { useEffect } from "react";
-import { CustomerModel } from "../../../Modals/CustomerModel";
+import { CustomerModel } from "../../../Models/CustomerModel";
 import ActionCustomerForm from "../ActionCustomerForm/ActionCustomerForm";
 import { AdminVerbs } from "../AdminVerbs";
 import "./CustomerRow.css";

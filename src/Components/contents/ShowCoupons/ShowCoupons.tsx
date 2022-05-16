@@ -16,7 +16,7 @@ import Coupon from "../../cards/Coupon/Coupon";
 import "./ShowCoupons.css";
 import axios, { AxiosResponse, AxiosResponseHeaders } from "axios";
 import React, { useState, useEffect } from "react";
-import { CouponModel } from "../../../Modals/CouponModel";
+import { CouponModel } from "../../../Models/CouponModel";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { useParams } from "react-router-dom";
 import { TrueLiteral } from "typescript";

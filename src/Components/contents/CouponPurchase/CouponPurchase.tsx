@@ -6,7 +6,7 @@ import { useActions } from "../../../hooks/useActions";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { clearCart } from "../../../state/action-creators";
 
-import { CouponModel } from "../../../Modals/CouponModel";
+import { CouponModel } from "../../../Models/CouponModel";
 import CartCoupon from "../../cards/CartCoupon/CartCoupon";
 import getAuthHeaders, { getStoredToken } from "../../utils/tokenUtils";
 import "./CouponPurchase.css";

@@ -1,5 +1,5 @@
 import { Grid, Paper, Box, Typography } from "@mui/material";
-import { UserModel } from "../../../Modals/UserModel";
+import { UserModel } from "../../../Models/UserModel";
 import "./UserDetails.css";
 interface userProps {
   children?: JSX.Element;

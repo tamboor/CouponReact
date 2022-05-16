@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import React from "react";
 import { useEffect } from "react";
-import { CustomerModel } from "../../../Modals/CustomerModel";
+import { CustomerModel } from "../../../Models/CustomerModel";
 import CustomerRow from "../CustomerRow/CustomerRow";
 import "./CustomerTable.css";
 interface customerProps {
