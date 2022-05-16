@@ -1,9 +1,24 @@
-import { TableRow, TableCell } from "@mui/material";
+import {
+  TableRow,
+  TableCell,
+  IconButton,
+  Box,
+  Collapse,
+  Table,
+  TableBody,
+  TableHead,
+  Typography,
+} from "@mui/material";
 import React, { useEffect } from "react";
 import { CustomerModel } from "../../../../Models/CustomerModel";
 import ActionCustomerForm from "../../../forms/ActionCustomerForm/ActionCustomerForm";
 import { AdminVerbs } from "../AdminVerbs";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import "./CustomerRow.css";
+import { CouponModel } from "../../../../Models/CouponModel";
+import axios, { AxiosError } from "axios";
+import CouponTable from "../CouponTable/CouponTable";
 interface customerSingleProp {
   singleCustomer: CustomerModel;
   deleteFunc: Function;
@@ -13,6 +28,8 @@ function CustomerRow(props: customerSingleProp): JSX.Element {
   const [customer, setCustomer] = React.useState<CustomerModel>(
     new CustomerModel()
   );
+  const [coupons, setCoupons] = React.useState<CouponModel[]>([]);
+  const token = localStorage.getItem("token") as string;
   //     [] as CustomerModel[]
   //   );
 
@@ -21,24 +38,46 @@ function CustomerRow(props: customerSingleProp): JSX.Element {
     console.log(customer);
   }, []);
 
-  //   const customer = props.singleCustomer;
+  const loadCoupons = () => {
+    const url = `http://localhost:8080/admin/getCustomerCoupons/${customer.id}`;
+    axios
+      .get(url, { headers: { Authorization: token } })
+      .then((response) => {
+        // console.log(response);
+        setCoupons(response.data);
+        console.log(coupons);
+        // if (response.data) {
+        //   setLoad(true);
+        // }
+      })
+      .catch((error: AxiosError) => {
+        const err = error.response?.request.responseText;
+        const errMessage = JSON.stringify(err);
+        console.log(errMessage);
 
+        // setMyError(errMessage.slice(22, 66));
+
+        // setError(true);
+      });
+  };
   const handleFormSubmit = (data: CustomerModel) => {
     setCustomer({ ...customer, ...data });
   };
   return (
     <React.Fragment>
       <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
-        {/* <TableCell>
-            <IconButton
-              aria-label="expand row"
-              size="small"
-              onClick={() => setOpen(!open)}
-            >
-              {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-            </IconButton>
-          </TableCell> */}
-        <TableCell />
+        <TableCell>
+          <IconButton
+            aria-label="expand row"
+            size="small"
+            onClick={() => {
+              loadCoupons();
+              setOpen(!open);
+            }}
+          >
+            {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+          </IconButton>
+        </TableCell>
         <TableCell component="th" scope="row">
           {customer.id}
         </TableCell>
@@ -60,50 +99,15 @@ function CustomerRow(props: customerSingleProp): JSX.Element {
           />
         </TableCell>
       </TableRow>
+      <TableRow>
+        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+          <Collapse in={open} timeout="auto" unmountOnExit>
+            <CouponTable coupons={coupons} />
+          </Collapse>
+        </TableCell>
+      </TableRow>
     </React.Fragment>
   );
 }
 
 export default CustomerRow;
-
-{
-  /* <TableRow>
-              <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
-                <Collapse in={open} timeout="auto" unmountOnExit>
-                  <Box sx={{ margin: 1 }}>
-                    <Typography variant="h6" gutterBottom component="div">
-                      Coupons
-                    </Typography>
-                    <Table size="small" aria-label="purchases">
-                      <TableHead>
-                        <TableRow>
-                          <TableCell>Title</TableCell>
-                          <TableCell>Description</TableCell>
-                          <TableCell>amount</TableCell>
-                          <TableCell>start-date</TableCell>
-                          <TableCell>end-date</TableCell>
-                          <TableCell align="right">Total price ($)</TableCell>
-                        </TableRow>
-                      </TableHead>
-                      <TableBody>
-                        {company.coupons.map((coupon) => (
-                          <TableRow key={coupon.coupon_id}>
-                            <TableCell component="th" scope="row">
-                              {coupon.title}
-                            </TableCell>
-                            <TableCell>{coupon.description}</TableCell>
-                            <TableCell>{coupon.amount}</TableCell>
-                            <TableCell>{coupon.start_date}</TableCell>
-                            <TableCell>{coupon.end_date}</TableCell>
-                            <TableCell align="right">
-                              {coupon.price}
-                            </TableCell>
-                          </TableRow>
-                        ))}
-                      </TableBody>
-                    </Table>
-                  </Box>
-                </Collapse>
-              </TableCell>
-            </TableRow> */
-}

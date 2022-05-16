@@ -1,4 +1,4 @@
-import { TableRow, TableCell } from "@mui/material";
+import { TableRow, TableCell, IconButton, Collapse } from "@mui/material";
 import React, { useEffect } from "react";
 import { CompanyModel } from "../../../../Models/CompanyModel";
 import ActionCompanyForm from "../../../forms/ActionCompanyForm/ActionCompanyForm";
@@ -6,6 +6,11 @@ import ActionCompanyForm from "../../../forms/ActionCompanyForm/ActionCompanyFor
 // import ActionCompanyForm from "../../forms/ActionCompanyForm/ActionCompanyForm";
 import { AdminVerbs } from "../AdminVerbs";
 import "./CompanyRow.css";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import { CouponModel } from "../../../../Models/CouponModel";
+import axios, { AxiosError } from "axios";
+import CouponTable from "../CouponTable/CouponTable";
 interface companySingleProp {
   singleCompany: CompanyModel;
   deleteFunc: Function;
@@ -15,12 +20,37 @@ function CompanyRow(props: companySingleProp): JSX.Element {
   const [company, setCompany] = React.useState<CompanyModel>(
     new CompanyModel()
   );
+  const [coupons, setCoupons] = React.useState<CouponModel[]>([]);
+  const token = localStorage.getItem("token") as string;
   //     [] as CustomerModel[]
   //   );
 
   useEffect(() => {
     setCompany(props.singleCompany);
   }, []);
+
+  const loadCoupons = () => {
+    const url = `http://localhost:8080/admin/getCompanyCoupons/${company.id}`;
+    axios
+      .get(url, { headers: { Authorization: token } })
+      .then((response) => {
+        // console.log(response);
+        setCoupons(response.data);
+        console.log(coupons);
+        // if (response.data) {
+        //   setLoad(true);
+        // }
+      })
+      .catch((error: AxiosError) => {
+        const err = error.response?.request.responseText;
+        const errMessage = JSON.stringify(err);
+        console.log(errMessage);
+
+        // setMyError(errMessage.slice(22, 66));
+
+        // setError(true);
+      });
+  };
 
   //   const customer = props.singleCustomer;
 
@@ -30,16 +60,18 @@ function CompanyRow(props: companySingleProp): JSX.Element {
   return (
     <React.Fragment>
       <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
-        {/* <TableCell>
-            <IconButton
-              aria-label="expand row"
-              size="small"
-              onClick={() => setOpen(!open)}
-            >
-              {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-            </IconButton>
-          </TableCell> */}
-        <TableCell />
+        <TableCell>
+          <IconButton
+            aria-label="expand row"
+            size="small"
+            onClick={() => {
+              loadCoupons();
+              setOpen(!open);
+            }}
+          >
+            {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+          </IconButton>
+        </TableCell>
         <TableCell component="th" scope="row">
           {company.id}
         </TableCell>
@@ -60,48 +92,15 @@ function CompanyRow(props: companySingleProp): JSX.Element {
           />
         </TableCell>
       </TableRow>
+      <TableRow>
+        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+          <Collapse in={open} timeout="auto" unmountOnExit>
+            <CouponTable coupons={coupons} />
+          </Collapse>
+        </TableCell>
+      </TableRow>
     </React.Fragment>
   );
 }
 
 export default CompanyRow;
-
-/* <TableRow>
-              <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
-                <Collapse in={open} timeout="auto" unmountOnExit>
-                  <Box sx={{ margin: 1 }}>
-                    <Typography variant="h6" gutterBottom component="div">
-                      Coupons
-                    </Typography>
-                    <Table size="small" aria-label="purchases">
-                      <TableHead>
-                        <TableRow>
-                          <TableCell>Title</TableCell>
-                          <TableCell>Description</TableCell>
-                          <TableCell>amount</TableCell>
-                          <TableCell>start-date</TableCell>
-                          <TableCell>end-date</TableCell>
-                          <TableCell align="right">Total price ($)</TableCell>
-                        </TableRow>
-                      </TableHead>
-                      <TableBody>
-                        {company.coupons.map((coupon) => (
-                          <TableRow key={coupon.coupon_id}>
-                            <TableCell component="th" scope="row">
-                              {coupon.title}
-                            </TableCell>
-                            <TableCell>{coupon.description}</TableCell>
-                            <TableCell>{coupon.amount}</TableCell>
-                            <TableCell>{coupon.start_date}</TableCell>
-                            <TableCell>{coupon.end_date}</TableCell>
-                            <TableCell align="right">
-                              {coupon.price}
-                            </TableCell>
-                          </TableRow>
-                        ))}
-                      </TableBody>
-                    </Table>
-                  </Box>
-                </Collapse>
-              </TableCell>
-            </TableRow> */

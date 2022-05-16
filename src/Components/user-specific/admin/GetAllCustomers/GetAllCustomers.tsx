@@ -1,10 +1,13 @@
+import styled from "@emotion/styled";
+import { Button, ButtonProps } from "@mui/material";
+import { grey } from "@mui/material/colors";
 import axios, { AxiosError } from "axios";
 import { useState, useEffect } from "react";
 import { CustomerModel } from "../../../../Models/CustomerModel";
 // import { CustomerModel } from "../../../Models/CustomerModel";
 import CustomerTable from "../CustomerTable/CustomerTable";
 import "./GetAllCustomers.css";
-
+//todo: what is setLoad
 function GetAllCustomers(): JSX.Element {
   const [customers, setCustomers] = useState<CustomerModel[]>([]);
   const [isLoad, setLoad] = useState<boolean>(false);
@@ -42,13 +45,13 @@ function GetAllCustomers(): JSX.Element {
 
   useEffect(() => {}, [collapse]);
 
-  //   const ColorButton = styled(Button)<ButtonProps>(({ theme }) => ({
-  //     color: theme.palette.getContrastText(grey[800]),
-  //     backgroundColor: grey[800],
-  //     "&:hover": {
-  //       backgroundColor: grey[600],
-  //     },
-  //   }));
+  // const ColorButton = styled(Button)<ButtonProps>(({ theme }) => ({
+  //   color: theme.palette.getContrastText(grey[800]),
+  //   backgroundColor: grey[800],
+  //   "&:hover": {
+  //     backgroundColor: grey[600],
+  //   },
+  // }));
   return (
     <div className="GetAllCustomers">
       <CustomerTable customers={customers} />
