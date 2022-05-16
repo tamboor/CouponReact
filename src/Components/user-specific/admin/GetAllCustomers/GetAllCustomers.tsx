@@ -23,7 +23,7 @@ function GetAllCustomers(): JSX.Element {
       .then((response) => {
         // console.log(response);
         setCustomers(response.data);
-        console.log(customers);
+
         if (response.data) {
           setLoad(true);
         }
@@ -39,9 +39,9 @@ function GetAllCustomers(): JSX.Element {
       });
   }, [isLoad, token]);
 
-  useEffect(() => {
-    console.log(isError);
-  }, [isError]);
+  // useEffect(() => {
+  //   console.log(isError);
+  // }, [isError]);
 
   useEffect(() => {}, [collapse]);
 
@@ -52,9 +52,29 @@ function GetAllCustomers(): JSX.Element {
   //     backgroundColor: grey[600],
   //   },
   // }));
+  const deleteCustomer = (data: number) => {
+    const oldCustomers = [...customers];
+    const newCustomers = oldCustomers.filter(
+      (customer) => customer.id !== data
+    );
+    setCustomers(newCustomers);
+  };
+
+  const addCustomer = (data: CustomerModel) => {
+    const oldCustomers = [...customers];
+    oldCustomers.push(data);
+    setCustomers(oldCustomers);
+  };
+
   return (
     <div className="GetAllCustomers">
-      <CustomerTable customers={customers} />
+      <CustomerTable
+        customers={customers}
+        addFunction={(data: any) => {
+          addCustomer(data);
+        }}
+        deleteFunction={deleteCustomer}
+      />
     </div>
   );
 }

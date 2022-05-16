@@ -21,7 +21,9 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import "./AcionUserForm.css";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import UserForm from "../UserForm/UserForm";
-
+import DeletePrompt from "../DeletePrompt/DeletePrompt";
+import { DeleteableEntity } from "../DeleteableEntities";
+//TODO: change usertype to enum
 interface CustomerForm {
   id: number;
   email: string;
@@ -37,16 +39,16 @@ interface CompanyForm {
   password: string;
 }
 
-interface IUserProps<T> {
+interface IUserProps {
   verb: AdminVerbs;
   formType: string;
-  user?: T;
+  user?: CompanyForm | CustomerForm;
   updateFunc?: Function;
+  deleteFunc?: Function;
+  addFunc?: Function;
 }
 
-function ActionUserForm<T extends CompanyForm | CustomerForm>(
-  props: IUserProps<T>
-): JSX.Element {
+function ActionUserForm(props: IUserProps): JSX.Element {
   const state = useTypedSelector((state) => state);
   const [open, setOpen] = React.useState(false);
   const token = localStorage.getItem("token") as string;
@@ -57,12 +59,71 @@ function ActionUserForm<T extends CompanyForm | CustomerForm>(
   const handleClose = () => {
     setOpen(false);
   };
+  const actionButtonRenderSwitch = () => {
+    switch (props.verb) {
+      case AdminVerbs.ADD:
+        return (
+          <Button variant="outlined" onClick={handleClickOpen}>
+            <AddBoxIcon /> ADD CUSTOMER
+          </Button>
+        );
+      case AdminVerbs.UPDATE:
+        return (
+          //todo: change to update icon
+          <Button variant="outlined" onClick={handleClickOpen}>
+            <EditIcon />
+          </Button>
+        );
+      case AdminVerbs.DELETE:
+        return (
+          //todo: change to delete icon
+          <Button variant="outlined" onClick={handleClickOpen}>
+            <DeleteIcon />
+          </Button>
+        );
+    }
+  };
+  // console.log("in userform:" + props.user);
+  const getTarget = () => {
+    switch (props.formType) {
+      case "customer":
+        return DeleteableEntity.CUSTOMER;
+      case "company":
+        return DeleteableEntity.COMPANY;
+    }
+    return DeleteableEntity.CUSTOMER;
+  };
+
+  // const handleDelete = () => {
+  //   props.deleteFunc
+  // };
 
   return (
     <div className="AddCustomerForm">
+      {actionButtonRenderSwitch()}
       <br />
       <Dialog open={open} onClose={handleClose}>
-        <UserForm verb={props.verb} handleClose={handleClose} userType="" />
+        {props.verb === AdminVerbs.DELETE ? (
+          <DeletePrompt
+            handleClose={handleClose}
+            deleteableID={props.user?.id as number}
+            targetType={getTarget()}
+            deleteFunc={() => {
+              props.deleteFunc?.(props.user?.id);
+            }}
+          >
+            {props.formType}
+          </DeletePrompt>
+        ) : (
+          <UserForm
+            verb={props.verb}
+            handleClose={handleClose}
+            user={props.user}
+            userType={props.formType}
+            updateFunction={props?.updateFunc}
+            addFunction={(data: any) => props.addFunc?.(data)}
+          />
+        )}
       </Dialog>
     </div>
   );

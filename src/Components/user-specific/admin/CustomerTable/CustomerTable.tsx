@@ -15,6 +15,8 @@ import CustomerRow from "../CustomerRow/CustomerRow";
 import "./CustomerTable.css";
 interface customerProps {
   customers: CustomerModel[];
+  addFunction: Function;
+  deleteFunction: Function;
 }
 
 function CustomerTable(props: customerProps): JSX.Element {
@@ -22,12 +24,8 @@ function CustomerTable(props: customerProps): JSX.Element {
   useEffect(() => {
     setCustomers(props.customers);
   }, []);
-  console.log(customers);
-  const handleFormSubmit = (data: CustomerModel) => {
-    // setCustomers({ ...customers, ...data });
-    // const newCustomers = customers.filter((c) => c !== data);
-    // setCustomers(newCustomers);
-  };
+
+  const handleFormSubmit = (data: CustomerModel) => {};
   return (
     <TableContainer component={Paper}>
       <Table aria-label="collapsible table">
@@ -45,7 +43,8 @@ function CustomerTable(props: customerProps): JSX.Element {
             <CustomerRow
               singleCustomer={customer}
               key={customer.id}
-              deleteFunc={handleFormSubmit}
+              deleteFunc={() => props.deleteFunction(customer.id)}
+              // addFunc={() => props.addFunction(customer.id)}
             />
           ))}
         </TableBody>

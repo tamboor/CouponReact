@@ -3,6 +3,7 @@ import { Button, ButtonProps, Collapse } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import axios, { AxiosError } from "axios";
 import { useEffect, useState } from "react";
+import { couldStartTrivia } from "typescript";
 import { CompanyModel } from "../../../../Models/CompanyModel";
 // import { CompanyModel } from "../../../Models/CompanyModel";
 import CompanyTable from "../CompanyTable/CompanyTable";
@@ -45,6 +46,20 @@ function GetAllCompanies(): JSX.Element {
 
   useEffect(() => {}, [collapse]);
 
+  const deleteCompany = (data: number) => {
+    const oldCompanies: CompanyModel[] = [...companies];
+    const newCompanies = oldCompanies.filter((company: CompanyModel) => {
+      return company.id !== data;
+    });
+    setCompanies(newCompanies);
+  };
+
+  const addCompany = (data: CompanyModel) => {
+    const oldCompanies = [...companies];
+    oldCompanies.push(data);
+    setCompanies(oldCompanies);
+  };
+
   //   const ColorButton = styled(Button)<ButtonProps>(({ theme }) => ({
   //     color: theme.palette.getContrastText(grey[800]),
   //     backgroundColor: grey[800],
@@ -56,7 +71,13 @@ function GetAllCompanies(): JSX.Element {
   return (
     <div id="CompanyTable">
       {/* <Collapse in={collapse}> */}
-      <CompanyTable companies={companies} />
+      <CompanyTable
+        companies={companies}
+        addFunction={(data: any) => {
+          addCompany(data);
+        }}
+        deleteFunction={deleteCompany}
+      />
       {/* </Collapse>{" "} */}
     </div>
   );

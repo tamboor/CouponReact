@@ -8,6 +8,7 @@ import { AdminVerbs } from "../AdminVerbs";
 import GetAllCustomers from "../GetAllCustomers/GetAllCustomers";
 import ActionCompanyForm from "../../../forms/ActionCompanyForm/ActionCompanyForm";
 import ActionCustomerForm from "../../../forms/ActionCustomerForm/ActionCustomerForm";
+import ActionUserForm from "../../../forms/AcionUserForm/ActionUserForm";
 // import ActionCompanyForm from "../../forms/ActionCompanyForm/ActionCompanyForm";
 
 function ManageUsers(): JSX.Element {
@@ -20,7 +21,7 @@ function ManageUsers(): JSX.Element {
   // const handleFormSubmit = (data: CustomerModel) => {
   //   setCustomer(data);
   // };
-
+  const addFunction = () => {};
   function renderSwitch() {
     switch (value) {
       case "Customers":
@@ -34,16 +35,18 @@ function ManageUsers(): JSX.Element {
     switch (value) {
       case "Customers":
         return (
-          <ActionCustomerForm
+          <ActionUserForm
             verb={AdminVerbs.ADD}
-            // updateFunc={handleFormSubmit}
+            formType="customer"
+            addFunc={addFunction}
           />
         );
       case "Companies":
         return (
-          <ActionCompanyForm
+          <ActionUserForm
             verb={AdminVerbs.ADD}
-            // updateFunc={handleFormSubmit}
+            formType="company"
+            addFunc={addFunction}
           />
         );
     }

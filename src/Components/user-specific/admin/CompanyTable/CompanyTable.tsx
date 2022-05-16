@@ -12,6 +12,8 @@ import { CompanyModel } from "../../../../Models/CompanyModel";
 
 interface companyProps {
   companies: CompanyModel[];
+  addFunction: Function;
+  deleteFunction: Function;
 }
 
 function CompanyTable(props: companyProps): JSX.Element {
@@ -20,11 +22,10 @@ function CompanyTable(props: companyProps): JSX.Element {
     setCompanies(props.companies);
   }, []);
   const handleFormSubmit = (data: CompanyModel) => {
-    // setCustomers({ ...customers, ...data });
     const newCompanies = companies.filter((c) => c !== data);
     setCompanies(newCompanies);
   };
-  console.log(companies);
+  // console.log(companies);
   return (
     <TableContainer component={Paper}>
       <Table aria-label="collapsible table">
@@ -41,7 +42,7 @@ function CompanyTable(props: companyProps): JSX.Element {
             <CompanyRow
               singleCompany={company}
               key={company.id}
-              deleteFunc={handleFormSubmit}
+              deleteFunc={() => props.deleteFunction(company.id)}
             />
           ))}
         </TableBody>

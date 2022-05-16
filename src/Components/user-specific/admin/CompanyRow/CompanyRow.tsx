@@ -11,6 +11,7 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { CouponModel } from "../../../../Models/CouponModel";
 import axios, { AxiosError } from "axios";
 import CouponTable from "../CouponTable/CouponTable";
+import ActionUserForm from "../../../forms/AcionUserForm/ActionUserForm";
 interface companySingleProp {
   singleCompany: CompanyModel;
   deleteFunc: Function;
@@ -34,25 +35,14 @@ function CompanyRow(props: companySingleProp): JSX.Element {
     axios
       .get(url, { headers: { Authorization: token } })
       .then((response) => {
-        // console.log(response);
         setCoupons(response.data);
-        console.log(coupons);
-        // if (response.data) {
-        //   setLoad(true);
-        // }
       })
       .catch((error: AxiosError) => {
         const err = error.response?.request.responseText;
         const errMessage = JSON.stringify(err);
         console.log(errMessage);
-
-        // setMyError(errMessage.slice(22, 66));
-
-        // setError(true);
       });
   };
-
-  //   const customer = props.singleCustomer;
 
   const handleFormSubmit = (data: CompanyModel) => {
     setCompany({ ...company, ...data });
@@ -78,17 +68,20 @@ function CompanyRow(props: companySingleProp): JSX.Element {
         <TableCell>{company.name}</TableCell>
         <TableCell>{company.email}</TableCell>
         <TableCell>
-          <ActionCompanyForm
+          <ActionUserForm
             verb={AdminVerbs.UPDATE}
-            company={company}
+            user={company}
+            formType="company"
             updateFunc={handleFormSubmit}
           />
         </TableCell>
         <TableCell>
-          <ActionCompanyForm
+          <ActionUserForm
             verb={AdminVerbs.DELETE}
-            company={company}
-            updateFunc={handleFormSubmit}
+            user={company}
+            // updateFunc={handleFormSubmit}
+            formType="company"
+            deleteFunc={() => props.deleteFunc(props.singleCompany.id)}
           />
         </TableCell>
       </TableRow>

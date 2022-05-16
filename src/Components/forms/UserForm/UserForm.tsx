@@ -15,29 +15,80 @@ import "./UserForm.css";
 
 interface IFormProps {
   verb: AdminVerbs;
-  user?: UserModel;
+  user?: CompanyForm | CustomerForm;
   userType: string;
   handleClose: Function;
+  updateFunction?: Function;
+  addFunction?: Function;
+}
+
+interface CustomerForm {
+  id: number;
+  email: string;
+  firstName: string;
+  lastName: string;
+  password: string;
+}
+
+interface CompanyForm {
+  id: number;
+  email: string;
+  name: string;
+  password: string;
 }
 
 function UserForm(props: IFormProps): JSX.Element {
+  console.log("in customer form");
+
+  //   const getType = () => {
+  //     switch (props.userType) {
+  //         case "customer":
+  //             return new customerForm();
+  //     }
+  // }
+
   const {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm<any>();
+    getValues,
+  } = useForm<CustomerForm | CompanyForm>();
 
-  const onSubmit: SubmitHandler<any> = async (data) => {
+  const onSubmit: SubmitHandler<CustomerForm | CompanyForm> = async (data) => {
+    // console.log("in onSubmit");
+    // console.log(data);
+    const userTypeUrl =
+      props.userType.charAt(0).toUpperCase() + props.userType.slice(1);
+    console.log(props.user);
+
+    // const getUpdateFields = () => {
+    //   switch (props.userType) {
+    //     case "customer":
+    //       return {
+    //         firstName: data.firstName,
+    //         lastName: data.lastName,
+    //         email: data.email,
+    //         password: data.password,
+    //       };
+    //     case "company":
+    //       return {
+    //         email: data.email,
+    //         password: data.password,
+    //       };
+    //   }
+    // }
+
     switch (props.verb) {
       case AdminVerbs.ADD:
         axios
           .post(
-            "http://localhost:8080/admin/updateCustomer",
+            `http://localhost:8080/admin/add${userTypeUrl}`,
             { ...data, id: 0 },
             getAuthHeaders()
           )
           .then((res: AxiosResponse) => {
             setStoredToken(res);
+            props.addFunction?.({ ...data });
           })
           .catch((error: AxiosError) => {
             console.log(error);
@@ -46,14 +97,20 @@ function UserForm(props: IFormProps): JSX.Element {
       case AdminVerbs.UPDATE:
         axios
           .put(
-            "http://localhost:8080/admin/updateCustomer",
-            { ...data, id: props.user?.id, email: props.user?.email },
+            `http://localhost:8080/admin/update${userTypeUrl}`,
+            { ...props.user, ...data },
             getAuthHeaders()
           )
           .then((res: AxiosResponse) => {
             setStoredToken(res);
+            props.updateFunction && props.updateFunction(data);
           })
           .catch((error: AxiosError) => {
+            console.log({
+              ...data,
+              id: props.user?.id,
+              email: props.user?.email,
+            });
             console.log(error);
           });
         break;
@@ -61,12 +118,13 @@ function UserForm(props: IFormProps): JSX.Element {
   };
 
   const renderSwitch = (): JSX.Element => {
-    const customerNameFields = (
+    const customerNameFields = () => (
       <div>
         <TextField
           {...register("firstName", { required: "this is required" })}
           label="First Name"
           variant="standard"
+          defaultValue={(props.user && (props.user as CustomerForm))?.firstName}
         />
 
         <br />
@@ -75,25 +133,30 @@ function UserForm(props: IFormProps): JSX.Element {
           {...register("lastName", { required: "this is required" })}
           label="Last Name"
           variant="standard"
+          defaultValue={(props.user && (props.user as CustomerForm))?.lastName}
         />
       </div>
     );
 
-    const companyNameFields = (
+    const companyNameFields = () => (
       <TextField
         {...register("name", { required: "this is required" })}
         label="Company Name"
         variant="standard"
+        // defaultValue={(props.user && (props.user as CompanyForm))?.name}
       />
     );
 
-    const emailFields = (
+    const emailFields = () => (
       <TextField
         {...register("email", { required: "this is required" })}
         label="Email"
         variant="standard"
+        defaultValue={props.user?.email}
       />
     );
+
+    // console.log(handleSubmit);
 
     switch (props.verb) {
       case AdminVerbs.ADD:
@@ -101,15 +164,15 @@ function UserForm(props: IFormProps): JSX.Element {
           case "customer":
             return (
               <div>
-                {customerNameFields}
-                {emailFields}
+                {customerNameFields()}
+                {emailFields()}
               </div>
             );
           case "company":
             return (
               <div>
-                {companyNameFields}
-                {emailFields}
+                {companyNameFields()}
+                {emailFields()}
               </div>
             );
         }
@@ -117,9 +180,9 @@ function UserForm(props: IFormProps): JSX.Element {
       case AdminVerbs.UPDATE:
         switch (props.userType) {
           case "customer":
-            return <div>{customerNameFields}</div>;
+            return <div>{customerNameFields()}</div>;
           case "company":
-            return <div>{emailFields}</div>;
+            return <div>{emailFields()}</div>;
         }
         return <div></div>;
     }
@@ -130,13 +193,23 @@ function UserForm(props: IFormProps): JSX.Element {
     props.handleClose();
   };
 
+  const onError = (errors: any, e: any) => {
+    // console.log(props.user);
+    // console.log(props.userType);
+    // console.log(errors, e);
+    console.log(getValues());
+  };
+
   return (
     <div className="UserForm">
-      <DialogTitle> Add {props.userType}</DialogTitle>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <DialogTitle>
+        {/* {" "} */}
+        {props.verb} {props.userType}
+      </DialogTitle>
+      <form onSubmit={handleSubmit(onSubmit, onError)}>
         <DialogContent>
           <DialogContentText>
-            Please enter here the new {props.userType}'s details:
+            Please enter here the {props.userType}'s details:
           </DialogContentText>
           {renderSwitch()}
           <br />

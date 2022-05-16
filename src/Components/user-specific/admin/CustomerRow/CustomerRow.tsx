@@ -19,6 +19,7 @@ import "./CustomerRow.css";
 import { CouponModel } from "../../../../Models/CouponModel";
 import axios, { AxiosError } from "axios";
 import CouponTable from "../CouponTable/CouponTable";
+import ActionUserForm from "../../../forms/AcionUserForm/ActionUserForm";
 interface customerSingleProp {
   singleCustomer: CustomerModel;
   deleteFunc: Function;
@@ -35,7 +36,7 @@ function CustomerRow(props: customerSingleProp): JSX.Element {
 
   useEffect(() => {
     setCustomer(props.singleCustomer);
-    console.log(customer);
+    // console.log(customer);
   }, []);
 
   const loadCoupons = () => {
@@ -43,21 +44,11 @@ function CustomerRow(props: customerSingleProp): JSX.Element {
     axios
       .get(url, { headers: { Authorization: token } })
       .then((response) => {
-        // console.log(response);
         setCoupons(response.data);
-        console.log(coupons);
-        // if (response.data) {
-        //   setLoad(true);
-        // }
       })
       .catch((error: AxiosError) => {
         const err = error.response?.request.responseText;
         const errMessage = JSON.stringify(err);
-        console.log(errMessage);
-
-        // setMyError(errMessage.slice(22, 66));
-
-        // setError(true);
       });
   };
   const handleFormSubmit = (data: CustomerModel) => {
@@ -85,17 +76,19 @@ function CustomerRow(props: customerSingleProp): JSX.Element {
         <TableCell>{customer.lastName}</TableCell>
         <TableCell>{customer.email}</TableCell>
         <TableCell>
-          <ActionCustomerForm
+          <ActionUserForm
             verb={AdminVerbs.UPDATE}
-            customer={customer}
+            user={customer}
+            formType="customer"
             updateFunc={handleFormSubmit}
           />
         </TableCell>
         <TableCell>
-          <ActionCustomerForm
+          <ActionUserForm
             verb={AdminVerbs.DELETE}
-            customer={customer}
-            updateFunc={handleFormSubmit}
+            user={customer}
+            formType="customer"
+            deleteFunc={() => props.deleteFunc?.(props.singleCustomer.id)}
           />
         </TableCell>
       </TableRow>
