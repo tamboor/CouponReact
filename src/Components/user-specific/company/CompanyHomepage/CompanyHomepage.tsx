@@ -3,7 +3,7 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import ShowCoupons from "../ShowCoupons/ShowCoupons";
+import ShowCoupons from "../../../views/contents/ShowCoupons/ShowCoupons";
 // import CouponList from "../CouponList/CouponList";
 
 interface TabPanelProps {

@@ -3,10 +3,11 @@ import ShowCoupons from "../contents/ShowCoupons/ShowCoupons";
 import Notfound from "../contents/notfound/notfound";
 import { Route, Routes } from "react-router-dom";
 import UserInfo from "../contents/UserInfo/UserInfo";
-import Cart from "../contents/Cart/Cart";
-import CompanyHomepage from "../contents/CompanyHomepage/CompanyHomepage";
+import Cart from "../../user-specific/customer/Cart/Cart";
+// import CompanyHomepage from "../../user-specific/company/CompanyHomepage/CompanyHomepage";
 import ManageUsers from "../../user-specific/admin/ManageUsers/ManageUsers";
 import Login from "../../user-specific/guest/Login/Login";
+import CompanyHomepage from "../../user-specific/company/CompanyHomepage/CompanyHomepage";
 
 function Routing(): JSX.Element {
   return (
