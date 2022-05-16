@@ -15,18 +15,20 @@ import CustomerRow from "../CustomerRow/CustomerRow";
 import "./CustomerTable.css";
 interface customerProps {
   customers: CustomerModel[];
+  // updateFunc: Function;
 }
 
 function CustomerTable(props: customerProps): JSX.Element {
   const [customers, setCustomers] = React.useState<CustomerModel[]>([]);
   useEffect(() => {
     setCustomers(props.customers);
+    // props.updateFunc();
   }, []);
   console.log(customers);
   const handleFormSubmit = (data: CustomerModel) => {
-    // setCustomers({ ...customers, ...data });
-    // const newCustomers = customers.filter((c) => c !== data);
-    // setCustomers(newCustomers);
+    setCustomers({ ...customers, ...data });
+    const newCustomers = customers.filter((c) => c !== data);
+    setCustomers(newCustomers);
   };
   return (
     <TableContainer component={Paper}>
