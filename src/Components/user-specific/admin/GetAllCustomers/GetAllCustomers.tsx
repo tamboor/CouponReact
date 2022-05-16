@@ -16,7 +16,7 @@ function GetAllCustomers(): JSX.Element {
   const [collapse, setCollapse] = useState(false);
   const token = localStorage.getItem("token") as string;
 
-  useEffect(() => {
+  const fetchCustomers = () => {
     const url = "http://localhost:8080/admin/getAllCustomers";
     axios
       .get(url, { headers: { Authorization: token } })
@@ -37,6 +37,10 @@ function GetAllCustomers(): JSX.Element {
 
         setError(true);
       });
+  };
+
+  useEffect(() => {
+    fetchCustomers();
   }, [isLoad, token]);
 
   useEffect(() => {
@@ -54,6 +58,7 @@ function GetAllCustomers(): JSX.Element {
   // }));
   return (
     <div className="GetAllCustomers">
+      {/* <CustomerTable  updateFunc={fetchCustomers} /> */}
       <CustomerTable customers={customers} />
     </div>
   );
