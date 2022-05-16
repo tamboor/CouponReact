@@ -1,25 +1,16 @@
 import { Button, Grid, Paper, Typography } from "@mui/material";
-import axios from "axios";
-import { useState } from "react";
-import { json } from "stream/consumers";
 import { useActions } from "../../../../hooks/useActions";
 import { useTypedSelector } from "../../../../hooks/useTypedSelector";
 import { CouponModel } from "../../../../Models/CouponModel";
 import CartCoupon from "../../../cards/CartCoupon/CartCoupon";
-// import { useActions } from "../../../hooks/useActions";
-// import { useTypedSelector } from "../../../hooks/useTypedSelector";
-// import { clearCart } from "../../../Redux/action-creators";
-
-// import { CouponModel } from "../../../Models/CouponModel";
-// import CartCoupon from "../../cards/CartCoupon/CartCoupon";
-import "./CouponPurchase.css";
+import "./Cart.css";
 
 const styles = {
   backgroundColor: "#FFB6C1",
   height: "100vh",
 };
 //TODO: move cart to external file
-function CouponPurchase(): JSX.Element {
+function Cart(): JSX.Element {
   const { clearCart } = useActions();
 
   const state = useTypedSelector((state) => state);
@@ -62,4 +53,4 @@ function CouponPurchase(): JSX.Element {
   );
 }
 
-export default CouponPurchase;
+export default Cart;

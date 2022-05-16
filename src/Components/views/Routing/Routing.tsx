@@ -3,9 +3,8 @@ import ShowCoupons from "../contents/ShowCoupons/ShowCoupons";
 import Notfound from "../contents/notfound/notfound";
 import { Route, Routes } from "react-router-dom";
 import UserInfo from "../contents/UserInfo/UserInfo";
-import CouponPurchase from "../contents/CouponPurchase/CouponPurchase";
+import Cart from "../contents/Cart/Cart";
 import CompanyHomepage from "../contents/CompanyHomepage/CompanyHomepage";
-// import { Login } from "@mui/icons-material";
 import ManageUsers from "../../user-specific/admin/ManageUsers/ManageUsers";
 import Login from "../../user-specific/guest/Login/Login";
 
@@ -14,7 +13,7 @@ function Routing(): JSX.Element {
     <div className="Routing">
       <Routes>
         <Route path="/login" element={<Login />} />
-        <Route path="/purchase-coupons" element={<CouponPurchase />} />
+        <Route path="/purchase-coupons" element={<Cart />} />
         <Route path="/my-account" element={<UserInfo />} />
         <Route path="/company-home" element={<CompanyHomepage />} />
         <Route path="/show-coupons" element={<ShowCoupons />} />
