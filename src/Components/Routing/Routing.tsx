@@ -3,7 +3,7 @@ import "./Routing.css";
 import ShowCoupons from "../contents/ShowCoupons/ShowCoupons";
 import Notfound from "../contents/notfound/notfound";
 // import { Route, Routes } from "react-router-dom";
-import Login from "../contents/Login/Login";
+import Login from "../guest/Login/Login";
 import { Route, Routes } from "react-router-dom";
 import UserInfo from "../contents/UserInfo/UserInfo";
 import CouponPurchase from "../contents/CouponPurchase/CouponPurchase";
