@@ -4,7 +4,7 @@ import { useState } from "react";
 import { json } from "stream/consumers";
 import { useActions } from "../../../hooks/useActions";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
-import { clearCart } from "../../../state/action-creators";
+import { clearCart } from "../../../Redux/action-creators";
 
 import { CouponModel } from "../../../Models/CouponModel";
 import CartCoupon from "../../cards/CartCoupon/CartCoupon";

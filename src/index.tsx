@@ -4,7 +4,7 @@ import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import Layout from "./Components/mainarea/Layout/Layout";
 import { BrowserRouter } from "react-router-dom";
-import { store } from "./state";
+import { store } from "./Redux";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistStore } from "redux-persist";

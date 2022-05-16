@@ -6,7 +6,7 @@ import { CouponModel } from "../../../Models/CouponModel";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import CouponMenu from "../../header-content/CouponMenu/CouponMenu";
 import { useState } from "react";
-import { addItem } from "../../../state/action-creators";
+import { addItem } from "../../../Redux/action-creators";
 import { useActions } from "../../../hooks/useActions";
 
 // interface couponProps {

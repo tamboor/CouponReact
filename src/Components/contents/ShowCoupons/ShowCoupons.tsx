@@ -21,7 +21,7 @@ import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { useParams } from "react-router-dom";
 import { TrueLiteral } from "typescript";
 import getAuthHeaders, { getStoredToken } from "../../utils/tokenUtils";
-import { store } from "../../../state/store";
+import { store } from "../../../Redux/store";
 // import { store } from "../../../state";
 
 //TODO: change filtering to work on limited amount of coupons
