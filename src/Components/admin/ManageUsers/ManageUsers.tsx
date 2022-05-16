@@ -4,7 +4,7 @@ import GetAllCompanies from "../GetAllCompanies/GetAllCompanies";
 // import AddCompanyForm from "../../admin/AddCompanyForm";
 import ActionCustomerForm from "../ActionCustomerForm/ActionCustomerForm";
 import ActionCompanyForm from "../ActionCompanyForm/ActionCompanyForm";
-import LoginPanel from "../../contents/LoginPanel/LoginPanel";
+import LoginPanel from "../../guest/LoginPanel/LoginPanel";
 import "./ManageUsers.css";
 import { AdminVerbs } from "../AdminVerbs";
 import GetAllCustomers from "../GetAllCustomers/GetAllCustomers";
