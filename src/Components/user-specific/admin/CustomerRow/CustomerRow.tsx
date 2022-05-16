@@ -89,6 +89,7 @@ function CustomerRow(props: customerSingleProp): JSX.Element {
             verb={AdminVerbs.UPDATE}
             customer={customer}
             updateFunc={handleFormSubmit}
+            // updateFunc={props.deleteFunc()}
           />
         </TableCell>
         <TableCell>
@@ -96,6 +97,7 @@ function CustomerRow(props: customerSingleProp): JSX.Element {
             verb={AdminVerbs.DELETE}
             customer={customer}
             updateFunc={handleFormSubmit}
+            // updateFunc={props.deleteFunc()}
           />
         </TableCell>
       </TableRow>
