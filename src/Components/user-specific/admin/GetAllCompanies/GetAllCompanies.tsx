@@ -8,7 +8,7 @@ import { CompanyModel } from "../../../../Models/CompanyModel";
 // import { CompanyModel } from "../../../Models/CompanyModel";
 import CompanyTable from "../CompanyTable/CompanyTable";
 import "./GetAllCompanies.css";
-
+///////////////////////////////////////////////////////////////////////////////
 function GetAllCompanies(): JSX.Element {
   const [companies, setCompanies] = useState<CompanyModel[]>([]);
   const [isLoad, setLoad] = useState<boolean>(false);
@@ -67,7 +67,7 @@ function GetAllCompanies(): JSX.Element {
   //       backgroundColor: grey[600],
   //     },
   //   }));
-
+  console.log("hihihihi");
   return (
     <div id="CompanyTable">
       {/* <Collapse in={collapse}> */}
