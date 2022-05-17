@@ -72,10 +72,6 @@ function GetAllCustomers(): JSX.Element {
 
   return (
     <div className="GetAllCustomers">
-<<<<<<< HEAD
-      {/* <CustomerTable  updateFunc={fetchCustomers} /> */}
-      <CustomerTable customers={customers} />
-=======
       <CustomerTable
         customers={customers}
         addFunction={(data: any) => {
@@ -83,7 +79,6 @@ function GetAllCustomers(): JSX.Element {
         }}
         deleteFunction={deleteCustomer}
       />
->>>>>>> 2d8b2ba2ede4710b511fb2c54d75fc3d77babb3c
     </div>
   );
 }

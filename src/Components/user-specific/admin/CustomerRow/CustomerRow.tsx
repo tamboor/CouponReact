@@ -87,15 +87,9 @@ function CustomerRow(props: customerSingleProp): JSX.Element {
         <TableCell>
           <ActionUserForm
             verb={AdminVerbs.DELETE}
-<<<<<<< HEAD
-            customer={customer}
-            updateFunc={handleFormSubmit}
-            // updateFunc={props.deleteFunc()}
-=======
             user={customer}
             formType="customer"
             deleteFunc={() => props.deleteFunc?.(props.singleCustomer.id)}
->>>>>>> 2d8b2ba2ede4710b511fb2c54d75fc3d77babb3c
           />
         </TableCell>
       </TableRow>

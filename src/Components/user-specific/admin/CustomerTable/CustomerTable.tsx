@@ -15,31 +15,18 @@ import CustomerRow from "../CustomerRow/CustomerRow";
 import "./CustomerTable.css";
 interface customerProps {
   customers: CustomerModel[];
-<<<<<<< HEAD
-  // updateFunc: Function;
-=======
   addFunction: Function;
   deleteFunction: Function;
->>>>>>> 2d8b2ba2ede4710b511fb2c54d75fc3d77babb3c
 }
-
+//todo: move ADD button from "manage users" to here
 function CustomerTable(props: customerProps): JSX.Element {
   const [customers, setCustomers] = React.useState<CustomerModel[]>([]);
   useEffect(() => {
     setCustomers(props.customers);
     // props.updateFunc();
   }, []);
-<<<<<<< HEAD
-  console.log(customers);
-  const handleFormSubmit = (data: CustomerModel) => {
-    setCustomers({ ...customers, ...data });
-    const newCustomers = customers.filter((c) => c !== data);
-    setCustomers(newCustomers);
-  };
-=======
 
   const handleFormSubmit = (data: CustomerModel) => {};
->>>>>>> 2d8b2ba2ede4710b511fb2c54d75fc3d77babb3c
   return (
     <TableContainer component={Paper}>
       <Table aria-label="collapsible table">

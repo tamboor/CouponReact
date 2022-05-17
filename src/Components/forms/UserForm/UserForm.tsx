@@ -36,7 +36,7 @@ interface CompanyForm {
   name: string;
   password: string;
 }
-
+//todo: make forms "submit" button not available if not all fields are filled
 function UserForm(props: IFormProps): JSX.Element {
   console.log("in customer form");
 
@@ -213,6 +213,7 @@ function UserForm(props: IFormProps): JSX.Element {
           </DialogContentText>
           {renderSwitch()}
           <br />
+          //todo: not good, on UPDATE need to have a default value
           <TextField
             {...register("password", { required: "this is required" })}
             label="Password"
