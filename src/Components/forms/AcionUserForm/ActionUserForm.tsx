@@ -47,6 +47,7 @@ interface IUserProps {
   deleteFunc?: Function;
   addFunc?: Function;
 }
+//todo: update contnet on each form
 
 function ActionUserForm(props: IUserProps): JSX.Element {
   const state = useTypedSelector((state) => state);
