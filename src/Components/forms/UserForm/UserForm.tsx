@@ -224,7 +224,7 @@ function UserForm(props: IFormProps): JSX.Element {
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
           <Button type="submit" onClick={handleClose}>
-            Add
+            {props.verb}
           </Button>
         </DialogActions>
       </form>
