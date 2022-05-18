@@ -55,6 +55,7 @@ function Coupon(props: couponProps): JSX.Element {
   }
 
   return (
+    //TODO: move gridItem to showCoupons
     <Grid item xs={3}>
       <Paper elevation={12}>
         <img

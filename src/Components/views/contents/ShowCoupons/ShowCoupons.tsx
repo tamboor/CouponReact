@@ -9,8 +9,10 @@ import {
   FormLabel,
   Grid,
   Menu,
+  Paper,
   Slider,
   TextField,
+  Typography,
 } from "@mui/material";
 // import Coupon from "../../cards/Coupon/Coupon";
 import "./ShowCoupons.css";
@@ -24,6 +26,7 @@ import { useTypedSelector } from "../../../../hooks/useTypedSelector";
 import { CouponModel } from "../../../../Models/CouponModel";
 import getAuthHeaders from "../../../../utils/tokenUtils";
 import Coupon from "../../../cards/Coupon/Coupon";
+import AddCoupon from "../../../cards/AddCoupon/AddCoupon";
 // import getAuthHeaders, { getStoredToken } from "../../../utils/tokenUtils";
 // import { store } from "../../../Redux/store";
 // import { store } from "../../../state";
@@ -135,6 +138,7 @@ function ShowCoupons(): JSX.Element {
         console.log(error);
       });
   }
+  //TODO: make 'add coupon' card children props
 
   useEffect(() => {
     console.log("useEffect");
@@ -249,9 +253,12 @@ function ShowCoupons(): JSX.Element {
           <TextField id="outlined-basic" label="Search" variant="outlined" />
         </Box>
         <Grid container spacing={5} marginTop={0.005}>
-          {/* {showState.couponsFiltered.map((c) => (
-            <Coupon coupon={c} isPurchased={} key={c.id} />
-          ))} */}
+          {state.users.userRole === "company" && (
+            <Grid item xs={3}>
+              <AddCoupon />
+            </Grid>
+          )}
+
           {state.users.userRole === "customer"
             ? showState.couponsFiltered.map((c) => (
                 <Coupon
