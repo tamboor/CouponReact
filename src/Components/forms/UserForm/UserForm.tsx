@@ -8,6 +8,7 @@ import {
 } from "@mui/material";
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { UserModel } from "../../../Models/UserModel";
 import getAuthHeaders, { setStoredToken } from "../../../utils/tokenUtils";
 import { AdminVerbs } from "../../user-specific/admin/AdminVerbs";
@@ -36,6 +37,7 @@ interface CompanyForm {
   name: string;
   password: string;
 }
+
 //todo: on every form, all fields must be required, ADD/UPDATE buttons can't be available with missing fields.
 function UserForm(props: IFormProps): JSX.Element {
   console.log("in customer form");
@@ -46,76 +48,77 @@ function UserForm(props: IFormProps): JSX.Element {
   //             return new customerForm();
   //     }
   // }
-
+  
   const {
     register,
     formState: { errors },
     handleSubmit,
     getValues,
-  } = useForm<CustomerForm | CompanyForm>();
+  } = useForm<CustomerForm | CompanyForm >();
 
-  const onSubmit: SubmitHandler<CustomerForm | CompanyForm> = async (data) => {
-    // console.log("in onSubmit");
-    // console.log(data);
-    const userTypeUrl =
-      props.userType.charAt(0).toUpperCase() + props.userType.slice(1);
-    console.log(props.user);
+  const onSubmit: SubmitHandler<CustomerForm | CompanyForm > =
+    async (data) => {
+      // console.log("in onSubmit");
+      // console.log(data);
+      const userTypeUrl =
+        props.userType.charAt(0).toUpperCase() + props.userType.slice(1);
+      console.log(props.user);
 
-    // const getUpdateFields = () => {
-    //   switch (props.userType) {
-    //     case "customer":
-    //       return {
-    //         firstName: data.firstName,
-    //         lastName: data.lastName,
-    //         email: data.email,
-    //         password: data.password,
-    //       };
-    //     case "company":
-    //       return {
-    //         email: data.email,
-    //         password: data.password,
-    //       };
-    //   }
-    // }
+      // const getUpdateFields = () => {
+      //   switch (props.userType) {
+      //     case "customer":
+      //       return {
+      //         firstName: data.firstName,
+      //         lastName: data.lastName,
+      //         email: data.email,
+      //         password: data.password,
+      //       };
+      //     case "company":
+      //       return {
+      //         email: data.email,
+      //         password: data.password,
+      //       };
+      //   }
+      // }
 
-    switch (props.verb) {
-      case AdminVerbs.ADD:
-        axios
-          .post(
-            `http://localhost:8080/admin/add${userTypeUrl}`,
-            { ...data, id: 0 },
-            getAuthHeaders()
-          )
-          .then((res: AxiosResponse) => {
-            setStoredToken(res);
-            props.addFunction?.({ ...data });
-          })
-          .catch((error: AxiosError) => {
-            console.log(error);
-          });
-        break;
-      case AdminVerbs.UPDATE:
-        axios
-          .put(
-            `http://localhost:8080/admin/update${userTypeUrl}`,
-            { ...props.user, ...data },
-            getAuthHeaders()
-          )
-          .then((res: AxiosResponse) => {
-            setStoredToken(res);
-            props.updateFunction && props.updateFunction(data);
-          })
-          .catch((error: AxiosError) => {
-            console.log({
-              ...data,
-              id: props.user?.id,
-              email: props.user?.email,
+      switch (props.verb) {
+        case AdminVerbs.ADD:
+          axios
+            .post(
+              `http://localhost:8080/admin/add${userTypeUrl}`,
+              { ...data, id: 0 },
+              getAuthHeaders()
+            )
+            .then((res: AxiosResponse) => {
+              setStoredToken(res);
+              props.addFunction?.({ ...data });
+            })
+            .catch((error: AxiosError) => {
+              console.log(error);
             });
-            console.log(error);
-          });
-        break;
-    }
-  };
+          break;
+        case AdminVerbs.UPDATE:
+          axios
+            .put(
+              `http://localhost:8080/admin/update${userTypeUrl}`,
+              { ...props.user, ...data },
+              getAuthHeaders()
+            )
+            .then((res: AxiosResponse) => {
+              setStoredToken(res);
+              props.updateFunction && props.updateFunction(data);
+            })
+            .catch((error: AxiosError) => {
+              console.log({
+                ...data,
+                id: props.user?.id,
+                email: props.user?.email,
+              });
+              console.log(error);
+            });
+          break;
+      }
+    };
   //todo: move password to fields, on UPDATE need to have a default value
   const renderSwitch = (): JSX.Element => {
     const customerNameFields = () => (

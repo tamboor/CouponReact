@@ -6,6 +6,7 @@ import Footer from "../Footer/Footer";
 import AppBar from "@mui/material/AppBar";
 import BottomNavigation from "@mui/material/BottomNavigation";
 import Navbar from "../Navbar/Navbar";
+import { BrowserRouter } from "react-router-dom";
 
 function Layout(): JSX.Element {
   return (
