@@ -14,18 +14,11 @@ import {
 import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import axios, { AxiosResponse, AxiosError } from "axios";
-<<<<<<< HEAD
 import React from "react";
-import ImageUploading, {
-  ImageListType,
-  ImageType,
-} from "react-images-uploading";
 
 import { SubmitHandler, useForm } from "react-hook-form";
 import { CouponModel } from "../../../Models/CouponModel";
-=======
-import { Controller, SubmitHandler, useForm } from "react-hook-form";
->>>>>>> 654d6acc4de54d00715bd7b354ba5060801a7b90
+
 import getAuthHeaders, { setStoredToken } from "../../../utils/tokenUtils";
 import { AdminVerbs } from "../../user-specific/admin/AdminVerbs";
 import "./CouponForm.css";
@@ -51,7 +44,6 @@ interface CouponForm {
 
 function CouponForm(props: CouponFormProps): JSX.Element {
   const {
-    control,
     register,
     formState: { errors },
     handleSubmit,
@@ -123,7 +115,6 @@ function CouponForm(props: CouponFormProps): JSX.Element {
 
   return (
     <div className="CouponForm">
-<<<<<<< HEAD
       <Grid>
         <Paper elevation={12}>
           <form onSubmit={handleSubmit(onSubmit, onError)}>
@@ -235,19 +226,6 @@ function CouponForm(props: CouponFormProps): JSX.Element {
           </form>
         </Paper>
       </Grid>
-=======
-      this is coupon form
-      {/* <Controller
-                name={name}
-                control={control}
-                render={({ onChange, value }) => (
-                    <DatePicker
-                        selected={value}
-                        onChange={onChange}
-                    />
-                )}
-            /> */}
->>>>>>> 654d6acc4de54d00715bd7b354ba5060801a7b90
     </div>
   );
 }
