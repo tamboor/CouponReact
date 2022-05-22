@@ -32,7 +32,7 @@ function Cart(): JSX.Element {
     });
     return total;
   };
-
+  //TODO: CART DOESNT SEND PURCHASE REQUEST!
   return (
     <div className="CouponPurchase">
       <Button onClick={clearCart}>Clear Cart</Button>

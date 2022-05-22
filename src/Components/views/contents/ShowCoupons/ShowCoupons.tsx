@@ -26,7 +26,7 @@ import usePagination from "@mui/material/usePagination/usePagination";
 //TODO: change to category enum
 //TODO: handle searchbar
 interface CouponsState {
-  coupons: CouponModel[];
+  // coupons: CouponModel[];
   couponsFiltered: CouponModel[];
   categories: {
     xtreme: boolean;
@@ -38,14 +38,18 @@ interface CouponsState {
   valueRange: number[];
 }
 
-function ShowCoupons(): JSX.Element {
-  // const { items } = usePagination({ count: 3 });
+interface IShowCouponsProps {
+  couponsInitial: CouponModel[];
+  customerCoupons?: CouponModel[];
+}
 
+function ShowCoupons(props: IShowCouponsProps): JSX.Element {
+  // const { items } = usePagination({ count: 3 });
   const state = useTypedSelector((state) => state);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [showState, setShowState] = useState<CouponsState>({
-    coupons: [],
-    couponsFiltered: [],
+    // coupons: props.couponsInitial,
+    couponsFiltered: props.couponsInitial,
     categories: {
       xtreme: true,
       tattoos: true,
@@ -55,6 +59,7 @@ function ShowCoupons(): JSX.Element {
     },
     valueRange: [0, 500],
   });
+
   const open = Boolean(anchorEl);
 
   const priceFilter = (allCoupons: CouponModel[]) => {
@@ -74,7 +79,7 @@ function ShowCoupons(): JSX.Element {
   const allFilters = [priceFilter, categoryFilter];
 
   const handleChange = (event: Event, newValue: number | number[]) => {
-    let workCoupons = showState.coupons;
+    let workCoupons = props.couponsInitial;
 
     allFilters.forEach((filt) => {
       workCoupons = filt(workCoupons);
@@ -86,11 +91,9 @@ function ShowCoupons(): JSX.Element {
     });
   };
 
-  // console.log(state);
-
   //TODO: combine all handleChange
   const handleCheckbox = (event: React.ChangeEvent<HTMLInputElement>) => {
-    let workCoupons = showState.coupons;
+    let workCoupons = props.couponsInitial;
 
     showState.categories[
       event.target.name as keyof typeof showState.categories
@@ -109,35 +112,6 @@ function ShowCoupons(): JSX.Element {
     return `${value}°C`;
   }
 
-  //TODO: handle any
-  function fetchCoupons(): void {
-    console.log("fetching coupons");
-    axios
-      .get(
-        state.users.userRole === "company"
-          ? "http://localhost:8080/company/getCompanyCoupons"
-          : "http://localhost:8080/guest/getAllCoupons",
-        getAuthHeaders()
-      )
-      .then((response) => {
-        // console.log(response.data);
-        setShowState({
-          ...showState,
-          coupons: response.data,
-          couponsFiltered: response.data,
-        });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
-  //TODO: make 'add coupon' card children props
-
-  useEffect(() => {
-    console.log("useEffect");
-    fetchCoupons();
-  }, [state.users.userRole]);
-
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -145,27 +119,13 @@ function ShowCoupons(): JSX.Element {
     setAnchorEl(null);
   };
 
-  let userCoupons: number[] = [];
-  if (state.users.userRole == "customer") {
-    axios
-      .get(
-        "http://localhost:8080/customer/getCustomerCoupons",
-        getAuthHeaders()
-      )
-      .then((res: AxiosResponse) => {
-        userCoupons = res.data.map((c: CouponModel) => c.id);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
+  let userCoupons: number[] = props.customerCoupons
+    ? props.customerCoupons.map((c) => c.id)
+    : [];
 
   return (
     <Box paddingY={3}>
       <Container>
-        {/* {items.map(({ page, type, selected, ...item }, index) => {
-          <Coupon coupon={showState.coupons[page as number]} />;
-        })} */}
         <Box sx={{ flexGrow: 1 }}>
           <Button
             onClick={handleClick}
@@ -271,4 +231,5 @@ function ShowCoupons(): JSX.Element {
     </Box>
   );
 }
+
 export default ShowCoupons;
