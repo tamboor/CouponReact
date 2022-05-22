@@ -18,14 +18,28 @@ const root = ReactDOM.createRoot(
 
 let persistor = persistStore(store);
 
+const theme = createTheme({
+  typography: {
+    fontFamily: [
+      "Lato",
+      // "Roboto",
+      "Helvetica Neue",
+      // "Arial",
+      // "sans-serif",
+    ].join(","),
+  },
+});
+
 root.render(
-  <BrowserRouter>
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <Layout />
-      </PersistGate>
-    </Provider>
-  </BrowserRouter>
+  <ThemeProvider theme={theme}>
+    <BrowserRouter>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <Layout />
+        </PersistGate>
+      </Provider>
+    </BrowserRouter>
+  </ThemeProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function
