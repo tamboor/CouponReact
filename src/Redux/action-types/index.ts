@@ -7,4 +7,13 @@ export enum ActionType {
   REMOVE_ITEM = "removeItem",
   CLEAR_CART = "clearCart",
   CLEAR_REDUX = "clearRedux",
+  //
+  SET_CUSTOMERS = "setCustomers",
+  SET_COMPANIES = "setCompanies",
+  ADD_CUSTOMER = "addCustomer",
+  REMOVE_CUSTOMER = "removeCustomer",
+  ADD_COMPANY = "addCompany",
+  REMOVE_COMPANY = "removeCompany",
+  CLEAR_ADMIN_STATE = "clearAdminState",
 }
+//TODO: make action types seperate

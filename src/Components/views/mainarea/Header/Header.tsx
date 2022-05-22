@@ -59,10 +59,14 @@ function Header(): JSX.Element {
   return (
     <AppBar position="sticky">
       <Toolbar>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+        <Typography
+          variant="h6"
+          component="div"
+          sx={{ flexGrow: 1, fontFamily: "Abril Fatface" }}
+        >
           Coupon Mania
         </Typography>
-        <Navbar>{renderSwitch()}</Navbar>
+        {/* <Navbar>{renderSwitch()}</Navbar> */}
         {/* <Button onClick={redoForms} color="inherit">
           Clear redux
         </Button> */}

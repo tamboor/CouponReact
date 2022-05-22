@@ -1,6 +1,9 @@
 import axios from "axios";
 import { Dispatch } from "redux";
+import { CompanyModel } from "../../Models/CompanyModel";
 import { CouponModel } from "../../Models/CouponModel";
+import { CustomerModel } from "../../Models/CustomerModel";
+import { UserModel } from "../../Models/UserModel";
 import { ActionType } from "../action-types";
 import { Action } from "../actions";
 
@@ -144,5 +147,56 @@ export const clearCart = () => {
 export const clearRedux = () => {
   return (dispatch: Dispatch<Action>) => {
     dispatch({ type: ActionType.CLEAR_REDUX });
+  };
+};
+
+export const addCustomer = (customer: CustomerModel) => {
+  return (dispatch: Dispatch<Action>) => {
+    dispatch({
+      type: ActionType.ADD_CUSTOMER,
+      payload: { customer: customer },
+    });
+  };
+};
+
+export const removeCustomer = (customerID: number) => {
+  return (dispatch: Dispatch<Action>) => {
+    dispatch({
+      type: ActionType.REMOVE_CUSTOMER,
+      payload: { customerID: customerID },
+    });
+  };
+};
+
+export const addCompany = (company: CompanyModel) => {
+  return (dispatch: Dispatch<Action>) => {
+    dispatch({ type: ActionType.ADD_COMPANY, payload: { company: company } });
+  };
+};
+
+export const removeCompany = (companyID: number) => {
+  return (dispatch: Dispatch<Action>) => {
+    dispatch({
+      type: ActionType.REMOVE_COMPANY,
+      payload: { companyID: companyID },
+    });
+  };
+};
+
+export const clearAdminState = () => {
+  return (dispatch: Dispatch<Action>) => {
+    dispatch({ type: ActionType.CLEAR_ADMIN_STATE });
+  };
+};
+
+export const setCompanies = (companies: CompanyModel[]) => {
+  return (dispatch: Dispatch<Action>) => {
+    dispatch({ type: ActionType.SET_COMPANIES, payload: { companies } });
+  };
+};
+
+export const setCustomers = (customers: CustomerModel[]) => {
+  return (dispatch: Dispatch<Action>) => {
+    dispatch({ type: ActionType.SET_CUSTOMERS, payload: { customers } });
   };
 };
