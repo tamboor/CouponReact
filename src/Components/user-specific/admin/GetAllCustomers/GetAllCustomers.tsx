@@ -3,18 +3,23 @@ import { Button, ButtonProps } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import axios, { AxiosError } from "axios";
 import { useState, useEffect } from "react";
+import { useActions } from "../../../../hooks/useActions";
+import { useTypedSelector } from "../../../../hooks/useTypedSelector";
 import { CustomerModel } from "../../../../Models/CustomerModel";
 // import { CustomerModel } from "../../../Models/CustomerModel";
 import CustomerTable from "../CustomerTable/CustomerTable";
 import "./GetAllCustomers.css";
 //todo: what is setLoad
 function GetAllCustomers(): JSX.Element {
-  const [customers, setCustomers] = useState<CustomerModel[]>([]);
+  // const [customers, setCustomers] = useState<CustomerModel[]>([]);
   const [isLoad, setLoad] = useState<boolean>(false);
   const [isError, setError] = useState(false);
   const [myError, setMyError] = useState("");
   const [collapse, setCollapse] = useState(false);
   const token = localStorage.getItem("token") as string;
+
+  const { setCustomers } = useActions();
+  const { admin } = useTypedSelector((state) => state);
 
   const fetchCustomers = () => {
     const url = "http://localhost:8080/admin/getAllCustomers";
@@ -38,7 +43,7 @@ function GetAllCustomers(): JSX.Element {
         setError(true);
       });
   };
-
+  //TODO: ask alon how this works
   useEffect(() => {
     fetchCustomers();
   }, [isLoad, token]);
@@ -47,7 +52,7 @@ function GetAllCustomers(): JSX.Element {
   //   console.log(isError);
   // }, [isError]);
 
-  useEffect(() => {}, [collapse]);
+  // useEffect(() => {}, [collapse]);
 
   // const ColorButton = styled(Button)<ButtonProps>(({ theme }) => ({
   //   color: theme.palette.getContrastText(grey[800]),
@@ -57,26 +62,26 @@ function GetAllCustomers(): JSX.Element {
   //   },
   // }));
   const deleteCustomer = (data: number) => {
-    const oldCustomers = [...customers];
-    const newCustomers = oldCustomers.filter(
-      (customer) => customer.id !== data
-    );
-    setCustomers(newCustomers);
+    // const oldCustomers = [...customers];
+    // const newCustomers = oldCustomers.filter(
+    //   (customer) => customer.id !== data
+    // );
+    // setCustomers(newCustomers);
   };
 
   const addCustomer = (data: CustomerModel) => {
-    const oldCustomers = [...customers];
-    oldCustomers.push(data);
-    setCustomers(oldCustomers);
+    // const oldCustomers = [...customers];
+    // oldCustomers.push(data);
+    // setCustomers(oldCustomers);
   };
 
   return (
     <div className="GetAllCustomers">
       <CustomerTable
-        customers={customers}
-        addFunction={(data: any) => {
-          addCustomer(data);
-        }}
+        customers={admin.customers}
+        // addFunction={(data: any) => {
+        //   addCustomer(data);
+        // }}
         deleteFunction={deleteCustomer}
       />
     </div>

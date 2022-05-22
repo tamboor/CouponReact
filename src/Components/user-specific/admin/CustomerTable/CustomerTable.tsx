@@ -15,7 +15,7 @@ import CustomerRow from "../CustomerRow/CustomerRow";
 import "./CustomerTable.css";
 interface customerProps {
   customers: CustomerModel[];
-  addFunction: Function;
+  // addFunction: Function;
   deleteFunction: Function;
 }
 //todo: move ADD button from "manage users" to here

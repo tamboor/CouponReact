@@ -20,6 +20,7 @@ import { CouponModel } from "../../../../Models/CouponModel";
 import getAuthHeaders from "../../../../utils/tokenUtils";
 import Coupon from "../../../cards/Coupon/Coupon";
 import AddCoupon from "../../../cards/AddCoupon/AddCoupon";
+import usePagination from "@mui/material/usePagination/usePagination";
 
 //TODO: change filtering to work on limited amount of coupons (use custom hooks)
 //TODO: change to category enum
@@ -38,6 +39,8 @@ interface CouponsState {
 }
 
 function ShowCoupons(): JSX.Element {
+  // const { items } = usePagination({ count: 3 });
+
   const state = useTypedSelector((state) => state);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [showState, setShowState] = useState<CouponsState>({
@@ -160,6 +163,9 @@ function ShowCoupons(): JSX.Element {
   return (
     <Box paddingY={3}>
       <Container>
+        {/* {items.map(({ page, type, selected, ...item }, index) => {
+          <Coupon coupon={showState.coupons[page as number]} />;
+        })} */}
         <Box sx={{ flexGrow: 1 }}>
           <Button
             onClick={handleClick}

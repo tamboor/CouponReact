@@ -1,5 +1,5 @@
 import axios, { AxiosResponse, AxiosError } from "axios";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import getAuthHeaders, { setStoredToken } from "../../../utils/tokenUtils";
 import { AdminVerbs } from "../../user-specific/admin/AdminVerbs";
 import "./CouponForm.css";
@@ -28,6 +28,7 @@ function CouponForm(props: CouponFormProps): JSX.Element {
     formState: { errors },
     handleSubmit,
     getValues,
+    control,
   } = useForm<CouponForm>();
 
   const onSubmit: SubmitHandler<CouponForm> = async (data) => {
@@ -65,7 +66,21 @@ function CouponForm(props: CouponFormProps): JSX.Element {
     }
   };
 
-  return <div className="CouponForm">this is coupon form</div>;
+  return (
+    <div className="CouponForm">
+      this is coupon form
+      {/* <Controller
+                name={name}
+                control={control}
+                render={({ onChange, value }) => (
+                    <DatePicker
+                        selected={value}
+                        onChange={onChange}
+                    />
+                )}
+            /> */}
+    </div>
+  );
 }
 
 export default CouponForm;

@@ -1,4 +1,7 @@
+import { CompanyModel } from "../../Models/CompanyModel";
 import { CouponModel } from "../../Models/CouponModel";
+import { CustomerModel } from "../../Models/CustomerModel";
+import { UserModel } from "../../Models/UserModel";
 import { ActionType } from "../action-types";
 
 interface AdminLoginAction {
@@ -45,6 +48,47 @@ interface ClearReduxAction {
   type: ActionType.CLEAR_REDUX;
 }
 
+interface AddCustomerAction {
+  type: ActionType.ADD_CUSTOMER;
+  payload: {
+    customer: CustomerModel;
+  };
+}
+interface RemoveCustomerAction {
+  type: ActionType.REMOVE_CUSTOMER;
+  payload: {
+    customerID: number;
+  };
+}
+interface AddCompanyAction {
+  type: ActionType.ADD_COMPANY;
+  payload: {
+    company: CompanyModel;
+  };
+}
+interface RemoveCompanyAction {
+  type: ActionType.REMOVE_COMPANY;
+  payload: {
+    companyID: number;
+  };
+}
+interface ClearAdminStateAction {
+  type: ActionType.CLEAR_ADMIN_STATE;
+}
+
+interface SetCustomersAction {
+  type: ActionType.SET_CUSTOMERS;
+  payload: {
+    customers: CustomerModel[];
+  };
+}
+interface SetCompaniesAction {
+  type: ActionType.SET_COMPANIES;
+  payload: {
+    companies: CompanyModel[];
+  };
+}
+
 export type Action =
   | AdminLoginAction
   | CustomerLoginAction
@@ -53,4 +97,12 @@ export type Action =
   | AddItemAction
   | RemoveItemAction
   | ClearCartAction
-  | ClearReduxAction;
+  | ClearReduxAction
+  //
+  | AddCustomerAction
+  | RemoveCustomerAction
+  | AddCompanyAction
+  | RemoveCompanyAction
+  | ClearAdminStateAction
+  | SetCustomersAction
+  | SetCompaniesAction;
