@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useActions } from "../../../../hooks/useActions";
 import { useSelector } from "react-redux";
 import { useTypedSelector } from "../../../../hooks/useTypedSelector";
+import getAuthHeaders from "../../../../utils/tokenUtils";
 
 interface LoginProps {
   children?: JSX.Element;
@@ -33,7 +34,8 @@ function LoginPanel(props: LoginProps): JSX.Element {
     switch (props.userType) {
       case "customer":
         tryCustomerLogin(data.userEmail, data.userPass);
-        navigate("/");
+        console.log(getAuthHeaders());
+        navigate("/customer-home");
         break;
       case "company":
         tryCompanyLogin(data.userEmail, data.userPass);

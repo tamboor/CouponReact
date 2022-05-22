@@ -63,7 +63,8 @@ export default function BasicTabs() {
       </Tabs>
       {/* </Box> */}
       <TabPanel value={value} index={0}>
-        <ShowCoupons />
+        {/* <ShowCoupons /> */}
+        //TODO: show coupons
       </TabPanel>
       <TabPanel value={value} index={1}></TabPanel>
       <TabPanel value={value} index={2}></TabPanel>
