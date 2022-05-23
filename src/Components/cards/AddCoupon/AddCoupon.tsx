@@ -12,6 +12,10 @@ function AddCoupon(): JSX.Element {
     setShowForm(true);
   };
 
+  const handleCancel = () => {
+    setShowForm(false);
+  };
+
   return showForm ? (
     <Box
       // onClick={handleAdd}
@@ -23,7 +27,7 @@ function AddCoupon(): JSX.Element {
       }}
       className="AddCoupon"
     >
-      <CouponForm verb={AdminVerbs.ADD} />
+      <CouponForm verb={AdminVerbs.ADD} handleClose={handleCancel} />
     </Box>
   ) : (
     <Box

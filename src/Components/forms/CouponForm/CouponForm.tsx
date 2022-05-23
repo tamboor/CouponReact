@@ -25,7 +25,7 @@ import "./CouponForm.css";
 interface CouponFormProps {
   verb: AdminVerbs;
   coupon?: CouponModel;
-  handleClose?: Function;
+  handleClose: Function;
   updateFunction?: Function;
   addFunction?: Function;
 }
@@ -223,6 +223,7 @@ function CouponForm(props: CouponFormProps): JSX.Element {
               {/* {renderSwitch()} */}
             </Box>
             <Button type="submit">{props.verb}</Button>
+            <Button onClick={props.handleClose()}>Cancel</Button>
           </form>
         </Paper>
       </Grid>

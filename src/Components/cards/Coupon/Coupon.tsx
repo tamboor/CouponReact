@@ -42,7 +42,7 @@ function Coupon(props: couponProps): JSX.Element {
   };
 
   const handleEditCoupon = (event: any) => {
-    return <CouponForm verb={AdminVerbs.UPDATE} coupon={props.coupon} />;
+    // return <CouponForm verb={AdminVerbs.UPDATE} coupon={props.coupon} />;
   };
 
   console.log(state.users.cart.includes(props.coupon));
