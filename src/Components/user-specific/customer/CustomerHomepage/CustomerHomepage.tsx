@@ -1,6 +1,7 @@
 import { Typography } from "@mui/material";
 import axios, { AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
+import { useTypedSelector } from "../../../../hooks/useTypedSelector";
 import { CouponModel } from "../../../../Models/CouponModel";
 import getAuthHeaders from "../../../../utils/tokenUtils";
 import CouponBrowser from "../../../views/contents/CouponBrowser/CouponBrowser";
@@ -9,11 +10,17 @@ import "./CustomerHomepage.css";
 function CustomerHomepage(): JSX.Element {
   const [allCoupons, setAllCoupons] = useState<CouponModel[]>([]);
   const [customerCoupons, setCustomerCoupons] = useState<CouponModel[]>([]);
-
+  const { users } = useTypedSelector((state) => state);
+  // console.log(users.userRole);
   useEffect(() => {
     fetchCoupons();
-    fetchCustomerCoupons();
   }, []);
+  //TODO: change user role to customer
+  useEffect(() => {
+    if (users.userRole !== "customer") return;
+
+    fetchCustomerCoupons();
+  }, [users.userRole]);
 
   //TODO: handle errors
   function fetchCoupons(): void {
@@ -38,6 +45,7 @@ function CustomerHomepage(): JSX.Element {
         //   customerCoupons: response.data as CouponModel[],
         // });
         // console.log("success");
+        // console.log(response.data);
         setCustomerCoupons(response.data as CouponModel[]);
       })
       .catch((error) => {

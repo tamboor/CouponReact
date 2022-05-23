@@ -9,6 +9,7 @@ function AddCoupon(): JSX.Element {
   const [showForm, setShowForm] = useState(false);
 
   const handleAdd = () => {
+    console.log("add");
     setShowForm(true);
   };
 

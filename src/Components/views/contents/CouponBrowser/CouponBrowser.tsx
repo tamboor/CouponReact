@@ -122,7 +122,14 @@ function CouponBrowser(props: ICouponListProps): JSX.Element {
     ? props.customerCoupons.map((c) => c.id)
     : [];
   const cartCoupons = state.users.cart.map((c) => c.id);
-  console.log(customerCoupons);
+
+  // console.log("customer coupons:  " + customerCoupons);
+  // console.log("cart coupons:  " + cartCoupons);
+  // console.log("all coupons:  " + props.allCoupons.map((c) => c.id));
+  props.allCoupons.forEach((c) => {
+    console.log(customerCoupons.includes(c.id));
+  });
+
   return (
     <div className="CouponBrowser">
       <Box paddingY={3}>
@@ -225,7 +232,6 @@ function CouponBrowser(props: ICouponListProps): JSX.Element {
                 <AddCoupon />
               </Grid>
             )}
-            //TODO: fixed is isPurchased
             {state.users.userRole === "customer"
               ? getFilteredCoupons().map((coupon: CouponModel) => (
                   <Coupon
@@ -233,7 +239,6 @@ function CouponBrowser(props: ICouponListProps): JSX.Element {
                     isPurchased={
                       customerCoupons.includes(coupon.id) ||
                       cartCoupons.includes(coupon.id)
-                      // state.users.cart.includes(coupon.id)
                     }
                     key={coupon.id}
                   />

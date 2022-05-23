@@ -5,6 +5,12 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import ShowCoupons from "../../../views/contents/ShowCoupons/ShowCoupons";
 import Login from "../../guest/Login/Login";
+import CouponList from "../../../views/contents/CouponList/CouponList";
+import { CouponModel } from "../../../../Models/CouponModel";
+import axios, { AxiosError, AxiosResponse } from "axios";
+import getAuthHeaders from "../../../../utils/tokenUtils";
+import CouponBrowser from "../../../views/contents/CouponBrowser/CouponBrowser";
+import { useEffect } from "react";
 // import CouponList from "../CouponList/CouponList";
 
 interface TabPanelProps {
@@ -24,11 +30,6 @@ function TabPanel(props: TabPanelProps) {
       aria-labelledby={`simple-tab-${index}`}
       {...other}
     >
-      {/* {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
-        </Box>
-      )} */}
       {children}
     </div>
   );
@@ -43,14 +44,29 @@ function a11yProps(index: number) {
 
 export default function BasicTabs() {
   const [value, setValue] = React.useState(0);
+  const [companyCoupons, setCompanyCoupons] = React.useState<CouponModel[]>([]);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
 
+  function fetchCoupons() {
+    axios
+      .get("http://localhost:8080/company/getCompanyCoupons", getAuthHeaders())
+      .then((res: AxiosResponse) => {
+        setCompanyCoupons(res.data);
+      })
+      .catch((err: AxiosError) => {
+        console.log(err);
+      });
+  }
+
+  useEffect(() => {
+    fetchCoupons();
+  }, []);
+
   return (
     <Box sx={{ width: "100%" }}>
-      {/* <Box sx={{ borderBottom: 1, borderColor: "divider" }}> */}
       <Tabs
         value={value}
         onChange={handleChange}
@@ -63,8 +79,7 @@ export default function BasicTabs() {
       </Tabs>
       {/* </Box> */}
       <TabPanel value={value} index={0}>
-        {/* <ShowCoupons /> */}
-        //TODO: show coupons
+        <CouponBrowser allCoupons={companyCoupons} />
       </TabPanel>
       <TabPanel value={value} index={1}></TabPanel>
       <TabPanel value={value} index={2}></TabPanel>

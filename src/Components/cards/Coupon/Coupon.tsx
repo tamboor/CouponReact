@@ -45,7 +45,7 @@ function Coupon(props: couponProps): JSX.Element {
     // return <CouponForm verb={AdminVerbs.UPDATE} coupon={props.coupon} />;
   };
 
-  console.log(state.users.cart.includes(props.coupon));
+  // console.log(state.users.cart.includes(props.coupon));
 
   function renderSwitch() {
     switch (state.users.userRole) {

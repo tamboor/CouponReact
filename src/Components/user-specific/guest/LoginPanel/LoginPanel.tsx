@@ -21,7 +21,7 @@ function LoginPanel(props: LoginProps): JSX.Element {
   const navigate = useNavigate();
 
   // console.log(state);
-
+  //TODO: make sure program doesnt proceed if backend is down
   const {
     register,
     formState: { errors },
