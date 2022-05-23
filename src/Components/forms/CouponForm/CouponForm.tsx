@@ -223,7 +223,7 @@ function CouponForm(props: CouponFormProps): JSX.Element {
               {/* {renderSwitch()} */}
             </Box>
             <Button type="submit">{props.verb}</Button>
-            <Button onClick={props.handleClose()}>Cancel</Button>
+            <Button onClick={(data: any) => props.handleClose}>Cancel</Button>
           </form>
         </Paper>
       </Grid>
