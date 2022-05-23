@@ -22,23 +22,23 @@ import CouponTable from "../CouponTable/CouponTable";
 import ActionUserForm from "../../../forms/AcionUserForm/ActionUserForm";
 interface customerSingleProp {
   singleCustomer: CustomerModel;
-  deleteFunc: Function;
+  // deleteFunc: Function;
 }
 function CustomerRow(props: customerSingleProp): JSX.Element {
   const [open, setOpen] = React.useState(false);
   const [customer, setCustomer] = React.useState<CustomerModel>(
-    new CustomerModel()
+    props.singleCustomer
   );
   const [coupons, setCoupons] = React.useState<CouponModel[]>([]);
   const token = localStorage.getItem("token") as string;
   //     [] as CustomerModel[]
   //   );
 
-  useEffect(() => {
-    setCustomer(props.singleCustomer);
-    // console.log(customer);
-  }, []);
-
+  // useEffect(() => {
+  //   setCustomer(props.singleCustomer);
+  //   // console.log(customer);
+  // }, []);
+  // console.log(customer);
   const loadCoupons = () => {
     const url = `http://localhost:8080/admin/getCustomerCoupons/${customer.id}`;
     axios
@@ -75,23 +75,28 @@ function CustomerRow(props: customerSingleProp): JSX.Element {
         <TableCell>{customer.firstName}</TableCell>
         <TableCell>{customer.lastName}</TableCell>
         <TableCell>{customer.email}</TableCell>
-        <TableCell>
-          <ActionUserForm
-            verb={AdminVerbs.UPDATE}
-            user={customer}
-            formType="customer"
-            updateFunc={handleFormSubmit}
-            // updateFunc={props.deleteFunc()}
-          />
-        </TableCell>
-        <TableCell>
-          <ActionUserForm
-            verb={AdminVerbs.DELETE}
-            user={customer}
-            formType="customer"
-            deleteFunc={() => props.deleteFunc?.(props.singleCustomer.id)}
-          />
-        </TableCell>
+        {customer.id && (
+          <div>
+            <TableCell>
+              <ActionUserForm
+                verb={AdminVerbs.UPDATE}
+                user={customer}
+                formType="customer"
+                updateFunc={handleFormSubmit}
+                // updateFunc={props.deleteFunc()}
+              />
+            </TableCell>
+            <TableCell>
+              <ActionUserForm
+                verb={AdminVerbs.DELETE}
+                user={customer}
+                formType="customer"
+                // disabled={!customer.id}
+                // deleteFunc={() => props.deleteFunc?.(props.singleCustomer.id)}
+              />
+            </TableCell>
+          </div>
+        )}
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>

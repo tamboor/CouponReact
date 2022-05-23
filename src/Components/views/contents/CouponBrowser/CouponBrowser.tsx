@@ -11,6 +11,9 @@ import {
   Slider,
   TextField,
   Grid,
+  Pagination,
+  MenuItem,
+  Select,
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useTypedSelector } from "../../../../hooks/useTypedSelector";
@@ -19,7 +22,7 @@ import AddCoupon from "../../../cards/AddCoupon/AddCoupon";
 import Coupon from "../../../cards/Coupon/Coupon";
 import "./CouponBrowser.css";
 
-interface ICouponListState {
+interface ICouponListFilterState {
   couponsFiltered: CouponModel[];
   categories: {
     xtreme: boolean;
@@ -30,6 +33,15 @@ interface ICouponListState {
   };
   valueRange: number[];
   searchbar: string;
+  // showPurchaseable: boolean;
+}
+
+interface ICouponListSortState {
+  couponsSorted: CouponModel[];
+  compareMethod: (a: CouponModel, b: CouponModel) => number;
+  limit: number;
+  order: -1 | 1;
+  page: number;
 }
 
 interface ICouponListProps {
@@ -48,7 +60,7 @@ function CouponBrowser(props: ICouponListProps): JSX.Element {
     return [Math.min(...mapped), Math.max(...mapped)];
   };
   const [minPrice, maxPrice] = getMinMaxPrice();
-  const [listState, setListState] = useState<ICouponListState>({
+  const [filterState, setFilterState] = useState<ICouponListFilterState>({
     couponsFiltered: props.allCoupons,
     categories: {
       xtreme: true,
@@ -60,22 +72,30 @@ function CouponBrowser(props: ICouponListProps): JSX.Element {
     valueRange: [minPrice, maxPrice],
     searchbar: "",
   });
+  const [sortState, setSortState] = useState<ICouponListSortState>({
+    compareMethod: compareCouponsByEndDate,
+    couponsSorted: filterState.couponsFiltered,
+    limit: 8,
+    order: 1,
+    page: 1,
+  });
 
   const filters = [
     (c: CouponModel) => {
-      return listState.categories[
-        c.category as keyof typeof listState.categories
+      return filterState.categories[
+        c.category as keyof typeof filterState.categories
       ];
     },
     (c: CouponModel) => {
       return (
-        listState.valueRange[0] <= c.price && c.price <= listState.valueRange[1]
+        filterState.valueRange[0] <= c.price &&
+        c.price <= filterState.valueRange[1]
       );
     },
     (c: CouponModel) => {
       return (
-        c.description.includes(listState.searchbar) ||
-        c.title.includes(listState.searchbar)
+        c.description.includes(filterState.searchbar) ||
+        c.title.includes(filterState.searchbar)
       );
     },
   ];
@@ -88,25 +108,22 @@ function CouponBrowser(props: ICouponListProps): JSX.Element {
     setAnchorEl(event.currentTarget);
   };
   const handleCheckbox = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setListState({
-      ...listState,
+    setFilterState({
+      ...filterState,
       categories: {
-        ...listState.categories,
-        [event.target.name as keyof typeof listState.categories]:
+        ...filterState.categories,
+        [event.target.name as keyof typeof filterState.categories]:
           event.target.checked,
       },
     });
   };
-
-  //   console.log("im here");
-
   const handleChangeSlider = (event: Event, newValue: number | number[]) => {
-    setListState({ ...listState, valueRange: newValue as number[] });
+    setFilterState({ ...filterState, valueRange: newValue as number[] });
   };
   //TODO: combine all handleChange
   //TODO: handle event anywhere
   const handleChangeSearchbar = (event: any) => {
-    setListState({ ...listState, searchbar: event.target.value });
+    setFilterState({ ...filterState, searchbar: event.target.value });
   };
   function valuetext(value: number) {
     return `${value}`;
@@ -118,106 +135,142 @@ function CouponBrowser(props: ICouponListProps): JSX.Element {
     });
   }
 
+  function compareCouponsByPrice(a: CouponModel, b: CouponModel) {
+    return (a.price - b.price) * sortState.order;
+  }
+
+  function compareCouponsByEndDate(a: CouponModel, b: CouponModel) {
+    return (
+      (new Date(a.endDate).getTime() - new Date(b.endDate).getTime()) *
+      sortState.order
+    );
+  }
+
+  function getSortedCoupons() {
+    const filtered = getFilteredCoupons();
+    const startIndex = (sortState.page - 1) * sortState.limit;
+    console.log(
+      filtered
+        .sort(sortState.compareMethod)
+        .slice(startIndex, startIndex + sortState.limit)
+    );
+
+    return filtered
+      .sort(sortState.compareMethod)
+      .slice(startIndex, startIndex + sortState.limit);
+  }
+
   const customerCoupons = props.customerCoupons
     ? props.customerCoupons.map((c) => c.id)
     : [];
   const cartCoupons = state.users.cart.map((c) => c.id);
 
-  // console.log("customer coupons:  " + customerCoupons);
-  // console.log("cart coupons:  " + cartCoupons);
-  // console.log("all coupons:  " + props.allCoupons.map((c) => c.id));
-  props.allCoupons.forEach((c) => {
-    console.log(customerCoupons.includes(c.id));
-  });
+  // const showCoupons = getSortedCoupons()
 
   return (
     <div className="CouponBrowser">
       <Box paddingY={3}>
         <Container>
-          <Box sx={{ flexGrow: 1 }}>
-            <Button
-              onClick={handleClick}
-              aria-haspopup="true"
-              aria-expanded={open ? "true" : undefined}
-              disableElevation
-            >
-              Refine
-            </Button>
-            <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
-              <FormControl
-                sx={{ m: 3 }}
-                component="fieldset"
-                variant="standard"
+          <Box sx={{ display: "flex" }}>
+            <Box sx={{ flexGrow: 4 }}>
+              <Button
+                onClick={handleClick}
+                aria-haspopup="true"
+                aria-expanded={open ? "true" : undefined}
+                disableElevation
               >
-                <FormLabel>Categories</FormLabel>
-                <FormGroup>
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        name="xtreme"
-                        defaultChecked={true}
-                        onChange={handleCheckbox}
-                      />
-                    }
-                    label="Xtreme"
-                  />
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        name="tattoos"
-                        defaultChecked={true}
-                        onChange={handleCheckbox}
-                      />
-                    }
-                    label="Tatoos"
-                  />
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        name="food"
-                        defaultChecked={true}
-                        onChange={handleCheckbox}
-                      />
-                    }
-                    label="Food"
-                  />
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        name="vacation"
-                        defaultChecked={true}
-                        onChange={handleCheckbox}
-                      />
-                    }
-                    label="Vacations"
-                  />
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        name="cars"
-                        defaultChecked={true}
-                        onChange={handleCheckbox}
-                      />
-                    }
-                    label="Cars"
-                  />
-                </FormGroup>
-                <br />
-                <FormLabel>Price Range</FormLabel>
-                <Box sx={{ width: 300 }}>
-                  <Slider
-                    getAriaLabel={() => "Temperature range"}
-                    value={listState.valueRange}
-                    onChange={handleChangeSlider}
-                    valueLabelDisplay="auto"
-                    getAriaValueText={valuetext}
-                    min={minPrice}
-                    max={maxPrice}
-                  />
-                </Box>
-              </FormControl>
-            </Menu>
+                Refine
+              </Button>
+              <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
+                <FormControl
+                  sx={{ m: 3 }}
+                  component="fieldset"
+                  variant="standard"
+                >
+                  <FormLabel>Categories</FormLabel>
+                  <FormGroup>
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          name="xtreme"
+                          defaultChecked={true}
+                          onChange={handleCheckbox}
+                        />
+                      }
+                      label="Xtreme"
+                    />
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          name="tattoos"
+                          defaultChecked={true}
+                          onChange={handleCheckbox}
+                        />
+                      }
+                      label="Tatoos"
+                    />
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          name="food"
+                          defaultChecked={true}
+                          onChange={handleCheckbox}
+                        />
+                      }
+                      label="Food"
+                    />
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          name="vacation"
+                          defaultChecked={true}
+                          onChange={handleCheckbox}
+                        />
+                      }
+                      label="Vacations"
+                    />
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          name="cars"
+                          defaultChecked={true}
+                          onChange={handleCheckbox}
+                        />
+                      }
+                      label="Cars"
+                    />
+                  </FormGroup>
+                  <br />
+                  <FormLabel>Price Range</FormLabel>
+                  <Box sx={{ width: 300 }}>
+                    <Slider
+                      getAriaLabel={() => "Temperature range"}
+                      value={filterState.valueRange}
+                      onChange={handleChangeSlider}
+                      valueLabelDisplay="auto"
+                      getAriaValueText={valuetext}
+                      min={minPrice}
+                      max={maxPrice}
+                    />
+                  </Box>
+                </FormControl>
+              </Menu>
+            </Box>
+            <Box sx={{ alignContent: "flex-end", flexGrow: 1 }}>
+              <Select
+                value={sortState.limit}
+                label="Limit"
+                onChange={(e) => {
+                  setSortState({ ...sortState, limit: Number(e.target.value) });
+                }}
+              >
+                <MenuItem value={8}>8</MenuItem>
+                <MenuItem value={16}>16</MenuItem>
+                <MenuItem value={32}>32</MenuItem>
+              </Select>
+            </Box>
           </Box>
+
           <Box sx={{ flexGrow: 1 }}>
             <TextField
               id="outlined-basic"
@@ -233,24 +286,32 @@ function CouponBrowser(props: ICouponListProps): JSX.Element {
               </Grid>
             )}
             {state.users.userRole === "customer"
-              ? getFilteredCoupons().map((coupon: CouponModel) => (
-                  <Coupon
-                    coupon={coupon}
-                    isPurchased={
-                      customerCoupons.includes(coupon.id) ||
-                      cartCoupons.includes(coupon.id)
-                    }
-                    key={coupon.id}
-                  />
-                ))
-              : getFilteredCoupons().map((coupon: CouponModel) => (
+              ? getSortedCoupons()
+                  .map((coupon: CouponModel) => (
+                    <Coupon
+                      coupon={coupon}
+                      isPurchased={
+                        customerCoupons.includes(coupon.id) ||
+                        cartCoupons.includes(coupon.id)
+                      }
+                      key={coupon.id}
+                    />
+                  ))
+                  .sort()
+              : getSortedCoupons().map((coupon: CouponModel) => (
                   <Coupon coupon={coupon} isPurchased={false} key={coupon.id} />
                 ))}
           </Grid>
+          <Pagination
+            count={Math.ceil(props.allCoupons.length / sortState.limit)}
+            onChange={(event, value) => {
+              setSortState({ ...sortState, page: value });
+            }}
+          />
         </Container>
       </Box>
     </div>
   );
 }
-
+//TODO: add chose sort method
 export default CouponBrowser;

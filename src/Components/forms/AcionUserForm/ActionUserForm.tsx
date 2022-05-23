@@ -23,6 +23,7 @@ import AddBoxIcon from "@mui/icons-material/AddBox";
 import UserForm from "../UserForm/UserForm";
 import DeletePrompt from "../DeletePrompt/DeletePrompt";
 import { DeleteableEntity } from "../DeleteableEntities";
+import { useActions } from "../../../hooks/useActions";
 //TODO: change usertype to enum
 interface CustomerForm {
   id: number;
@@ -44,8 +45,8 @@ interface IUserProps {
   formType: string;
   user?: CompanyForm | CustomerForm;
   updateFunc?: Function;
-  deleteFunc?: Function;
-  addFunc?: Function;
+  // deleteFunc?: Function;
+  // addFunc?: Function;
 }
 //todo: update contnet on each form
 
@@ -53,6 +54,7 @@ function ActionUserForm(props: IUserProps): JSX.Element {
   const state = useTypedSelector((state) => state);
   const [open, setOpen] = React.useState(false);
   const token = localStorage.getItem("token") as string;
+  const { removeCustomer, removeCompany } = useActions();
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -110,7 +112,14 @@ function ActionUserForm(props: IUserProps): JSX.Element {
             deleteableID={props.user?.id as number}
             targetType={getTarget()}
             deleteFunc={() => {
-              props.deleteFunc?.(props.user?.id);
+              // props.deleteFunc?.(props.user?.id);
+              switch (props.formType) {
+                case "customer":
+                  removeCustomer(props.user ? props.user.id : -1);
+                  break;
+                case "company":
+                  removeCompany(props.user ? props.user.id : -1);
+              }
             }}
           >
             {props.formType}
@@ -122,7 +131,7 @@ function ActionUserForm(props: IUserProps): JSX.Element {
             user={props.user}
             userType={props.formType}
             updateFunction={props?.updateFunc}
-            addFunction={(data: any) => props.addFunc?.(data)}
+            // addFunction={(data: any) => props.addFunc?.(data)}
           />
         )}
       </Dialog>

@@ -16,15 +16,15 @@ import "./CustomerTable.css";
 interface customerProps {
   customers: CustomerModel[];
   // addFunction: Function;
-  deleteFunction: Function;
+  // deleteFunction: Function;
 }
 //todo: move ADD button from "manage users" to here
 function CustomerTable(props: customerProps): JSX.Element {
-  const [customers, setCustomers] = React.useState<CustomerModel[]>([]);
-  useEffect(() => {
-    setCustomers(props.customers);
-    // props.updateFunc();
-  }, []);
+  // const [customers, setCustomers] = React.useState<CustomerModel[]>([]);
+  // useEffect(() => {
+  //   setCustomers(props.customers);
+  //   // props.updateFunc();
+  // }, []);
 
   const handleFormSubmit = (data: CustomerModel) => {};
   return (
@@ -44,7 +44,7 @@ function CustomerTable(props: customerProps): JSX.Element {
             <CustomerRow
               singleCustomer={customer}
               key={customer.id}
-              deleteFunc={() => props.deleteFunction(customer.id)}
+              // deleteFunc={() => props.deleteFunction(customer.id)}
               // addFunc={() => props.addFunction(customer.id)}
             />
           ))}

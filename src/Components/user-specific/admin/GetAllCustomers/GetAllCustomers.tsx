@@ -61,13 +61,13 @@ function GetAllCustomers(): JSX.Element {
   //     backgroundColor: grey[600],
   //   },
   // }));
-  const deleteCustomer = (data: number) => {
-    // const oldCustomers = [...customers];
-    // const newCustomers = oldCustomers.filter(
-    //   (customer) => customer.id !== data
-    // );
-    // setCustomers(newCustomers);
-  };
+  // const deleteCustomer = (data: number) => {
+  //   // const oldCustomers = [...customers];
+  //   // const newCustomers = oldCustomers.filter(
+  //   //   (customer) => customer.id !== data
+  //   // );
+  //   // setCustomers(newCustomers);
+  // };
 
   const addCustomer = (data: CustomerModel) => {
     // const oldCustomers = [...customers];
@@ -82,7 +82,7 @@ function GetAllCustomers(): JSX.Element {
         // addFunction={(data: any) => {
         //   addCustomer(data);
         // }}
-        deleteFunction={deleteCustomer}
+        // deleteFunction={deleteCustomer}
       />
     </div>
   );

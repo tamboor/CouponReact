@@ -4,18 +4,23 @@ import { grey } from "@mui/material/colors";
 import axios, { AxiosError } from "axios";
 import { useEffect, useState } from "react";
 import { couldStartTrivia } from "typescript";
+import { useActions } from "../../../../hooks/useActions";
+import { useTypedSelector } from "../../../../hooks/useTypedSelector";
 import { CompanyModel } from "../../../../Models/CompanyModel";
 // import { CompanyModel } from "../../../Models/CompanyModel";
 import CompanyTable from "../CompanyTable/CompanyTable";
 import "./GetAllCompanies.css";
 ///////////////////////////////////////////////////////////////////////////////
+//TODO: change to admin homepage architecture
 function GetAllCompanies(): JSX.Element {
-  const [companies, setCompanies] = useState<CompanyModel[]>([]);
+  // const [companies, setCompanies] = useState<CompanyModel[]>([]);
   const [isLoad, setLoad] = useState<boolean>(false);
   const [isError, setError] = useState(false);
   const [myError, setMyError] = useState("");
   const [collapse, setCollapse] = useState(false);
   const token = localStorage.getItem("token") as string;
+  const { setCompanies } = useActions();
+  const { admin } = useTypedSelector((state) => state);
 
   useEffect(() => {
     const url = "http://localhost:8080/admin/getAllCompanies";
@@ -24,7 +29,7 @@ function GetAllCompanies(): JSX.Element {
       .then((response) => {
         console.log(response);
         setCompanies(response.data);
-        console.log(companies);
+        // console.log(companies);
         if (response.data) {
           setLoad(true);
         }
@@ -46,19 +51,19 @@ function GetAllCompanies(): JSX.Element {
 
   useEffect(() => {}, [collapse]);
 
-  const deleteCompany = (data: number) => {
-    const oldCompanies: CompanyModel[] = [...companies];
-    const newCompanies = oldCompanies.filter((company: CompanyModel) => {
-      return company.id !== data;
-    });
-    setCompanies(newCompanies);
-  };
+  // const deleteCompany = (data: number) => {
+  //   const oldCompanies: CompanyModel[] = [...companies];
+  //   const newCompanies = oldCompanies.filter((company: CompanyModel) => {
+  //     return company.id !== data;
+  //   });
+  //   setCompanies(newCompanies);
+  // };
 
-  const addCompany = (data: CompanyModel) => {
-    const oldCompanies = [...companies];
-    oldCompanies.push(data);
-    setCompanies(oldCompanies);
-  };
+  // const addCompany = (data: CompanyModel) => {
+  //   const oldCompanies = [...companies];
+  //   oldCompanies.push(data);
+  //   setCompanies(oldCompanies);
+  // };
 
   //   const ColorButton = styled(Button)<ButtonProps>(({ theme }) => ({
   //     color: theme.palette.getContrastText(grey[800]),
@@ -72,11 +77,11 @@ function GetAllCompanies(): JSX.Element {
     <div id="CompanyTable">
       {/* <Collapse in={collapse}> */}
       <CompanyTable
-        companies={companies}
-        addFunction={(data: any) => {
-          addCompany(data);
-        }}
-        deleteFunction={deleteCompany}
+        companies={admin.companies}
+        // addFunction={(data: any) => {
+        //   addCompany(data);
+        // }}
+        // deleteFunction={deleteCompany}
       />
       {/* </Collapse>{" "} */}
     </div>

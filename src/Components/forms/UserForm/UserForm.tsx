@@ -23,7 +23,7 @@ interface IFormProps {
   userType: string;
   handleClose: Function;
   updateFunction?: Function;
-  addFunction?: Function;
+  // addFunction?: Function;
 }
 
 interface CustomerForm {
@@ -99,6 +99,7 @@ function UserForm(props: IFormProps): JSX.Element {
             // props.addFunction?.({ ...data });
             switch (props.userType) {
               case "customer":
+                // console.log({ ...data } as CustomerModel);
                 addCustomer({ ...data } as CustomerModel);
                 break;
               case "company":

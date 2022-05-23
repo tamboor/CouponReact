@@ -38,7 +38,7 @@ function ManageUsers(): JSX.Element {
           <ActionUserForm
             verb={AdminVerbs.ADD}
             formType="customer"
-            addFunc={addFunction}
+            // addFunc={addFunction}
           />
         );
       case "Companies":
@@ -46,7 +46,7 @@ function ManageUsers(): JSX.Element {
           <ActionUserForm
             verb={AdminVerbs.ADD}
             formType="company"
-            addFunc={addFunction}
+            // addFunc={addFunction}
           />
         );
     }

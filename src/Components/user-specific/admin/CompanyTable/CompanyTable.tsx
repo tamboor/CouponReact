@@ -12,8 +12,8 @@ import { CompanyModel } from "../../../../Models/CompanyModel";
 
 interface companyProps {
   companies: CompanyModel[];
-  addFunction: Function;
-  deleteFunction: Function;
+  // addFunction: Function;
+  // deleteFunction: Function;
 }
 
 function CompanyTable(props: companyProps): JSX.Element {
@@ -42,7 +42,7 @@ function CompanyTable(props: companyProps): JSX.Element {
             <CompanyRow
               singleCompany={company}
               key={company.id}
-              deleteFunc={() => props.deleteFunction(company.id)}
+              // deleteFunc={() => props.deleteFunction(company.id)}
             />
           ))}
         </TableBody>

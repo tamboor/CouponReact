@@ -14,7 +14,7 @@ import CouponTable from "../CouponTable/CouponTable";
 import ActionUserForm from "../../../forms/AcionUserForm/ActionUserForm";
 interface companySingleProp {
   singleCompany: CompanyModel;
-  deleteFunc: Function;
+  // deleteFunc: Function;
 }
 function CompanyRow(props: companySingleProp): JSX.Element {
   const [open, setOpen] = React.useState(false);
@@ -81,7 +81,7 @@ function CompanyRow(props: companySingleProp): JSX.Element {
             user={company}
             // updateFunc={handleFormSubmit}
             formType="company"
-            deleteFunc={() => props.deleteFunc(props.singleCompany.id)}
+            // deleteFunc={() => props.deleteFunc(props.singleCompany.id)}
           />
         </TableCell>
       </TableRow>
