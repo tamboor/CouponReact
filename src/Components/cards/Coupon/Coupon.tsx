@@ -64,10 +64,7 @@ function Coupon(props: couponProps): JSX.Element {
     switch (state.users.userRole) {
       case "customer":
         return (
-          <Button
-            onClick={handleAddToCart}
-            disabled={state.users.cart.includes(props.coupon)}
-          >
+          <Button onClick={handleAddToCart} disabled={props.isPurchased}>
             Add to cart
           </Button>
         );
