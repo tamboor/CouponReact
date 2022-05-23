@@ -30,9 +30,9 @@ function FeaturedCoupons(props: IFeaturedProps): JSX.Element {
   //   const [showCoupon, setShowCoupon] = useState<CouponModel>(
   //     props.allCoupons[0]
   //   );
-  console.log(props.allCoupons[0]);
+  // console.log(props.allCoupons[0]);
 
-  console.log(props.allCoupons);
+  // console.log(props.allCoupons);
 
   return (
     <Box sx={{ alignItems: "center" }}>

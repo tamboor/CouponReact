@@ -29,6 +29,7 @@ import ActionUserForm from "../../forms/AcionUserForm/ActionUserForm";
 interface couponProps {
   coupon: CouponModel;
   isPurchased: boolean;
+  styles?: object;
 }
 
 function Coupon(props: couponProps): JSX.Element {
@@ -88,7 +89,7 @@ function Coupon(props: couponProps): JSX.Element {
   ) : (
     //TODO: move gridItem to showCoupons
     <Grid item xs={3}>
-      <Paper elevation={12}>
+      <Paper elevation={12} sx={props?.styles}>
         <Box paddingX={2} paddingY={1}>
           <img
             // src="https://m.gagam.co.il/wp-content/uploads/2017/10/מגנה-הדפסת-תמונה-על-מגנט-תמונות-על-מגנט-2.jpg"
