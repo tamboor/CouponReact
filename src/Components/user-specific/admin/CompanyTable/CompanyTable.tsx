@@ -17,15 +17,11 @@ interface companyProps {
 }
 
 function CompanyTable(props: companyProps): JSX.Element {
-  const [companies, setCompanies] = React.useState<CompanyModel[]>([]);
-  React.useEffect(() => {
-    setCompanies(props.companies);
-  }, []);
-  const handleFormSubmit = (data: CompanyModel) => {
-    const newCompanies = companies.filter((c) => c !== data);
-    setCompanies(newCompanies);
-  };
-  // console.log(companies);
+  // const [companies, setCompanies] = React.useState<CompanyModel[]>([]);
+  // React.useEffect(() => {
+  //   setCompanies(props.companies);
+  // }, []);
+
   return (
     <TableContainer component={Paper}>
       <Table aria-label="collapsible table">
@@ -38,12 +34,8 @@ function CompanyTable(props: companyProps): JSX.Element {
           </TableRow>
         </TableHead>
         <TableBody>
-          {props.companies.map((company) => (
-            <CompanyRow
-              singleCompany={company}
-              key={company.id}
-              // deleteFunc={() => props.deleteFunction(company.id)}
-            />
+          {props.companies.map((company, index) => (
+            <CompanyRow singleCompany={company} key={index} />
           ))}
         </TableBody>
       </Table>

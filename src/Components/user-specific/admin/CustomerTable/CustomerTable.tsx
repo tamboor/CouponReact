@@ -40,10 +40,10 @@ function CustomerTable(props: customerProps): JSX.Element {
           </TableRow>
         </TableHead>
         <TableBody>
-          {props.customers.map((customer) => (
+          {props.customers.map((customer, index) => (
             <CustomerRow
               singleCustomer={customer}
-              key={customer.id}
+              key={index}
               // deleteFunc={() => props.deleteFunction(customer.id)}
               // addFunc={() => props.addFunction(customer.id)}
             />

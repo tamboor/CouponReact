@@ -75,15 +75,14 @@ function CustomerRow(props: customerSingleProp): JSX.Element {
         <TableCell>{customer.firstName}</TableCell>
         <TableCell>{customer.lastName}</TableCell>
         <TableCell>{customer.email}</TableCell>
-        {customer.id && (
-          <div>
+        {customer.id ? (
+          <>
             <TableCell>
               <ActionUserForm
                 verb={AdminVerbs.UPDATE}
                 user={customer}
                 formType="customer"
                 updateFunc={handleFormSubmit}
-                // updateFunc={props.deleteFunc()}
               />
             </TableCell>
             <TableCell>
@@ -91,12 +90,10 @@ function CustomerRow(props: customerSingleProp): JSX.Element {
                 verb={AdminVerbs.DELETE}
                 user={customer}
                 formType="customer"
-                // disabled={!customer.id}
-                // deleteFunc={() => props.deleteFunc?.(props.singleCustomer.id)}
               />
             </TableCell>
-          </div>
-        )}
+          </>
+        ) : null}
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>

@@ -67,23 +67,25 @@ function CompanyRow(props: companySingleProp): JSX.Element {
         </TableCell>
         <TableCell>{company.name}</TableCell>
         <TableCell>{company.email}</TableCell>
-        <TableCell>
-          <ActionUserForm
-            verb={AdminVerbs.UPDATE}
-            user={company}
-            formType="company"
-            updateFunc={handleFormSubmit}
-          />
-        </TableCell>
-        <TableCell>
-          <ActionUserForm
-            verb={AdminVerbs.DELETE}
-            user={company}
-            // updateFunc={handleFormSubmit}
-            formType="company"
-            // deleteFunc={() => props.deleteFunc(props.singleCompany.id)}
-          />
-        </TableCell>
+        {company.id ? (
+          <>
+            <TableCell>
+              <ActionUserForm
+                verb={AdminVerbs.UPDATE}
+                user={company}
+                formType="company"
+                updateFunc={handleFormSubmit}
+              />
+            </TableCell>
+            <TableCell>
+              <ActionUserForm
+                verb={AdminVerbs.DELETE}
+                user={company}
+                formType="company"
+              />
+            </TableCell>
+          </>
+        ) : null}
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
