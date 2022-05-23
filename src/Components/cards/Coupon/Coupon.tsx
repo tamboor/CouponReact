@@ -14,6 +14,7 @@ import Inventory2OutlinedIcon from "@mui/icons-material/Inventory2Outlined";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import CouponForm from "../../forms/CouponForm/CouponForm";
 import { AdminVerbs } from "../../user-specific/admin/AdminVerbs";
+import ActionUserForm from "../../forms/AcionUserForm/ActionUserForm";
 // interface couponProps {
 //   amount: number;
 //   category: string;
@@ -69,7 +70,12 @@ function Coupon(props: couponProps): JSX.Element {
           </Button>
         );
       case "company":
-        return <Button onClick={handleEditCoupon}>Edit</Button>;
+        return (
+          <Grid>
+            <Button onClick={handleEditCoupon}>Edit</Button>
+            <ActionUserForm verb={AdminVerbs.DELETE} formType="coupon" />
+          </Grid>
+        );
     }
   }
 

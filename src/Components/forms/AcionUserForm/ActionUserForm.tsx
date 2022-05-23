@@ -25,6 +25,7 @@ import DeletePrompt from "../DeletePrompt/DeletePrompt";
 import { DeleteableEntity } from "../DeleteableEntities";
 import { useActions } from "../../../hooks/useActions";
 //TODO: change usertype to enum
+//TODO: complete functionality to delete a coupon
 interface CustomerForm {
   id: number;
   email: string;
@@ -108,6 +109,8 @@ function ActionUserForm(props: IUserProps): JSX.Element {
         return DeleteableEntity.CUSTOMER;
       case "company":
         return DeleteableEntity.COMPANY;
+      case "coupon":
+        return DeleteableEntity.COUPON;
     }
     return DeleteableEntity.CUSTOMER;
   };
