@@ -18,6 +18,7 @@ import React from "react";
 
 import { SubmitHandler, useForm } from "react-hook-form";
 import { CouponModel } from "../../../Models/CouponModel";
+import notify from "../../../utils/Notify";
 
 import getAuthHeaders, { setStoredToken } from "../../../utils/tokenUtils";
 import { AdminVerbs } from "../../user-specific/admin/AdminVerbs";
@@ -47,21 +48,23 @@ function CouponForm(props: CouponFormProps): JSX.Element {
     register,
     formState: { errors },
     handleSubmit,
-    getValues,
-    control,
+    // getValues,
+    // control,
   } = useForm<CouponForm>();
 
   const [category, setCategory] = React.useState("");
 
   const [startDate, setStartDate] = React.useState<Date | null>(new Date());
   const [endDate, setEndDate] = React.useState<Date | null>(new Date());
+  // const [isError, setIsError] = React.useState(false);
 
   const handleChange = (event: SelectChangeEvent) => {
     setCategory(event.target.value as string);
   };
 
   const onError = (errors: any, e: any) => {
-    console.log(errors);
+    // console.log(errors);
+    // setIsError(true);
   };
 
   const onSubmit: SubmitHandler<CouponForm> = async (data) => {
@@ -79,7 +82,6 @@ function CouponForm(props: CouponFormProps): JSX.Element {
           startDate: startDateFormat,
           endDate: endDateFormat,
         };
-        console.log(typeof data.image);
 
         axios
           .post(
@@ -89,6 +91,7 @@ function CouponForm(props: CouponFormProps): JSX.Element {
           )
           .then((res: AxiosResponse) => {
             setStoredToken(res);
+            props.handleClose();
             props.addFunction?.({ ...data });
           })
           .catch((error: AxiosError) => {
@@ -108,6 +111,7 @@ function CouponForm(props: CouponFormProps): JSX.Element {
           })
           .catch((error: AxiosError) => {
             console.log(error);
+            notify.error(error.response?.data as string);
           });
         break;
     }
@@ -118,29 +122,22 @@ function CouponForm(props: CouponFormProps): JSX.Element {
       <Grid>
         <Paper elevation={12}>
           <form onSubmit={handleSubmit(onSubmit, onError)}>
-            {/* <img
-              {...register("image", { required: "this is required" })}
-              src="https://m.gagam.co.il/wp-content/uploads/2017/10/מגנה-הדפסת-תמונה-על-מגנט-תמונות-על-מגנט-2.jpg"
-              alt=""
-              className="img"
-            /> */}
             <Box paddingX={2} paddingY={1}>
-              {/* <FormControl fullWidth> */}
-              {/* <Button variant="contained" component="label">
-                Upload Image
-                <input type="file" hidden />
-              </Button> */}
-
               <TextField
                 {...register("image", { required: "this is required" })}
+                required
+                // error={errors.image ? true : false}
+                // error={isError}
                 label="Image URL"
                 type="url"
-                variant="standard"
+                variant="outlined"
                 defaultValue={props.coupon?.image}
               />
               <InputLabel id="category-select">Category</InputLabel>
               <Select
+                required
                 {...register("category", { required: "this is required" })}
+                // error={errors.category ? true : false}
                 labelId="category-select"
                 id="category-select"
                 value={category}
@@ -154,31 +151,40 @@ function CouponForm(props: CouponFormProps): JSX.Element {
                 <MenuItem value={"cars"}>Cars</MenuItem>
                 <MenuItem value={"vacation"}>Vacation</MenuItem>
               </Select>
-              <br />
+              <br /> <br />
               {/* </FormControl> */}
               <TextField
-                {...register("title", { required: "this is required" })}
+                {...register("title", { required: errors.title?.message })}
+                required
+                // error={errors.title ? true : false}
                 label="Title"
-                variant="standard"
+                variant="outlined"
                 defaultValue={props.coupon?.title}
+                helperText={errors.title && errors.title.message}
               />
+              <br />
               <br />
               <TextField
                 {...register("price", { required: "this is required" })}
+                required
+                // error={errors.price ? true : false}
+                // error={isError}
                 id="price"
                 label="Price"
                 type="number"
                 InputLabelProps={{
                   shrink: true,
                 }}
-                variant="filled"
+                variant="outlined"
                 defaultValue={props.coupon?.price}
               />
               <br />
+              <br />
               <TextField
                 {...register("description", { required: "this is required" })}
+                required
                 label="Description"
-                variant="standard"
+                variant="outlined"
                 defaultValue={props.coupon?.description}
               />
               <br />
@@ -206,24 +212,25 @@ function CouponForm(props: CouponFormProps): JSX.Element {
                 />
               </LocalizationProvider>
               {/* <Box> */}
-
               {/* </Box> */}
-
+              <br />
+              <br />
               <TextField
                 {...register("amount", { required: "this is required" })}
+                required
                 id="amount"
                 label="Amount"
                 type="number"
                 InputLabelProps={{
                   shrink: true,
                 }}
-                variant="filled"
+                variant="outlined"
                 defaultValue={props.coupon?.amount}
               />
               {/* {renderSwitch()} */}
             </Box>
             <Button type="submit">{props.verb}</Button>
-            <Button onClick={(data: any) => props.handleClose}>Cancel</Button>
+            <Button onClick={(data: any) => props.handleClose()}>Cancel</Button>
           </form>
         </Paper>
       </Grid>
