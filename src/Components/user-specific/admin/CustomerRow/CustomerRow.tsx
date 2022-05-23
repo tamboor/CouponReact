@@ -11,7 +11,6 @@ import {
 } from "@mui/material";
 import React, { useEffect } from "react";
 import { CustomerModel } from "../../../../Models/CustomerModel";
-import ActionCustomerForm from "../../../forms/ActionCustomerForm/ActionCustomerForm";
 import { AdminVerbs } from "../AdminVerbs";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
@@ -22,7 +21,6 @@ import CouponTable from "../CouponTable/CouponTable";
 import ActionUserForm from "../../../forms/AcionUserForm/ActionUserForm";
 interface customerSingleProp {
   singleCustomer: CustomerModel;
-  // deleteFunc: Function;
 }
 function CustomerRow(props: customerSingleProp): JSX.Element {
   const [open, setOpen] = React.useState(false);

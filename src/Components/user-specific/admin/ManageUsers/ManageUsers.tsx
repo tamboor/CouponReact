@@ -1,15 +1,10 @@
 import { Container, Card, Box, Tabs, Tab, Button, Paper } from "@mui/material";
 import { useState } from "react";
 import GetAllCompanies from "../GetAllCompanies/GetAllCompanies";
-// import ActionCustomerForm from "../../forms/ActionCustomerForm/ActionCustomerForm";
-// import LoginPanel from "../../guest/LoginPanel/LoginPanel";
 import "./ManageUsers.css";
 import { AdminVerbs } from "../AdminVerbs";
 import GetAllCustomers from "../GetAllCustomers/GetAllCustomers";
-import ActionCompanyForm from "../../../forms/ActionCompanyForm/ActionCompanyForm";
-import ActionCustomerForm from "../../../forms/ActionCustomerForm/ActionCustomerForm";
 import ActionUserForm from "../../../forms/AcionUserForm/ActionUserForm";
-// import ActionCompanyForm from "../../forms/ActionCompanyForm/ActionCompanyForm";
 
 function ManageUsers(): JSX.Element {
   const [value, setValue] = useState<string>("Customers");
@@ -18,9 +13,6 @@ function ManageUsers(): JSX.Element {
     setValue(newValue);
   };
 
-  // const handleFormSubmit = (data: CustomerModel) => {
-  //   setCustomer(data);
-  // };
   const addFunction = () => {};
   function renderSwitch() {
     switch (value) {
@@ -34,21 +26,9 @@ function ManageUsers(): JSX.Element {
   function addButtonRenderSwitch() {
     switch (value) {
       case "Customers":
-        return (
-          <ActionUserForm
-            verb={AdminVerbs.ADD}
-            formType="customer"
-            // addFunc={addFunction}
-          />
-        );
+        return <ActionUserForm verb={AdminVerbs.ADD} formType="customer" />;
       case "Companies":
-        return (
-          <ActionUserForm
-            verb={AdminVerbs.ADD}
-            formType="company"
-            // addFunc={addFunction}
-          />
-        );
+        return <ActionUserForm verb={AdminVerbs.ADD} formType="company" />;
     }
   }
 

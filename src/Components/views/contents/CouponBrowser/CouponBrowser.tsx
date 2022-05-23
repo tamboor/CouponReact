@@ -149,11 +149,11 @@ function CouponBrowser(props: ICouponListProps): JSX.Element {
   function getSortedCoupons() {
     const filtered = getFilteredCoupons();
     const startIndex = (sortState.page - 1) * sortState.limit;
-    console.log(
-      filtered
-        .sort(sortState.compareMethod)
-        .slice(startIndex, startIndex + sortState.limit)
-    );
+    // console.log(
+    //   filtered
+    //     .sort(sortState.compareMethod)
+    //     .slice(startIndex, startIndex + sortState.limit)
+    // );
 
     return filtered
       .sort(sortState.compareMethod)

@@ -1,15 +1,13 @@
-import { AdminPanelSettings } from "@mui/icons-material";
 import {
-  TableRow,
-  TableCell,
   Paper,
   Table,
   TableBody,
+  TableCell,
   TableContainer,
   TableHead,
+  TableRow,
 } from "@mui/material";
 import React from "react";
-import { useEffect } from "react";
 import { CustomerModel } from "../../../../Models/CustomerModel";
 import CustomerRow from "../CustomerRow/CustomerRow";
 import "./CustomerTable.css";

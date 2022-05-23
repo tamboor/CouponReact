@@ -43,7 +43,8 @@ function LoginPanel(props: LoginProps): JSX.Element {
         break;
       case "admin":
         tryAdminLogin(data.userEmail, data.userPass);
-        navigate("/");
+        //todo: CHANGE TO ADMIN HOME
+        navigate("manage-user");
         break;
       default:
         tryLogout();

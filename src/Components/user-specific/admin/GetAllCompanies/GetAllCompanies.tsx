@@ -1,12 +1,7 @@
-import styled from "@emotion/styled";
-import { Button, ButtonProps, Collapse } from "@mui/material";
-import { grey } from "@mui/material/colors";
 import axios, { AxiosError } from "axios";
-import { useEffect, useState } from "react";
-import { couldStartTrivia } from "typescript";
+import { useEffect } from "react";
 import { useActions } from "../../../../hooks/useActions";
 import { useTypedSelector } from "../../../../hooks/useTypedSelector";
-import { CompanyModel } from "../../../../Models/CompanyModel";
 import getAuthHeaders from "../../../../utils/tokenUtils";
 // import { CompanyModel } from "../../../Models/CompanyModel";
 import CompanyTable from "../CompanyTable/CompanyTable";

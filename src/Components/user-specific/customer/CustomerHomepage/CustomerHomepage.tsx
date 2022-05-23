@@ -5,6 +5,7 @@ import { useTypedSelector } from "../../../../hooks/useTypedSelector";
 import { CouponModel } from "../../../../Models/CouponModel";
 import getAuthHeaders from "../../../../utils/tokenUtils";
 import CouponBrowser from "../../../views/contents/CouponBrowser/CouponBrowser";
+import FeaturedCoupons from "../FeaturedCoupons/FeaturedCoupons";
 import "./CustomerHomepage.css";
 
 function CustomerHomepage(): JSX.Element {
@@ -12,13 +13,13 @@ function CustomerHomepage(): JSX.Element {
   const [customerCoupons, setCustomerCoupons] = useState<CouponModel[]>([]);
   const { users } = useTypedSelector((state) => state);
   // console.log(users.userRole);
-  useEffect(() => {
-    fetchCoupons();
-  }, []);
+  // useEffect(() => {
+  //   fetchCoupons();
+  // }, []);
   //TODO: change user role to customer
   useEffect(() => {
-    if (users.userRole !== "customer") return;
-
+    // if (users.userRole !== "customer") return;
+    fetchCoupons();
     fetchCustomerCoupons();
   }, [users.userRole]);
 
@@ -40,12 +41,6 @@ function CustomerHomepage(): JSX.Element {
         getAuthHeaders()
       )
       .then((response: AxiosResponse) => {
-        // setCustomerState({
-        //   ...customerState,
-        //   customerCoupons: response.data as CouponModel[],
-        // });
-        // console.log("success");
-        // console.log(response.data);
         setCustomerCoupons(response.data as CouponModel[]);
       })
       .catch((error) => {
@@ -53,10 +48,10 @@ function CustomerHomepage(): JSX.Element {
       });
   }
 
-  // console.log(customerState);
+  // console.log(allCoupons);
   return (
     <div className="customerHomepage">
-      <Typography>Add featured coupons here</Typography>
+      <FeaturedCoupons allCoupons={allCoupons} />
       <CouponBrowser
         allCoupons={allCoupons}
         customerCoupons={customerCoupons}
