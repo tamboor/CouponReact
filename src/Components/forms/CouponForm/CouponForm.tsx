@@ -232,8 +232,8 @@ function CouponForm(props: CouponFormProps): JSX.Element {
               />
               {/* {renderSwitch()} */}
             </Box>
-            <Button type="submit">{props.verb}</Button>
             <Button onClick={(data: any) => props.handleClose()}>Cancel</Button>
+            <Button type="submit">{props.verb}</Button>
           </form>
         </Paper>
       </Grid>
