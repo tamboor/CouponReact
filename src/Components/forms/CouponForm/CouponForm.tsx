@@ -133,7 +133,7 @@ function CouponForm(props: CouponFormProps): JSX.Element {
 
               <TextField
                 {...register("image", { required: "this is required" })}
-                label="image"
+                label="Image URL"
                 type="url"
                 variant="standard"
                 defaultValue={props.coupon?.image}

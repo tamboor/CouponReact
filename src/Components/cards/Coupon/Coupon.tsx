@@ -67,19 +67,23 @@ function Coupon(props: couponProps): JSX.Element {
     //TODO: move gridItem to showCoupons
     <Grid item xs={3}>
       <Paper elevation={12}>
-        <img
-          src="https://m.gagam.co.il/wp-content/uploads/2017/10/מגנה-הדפסת-תמונה-על-מגנט-תמונות-על-מגנט-2.jpg"
-          // src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.cts.co.il%2F%25D7%25A2%25D7%2595%25D7%25A8-%25D7%25A9%25D7%259C-%25D7%25AA%25D7%2599%25D7%25A0%25D7%2595%25D7%25A7&psig=AOvVaw127pnbUsRBAAD3uQEurCJv&ust=1653318941890000&source=images&cd=vfe&ved=0CAwQjRxqFwoTCPibvpSz8_cCFQAAAAAdAAAAABAN"
-          alt=""
-          className="img"
-        />
         <Box paddingX={2} paddingY={1}>
-          <Typography variant="h6" component="h6">
-            {props.coupon.category}
-          </Typography>
+          <img
+            // src="https://m.gagam.co.il/wp-content/uploads/2017/10/מגנה-הדפסת-תמונה-על-מגנט-תמונות-על-מגנט-2.jpg"
+            src={props.coupon.image}
+            alt=""
+            className="img"
+          />
+          <Grid item xs={3}>
+            <Typography variant="h6" component="h6">
+              {props.coupon.category}
+            </Typography>
+          </Grid>
+          {/* <Grid item xs={3}> */}
           <Typography variant="h4" component="h2">
             {props.coupon.title}
           </Typography>
+          {/* </Grid> */}
           <Typography variant="h4" component="h2">
             {props.coupon.price}
             <AttachMoneyIcon
