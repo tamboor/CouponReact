@@ -32,6 +32,8 @@ function DeletePrompt(props: PromptProps): JSX.Element {
           return `http://localhost:8080/admin/deleteCompany/${props.deleteableID}`;
         case DeleteableEntity.CUSTOMER:
           return `http://localhost:8080/admin/deleteCustomer/${props.deleteableID}`;
+        case DeleteableEntity.COUPON:
+          return `http://localhost:8080/company/deleteCoupon/${props.deleteableID}`;
       }
     };
     // console.log((getUrl() as string) + props.deleteableID);

@@ -24,6 +24,8 @@ import UserForm from "../UserForm/UserForm";
 import DeletePrompt from "../DeletePrompt/DeletePrompt";
 import { DeleteableEntity } from "../DeleteableEntities";
 import { useActions } from "../../../hooks/useActions";
+import { userInfo } from "os";
+// import CouponForm from "../CouponForm/CouponForm";
 //TODO: change usertype to enum
 //TODO: complete functionality to delete a coupon
 interface CustomerForm {
@@ -41,6 +43,18 @@ interface CompanyForm {
   password: string;
 }
 
+// interface CouponForm {
+//   id: number;
+//   category: string;
+//   description: string;
+//   startDate: string;
+//   endDate: string;
+//   image: string;
+//   price: number;
+//   title: string;
+//   amount: number;
+// }
+
 interface IUserProps {
   verb: AdminVerbs;
   formType: string;
@@ -56,7 +70,6 @@ function ActionUserForm(props: IUserProps): JSX.Element {
   const [open, setOpen] = React.useState(false);
   const token = localStorage.getItem("token") as string;
   const { removeCustomer, removeCompany } = useActions();
-
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -146,7 +159,7 @@ function ActionUserForm(props: IUserProps): JSX.Element {
           <UserForm
             verb={props.verb}
             handleClose={handleClose}
-            user={props.user}
+            user={props?.user}
             userType={props.formType}
             updateFunction={props?.updateFunc}
             // addFunction={(data: any) => props.addFunc?.(data)}

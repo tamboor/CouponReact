@@ -1,4 +1,11 @@
-import { Button, Container, Grid, Paper, Typography } from "@mui/material";
+import {
+  Button,
+  Container,
+  Dialog,
+  Grid,
+  Paper,
+  Typography,
+} from "@mui/material";
 import { Box } from "@mui/system";
 import "./Coupon.css";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
@@ -14,7 +21,11 @@ import Inventory2OutlinedIcon from "@mui/icons-material/Inventory2Outlined";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import CouponForm from "../../forms/CouponForm/CouponForm";
 import { AdminVerbs } from "../../user-specific/admin/AdminVerbs";
+import DeleteIcon from "@mui/icons-material/Delete";
+
 import ActionUserForm from "../../forms/AcionUserForm/ActionUserForm";
+import DeletePrompt from "../../forms/DeletePrompt/DeletePrompt";
+import { DeleteableEntity } from "../../forms/DeleteableEntities";
 // interface couponProps {
 //   amount: number;
 //   category: string;
@@ -35,10 +46,16 @@ interface couponProps {
 function Coupon(props: couponProps): JSX.Element {
   const { addItem } = useActions();
   const [showForm, setShowForm] = useState(false);
+  const [open, setOpen] = useState(false);
   const state = useTypedSelector((state) => state);
 
   // console.log("type from coupon: " + typeof state.users.cart);
-
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
   const handleAddToCart = (event: any) => {
     addItem(props.coupon);
   };
@@ -72,10 +89,15 @@ function Coupon(props: couponProps): JSX.Element {
         );
       case "company":
         return (
-          <Grid>
-            <Button onClick={handleEditCoupon}>Edit</Button>
-            <ActionUserForm verb={AdminVerbs.DELETE} formType="coupon" />
-          </Grid>
+          <Box>
+            <Button variant="outlined" onClick={handleEditCoupon}>
+              Edit
+            </Button>
+            {/* <ActionUserForm verb={AdminVerbs.DELETE} formType="coupon" /> */}
+            <Button variant="outlined" onClick={handleClickOpen}>
+              <DeleteIcon />
+            </Button>
+          </Box>
         );
     }
   }
@@ -88,6 +110,7 @@ function Coupon(props: couponProps): JSX.Element {
     />
   ) : (
     //TODO: move gridItem to showCoupons
+
     <Grid item xs={3}>
       <Paper elevation={12} sx={props?.styles}>
         <Box paddingX={2} paddingY={1}>
@@ -151,6 +174,25 @@ function Coupon(props: couponProps): JSX.Element {
           {renderSwitch()}
         </Box>
       </Paper>
+      <Dialog open={open} onClose={handleClose}>
+        <DeletePrompt
+          handleClose={handleClose}
+          deleteableID={props.coupon.id as number}
+          targetType={DeleteableEntity.COUPON}
+          // deleteFunc={() => {
+          //   // props.deleteFunc?.(props.user?.id);
+          //   switch (props.formType) {
+          //     case "customer":
+          //       removeCustomer(props.user ? props.user.id : -1);
+          //       break;
+          //     case "company":
+          //       removeCompany(props.user ? props.user.id : -1);
+          //   }
+          // }}
+        >
+          {/* {props.formType} */}
+        </DeletePrompt>
+      </Dialog>
     </Grid>
   );
 }
