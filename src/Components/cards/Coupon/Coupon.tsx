@@ -32,7 +32,7 @@ interface couponProps {
 
 function Coupon(props: couponProps): JSX.Element {
   const { addItem } = useActions();
-
+  const [showForm, setShowForm] = useState(false);
   const state = useTypedSelector((state) => state);
 
   // console.log("type from coupon: " + typeof state.users.cart);
@@ -41,8 +41,21 @@ function Coupon(props: couponProps): JSX.Element {
     addItem(props.coupon);
   };
 
-  const handleEditCoupon = (event: any) => {
-    // return <CouponForm verb={AdminVerbs.UPDATE} coupon={props.coupon} />;
+  const handleEditCoupon = () => {
+    console.log("edit");
+    setShowForm(true);
+  };
+  //  (event: any) => {
+  //   return (
+  //     <CouponForm
+  //       verb={AdminVerbs.UPDATE}
+  //       coupon={props.coupon}
+  //       handleClose={() => {}}
+  //     />
+  //   );
+  // };
+  const handleCancel = () => {
+    setShowForm(false);
   };
 
   // console.log(state.users.cart.includes(props.coupon));
@@ -63,7 +76,13 @@ function Coupon(props: couponProps): JSX.Element {
     }
   }
 
-  return (
+  return showForm ? (
+    <CouponForm
+      verb={AdminVerbs.UPDATE}
+      coupon={props.coupon}
+      handleClose={handleCancel}
+    />
+  ) : (
     //TODO: move gridItem to showCoupons
     <Grid item xs={3}>
       <Paper elevation={12}>

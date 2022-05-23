@@ -52,7 +52,9 @@ function CouponForm(props: CouponFormProps): JSX.Element {
     // control,
   } = useForm<CouponForm>();
 
-  const [category, setCategory] = React.useState("");
+  const [category, setCategory] = React.useState(
+    props.coupon ? props.coupon.category : ""
+  );
 
   const [startDate, setStartDate] = React.useState<Date | null>(new Date());
   const [endDate, setEndDate] = React.useState<Date | null>(new Date());
@@ -140,6 +142,7 @@ function CouponForm(props: CouponFormProps): JSX.Element {
                 // error={errors.category ? true : false}
                 labelId="category-select"
                 id="category-select"
+                // defaultValue={props.coupon?.category}
                 value={category}
                 label="Category"
                 onChange={handleChange}
@@ -229,8 +232,8 @@ function CouponForm(props: CouponFormProps): JSX.Element {
               />
               {/* {renderSwitch()} */}
             </Box>
-            <Button type="submit">{props.verb}</Button>
             <Button onClick={(data: any) => props.handleClose()}>Cancel</Button>
+            <Button type="submit">{props.verb}</Button>
           </form>
         </Paper>
       </Grid>
