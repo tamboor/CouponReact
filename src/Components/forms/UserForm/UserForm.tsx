@@ -8,6 +8,7 @@ import {
 } from "@mui/material";
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { useActions } from "../../../hooks/useActions";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { CompanyModel } from "../../../Models/CompanyModel";
@@ -43,6 +44,9 @@ interface CompanyForm {
 
 //todo: on every form, all fields must be required, ADD/UPDATE buttons can't be available with missing fields.
 function UserForm(props: IFormProps): JSX.Element {
+  const state = useTypedSelector((state) => state);
+  const navigate = useNavigate();
+
   console.log("in customer form");
 
   //todo: move to other component
@@ -88,28 +92,44 @@ function UserForm(props: IFormProps): JSX.Element {
 
     switch (props.verb) {
       case AdminVerbs.ADD:
-        axios
-          .post(
-            `http://localhost:8080/admin/add${userTypeUrl}`,
-            { ...data, id: 0 },
-            getAuthHeaders()
-          )
-          .then((res: AxiosResponse) => {
-            setStoredToken(res);
-            // props.addFunction?.({ ...data });
-            switch (props.userType) {
-              case "customer":
-                // console.log({ ...data } as CustomerModel);
-                addCustomer({ ...data } as CustomerModel);
-                break;
-              case "company":
-                addCompany({ ...data } as CompanyModel);
-                break;
-            }
-          })
-          .catch((error: AxiosError) => {
-            console.log(error);
-          });
+        switch (state.users.userRole) {
+          case "admin":
+            axios
+              .post(
+                `http://localhost:8080/admin/add${userTypeUrl}`,
+                { ...data, id: 0 },
+                getAuthHeaders()
+              )
+              .then((res: AxiosResponse) => {
+                setStoredToken(res);
+                // props.addFunction?.({ ...data });
+                switch (props.userType) {
+                  case "customer":
+                    // console.log({ ...data } as CustomerModel);
+                    addCustomer({ ...data } as CustomerModel);
+                    break;
+                  case "company":
+                    addCompany({ ...data } as CompanyModel);
+                    break;
+                }
+              })
+              .catch((error: AxiosError) => {
+                console.log(error);
+              });
+            break;
+          case "guest":
+            axios
+              .post(`http://localhost:8080/guest/register`, { ...data, id: 0 })
+              .then((res: AxiosResponse) => {
+                props.userType === "customer" &&
+                  addCustomer({ ...data } as CustomerModel);
+                navigate("/login");
+              })
+              .catch((error: AxiosError) => {
+                console.log(error);
+              });
+            break;
+        }
         break;
       case AdminVerbs.UPDATE:
         axios
@@ -189,6 +209,7 @@ function UserForm(props: IFormProps): JSX.Element {
             return (
               <div>
                 {companyNameFields()}
+                <br />
                 {emailFields()}
               </div>
             );
@@ -211,23 +232,27 @@ function UserForm(props: IFormProps): JSX.Element {
   };
 
   const onError = (errors: any, e: any) => {
-    // console.log(props.user);
-    // console.log(props.userType);
-    // console.log(errors, e);
     console.log(getValues());
   };
 
   return (
     <div className="UserForm">
-      <DialogTitle>
-        {/* {" "} */}
-        {props.verb} {props.userType}
-      </DialogTitle>
+      {state.users.userRole === "guest" ? (
+        <DialogTitle>Register</DialogTitle>
+      ) : (
+        <DialogTitle>
+          {props.verb} {props.userType}
+        </DialogTitle>
+      )}
+
       <form onSubmit={handleSubmit(onSubmit, onError)}>
         <DialogContent>
-          <DialogContentText>
-            Please enter here the {props.userType}'s details:
-          </DialogContentText>
+          {state.users.userRole === "admin" && (
+            <DialogContentText>
+              Please enter here the {props.userType}'s details:
+            </DialogContentText>
+          )}
+
           {renderSwitch()}
           <br />
 
@@ -241,9 +266,15 @@ function UserForm(props: IFormProps): JSX.Element {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button type="submit" onClick={handleClose}>
-            {props.verb}
-          </Button>
+          {state.users.userRole === "guest" ? (
+            <Button type="submit" onClick={handleClose}>
+              sign me in!
+            </Button>
+          ) : (
+            <Button type="submit" onClick={handleClose}>
+              {props.verb}
+            </Button>
+          )}
         </DialogActions>
       </form>
     </div>

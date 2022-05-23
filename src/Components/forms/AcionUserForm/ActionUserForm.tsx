@@ -65,11 +65,26 @@ function ActionUserForm(props: IUserProps): JSX.Element {
   const actionButtonRenderSwitch = () => {
     switch (props.verb) {
       case AdminVerbs.ADD:
-        return (
-          <Button variant="outlined" onClick={handleClickOpen}>
-            <AddBoxIcon /> ADD CUSTOMER
-          </Button>
-        );
+        switch (state.users.userRole) {
+          case "admin":
+            return (
+              <Button variant="outlined" onClick={handleClickOpen}>
+                <AddBoxIcon /> ADD {props.formType}
+              </Button>
+            );
+          case "guest":
+            console.log("here!!!");
+            return (
+              <Button
+                color="inherit"
+                variant="outlined"
+                onClick={handleClickOpen}
+              >
+                REGISTER
+              </Button>
+            );
+        }
+        break;
       case AdminVerbs.UPDATE:
         return (
           //todo: change to update icon

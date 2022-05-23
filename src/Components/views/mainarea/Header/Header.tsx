@@ -1,11 +1,13 @@
 import { AppBar, Box, Button, Toolbar, Typography } from "@mui/material";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useTypedSelector } from "../../../../hooks/useTypedSelector";
+import ManageUsers from "../../../user-specific/admin/ManageUsers/ManageUsers";
 // import { useActions } from "../../../hooks/useActions";
 // import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import CouponMenu from "../../header-content/CouponMenu/CouponMenu";
 import LoginButton from "../../header-content/LoginButton/LoginButton";
 import ManageUsersButton from "../../header-content/ManageUsersButton/ManageUsersButton";
+import RegisterButton from "../../header-content/RegisterButton/RegisterButton";
 import ShoppingCart from "../../header-content/ShoppingCart/ShoppingCart";
 import UserMenu from "../../header-content/UserMenu/UserMenu";
 import Logo from "../Logo/Logo";
@@ -67,10 +69,19 @@ function Header(): JSX.Element {
           Coupon Mania
         </Typography>
         {/* <Navbar>{renderSwitch()}</Navbar> */}
+
         {/* <Button onClick={redoForms} color="inherit">
           Clear redux
         </Button> */}
+        {state.users.userRole === "admin" && (
+          <Box>
+            {/* <Navbar> */}
+            <ManageUsersButton />
+            {/* </Navbar> */}
+          </Box>
+        )}
         {state.users.userRole === "customer" && <ShoppingCart />}
+        {state.users.userRole === "guest" && <RegisterButton />}
         {state.users.userRole === "guest" ? <LoginButton /> : <UserMenu />}
       </Toolbar>
     </AppBar>
