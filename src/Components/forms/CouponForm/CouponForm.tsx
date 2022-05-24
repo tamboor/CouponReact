@@ -113,6 +113,7 @@ function CouponForm(props: CouponFormProps): JSX.Element {
           .then((res: AxiosResponse) => {
             setStoredToken(res);
             props.handleClose();
+            notify.success("Coupon Updated!");
             props.updateFunction && props.updateFunction(data);
           })
           .catch((error: AxiosError) => {
