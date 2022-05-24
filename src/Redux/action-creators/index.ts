@@ -1,9 +1,10 @@
-import axios from "axios";
+import axios, { AxiosError, AxiosResponse } from "axios";
 import { Dispatch } from "redux";
 import { CompanyModel } from "../../Models/CompanyModel";
 import { CouponModel } from "../../Models/CouponModel";
 import { CustomerModel } from "../../Models/CustomerModel";
 import { UserModel } from "../../Models/UserModel";
+import getAuthHeaders from "../../utils/tokenUtils";
 import { ActionType } from "../action-types";
 import { Action } from "../actions";
 

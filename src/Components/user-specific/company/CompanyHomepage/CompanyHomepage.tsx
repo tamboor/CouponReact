@@ -13,6 +13,7 @@ import CouponBrowser from "../../../views/contents/CouponBrowser/CouponBrowser";
 import { useEffect } from "react";
 import { useTypedSelector } from "../../../../hooks/useTypedSelector";
 import { useActions } from "../../../../hooks/useActions";
+import { setRefreshFunction } from "../../../../utils/fetchCompanyCoupons";
 // import CouponList from "../CouponList/CouponList";
 
 interface TabPanelProps {
@@ -55,6 +56,8 @@ export default function BasicTabs() {
   };
 
   function fetchCoupons() {
+    console.log("fetchCoupons");
+
     axios
       .get("http://localhost:8080/company/getCompanyCoupons", getAuthHeaders())
       .then((res: AxiosResponse) => {
@@ -65,11 +68,15 @@ export default function BasicTabs() {
       });
   }
 
+  setRefreshFunction(() => {
+    fetchCoupons();
+  });
+
   //todo: change to userrole enum
   useEffect(() => {
     if (users.userRole !== "company") return;
     fetchCoupons();
-  }, [users.userRole, coupons.coupons]);
+  }, [users.userRole]);
 
   return (
     <Box sx={{ width: "100%" }}>

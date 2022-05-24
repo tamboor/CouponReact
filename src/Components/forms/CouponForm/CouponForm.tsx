@@ -19,6 +19,7 @@ import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useActions } from "../../../hooks/useActions";
 import { CouponModel } from "../../../Models/CouponModel";
+import { refetchCoupons } from "../../../utils/fetchCompanyCoupons";
 import notify from "../../../utils/Notify";
 
 import getAuthHeaders, { setStoredToken } from "../../../utils/tokenUtils";
@@ -45,7 +46,7 @@ interface CouponForm {
 }
 
 function CouponForm(props: CouponFormProps): JSX.Element {
-  const { addCoupon } = useActions();
+  // const { addCoupon, refetchCoupons } = useActions();
 
   const {
     register,
@@ -100,12 +101,15 @@ function CouponForm(props: CouponFormProps): JSX.Element {
           .then((res: AxiosResponse) => {
             setStoredToken(res);
             props.handleClose();
+
+            refetchCoupons();
             // props.addFunction?.({ ...data });
-            addCoupon({
-              ...newData,
-              startDate: startDate ? startDate.getDate() : new Date().getDate(),
-              endDate: endDate ? endDate.getDate() : new Date().getDate(),
-            });
+            // addCoupon({
+            //   ...newData,
+            //   startDate: startDate ? startDate.getDate() : new Date().getDate(),
+            //   endDate: endDate ? endDate.getDate() : new Date().getDate(),
+            // });
+            // refetchCoupons();
           })
           .catch((error: any) => {
             console.log(error);
@@ -125,7 +129,11 @@ function CouponForm(props: CouponFormProps): JSX.Element {
             setStoredToken(res);
             props.handleClose();
             notify.success("Coupon Updated!");
-            props.updateFunction && props.updateFunction(data);
+
+            refetchCoupons();
+
+            // props.updateFunction && props.updateFunction(data);
+            // refetchCoupons();
           })
           .catch((error: AxiosError) => {
             console.log(error);
