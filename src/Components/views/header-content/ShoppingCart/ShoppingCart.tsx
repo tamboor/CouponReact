@@ -8,14 +8,18 @@ import { useState } from "react";
 import { Button } from "@mui/material";
 import { useTypedSelector } from "../../../../hooks/useTypedSelector";
 function ShoppingCart(): JSX.Element {
-  //   const state = useTypedSelector((state) => state);
+  const state = useTypedSelector((state) => state);
   //   const [items, setItems] = useState<Number>(0);
   return (
     <Button href="/purchase-coupons">
       <Stack spacing={4} direction="row" sx={{ color: "action.active" }}>
-        {/* <Badge color="secondary" badgeContent={0} max={99}> */}
-        <ShoppingCartIcon />
-        {/* </Badge> */}
+        <Badge
+          color="secondary"
+          badgeContent={state.users.cart.length}
+          max={99}
+        >
+          <ShoppingCartIcon />
+        </Badge>
       </Stack>
     </Button>
   );
