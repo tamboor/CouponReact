@@ -287,14 +287,14 @@ function CouponBrowser(props: ICouponListProps): JSX.Element {
             )}
             {state.users.userRole === "customer"
               ? getSortedCoupons()
-                  .map((coupon: CouponModel) => (
+                  .map((coupon: CouponModel, index: number) => (
                     <Coupon
                       coupon={coupon}
                       isPurchased={
                         customerCoupons.includes(coupon.id) ||
                         cartCoupons.includes(coupon.id)
                       }
-                      key={coupon.id}
+                      key={index}
                     />
                   ))
                   .sort()

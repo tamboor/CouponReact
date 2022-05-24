@@ -17,6 +17,7 @@ import axios, { AxiosResponse, AxiosError } from "axios";
 import React from "react";
 
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useActions } from "../../../hooks/useActions";
 import { CouponModel } from "../../../Models/CouponModel";
 import notify from "../../../utils/Notify";
 
@@ -44,6 +45,8 @@ interface CouponForm {
 }
 
 function CouponForm(props: CouponFormProps): JSX.Element {
+  const { addCoupon } = useActions();
+
   const {
     register,
     formState: { errors },
@@ -69,8 +72,11 @@ function CouponForm(props: CouponFormProps): JSX.Element {
     // setIsError(true);
   };
 
-  const onSubmit: SubmitHandler<CouponForm> = async (data) => {
+  const useSubmit: SubmitHandler<CouponForm> = async (data) => {
     // console.log(startDate);
+    // const addCouponToRedux = (coupon: CouponModel) => {
+    //   addCoupon(coupon);
+    // }
 
     switch (props.verb) {
       case AdminVerbs.ADD:
@@ -94,7 +100,12 @@ function CouponForm(props: CouponFormProps): JSX.Element {
           .then((res: AxiosResponse) => {
             setStoredToken(res);
             props.handleClose();
-            props.addFunction?.({ ...data });
+            // props.addFunction?.({ ...data });
+            addCoupon({
+              ...newData,
+              startDate: startDate ? startDate.getDate() : new Date().getDate(),
+              endDate: endDate ? endDate.getDate() : new Date().getDate(),
+            });
           })
           .catch((error: any) => {
             console.log(error);
@@ -129,7 +140,7 @@ function CouponForm(props: CouponFormProps): JSX.Element {
     <div className="CouponForm">
       <Grid>
         <Paper elevation={12}>
-          <form onSubmit={handleSubmit(onSubmit, onError)}>
+          <form onSubmit={handleSubmit(useSubmit, onError)}>
             <Box paddingX={2} paddingY={1}>
               <TextField
                 {...register("image", { required: "this is required" })}

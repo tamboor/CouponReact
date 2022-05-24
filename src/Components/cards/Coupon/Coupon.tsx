@@ -48,6 +48,7 @@ function Coupon(props: couponProps): JSX.Element {
   const [showForm, setShowForm] = useState(false);
   const [open, setOpen] = useState(false);
   const state = useTypedSelector((state) => state);
+  const { removeCoupon } = useActions();
 
   // console.log("type from coupon: " + typeof state.users.cart);
   const handleClickOpen = () => {
@@ -179,6 +180,9 @@ function Coupon(props: couponProps): JSX.Element {
           handleClose={handleClose}
           deleteableID={props.coupon.id as number}
           targetType={DeleteableEntity.COUPON}
+          deleteFunc={() => {
+            removeCoupon(props.coupon as CouponModel);
+          }}
           // deleteFunc={() => {
           //   // props.deleteFunc?.(props.user?.id);
           //   switch (props.formType) {

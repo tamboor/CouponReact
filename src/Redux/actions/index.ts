@@ -88,6 +88,28 @@ interface SetCompaniesAction {
     companies: CompanyModel[];
   };
 }
+interface AddCouponAction {
+  type: ActionType.ADD_COUPON;
+  payload: {
+    coupon: CouponModel;
+  };
+}
+interface RemoveCouponAction {
+  type: ActionType.REMOVE_COUPON;
+  payload: {
+    coupon: CouponModel;
+  };
+}
+
+interface SetCouponsAction {
+  type: ActionType.SET_COUPONS;
+  payload: {
+    coupons: CouponModel[];
+  };
+}
+interface ClearCouponsAction {
+  type: ActionType.CLEAR_COUPONS;
+}
 
 export type Action =
   | AdminLoginAction
@@ -105,4 +127,9 @@ export type Action =
   | RemoveCompanyAction
   | ClearAdminStateAction
   | SetCustomersAction
-  | SetCompaniesAction;
+  | SetCompaniesAction
+  //
+  | AddCouponAction
+  | RemoveCouponAction
+  | SetCouponsAction
+  | ClearCouponsAction;

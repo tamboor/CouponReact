@@ -35,8 +35,8 @@ function FeaturedCoupons(props: IFeaturedProps): JSX.Element {
   // console.log(props.allCoupons);
 
   return (
-    <Box sx={{ alignItems: "center" }}>
-      {/* <ArrowBackIosIcon /> */}
+    <Box sx={{ alignItems: "center", display: "inline" }}>
+      <ArrowBackIosIcon />
       {props.allCoupons.length > 0 ? (
         <Coupon
           coupon={props.allCoupons[0]}
@@ -44,7 +44,7 @@ function FeaturedCoupons(props: IFeaturedProps): JSX.Element {
           styles={{ width: "20%", margin: "auto", padding: "10px" }}
         />
       ) : null}
-      {/* <ArrowForwardIosIcon /> */}
+      <ArrowForwardIosIcon />
     </Box>
   );
 }

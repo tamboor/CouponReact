@@ -12,6 +12,7 @@ import getAuthHeaders from "../../../../utils/tokenUtils";
 import CouponBrowser from "../../../views/contents/CouponBrowser/CouponBrowser";
 import { useEffect } from "react";
 import { useTypedSelector } from "../../../../hooks/useTypedSelector";
+import { useActions } from "../../../../hooks/useActions";
 // import CouponList from "../CouponList/CouponList";
 
 interface TabPanelProps {
@@ -45,8 +46,9 @@ function a11yProps(index: number) {
 
 export default function BasicTabs() {
   const [value, setValue] = React.useState(0);
-  const [companyCoupons, setCompanyCoupons] = React.useState<CouponModel[]>([]);
-  const { users } = useTypedSelector((state) => state);
+  // const [companyCoupons, setCompanyCoupons] = React.useState<CouponModel[]>([]);
+  const { users, coupons } = useTypedSelector((state) => state);
+  const { setCoupons } = useActions();
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -56,7 +58,7 @@ export default function BasicTabs() {
     axios
       .get("http://localhost:8080/company/getCompanyCoupons", getAuthHeaders())
       .then((res: AxiosResponse) => {
-        setCompanyCoupons(res.data);
+        setCoupons(res.data as CouponModel[]);
       })
       .catch((err: AxiosError) => {
         console.log(err);
@@ -67,7 +69,7 @@ export default function BasicTabs() {
   useEffect(() => {
     if (users.userRole !== "company") return;
     fetchCoupons();
-  }, [users.userRole]);
+  }, [users.userRole, coupons.coupons]);
 
   return (
     <Box sx={{ width: "100%" }}>
@@ -83,7 +85,7 @@ export default function BasicTabs() {
       </Tabs>
       {/* </Box> */}
       <TabPanel value={value} index={0}>
-        <CouponBrowser allCoupons={companyCoupons} />
+        <CouponBrowser allCoupons={coupons.coupons} />
       </TabPanel>
       <TabPanel value={value} index={1}></TabPanel>
       <TabPanel value={value} index={2}></TabPanel>

@@ -200,3 +200,28 @@ export const setCustomers = (customers: CustomerModel[]) => {
     dispatch({ type: ActionType.SET_CUSTOMERS, payload: { customers } });
   };
 };
+
+export const addCoupon = (coupon: CouponModel) => {
+  // dispatch({type:ActionType.ADD_ITEM , payload:});
+  return (dispatch: Dispatch<Action>) => {
+    dispatch({ type: ActionType.ADD_COUPON, payload: { coupon: coupon } });
+  };
+};
+
+export const removeCoupon = (coupon: CouponModel) => {
+  return (dispatch: Dispatch<Action>) => {
+    dispatch({ type: ActionType.REMOVE_COUPON, payload: { coupon } });
+  };
+};
+
+export const setCoupons = (coupons: CouponModel[]) => {
+  return (dispatch: Dispatch<Action>) => {
+    dispatch({ type: ActionType.SET_COUPONS, payload: { coupons } });
+  };
+};
+
+export const clearCoupons = () => {
+  return (dispatch: Dispatch<Action>) => {
+    dispatch({ type: ActionType.CLEAR_COUPONS });
+  };
+};
