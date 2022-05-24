@@ -82,6 +82,7 @@ function CouponForm(props: CouponFormProps): JSX.Element {
           startDate: startDateFormat,
           endDate: endDateFormat,
         };
+        console.log(newData);
 
         axios
           .post(
@@ -102,10 +103,17 @@ function CouponForm(props: CouponFormProps): JSX.Element {
           });
         break;
       case AdminVerbs.UPDATE:
+        const startDateFormat = (startDate as Date).toJSON().substring(0, 10);
+        const endDateFormat = (endDate as Date).toJSON().substring(0, 10);
+        const newData = {
+          ...data,
+          startDate: startDateFormat,
+          endDate: endDateFormat,
+        };
         axios
           .put(
             `http://localhost:8080/company/updateCoupon`,
-            { ...props.coupon, ...data },
+            { ...props.coupon, ...newData },
             getAuthHeaders()
           )
           .then((res: AxiosResponse) => {
