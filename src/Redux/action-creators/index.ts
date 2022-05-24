@@ -226,3 +226,5 @@ export const clearCoupons = () => {
     dispatch({ type: ActionType.CLEAR_COUPONS });
   };
 };
+
+//TODO: delete coupons state
