@@ -68,26 +68,27 @@ function CouponForm(props: CouponFormProps): JSX.Element {
     setCategory(event.target.value as string);
   };
 
-  const onError = (errors: any, e: any) => {
-  };
+  const onError = (errors: any, e: any) => {};
 
   const useSubmit: SubmitHandler<CouponForm> = async (data) => {
     switch (props.verb) {
       case AdminVerbs.ADD:
-        const startDateFormat = (startDate as Date).toJSON().substring(0, 10);
-        const endDateFormat = (endDate as Date).toJSON().substring(0, 10);
-        const newData = {
+        const addStartDateFormat = (startDate as Date)
+          .toJSON()
+          .substring(0, 10);
+        const addEndDateFormat = (endDate as Date).toJSON().substring(0, 10);
+        const addData = {
           ...data,
           id: 0,
-          startDate: startDateFormat,
-          endDate: endDateFormat,
+          startDate: addStartDateFormat,
+          endDate: addEndDateFormat,
         };
-        console.log(newData);
+        console.log(addData);
 
         axios
           .post(
             `http://localhost:8080/company/addCoupon`,
-            newData,
+            addData,
             getAuthHeaders()
           )
           .then((res: AxiosResponse) => {
@@ -103,17 +104,19 @@ function CouponForm(props: CouponFormProps): JSX.Element {
           });
         break;
       case AdminVerbs.UPDATE:
-        const startDateFormat = (startDate as Date).toJSON().substring(0, 10);
-        const endDateFormat = (endDate as Date).toJSON().substring(0, 10);
-        const newData = {
+        const updateStartDateFormat = (startDate as Date)
+          .toJSON()
+          .substring(0, 10);
+        const updateEndDateFormat = (endDate as Date).toJSON().substring(0, 10);
+        const updateData = {
           ...data,
-          startDate: startDateFormat,
-          endDate: endDateFormat,
+          startDate: updateStartDateFormat,
+          endDate: updateEndDateFormat,
         };
         axios
           .put(
             `http://localhost:8080/company/updateCoupon`,
-            { ...props.coupon, ...newData },
+            { ...props.coupon, ...updateData },
             getAuthHeaders()
           )
           .then((res: AxiosResponse) => {
@@ -124,7 +127,7 @@ function CouponForm(props: CouponFormProps): JSX.Element {
             refetchCoupons();
           })
           .catch((error: AxiosError) => {
-                        //TODO: handle error
+            //TODO: handle error
             console.log(error);
 
             notify.error(error.response?.data as string);

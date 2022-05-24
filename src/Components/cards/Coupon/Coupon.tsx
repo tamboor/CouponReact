@@ -27,6 +27,8 @@ import ActionUserForm from "../../forms/AcionUserForm/ActionUserForm";
 import DeletePrompt from "../../forms/DeletePrompt/DeletePrompt";
 import { DeleteableEntity } from "../../forms/DeleteableEntities";
 import { deleteCoupon } from "../../../utils/fetchCompanyCoupons";
+import EditIcon from "@mui/icons-material/Edit";
+
 // interface couponProps {
 //   amount: number;
 //   category: string;
@@ -93,7 +95,7 @@ function Coupon(props: couponProps): JSX.Element {
         return (
           <Box>
             <Button variant="outlined" onClick={handleEditCoupon}>
-              Edit
+              <EditIcon />
             </Button>
             {/* <ActionUserForm verb={AdminVerbs.DELETE} formType="coupon" /> */}
             <Button variant="outlined" onClick={handleClickOpen}>
