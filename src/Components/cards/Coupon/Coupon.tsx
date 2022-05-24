@@ -26,8 +26,8 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import ActionUserForm from "../../forms/AcionUserForm/ActionUserForm";
 import DeletePrompt from "../../forms/DeletePrompt/DeletePrompt";
 import { DeleteableEntity } from "../../forms/DeleteableEntities";
-import { deleteCoupon } from "../../../utils/fetchCompanyCoupons";
 import EditIcon from "@mui/icons-material/Edit";
+import { deleteCoupon } from "../../../utils/fetchCompanyCoupons";
 
 // interface couponProps {
 //   amount: number;
