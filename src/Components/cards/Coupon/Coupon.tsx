@@ -26,6 +26,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import ActionUserForm from "../../forms/AcionUserForm/ActionUserForm";
 import DeletePrompt from "../../forms/DeletePrompt/DeletePrompt";
 import { DeleteableEntity } from "../../forms/DeleteableEntities";
+import { deleteCoupon } from "../../../utils/fetchCompanyCoupons";
 // interface couponProps {
 //   amount: number;
 //   category: string;
@@ -181,7 +182,7 @@ function Coupon(props: couponProps): JSX.Element {
           deleteableID={props.coupon.id as number}
           targetType={DeleteableEntity.COUPON}
           deleteFunc={() => {
-            removeCoupon(props.coupon as CouponModel);
+            deleteCoupon(props.coupon);
           }}
           // deleteFunc={() => {
           //   // props.deleteFunc?.(props.user?.id);

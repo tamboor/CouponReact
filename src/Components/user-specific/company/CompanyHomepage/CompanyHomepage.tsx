@@ -13,7 +13,10 @@ import CouponBrowser from "../../../views/contents/CouponBrowser/CouponBrowser";
 import { useEffect } from "react";
 import { useTypedSelector } from "../../../../hooks/useTypedSelector";
 import { useActions } from "../../../../hooks/useActions";
-import { setRefreshFunction } from "../../../../utils/fetchCompanyCoupons";
+import {
+  setDeleteFunction,
+  setRefreshFunction,
+} from "../../../../utils/fetchCompanyCoupons";
 // import CouponList from "../CouponList/CouponList";
 
 interface TabPanelProps {
@@ -48,8 +51,11 @@ function a11yProps(index: number) {
 export default function BasicTabs() {
   const [value, setValue] = React.useState(0);
   // const [companyCoupons, setCompanyCoupons] = React.useState<CouponModel[]>([]);
-  const { users, coupons } = useTypedSelector((state) => state);
-  const { setCoupons } = useActions();
+  const { users } = useTypedSelector((state) => state);
+  // const { setCoupons } = useActions();
+  const [coupons, setCoupons] = React.useState<CouponModel[]>(
+    [] as CouponModel[]
+  );
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -72,6 +78,11 @@ export default function BasicTabs() {
     fetchCoupons();
   });
 
+  setDeleteFunction((c: CouponModel) => {
+    const newCoupons = coupons.filter((coupon) => coupon.id !== c.id);
+    setCoupons(newCoupons);
+  });
+
   //todo: change to userrole enum
   useEffect(() => {
     if (users.userRole !== "company") return;
@@ -92,7 +103,7 @@ export default function BasicTabs() {
       </Tabs>
       {/* </Box> */}
       <TabPanel value={value} index={0}>
-        <CouponBrowser allCoupons={coupons.coupons} />
+        <CouponBrowser allCoupons={coupons} />
       </TabPanel>
       <TabPanel value={value} index={1}></TabPanel>
       <TabPanel value={value} index={2}></TabPanel>

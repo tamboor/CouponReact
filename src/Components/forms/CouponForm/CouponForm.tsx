@@ -69,22 +69,13 @@ function CouponForm(props: CouponFormProps): JSX.Element {
   };
 
   const onError = (errors: any, e: any) => {
-    // console.log(errors);
-    // setIsError(true);
   };
 
   const useSubmit: SubmitHandler<CouponForm> = async (data) => {
-    // console.log(startDate);
-    // const addCouponToRedux = (coupon: CouponModel) => {
-    //   addCoupon(coupon);
-    // }
-
     switch (props.verb) {
       case AdminVerbs.ADD:
         const startDateFormat = (startDate as Date).toJSON().substring(0, 10);
-        // const startDateFormat = (startDate as Date).toJSON();
         const endDateFormat = (endDate as Date).toJSON().substring(0, 10);
-        // const endDateFormat = (endDate as Date).toJSON();
         const newData = {
           ...data,
           id: 0,
@@ -103,18 +94,10 @@ function CouponForm(props: CouponFormProps): JSX.Element {
             props.handleClose();
 
             refetchCoupons();
-            // props.addFunction?.({ ...data });
-            // addCoupon({
-            //   ...newData,
-            //   startDate: startDate ? startDate.getDate() : new Date().getDate(),
-            //   endDate: endDate ? endDate.getDate() : new Date().getDate(),
-            // });
-            // refetchCoupons();
           })
           .catch((error: any) => {
+            //TODO: handle error
             console.log(error);
-            // notify.error(error.response?.data.description as string);
-            // notify.error("fuck you");
             notify.error(error.response?.data.description as string);
           });
         break;
@@ -131,11 +114,9 @@ function CouponForm(props: CouponFormProps): JSX.Element {
             notify.success("Coupon Updated!");
 
             refetchCoupons();
-
-            // props.updateFunction && props.updateFunction(data);
-            // refetchCoupons();
           })
           .catch((error: AxiosError) => {
+                        //TODO: handle error
             console.log(error);
 
             notify.error(error.response?.data as string);
@@ -153,8 +134,6 @@ function CouponForm(props: CouponFormProps): JSX.Element {
               <TextField
                 {...register("image", { required: "this is required" })}
                 required
-                // error={errors.image ? true : false}
-                // error={isError}
                 label="Image URL"
                 type="url"
                 variant="outlined"
@@ -164,10 +143,8 @@ function CouponForm(props: CouponFormProps): JSX.Element {
               <Select
                 required
                 {...register("category", { required: "this is required" })}
-                // error={errors.category ? true : false}
                 labelId="category-select"
                 id="category-select"
-                // defaultValue={props.coupon?.category}
                 value={category}
                 label="Category"
                 onChange={handleChange}
@@ -180,11 +157,9 @@ function CouponForm(props: CouponFormProps): JSX.Element {
                 <MenuItem value={"vacation"}>Vacation</MenuItem>
               </Select>
               <br /> <br />
-              {/* </FormControl> */}
               <TextField
                 {...register("title", { required: errors.title?.message })}
                 required
-                // error={errors.title ? true : false}
                 label="Title"
                 variant="outlined"
                 defaultValue={props.coupon?.title}
@@ -195,8 +170,6 @@ function CouponForm(props: CouponFormProps): JSX.Element {
               <TextField
                 {...register("price", { required: "this is required" })}
                 required
-                // error={errors.price ? true : false}
-                // error={isError}
                 id="price"
                 label="Price"
                 type="number"
@@ -239,8 +212,6 @@ function CouponForm(props: CouponFormProps): JSX.Element {
                   renderInput={(params) => <TextField {...params} />}
                 />
               </LocalizationProvider>
-              {/* <Box> */}
-              {/* </Box> */}
               <br />
               <br />
               <TextField
@@ -255,7 +226,6 @@ function CouponForm(props: CouponFormProps): JSX.Element {
                 variant="outlined"
                 defaultValue={props.coupon?.amount}
               />
-              {/* {renderSwitch()} */}
             </Box>
             <Button onClick={(data: any) => props.handleClose()}>Cancel</Button>
             <Button type="submit">{props.verb}</Button>
