@@ -1,6 +1,7 @@
 // import { Notyf } from "notyf";
 
 import { Notyf } from "notyf";
+import "notyf/notyf.min.css";
 
 class Notify {
   private notification = new Notyf({
