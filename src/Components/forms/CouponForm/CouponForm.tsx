@@ -96,8 +96,11 @@ function CouponForm(props: CouponFormProps): JSX.Element {
             props.handleClose();
             props.addFunction?.({ ...data });
           })
-          .catch((error: AxiosError) => {
+          .catch((error: any) => {
             console.log(error);
+            // notify.error(error.response?.data.description as string);
+            // notify.error("fuck you");
+            notify.error(error.response?.data.description as string);
           });
         break;
       case AdminVerbs.UPDATE:
