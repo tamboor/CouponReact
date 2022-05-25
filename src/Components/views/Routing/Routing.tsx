@@ -17,7 +17,7 @@ function Routing(): JSX.Element {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/purchase-coupons" element={<Cart />} />
-        <Route path="/my-coupons" element={<MyCoupons />} />
+        {/* <Route path="/my-coupons" element={<MyCoupons />} /> */}
         <Route path="/my-account" element={<UserInfo />} />
         <Route path="/company-home" element={<CompanyHomepage />} />
         {/* <Route path="/show-coupons" element={<ShowCoupons />} /> */}

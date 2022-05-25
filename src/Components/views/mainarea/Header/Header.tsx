@@ -100,7 +100,7 @@ function Header(): JSX.Element {
             {/* </Navbar> */}
           </Box>
         )}
-        {state.users.userRole === "customer" && <MyCouponsButton />}
+        {/* {state.users.userRole === "customer" && <MyCouponsButton />} */}
         {state.users.userRole === "customer" && <ShoppingCart />}
         {state.users.userRole === "guest" && <RegisterButton />}
         {state.users.userRole === "guest" ? <LoginButton /> : <UserMenu />}

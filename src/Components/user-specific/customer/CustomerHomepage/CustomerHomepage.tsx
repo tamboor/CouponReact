@@ -1,4 +1,4 @@
-import { Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import axios, { AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
 import { useTypedSelector } from "../../../../hooks/useTypedSelector";
@@ -10,6 +10,7 @@ import getAuthHeaders, {
 } from "../../../../utils/tokenUtils";
 import CouponBrowser from "../../../views/contents/CouponBrowser/CouponBrowser";
 import FeaturedCoupons from "../FeaturedCoupons/FeaturedCoupons";
+import MyCoupons from "../MyCoupons/MyCoupons";
 import "./CustomerHomepage.css";
 
 function CustomerHomepage(): JSX.Element {
@@ -71,12 +72,21 @@ function CustomerHomepage(): JSX.Element {
   // console.log(allCoupons);
   return (
     <div className="customerHomepage">
-      {}
-      <FeaturedCoupons allCoupons={allCoupons} />
-      <CouponBrowser
-        allCoupons={allCoupons}
-        customerCoupons={customerCoupons}
-      />
+      {browse ? (
+        <Box>
+          <Button onClick={openMyCoupons}>My Coupons</Button>
+          <FeaturedCoupons allCoupons={allCoupons} />
+          <CouponBrowser
+            allCoupons={allCoupons}
+            customerCoupons={customerCoupons}
+          />
+        </Box>
+      ) : (
+        <Box>
+          <Button onClick={openBrowser}>Coupon Browser</Button>
+          <MyCoupons coupons={customerCoupons} />
+        </Box>
+      )}
     </div>
   );
 }
