@@ -13,23 +13,48 @@ import CouponTable from "../CouponTable/CouponTable";
 import ActionUserForm from "../../../forms/AcionUserForm/ActionUserForm";
 import notify from "../../../../utils/Notify";
 import getAuthHeaders, { setStoredToken } from "../../../../utils/tokenUtils";
+import { useTypedSelector } from "../../../../hooks/useTypedSelector";
+import { useActions } from "../../../../hooks/useActions";
 interface companySingleProp {
   singleCompany: CompanyModel;
-  // deleteFunc: Function;
 }
 function CompanyRow(props: companySingleProp): JSX.Element {
   const [open, setOpen] = React.useState(false);
   const [company, setCompany] = React.useState<CompanyModel>(
-    new CompanyModel()
+    props.singleCompany
   );
   const [coupons, setCoupons] = React.useState<CouponModel[]>([]);
-  const token = localStorage.getItem("token") as string;
+  // const token = localStorage.getItem("token") as string;
   //     [] as CustomerModel[]
   //   );
+  const { admin } = useTypedSelector((state) => state);
+  const { removeCompany } = useActions();
 
   useEffect(() => {
-    setCompany(props.singleCompany);
+    if (company.id) {
+      return;
+    }
+    if (admin.companies.indexOf(company) === -1) {
+      return;
+    }
+    axios
+      .get(
+        `http://localhost:8080/admin/getCompanyByEmail/${company.email}`,
+        getAuthHeaders()
+      )
+      .then((res) => {
+        setCompany(res.data);
+      })
+      .catch((err: AxiosError) => {
+        if (err.response && err.response.status === 404) {
+          removeCompany(company.id);
+        }
+      });
   }, []);
+
+  // useEffect(() => {
+  //   setCompany(props.singleCompany);
+  // }, []);
 
   const loadCoupons = () => {
     const url = `http://localhost:8080/admin/getCompanyCoupons/${company.id}`;

@@ -25,6 +25,7 @@ import DeletePrompt from "../DeletePrompt/DeletePrompt";
 import { DeleteableEntity } from "../DeleteableEntities";
 import { useActions } from "../../../hooks/useActions";
 import { userInfo } from "os";
+import { refetchCoupons } from "../../../utils/fetchCompanyCoupons";
 // import CouponForm from "../CouponForm/CouponForm";
 //TODO: change usertype to enum
 //TODO: complete functionality to delete a coupon
@@ -132,6 +133,7 @@ function ActionUserForm(props: IUserProps): JSX.Element {
               // props.deleteFunc?.(props.user?.id);
               switch (props.formType) {
                 case "customer":
+                  console.log("delete customer");
                   removeCustomer(props.user ? props.user.id : -1);
                   break;
                 case "company":

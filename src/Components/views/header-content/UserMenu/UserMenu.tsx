@@ -23,7 +23,7 @@ import { useActions } from "../../../../hooks/useActions";
 import { useNavigate } from "react-router-dom";
 
 function UserMenu(): JSX.Element {
-  const { tryLogout } = useActions();
+  const { tryLogout, clearCoupons, setCustomers, setCompanies } = useActions();
   const state = useTypedSelector((state) => state);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const navigate = useNavigate();
@@ -110,6 +110,9 @@ function UserMenu(): JSX.Element {
         <MenuItem
           onClick={() => {
             tryLogout();
+            clearCoupons();
+            setCustomers([]);
+            setCompanies([]);
             navigate("/");
           }}
         >
