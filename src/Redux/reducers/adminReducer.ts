@@ -25,11 +25,16 @@ const adminReducer = (state: AdminState = initialState, action: Action) => {
         ] as CustomerModel[],
       };
     case ActionType.REMOVE_CUSTOMER:
+      console.log("state before: ");
+      console.log(state);
+      const workingCustomers = state.customers.filter(
+        (customer) => customer.id !== action.payload.customerID
+      );
+      console.log("state after: ");
+      console.log(workingCustomers);
       return {
         ...state,
-        customers: state.customers.filter(
-          (customer) => customer.id !== action.payload.customerID
-        ) as CustomerModel[],
+        customers: workingCustomers as CustomerModel[],
       };
     case ActionType.ADD_COMPANY:
       return {
@@ -40,6 +45,13 @@ const adminReducer = (state: AdminState = initialState, action: Action) => {
         ] as CompanyModel[],
       };
     case ActionType.REMOVE_COMPANY:
+      console.log("state before: ");
+      console.log(state);
+      const workingCompanies = state.companies.filter(
+        (company) => company.id !== action.payload.companyID
+      );
+      console.log("state after: ");
+      console.log(workingCompanies);
       return {
         ...state,
         companies: state.companies.filter(
@@ -59,7 +71,21 @@ const adminReducer = (state: AdminState = initialState, action: Action) => {
         ...state,
         customers: action.payload.customers as CustomerModel[],
       };
+    case ActionType.REMOVE_COMPANY_BY_EMAIL:
+      return {
+        ...state,
+        companies: state.companies.filter(
+          (company) => company.email !== action.payload.email
+        ) as CompanyModel[],
+      };
 
+    case ActionType.REMOVE_CUSTOMER_BY_EMAIL:
+      return {
+        ...state,
+        customers: state.customers.filter(
+          (customer) => customer.email !== action.payload.email
+        ) as CustomerModel[],
+      };
     default:
       return state;
   }

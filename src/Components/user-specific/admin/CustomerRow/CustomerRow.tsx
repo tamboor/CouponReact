@@ -21,6 +21,7 @@ import CouponTable from "../CouponTable/CouponTable";
 import ActionUserForm from "../../../forms/AcionUserForm/ActionUserForm";
 import notify from "../../../../utils/Notify";
 import getAuthHeaders, { setStoredToken } from "../../../../utils/tokenUtils";
+import { useActions } from "../../../../hooks/useActions";
 interface customerSingleProp {
   singleCustomer: CustomerModel;
 }
@@ -30,9 +31,7 @@ function CustomerRow(props: customerSingleProp): JSX.Element {
     props.singleCustomer
   );
   const [coupons, setCoupons] = React.useState<CouponModel[]>([]);
-  // const token = localStorage.getItem("token") as string;
-  //     [] as CustomerModel[]
-  //   );
+  const { addCustomer, removeCustomerByEmail } = useActions();
 
   useEffect(() => {
     if (customer.id) {
@@ -44,13 +43,14 @@ function CustomerRow(props: customerSingleProp): JSX.Element {
         getAuthHeaders()
       )
       .then((res) => {
+        removeCustomerByEmail(customer.email);
         setCustomer(res.data);
+        addCustomer(res.data);
       })
       .catch((err: AxiosError) => {
         console.log(err);
       });
   }, []);
-  // console.log(customer);
   useEffect(() => {}, []);
 
   const loadCoupons = () => {

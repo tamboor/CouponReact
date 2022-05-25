@@ -58,7 +58,12 @@ function ActionUserForm(props: IUserProps): JSX.Element {
   const state = useTypedSelector((state) => state);
   const [open, setOpen] = React.useState(false);
   const token = localStorage.getItem("token") as string;
-  const { removeCustomer, removeCompany } = useActions();
+  const {
+    removeCustomer,
+    removeCompany,
+    removeCompanyByEmail,
+    removeCustomerByEmail,
+  } = useActions();
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -134,10 +139,20 @@ function ActionUserForm(props: IUserProps): JSX.Element {
               switch (props.formType) {
                 case "customer":
                   console.log("delete customer");
+                  if (!props.user?.id) {
+                    removeCustomerByEmail(props.user?.email as string);
+                    break;
+                  }
                   removeCustomer(props.user ? props.user.id : -1);
                   break;
                 case "company":
+                  // console.log("delete company email");
+                  if (!props.user?.id) {
+                    removeCompanyByEmail(props.user?.email as string);
+                    break;
+                  }
                   removeCompany(props.user ? props.user.id : -1);
+                  break;
               }
             }}
           >

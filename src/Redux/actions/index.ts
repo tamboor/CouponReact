@@ -111,6 +111,19 @@ interface ClearCouponsAction {
   type: ActionType.CLEAR_COUPONS;
 }
 
+interface RemoveCompanyByEmailAction {
+  type: ActionType.REMOVE_COMPANY_BY_EMAIL;
+  payload: {
+    email: string;
+  };
+}
+interface RemoveCustomerByEmailAction {
+  type: ActionType.REMOVE_CUSTOMER_BY_EMAIL;
+  payload: {
+    email: string;
+  };
+}
+
 export type Action =
   | AdminLoginAction
   | CustomerLoginAction
@@ -128,6 +141,10 @@ export type Action =
   | ClearAdminStateAction
   | SetCustomersAction
   | SetCompaniesAction
+  | RemoveCompanyAction
+  | RemoveCustomerAction
+  | RemoveCompanyByEmailAction
+  | RemoveCustomerByEmailAction
   //
   | AddCouponAction
   | RemoveCouponAction

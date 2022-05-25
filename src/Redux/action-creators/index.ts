@@ -227,4 +227,19 @@ export const clearCoupons = () => {
   };
 };
 
+export const removeCompanyByEmail = (email: string) => {
+  return (dispatch: Dispatch<Action>) => {
+    dispatch({ type: ActionType.REMOVE_COMPANY_BY_EMAIL, payload: { email } });
+  };
+};
+
+export const removeCustomerByEmail = (email: string) => {
+  return (dispatch: Dispatch<Action>) => {
+    dispatch({
+      type: ActionType.REMOVE_CUSTOMER_BY_EMAIL,
+      payload: { email },
+    });
+  };
+};
+
 //TODO: delete coupons state

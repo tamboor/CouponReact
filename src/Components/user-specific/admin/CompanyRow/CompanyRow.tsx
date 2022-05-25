@@ -24,14 +24,13 @@ function CompanyRow(props: companySingleProp): JSX.Element {
     props.singleCompany
   );
   const [coupons, setCoupons] = React.useState<CouponModel[]>([]);
-  // const token = localStorage.getItem("token") as string;
-  //     [] as CustomerModel[]
-  //   );
+
+  const { addCompany, removeCompanyByEmail } = useActions();
   const { admin } = useTypedSelector((state) => state);
   const { removeCompany } = useActions();
 
   useEffect(() => {
-    if (company.id) {
+    if (company.id || props.singleCompany.id) {
       return;
     }
     if (admin.companies.indexOf(company) === -1) {
@@ -43,7 +42,9 @@ function CompanyRow(props: companySingleProp): JSX.Element {
         getAuthHeaders()
       )
       .then((res) => {
+        removeCompanyByEmail(company.email);
         setCompany(res.data);
+        addCompany(res.data);
       })
       .catch((err: AxiosError) => {
         if (err.response && err.response.status === 404) {
@@ -51,10 +52,6 @@ function CompanyRow(props: companySingleProp): JSX.Element {
         }
       });
   }, []);
-
-  // useEffect(() => {
-  //   setCompany(props.singleCompany);
-  // }, []);
 
   const loadCoupons = () => {
     const url = `http://localhost:8080/admin/getCompanyCoupons/${company.id}`;
