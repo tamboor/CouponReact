@@ -20,6 +20,8 @@ import "./Header.css";
 function Header(): JSX.Element {
   const state = useTypedSelector((state) => state);
 
+  const navigate = useNavigate();
+
   // const { clearRedux } = useActions();
 
   function renderSwitch() {
@@ -64,7 +66,24 @@ function Header(): JSX.Element {
         <Typography
           variant="h6"
           component="div"
-          sx={{ flexGrow: 1, fontFamily: "Abril Fatface" }}
+          sx={{
+            flexGrow: 1,
+            fontFamily: "Abril Fatface",
+            "&:hover": { cursor: "pointer" },
+          }}
+          onClick={() => {
+            switch (state.users.userRole) {
+              case "customer":
+                navigate("/customer-home");
+                break;
+              case "company":
+                navigate("/company-home");
+                break;
+              case "admin":
+                navigate("/admin-home");
+                break;
+            }
+          }}
         >
           Coupon Mania
         </Typography>

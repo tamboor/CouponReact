@@ -25,6 +25,7 @@ import usePagination from "@mui/material/usePagination/usePagination";
 //TODO: change filtering to work on limited amount of coupons (use custom hooks)
 //TODO: change to category enum
 //TODO: handle searchbar
+//TODO: fixx guest access
 interface CouponsState {
   // coupons: CouponModel[];
   couponsFiltered: CouponModel[];

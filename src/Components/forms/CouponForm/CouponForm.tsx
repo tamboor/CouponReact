@@ -88,10 +88,12 @@ function CouponForm(props: CouponFormProps): JSX.Element {
         axios
           .post(
             `http://localhost:8080/company/addCoupon`,
+
             addData,
             getAuthHeaders()
           )
           .then((res: AxiosResponse) => {
+            console.log(res.request);
             setStoredToken(res);
             props.handleClose();
 

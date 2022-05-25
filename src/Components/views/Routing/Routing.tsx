@@ -20,7 +20,7 @@ function Routing(): JSX.Element {
         <Route path="/company-home" element={<CompanyHomepage />} />
         {/* <Route path="/show-coupons" element={<ShowCoupons />} /> */}
         <Route path="/customer-home" element={<CustomerHomepage />} />
-        <Route path="/manage-users" element={<ManageUsers />} />
+        <Route path="/admin-home" element={<ManageUsers />} />
         <Route path="*" element={<Notfound />} />
       </Routes>
     </div>
