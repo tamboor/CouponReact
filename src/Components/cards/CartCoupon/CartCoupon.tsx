@@ -3,7 +3,8 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useActions } from "../../../hooks/useActions";
 import { CouponModel } from "../../../Models/CouponModel";
-import { getStoredToken } from "../../../utils/tokenUtils";
+import notify from "../../../utils/Notify";
+import getAuthHeaders, { setStoredToken } from "../../../utils/tokenUtils";
 import "./CartCoupon.css";
 
 interface cartItemProps {
@@ -34,13 +35,16 @@ function CartCoupon(props: cartItemProps): JSX.Element {
    */
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/customer/checkCoupon/${props.coupon.id}`, {
-        headers: { Authorization: getStoredToken() },
-      })
+      .get(
+        `http://localhost:8080/customer/checkCoupon/${props.coupon.id}`,
+        getAuthHeaders()
+      )
       .then((res) => {
+        setStoredToken(res);
         setCoupon(res.data);
       })
       .catch((error) => {
+        // notify.error(error.response.data.description);
         //TODO: make better 401 response in backend
         setCouponError({
           error: error.response.data.description,

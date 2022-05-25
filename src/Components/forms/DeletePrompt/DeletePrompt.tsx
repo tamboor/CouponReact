@@ -5,6 +5,7 @@ import {
   Button,
 } from "@mui/material";
 import axios from "axios";
+import notify from "../../../utils/Notify";
 import getAuthHeaders, { setStoredToken } from "../../../utils/tokenUtils";
 import { DeleteableEntity } from "../DeleteableEntities";
 import "./DeletePrompt.css";
@@ -46,6 +47,7 @@ function DeletePrompt(props: PromptProps): JSX.Element {
         handleClose();
       })
       .catch((error) => {
+        notify.error(error.response.data.description);
         //TODO: handle error
         console.log(error);
       });
