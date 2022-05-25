@@ -1,9 +1,9 @@
 import { AxiosResponse } from "axios";
 
 export function getStoredToken(): string {
-  if (localStorage.getItem("token") === null) {
-    localStorage.setItem("token", "");
-  }
+  // if (localStorage.getItem("token") === null) {
+  //   localStorage.setItem("token", "");
+  // }
   return localStorage.getItem("token") as string;
 }
 

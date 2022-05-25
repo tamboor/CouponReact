@@ -1,7 +1,7 @@
-import { Grid, Typography } from "@mui/material";
+import { Container, Grid, Typography } from "@mui/material";
 import { cleanup } from "@testing-library/react";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTypedSelector } from "../../../../hooks/useTypedSelector";
 import { CouponModel } from "../../../../Models/CouponModel";
@@ -35,11 +35,15 @@ function MyCoupons(): JSX.Element {
   return (
     <div className="MyCoupons">
       <Typography>My Coupons</Typography>
-      <Grid>
-        {coupons.map((c: CouponModel) => (
-          <PurchasedCoupon coupon={c} />
-        ))}
-      </Grid>
+      <Container>
+        <Grid container spacing={5} marginTop={0.005}>
+          {coupons.map((c: CouponModel, index: number) => (
+            // <React.Fragment key={index}>
+            <PurchasedCoupon coupon={c} key={index} />
+            // </React.Fragment>
+          ))}
+        </Grid>
+      </Container>
     </div>
   );
 }

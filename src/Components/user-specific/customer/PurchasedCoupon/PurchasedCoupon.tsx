@@ -1,4 +1,4 @@
-import { Card, Paper, Typography } from "@mui/material";
+import { Card, Grid, Paper, Typography } from "@mui/material";
 import { CouponModel } from "../../../../Models/CouponModel";
 import "./PurchasedCoupon.css";
 import EventBusyIcon from "@mui/icons-material/EventBusy";
@@ -9,8 +9,8 @@ interface PurchasedCouponProps {
 }
 function PurchasedCoupon(props: PurchasedCouponProps): JSX.Element {
   return (
-    <div className="PurchasedCoupon">
-      <Paper>
+    <Grid item xs={3}>
+      <Paper elevation={2}>
         <img src={props.coupon.image} alt="" className="img" />
         <Typography variant="h4" component="h2">
           {props.coupon.title}
@@ -37,7 +37,7 @@ function PurchasedCoupon(props: PurchasedCouponProps): JSX.Element {
           {props.coupon.endDate}
         </Typography>
       </Paper>
-    </div>
+    </Grid>
   );
 }
 
