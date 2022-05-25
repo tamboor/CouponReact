@@ -3,7 +3,8 @@ import axios, { AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
 import { useTypedSelector } from "../../../../hooks/useTypedSelector";
 import { CouponModel } from "../../../../Models/CouponModel";
-import getAuthHeaders from "../../../../utils/tokenUtils";
+import notify from "../../../../utils/Notify";
+import getAuthHeaders, { setStoredToken } from "../../../../utils/tokenUtils";
 import CouponBrowser from "../../../views/contents/CouponBrowser/CouponBrowser";
 import FeaturedCoupons from "../FeaturedCoupons/FeaturedCoupons";
 import "./CustomerHomepage.css";
@@ -28,9 +29,11 @@ function CustomerHomepage(): JSX.Element {
     axios
       .get("http://localhost:8080/guest/getAllCoupons", getAuthHeaders())
       .then((response: AxiosResponse) => {
+        setStoredToken(response);
         setAllCoupons(response.data as CouponModel[]);
       })
       .catch((error) => {
+        notify.error(error.response.data.description);
         console.log(error);
       });
   }
@@ -41,9 +44,11 @@ function CustomerHomepage(): JSX.Element {
         getAuthHeaders()
       )
       .then((response: AxiosResponse) => {
+        setStoredToken(response);
         setCustomerCoupons(response.data as CouponModel[]);
       })
       .catch((error) => {
+        notify.error(error.response.data.description);
         console.log(error);
       });
   }

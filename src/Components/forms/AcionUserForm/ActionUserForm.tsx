@@ -43,18 +43,6 @@ interface CompanyForm {
   password: string;
 }
 
-// interface CouponForm {
-//   id: number;
-//   category: string;
-//   description: string;
-//   startDate: string;
-//   endDate: string;
-//   image: string;
-//   price: number;
-//   title: string;
-//   amount: number;
-// }
-
 interface IUserProps {
   verb: AdminVerbs;
   formType: string;
@@ -122,8 +110,6 @@ function ActionUserForm(props: IUserProps): JSX.Element {
         return DeleteableEntity.CUSTOMER;
       case "company":
         return DeleteableEntity.COMPANY;
-      case "coupon":
-        return DeleteableEntity.COUPON;
     }
     return DeleteableEntity.CUSTOMER;
   };

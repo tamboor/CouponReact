@@ -18,12 +18,7 @@ function RegisterButton(): JSX.Element {
   };
   return (
     <React.Fragment>
-      {/* <Button color="inherit" onClick={handleClick}>
-        Register
-      </Button> */}
-      {/* {open && ( */}
       <ActionUserForm verb={AdminVerbs.ADD} formType="customer" />
-      {/* )} */}
     </React.Fragment>
   );
 }
