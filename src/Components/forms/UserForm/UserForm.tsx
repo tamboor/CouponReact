@@ -14,6 +14,7 @@ import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { CompanyModel } from "../../../Models/CompanyModel";
 import { CustomerModel } from "../../../Models/CustomerModel";
 import { UserModel } from "../../../Models/UserModel";
+import notify from "../../../utils/Notify";
 import getAuthHeaders, { setStoredToken } from "../../../utils/tokenUtils";
 import { AdminVerbs } from "../../user-specific/admin/AdminVerbs";
 import "./UserForm.css";
@@ -85,7 +86,8 @@ function UserForm(props: IFormProps): JSX.Element {
                     break;
                 }
               })
-              .catch((error: AxiosError) => {
+              .catch((error: any) => {
+                notify.error(error.response.data.description);
                 console.log(error);
               });
             break;
@@ -93,11 +95,13 @@ function UserForm(props: IFormProps): JSX.Element {
             axios
               .post(`http://localhost:8080/guest/register`, { ...data, id: 0 })
               .then((res: AxiosResponse) => {
+                setStoredToken(res);
                 props.userType === "customer" &&
                   addCustomer({ ...data } as CustomerModel);
                 navigate("/login");
               })
-              .catch((error: AxiosError) => {
+              .catch((error: any) => {
+                notify.error(error.response.data.description);
                 console.log(error);
               });
             break;
@@ -114,7 +118,8 @@ function UserForm(props: IFormProps): JSX.Element {
             setStoredToken(res);
             props.updateFunction && props.updateFunction(data);
           })
-          .catch((error: AxiosError) => {
+          .catch((error: any) => {
+            notify.error(error.response.data.description);
             console.log({
               ...data,
               id: props.user?.id,
