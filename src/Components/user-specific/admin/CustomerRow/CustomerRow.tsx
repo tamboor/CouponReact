@@ -19,6 +19,8 @@ import { CouponModel } from "../../../../Models/CouponModel";
 import axios, { AxiosError } from "axios";
 import CouponTable from "../CouponTable/CouponTable";
 import ActionUserForm from "../../../forms/AcionUserForm/ActionUserForm";
+import notify from "../../../../utils/Notify";
+import getAuthHeaders, { setStoredToken } from "../../../../utils/tokenUtils";
 interface customerSingleProp {
   singleCustomer: CustomerModel;
 }
@@ -40,13 +42,14 @@ function CustomerRow(props: customerSingleProp): JSX.Element {
   const loadCoupons = () => {
     const url = `http://localhost:8080/admin/getCustomerCoupons/${customer.id}`;
     axios
-      .get(url, { headers: { Authorization: token } })
+      .get(url, getAuthHeaders())
       .then((response) => {
+        setStoredToken(response);
         setCoupons(response.data);
       })
-      .catch((error: AxiosError) => {
-        const err = error.response?.request.responseText;
-        const errMessage = JSON.stringify(err);
+      .catch((error: any) => {
+        notify.error(error.response.data.description);
+        console.log(error);
       });
   };
   const handleFormSubmit = (data: CustomerModel) => {

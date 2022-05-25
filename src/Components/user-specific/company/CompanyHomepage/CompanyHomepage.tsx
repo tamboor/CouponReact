@@ -1,23 +1,17 @@
 import * as React from "react";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import ShowCoupons from "../../../views/contents/ShowCoupons/ShowCoupons";
-import Login from "../../guest/Login/Login";
-import CouponList from "../../../views/contents/CouponList/CouponList";
 import { CouponModel } from "../../../../Models/CouponModel";
 import axios, { AxiosError, AxiosResponse } from "axios";
 import getAuthHeaders from "../../../../utils/tokenUtils";
 import CouponBrowser from "../../../views/contents/CouponBrowser/CouponBrowser";
 import { useEffect } from "react";
 import { useTypedSelector } from "../../../../hooks/useTypedSelector";
-import { useActions } from "../../../../hooks/useActions";
 import {
   setDeleteFunction,
   setRefreshFunction,
 } from "../../../../utils/fetchCompanyCoupons";
-// import CouponList from "../CouponList/CouponList";
 
 interface TabPanelProps {
   children?: React.ReactNode;

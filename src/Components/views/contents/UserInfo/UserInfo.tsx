@@ -9,6 +9,7 @@ import { useTypedSelector } from "../../../../hooks/useTypedSelector";
 import { CompanyModel } from "../../../../Models/CompanyModel";
 import { CustomerModel } from "../../../../Models/CustomerModel";
 import notify from "../../../../utils/Notify";
+import getAuthHeaders, { setStoredToken } from "../../../../utils/tokenUtils";
 // import { CompanyModel } from "../../../Models/CompanyModel";
 // import { CustomerModel } from "../../../Models/CustomerModel";
 // import notify from "../../../utils/Notify";
@@ -29,26 +30,22 @@ function UserInfo(): JSX.Element {
       case "customer":
         url = "http://localhost:8080/customer/getCustomerDetails";
         axios
-          .get(url, { headers: { Authorization: token } })
+          .get(url, getAuthHeaders())
           .then((res) => {
-            const headers = res.headers;
-            localStorage.setItem("token", headers.authorization);
+            setStoredToken(res);
             setCustomer(res.data);
           })
           .catch((error) => {
-            console.log(error.response.status);
             notify.error(error.response.data.description);
-            console.log(error);
           });
 
         break;
       case "company":
         url = "http://localhost:8080/company/getCompanyDetails";
         axios
-          .get(url, { headers: { Authorization: token } })
+          .get(url, getAuthHeaders())
           .then((res) => {
-            const headers = res.headers;
-            localStorage.setItem("token", headers.authorization);
+            setStoredToken(res);
             setCompany(res.data);
           })
           .catch((error) => {
