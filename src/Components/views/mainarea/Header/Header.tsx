@@ -7,6 +7,7 @@ import ManageUsers from "../../../user-specific/admin/ManageUsers/ManageUsers";
 import CouponMenu from "../../header-content/CouponMenu/CouponMenu";
 import LoginButton from "../../header-content/LoginButton/LoginButton";
 import ManageUsersButton from "../../header-content/ManageUsersButton/ManageUsersButton";
+import MyCouponsButton from "../../header-content/MyCouponsButton/MyCouponsButton";
 import RegisterButton from "../../header-content/RegisterButton/RegisterButton";
 import ShoppingCart from "../../header-content/ShoppingCart/ShoppingCart";
 import UserMenu from "../../header-content/UserMenu/UserMenu";
@@ -99,6 +100,7 @@ function Header(): JSX.Element {
             {/* </Navbar> */}
           </Box>
         )}
+        {state.users.userRole === "customer" && <MyCouponsButton />}
         {state.users.userRole === "customer" && <ShoppingCart />}
         {state.users.userRole === "guest" && <RegisterButton />}
         {state.users.userRole === "guest" ? <LoginButton /> : <UserMenu />}
