@@ -2,6 +2,7 @@ import axios, { AxiosError } from "axios";
 import { useEffect } from "react";
 import { useActions } from "../../../../hooks/useActions";
 import { useTypedSelector } from "../../../../hooks/useTypedSelector";
+import { setFetchMethodCustomers } from "../../../../utils/fetchAdminUsers";
 import notify from "../../../../utils/Notify";
 import getAuthHeaders, { setStoredToken } from "../../../../utils/tokenUtils";
 import CustomerTable from "../CustomerTable/CustomerTable";
@@ -18,6 +19,7 @@ function GetAllCustomers(): JSX.Element {
     axios
       .get(url, getAuthHeaders())
       .then((response) => {
+        console.log(response);
         setStoredToken(response);
         setCustomers(response.data);
       })
@@ -26,6 +28,10 @@ function GetAllCustomers(): JSX.Element {
         console.log(error);
       });
   };
+
+  setFetchMethodCustomers(() => {
+    fetchCustomers();
+  });
 
   //TODO: ask alon how this works
   useEffect(() => {

@@ -30,15 +30,29 @@ function CustomerRow(props: customerSingleProp): JSX.Element {
     props.singleCustomer
   );
   const [coupons, setCoupons] = React.useState<CouponModel[]>([]);
-  const token = localStorage.getItem("token") as string;
+  // const token = localStorage.getItem("token") as string;
   //     [] as CustomerModel[]
   //   );
 
-  // useEffect(() => {
-  //   setCustomer(props.singleCustomer);
-  //   // console.log(customer);
-  // }, []);
+  useEffect(() => {
+    if (customer.id) {
+      return;
+    }
+    axios
+      .get(
+        `http://localhost:8080/admin/getCustomerByEmail/${customer.email}`,
+        getAuthHeaders()
+      )
+      .then((res) => {
+        setCustomer(res.data);
+      })
+      .catch((err: AxiosError) => {
+        console.log(err);
+      });
+  }, []);
   // console.log(customer);
+  useEffect(() => {}, []);
+
   const loadCoupons = () => {
     const url = `http://localhost:8080/admin/getCustomerCoupons/${customer.id}`;
     axios

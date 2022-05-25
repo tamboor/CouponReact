@@ -47,17 +47,8 @@ function UserForm(props: IFormProps): JSX.Element {
   const state = useTypedSelector((state) => state);
   const navigate = useNavigate();
 
-  console.log("in customer form");
-
   //todo: move to other component
   const { addCustomer, addCompany } = useActions();
-
-  //   const getType = () => {
-  //     switch (props.userType) {
-  //         case "customer":
-  //             return new customerForm();
-  //     }
-  // }
 
   const {
     register,
@@ -67,28 +58,9 @@ function UserForm(props: IFormProps): JSX.Element {
   } = useForm<CustomerForm | CompanyForm>();
 
   const onSubmit: SubmitHandler<CustomerForm | CompanyForm> = async (data) => {
-    // console.log("in onSubmit");
-    // console.log(data);
     const userTypeUrl =
       props.userType.charAt(0).toUpperCase() + props.userType.slice(1);
     console.log(props.user);
-
-    // const getUpdateFields = () => {
-    //   switch (props.userType) {
-    //     case "customer":
-    //       return {
-    //         firstName: data.firstName,
-    //         lastName: data.lastName,
-    //         email: data.email,
-    //         password: data.password,
-    //       };
-    //     case "company":
-    //       return {
-    //         email: data.email,
-    //         password: data.password,
-    //       };
-    //   }
-    // }
 
     switch (props.verb) {
       case AdminVerbs.ADD:
