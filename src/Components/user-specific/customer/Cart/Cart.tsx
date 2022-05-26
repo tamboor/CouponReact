@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useActions } from "../../../../hooks/useActions";
 import { useTypedSelector } from "../../../../hooks/useTypedSelector";
 import { CouponModel } from "../../../../Models/CouponModel";
+import notify from "../../../../utils/Notify";
 import getAuthHeaders, { getStoredToken } from "../../../../utils/tokenUtils";
 import CartCoupon from "../../../cards/CartCoupon/CartCoupon";
 import "./Cart.css";
@@ -69,8 +70,10 @@ function Cart(): JSX.Element {
           )
           .then((res) => {
             removeItem(coupon);
+            notify.success(coupon.title + " was successfully purchased");
           })
-          .catch((err: AxiosError) => {
+          .catch((err: any) => {
+            notify.error(err.response.data.description);
             errorCallback(err);
           });
       })
