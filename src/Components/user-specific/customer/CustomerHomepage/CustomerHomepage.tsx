@@ -25,11 +25,8 @@ function CustomerHomepage(): JSX.Element {
   const openBrowser = () => {
     setBrowse(true);
   };
-  // console.log(users.userRole);
-  // useEffect(() => {
-  //   fetchCoupons();
-  // }, []);
-  //TODO: change user role to customer
+
+  //TODO: change user role to enum
   useEffect(() => {
     if (users.userRole !== "customer") return;
     fetchCoupons();
@@ -43,7 +40,6 @@ function CustomerHomepage(): JSX.Element {
     axios
       .get("http://localhost:8080/guest/getAllCoupons")
       .then((response: AxiosResponse) => {
-        // setStoredToken(response);
         setAllCoupons(response.data as CouponModel[]);
       })
       .catch((error) => {
@@ -58,24 +54,19 @@ function CustomerHomepage(): JSX.Element {
         getAuthHeaders()
       )
       .then((response: AxiosResponse) => {
-        // console.log()
-        // setStoredToken(response);
         setCustomerCoupons(response.data as CouponModel[]);
       })
       .catch((error) => {
-        console.log(getStoredToken());
         notify.error(error.response.data.description);
-        console.log(error);
       });
   }
 
-  // console.log(allCoupons);
   return (
     <div className="customerHomepage">
       {browse ? (
         <Box>
           <Button onClick={openMyCoupons}>My Coupons</Button>
-          <FeaturedCoupons allCoupons={allCoupons} />
+          {/* <FeaturedCoupons allCoupons={allCoupons} /> */}
           <CouponBrowser
             allCoupons={allCoupons}
             customerCoupons={customerCoupons}

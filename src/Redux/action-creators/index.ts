@@ -10,108 +10,126 @@ import { Action } from "../actions";
 
 //todo: check if can add a helper method, read about async await.
 export const tryAdminLogin = (userName: string, userPass: string) => {
-  return async (dispatch: Dispatch<Action>) => {
-    const url = `http://localhost:8080/admin/login`;
-    // const url = `http://localhost:8080/admin/login`;
-    try {
-      const { headers } = await axios.post(url, {
-        role: "admin",
-        userName: userName,
-        userPass: userPass,
-      });
+  // return async (dispatch: Dispatch<Action>) => {
+  //   const url = `http://localhost:8080/admin/login`;
+  //   // const url = `http://localhost:8080/admin/login`;
+  //   try {
+  //     const { headers } = await axios.post(url, {
+  //       role: "admin",
+  //       userName: userName,
+  //       userPass: userPass,
+  //     });
 
-      localStorage.setItem("token", headers.authorization);
-      dispatch({
-        type: ActionType.ADMIN_LOGIN,
-      });
-    } catch (err: any) {
-      localStorage.removeItem("token");
+  //     localStorage.setItem("token", headers.authorization);
+  //     dispatch({
+  //       type: ActionType.ADMIN_LOGIN,
+  //     });
+  //   } catch (err: any) {
+  //     localStorage.removeItem("token");
 
-      dispatch({
-        type: ActionType.LOGOUT,
-        payload: err?.message,
-      });
-    }
+  //     dispatch({
+  //       type: ActionType.LOGOUT,
+  //       payload: err?.message,
+  //     });
+  //   }
+  // };
+  return (dispatch: Dispatch<Action>) => {
+    dispatch({
+      type: ActionType.ADMIN_LOGIN,
+      payload: { userName: userName, userPass: userPass },
+    });
   };
 };
 
 export const tryCompanyLogin = (userName: string, userPass: string) => {
-  return async (dispatch: Dispatch<Action>) => {
-    const url = `http://localhost:8080/company/login`;
-    try {
-      const { headers } = await axios.post(url, {
-        role: "company",
-        userName: userName,
-        userPass: userPass,
-      });
-
-      localStorage.setItem("token", headers.authorization);
-      dispatch({
-        type: ActionType.COMPANY_LOGIN,
-        payload: {
-          userName,
-        },
-      });
-    } catch (err: any) {
-      localStorage.removeItem("token");
-
-      dispatch({
-        type: ActionType.LOGOUT,
-        payload: err?.message,
-      });
-    }
-  };
-  // return (dispatch: Dispatch<Action>) => {
+  // return async (dispatch: Dispatch<Action>) => {
   //   const url = `http://localhost:8080/company/login`;
-  //   axios
-  //     .post(url, { role: "company", userName: userName, userPass: userPass })
-  //     .then((res) => {
-  //       localStorage.setItem("token", res.headers.authorization);
-  //       dispatch({
-  //         type: ActionType.COMPANY_LOGIN,
-  //         payload: {
-  //           userName,
-  //         },
-  //       });
-  //     })
-  //     .catch((err) => {
-  //       localStorage.removeItem("token");
-
-  //       dispatch({
-  //         type: ActionType.LOGOUT,
-  //         payload: err?.message,
-  //       });
+  //   try {
+  //     const { headers } = await axios.post(url, {
+  //       role: "company",
+  //       userName: userName,
+  //       userPass: userPass,
   //     });
-  // };
+
+  //     localStorage.setItem("token", headers.authorization);
+  //     dispatch({
+  //       type: ActionType.COMPANY_LOGIN,
+  //       payload: {
+  //         userName,
+  //       },
+  //     });
+  //   } catch (err: any) {
+  //     localStorage.removeItem("token");
+
+  //     dispatch({
+  //       type: ActionType.LOGOUT,
+  //       payload: err?.message,
+  //     });
+  //   }
+  return (dispatch: Dispatch<Action>) => {
+    dispatch({
+      type: ActionType.COMPANY_LOGIN,
+      payload: { userName: userName, userPass: userPass },
+    });
+  };
 };
+// return (dispatch: Dispatch<Action>) => {
+//   const url = `http://localhost:8080/company/login`;
+//   axios
+//     .post(url, { role: "company", userName: userName, userPass: userPass })
+//     .then((res) => {
+//       localStorage.setItem("token", res.headers.authorization);
+//       dispatch({
+//         type: ActionType.COMPANY_LOGIN,
+//         payload: {
+//           userName,
+//         },
+//       });
+//     })
+//     .catch((err) => {
+//       localStorage.removeItem("token");
+
+//       dispatch({
+//         type: ActionType.LOGOUT,
+//         payload: err?.message,
+//       });
+//     });
+// };
+// };
 
 export const tryCustomerLogin = (userName: string, userPass: string) => {
-  return async (dispatch: Dispatch<Action>) => {
-    const url = `http://localhost:8080/customer/login`;
-    try {
-      const { headers } = await axios.post(url, {
-        role: "customer",
-        userName: userName,
-        userPass: userPass,
-      });
+  // return async (dispatch: Dispatch<Action>) => {
+  //   const url = `http://localhost:8080/customer/login`;
+  //   try {
+  //     const { headers } = await axios.post(url, {
+  //       role: "customer",
+  //       userName: userName,
+  //       userPass: userPass,
+  //     });
 
-      localStorage.setItem("token", headers.authorization);
+  //     localStorage.setItem("token", headers.authorization);
 
-      dispatch({
-        type: ActionType.CUSTOMER_LOGIN,
-        payload: {
-          userName,
-        },
-      });
-      console.log(headers);
-    } catch (err: any) {
-      localStorage.removeItem("token");
+  //     dispatch({
+  //       type: ActionType.CUSTOMER_LOGIN,
+  //       payload: {
+  //         userName,
+  //       },
+  //     });
+  //     console.log(headers);
+  //   } catch (err: any) {
+  //     localStorage.removeItem("token");
 
-      dispatch({
-        type: ActionType.LOGOUT,
-        payload: err?.message,
-      });
-    }
+  //     dispatch({
+  //       type: ActionType.LOGOUT,
+  //       payload: err?.message,
+  //     });
+  //   }
+  // };
+  return (dispatch: Dispatch<Action>) => {
+    dispatch({
+      type: ActionType.CUSTOMER_LOGIN,
+      payload: { userName: userName, userPass: userPass },
+    });
   };
 };
 

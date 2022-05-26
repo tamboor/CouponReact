@@ -186,16 +186,6 @@ function Coupon(props: couponProps): JSX.Element {
           deleteFunc={() => {
             deleteCoupon(props.coupon);
           }}
-          // deleteFunc={() => {
-          //   // props.deleteFunc?.(props.user?.id);
-          //   switch (props.formType) {
-          //     case "customer":
-          //       removeCustomer(props.user ? props.user.id : -1);
-          //       break;
-          //     case "company":
-          //       removeCompany(props.user ? props.user.id : -1);
-          //   }
-          // }}
         >
           {/* {props.formType} */}
         </DeletePrompt>

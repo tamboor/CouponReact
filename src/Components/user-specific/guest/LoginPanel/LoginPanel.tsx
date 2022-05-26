@@ -6,7 +6,9 @@ import { useNavigate } from "react-router-dom";
 import { useActions } from "../../../../hooks/useActions";
 import { useSelector } from "react-redux";
 import { useTypedSelector } from "../../../../hooks/useTypedSelector";
-import getAuthHeaders from "../../../../utils/tokenUtils";
+import getAuthHeaders, { setStoredToken } from "../../../../utils/tokenUtils";
+import axios, { AxiosError, AxiosResponse } from "axios";
+import globals from "../../../../utils/globals";
 
 interface LoginProps {
   children?: JSX.Element;
@@ -17,10 +19,8 @@ function LoginPanel(props: LoginProps): JSX.Element {
   const { tryAdminLogin, tryCompanyLogin, tryCustomerLogin, tryLogout } =
     useActions();
 
-  // const state = useTypedSelector((state) => state);
   const navigate = useNavigate();
 
-  // console.log(state);
   //TODO: make sure program doesnt proceed if backend is down
   const {
     register,
@@ -31,27 +31,77 @@ function LoginPanel(props: LoginProps): JSX.Element {
   //TODO: cahnge to enum
   //todo: navigate each case to the right path
   const onSubmit = (data: any) => {
+    const sendLogin = (
+      url: string,
+      role: string,
+      userName: string,
+      userPass: string,
+      callback: (error: AxiosError) => any
+    ) => {
+      axios
+        .post(url, { role: role, userName: userName, userPass: userPass })
+        .then((res) => {
+          switch (role) {
+            case "customer":
+              tryCustomerLogin(userName, userPass);
+              navigate("/customer-home");
+              break;
+            case "company":
+              tryCompanyLogin(userName, userPass);
+              navigate("/company-home");
+              break;
+            case "admin":
+              tryAdminLogin(userName, userPass);
+              navigate("/admin-home");
+              break;
+            default:
+              tryLogout();
+          }
+          setStoredToken(res);
+        })
+        .catch((err: AxiosError) => {
+          callback(err);
+        });
+    };
+
     switch (props.userType) {
       case "customer":
-        tryCustomerLogin(data.userEmail, data.userPass);
-        console.log(getAuthHeaders());
-        navigate("/customer-home");
+        sendLogin(
+          globals.urls.customerLogin,
+          "customer",
+          data.userEmail,
+          data.userPass,
+          (err: AxiosError) => {
+            //TODO: change to not found
+            navigate("/notFound");
+          }
+        );
         break;
       case "company":
-        tryCompanyLogin(data.userEmail, data.userPass);
-        navigate("/company-home");
+        sendLogin(
+          globals.urls.companyLogin,
+          "company",
+          data.userEmail,
+          data.userPass,
+          (err: AxiosError) => {
+            navigate("/notFound");
+          }
+        );
         break;
       case "admin":
-        tryAdminLogin(data.userEmail, data.userPass);
-        //todo: CHANGE TO ADMIN HOME
-        navigate("manage-user");
+        sendLogin(
+          globals.urls.adminLogin,
+          "admin",
+          data.userEmail,
+          data.userPass,
+          (err: AxiosError) => {
+            navigate("/notFound");
+          }
+        );
         break;
       default:
         tryLogout();
     }
-
-    // if (localStorage.getItem("token") != undefined) {
-    // }
   };
 
   return (

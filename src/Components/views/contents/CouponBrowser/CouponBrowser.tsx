@@ -48,7 +48,7 @@ interface ICouponListProps {
   allCoupons: CouponModel[];
   customerCoupons?: CouponModel[];
 }
-
+//TODO: add an option to filter out customercoupons
 function CouponBrowser(props: ICouponListProps): JSX.Element {
   //   console.log(props.allCoupons);
   const state = useTypedSelector((state) => state);
