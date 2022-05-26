@@ -86,6 +86,26 @@ const adminReducer = (state: AdminState = initialState, action: Action) => {
           (customer) => customer.email !== action.payload.email
         ) as CustomerModel[],
       };
+    case ActionType.UPDATE_CUSTOMER:
+      return {
+        ...state,
+        customers: state.customers.map((customer) => {
+          if (customer.id === action.payload.customer.id) {
+            return action.payload.customer as CustomerModel;
+          }
+          return customer;
+        }) as CustomerModel[],
+      };
+    case ActionType.UPDATE_COMPANY:
+      return {
+        ...state,
+        companies: state.companies.map((company) => {
+          if (company.id === action.payload.company.id) {
+            return action.payload.company as CompanyModel;
+          }
+          return company;
+        }) as CompanyModel[],
+      };
     default:
       return state;
   }

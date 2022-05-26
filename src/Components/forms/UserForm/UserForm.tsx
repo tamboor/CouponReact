@@ -49,7 +49,8 @@ function UserForm(props: IFormProps): JSX.Element {
   const navigate = useNavigate();
 
   //todo: move to other component
-  const { addCustomer, addCompany } = useActions();
+  const { addCustomer, addCompany, updateCompany, updateCustomer } =
+    useActions();
 
   const {
     register,
@@ -88,7 +89,6 @@ function UserForm(props: IFormProps): JSX.Element {
               })
               .catch((error: any) => {
                 notify.error(error.response.data.description);
-                console.log(error);
               });
             break;
           case "guest":
@@ -116,7 +116,15 @@ function UserForm(props: IFormProps): JSX.Element {
           )
           .then((res: AxiosResponse) => {
             setStoredToken(res);
-            props.updateFunction && props.updateFunction(data);
+            // props.updateFunction && props.updateFunction(data);
+            switch (props.userType) {
+              case "customer":
+                updateCustomer({ ...props.user, ...data } as CustomerModel);
+                break;
+              case "company":
+                updateCompany({ ...props.user, ...data } as CompanyModel);
+                break;
+            }
           })
           .catch((error: any) => {
             notify.error(error.response.data.description);

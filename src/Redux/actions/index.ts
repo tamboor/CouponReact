@@ -123,7 +123,18 @@ interface RemoveCustomerByEmailAction {
     email: string;
   };
 }
-
+interface UpdateCustomerAction {
+  type: ActionType.UPDATE_CUSTOMER;
+  payload: {
+    customer: CustomerModel;
+  };
+}
+interface UpdateCompanyAction {
+  type: ActionType.UPDATE_COMPANY;
+  payload: {
+    company: CompanyModel;
+  };
+}
 export type Action =
   | AdminLoginAction
   | CustomerLoginAction
@@ -149,4 +160,7 @@ export type Action =
   | AddCouponAction
   | RemoveCouponAction
   | SetCouponsAction
-  | ClearCouponsAction;
+  | ClearCouponsAction
+  //
+  | UpdateCustomerAction
+  | UpdateCompanyAction;

@@ -15,6 +15,8 @@ export enum ActionType {
   ADD_COMPANY = "addCompany",
   REMOVE_COMPANY = "removeCompany",
   CLEAR_ADMIN_STATE = "clearAdminState",
+  UPDATE_CUSTOMER = "updateCustomer",
+  UPDATE_COMPANY = "updateCompany",
   //
   ADD_COUPON = "addCoupon",
   REMOVE_COUPON = "removeCoupon",

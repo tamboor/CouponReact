@@ -27,34 +27,31 @@ interface customerSingleProp {
 }
 function CustomerRow(props: customerSingleProp): JSX.Element {
   const [open, setOpen] = React.useState(false);
-  const [customer, setCustomer] = React.useState<CustomerModel>(
-    props.singleCustomer
-  );
   const [coupons, setCoupons] = React.useState<CouponModel[]>([]);
   const { addCustomer, removeCustomerByEmail } = useActions();
-
+  console.log("customer row: " + props.singleCustomer.id);
   useEffect(() => {
-    if (customer.id) {
+    if (props.singleCustomer.id) {
       return;
     }
     axios
       .get(
-        `http://localhost:8080/admin/getCustomerByEmail/${customer.email}`,
+        //TODO: change to globals
+        `http://localhost:8080/admin/getCustomerByEmail/${props.singleCustomer.email}`,
         getAuthHeaders()
       )
       .then((res) => {
-        removeCustomerByEmail(customer.email);
-        setCustomer(res.data);
+        removeCustomerByEmail(props.singleCustomer.email);
         addCustomer(res.data);
       })
       .catch((err: AxiosError) => {
-        console.log(err);
+        //TODO: handle error
       });
   }, []);
   useEffect(() => {}, []);
 
   const loadCoupons = () => {
-    const url = `http://localhost:8080/admin/getCustomerCoupons/${customer.id}`;
+    const url = `http://localhost:8080/admin/getCustomerCoupons/${props.singleCustomer.id}`;
     axios
       .get(url, getAuthHeaders())
       .then((response) => {
@@ -63,11 +60,10 @@ function CustomerRow(props: customerSingleProp): JSX.Element {
       })
       .catch((error: any) => {
         notify.error(error.response.data.description);
-        console.log(error);
       });
   };
   const handleFormSubmit = (data: CustomerModel) => {
-    setCustomer({ ...customer, ...data });
+    //TODO: change to update
   };
   return (
     <React.Fragment>
@@ -85,17 +81,17 @@ function CustomerRow(props: customerSingleProp): JSX.Element {
           </IconButton>
         </TableCell>
         <TableCell component="th" scope="row">
-          {customer.id}
+          {props.singleCustomer.id}
         </TableCell>
-        <TableCell>{customer.firstName}</TableCell>
-        <TableCell>{customer.lastName}</TableCell>
-        <TableCell>{customer.email}</TableCell>
-        {customer.id ? (
+        <TableCell>{props.singleCustomer.firstName}</TableCell>
+        <TableCell>{props.singleCustomer.lastName}</TableCell>
+        <TableCell>{props.singleCustomer.email}</TableCell>
+        {props.singleCustomer.id ? (
           <>
             <TableCell>
               <ActionUserForm
                 verb={AdminVerbs.UPDATE}
-                user={customer}
+                user={props.singleCustomer}
                 formType="customer"
                 updateFunc={handleFormSubmit}
               />
@@ -103,7 +99,7 @@ function CustomerRow(props: customerSingleProp): JSX.Element {
             <TableCell>
               <ActionUserForm
                 verb={AdminVerbs.DELETE}
-                user={customer}
+                user={props.singleCustomer}
                 formType="customer"
               />
             </TableCell>

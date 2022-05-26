@@ -242,4 +242,22 @@ export const removeCustomerByEmail = (email: string) => {
   };
 };
 
+export const updateCustomer = (customer: CustomerModel) => {
+  return (dispatch: Dispatch<Action>) => {
+    dispatch({
+      type: ActionType.UPDATE_CUSTOMER,
+      payload: { customer: customer },
+    });
+  };
+};
+
+export const updateCompany = (company: CompanyModel) => {
+  return (dispatch: Dispatch<Action>) => {
+    dispatch({
+      type: ActionType.UPDATE_COMPANY,
+      payload: { company: company },
+    });
+  };
+};
+
 //TODO: delete coupons state

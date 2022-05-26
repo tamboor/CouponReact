@@ -1,8 +1,6 @@
 import { TableRow, TableCell, IconButton, Collapse } from "@mui/material";
 import React, { useEffect } from "react";
 import { CompanyModel } from "../../../../Models/CompanyModel";
-// import { CompanyModel } from "../../../Models/CompanyModel";
-// import ActionCompanyForm from "../../forms/ActionCompanyForm/ActionCompanyForm";
 import { AdminVerbs } from "../AdminVerbs";
 import "./CompanyRow.css";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
@@ -15,60 +13,55 @@ import notify from "../../../../utils/Notify";
 import getAuthHeaders, { setStoredToken } from "../../../../utils/tokenUtils";
 import { useTypedSelector } from "../../../../hooks/useTypedSelector";
 import { useActions } from "../../../../hooks/useActions";
+
 interface companySingleProp {
   singleCompany: CompanyModel;
 }
 function CompanyRow(props: companySingleProp): JSX.Element {
   const [open, setOpen] = React.useState(false);
-  const [company, setCompany] = React.useState<CompanyModel>(
-    props.singleCompany
-  );
   const [coupons, setCoupons] = React.useState<CouponModel[]>([]);
 
-  const { addCompany, removeCompanyByEmail } = useActions();
+  const { addCompany, removeCompanyByEmail, updateCompany } = useActions();
   const { admin } = useTypedSelector((state) => state);
-  const { removeCompany } = useActions();
 
   useEffect(() => {
-    if (company.id || props.singleCompany.id) {
+    if (props.singleCompany.id || props.singleCompany.id) {
       return;
     }
-    if (admin.companies.indexOf(company) === -1) {
+    if (admin.companies.indexOf(props.singleCompany) === -1) {
       return;
     }
     axios
       .get(
-        `http://localhost:8080/admin/getCompanyByEmail/${company.email}`,
+        `http://localhost:8080/admin/getCompanyByEmail/${props.singleCompany.email}`,
         getAuthHeaders()
       )
       .then((res) => {
-        removeCompanyByEmail(company.email);
-        setCompany(res.data);
+        removeCompanyByEmail(props.singleCompany.email);
         addCompany(res.data);
       })
       .catch((err: AxiosError) => {
-        if (err.response && err.response.status === 404) {
-          removeCompany(company.id);
-        }
+        //TODO: handle error
       });
   }, []);
 
   const loadCoupons = () => {
-    const url = `http://localhost:8080/admin/getCompanyCoupons/${company.id}`;
+    const url = `http://localhost:8080/admin/getCompanyCoupons/${props.singleCompany.id}`;
     axios
       .get(url, getAuthHeaders())
       .then((response) => {
         setStoredToken(response);
         setCoupons(response.data);
+        console.log("setting coupons: ");
       })
       .catch((error: any) => {
         notify.error(error.response.data.description);
-        console.log(error);
+        // console.log(error);
       });
   };
 
   const handleFormSubmit = (data: CompanyModel) => {
-    setCompany({ ...company, ...data });
+    updateCompany(data);
   };
   return (
     <React.Fragment>
@@ -86,16 +79,16 @@ function CompanyRow(props: companySingleProp): JSX.Element {
           </IconButton>
         </TableCell>
         <TableCell component="th" scope="row">
-          {company.id}
+          {props.singleCompany.id}
         </TableCell>
-        <TableCell>{company.name}</TableCell>
-        <TableCell>{company.email}</TableCell>
-        {company.id ? (
+        <TableCell>{props.singleCompany.name}</TableCell>
+        <TableCell>{props.singleCompany.email}</TableCell>
+        {props.singleCompany.id ? (
           <>
             <TableCell>
               <ActionUserForm
                 verb={AdminVerbs.UPDATE}
-                user={company}
+                user={props.singleCompany}
                 formType="company"
                 updateFunc={handleFormSubmit}
               />
@@ -103,7 +96,7 @@ function CompanyRow(props: companySingleProp): JSX.Element {
             <TableCell>
               <ActionUserForm
                 verb={AdminVerbs.DELETE}
-                user={company}
+                user={props.singleCompany}
                 formType="company"
               />
             </TableCell>

@@ -1,6 +1,6 @@
 import "./AddCoupon.css";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
-import { Box, ButtonBase } from "@mui/material";
+import { Box } from "@mui/material";
 import { useState } from "react";
 import CouponForm from "../../forms/CouponForm/CouponForm";
 import { AdminVerbs } from "../../user-specific/admin/AdminVerbs";
@@ -19,7 +19,6 @@ function AddCoupon(): JSX.Element {
 
   return showForm ? (
     <Box
-      // onClick={handleAdd}
       sx={{
         cursor: "pointer",
         height: "100%",
