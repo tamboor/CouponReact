@@ -75,7 +75,7 @@ function CustomerHomepage(): JSX.Element {
       {browse ? (
         <Box>
           <Button onClick={openMyCoupons}>My Coupons</Button>
-          <FeaturedCoupons allCoupons={allCoupons} />
+          {/* <FeaturedCoupons allCoupons={allCoupons} /> */}
           <CouponBrowser
             allCoupons={allCoupons}
             customerCoupons={customerCoupons}
