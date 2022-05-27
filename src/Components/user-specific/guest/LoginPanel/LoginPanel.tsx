@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 import { useTypedSelector } from "../../../../hooks/useTypedSelector";
 import getAuthHeaders, { setStoredToken } from "../../../../utils/tokenUtils";
 import axios, { AxiosError, AxiosResponse } from "axios";
-import globals from "../../../../utils/globals";
+import globals, { host } from "../../../../utils/globals";
 
 interface LoginProps {
   children?: JSX.Element;
@@ -67,7 +67,7 @@ function LoginPanel(props: LoginProps): JSX.Element {
     switch (props.userType) {
       case "customer":
         sendLogin(
-          globals.urls.customerLogin,
+          `${host}/customer/login`,
           "customer",
           data.userEmail,
           data.userPass,
@@ -79,7 +79,7 @@ function LoginPanel(props: LoginProps): JSX.Element {
         break;
       case "company":
         sendLogin(
-          globals.urls.companyLogin,
+          `${host}/company/login`,
           "company",
           data.userEmail,
           data.userPass,
@@ -90,7 +90,7 @@ function LoginPanel(props: LoginProps): JSX.Element {
         break;
       case "admin":
         sendLogin(
-          globals.urls.adminLogin,
+          `${host}/admin/login`,
           "admin",
           data.userEmail,
           data.userPass,
