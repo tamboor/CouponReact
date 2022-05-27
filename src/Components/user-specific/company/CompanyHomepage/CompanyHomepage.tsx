@@ -12,6 +12,7 @@ import {
   setDeleteFunction,
   setRefreshFunction,
 } from "../../../../utils/fetchCompanyCoupons";
+import { host } from "../../../../utils/globals";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -59,7 +60,7 @@ export default function BasicTabs() {
     console.log("fetchCoupons");
 
     axios
-      .get("http://localhost:8080/company/getCompanyCoupons", getAuthHeaders())
+      .get(`${host}/company/getCompanyCoupons`, getAuthHeaders())
       .then((res: AxiosResponse) => {
         setCoupons(res.data as CouponModel[]);
       })

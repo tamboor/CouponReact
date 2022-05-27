@@ -3,6 +3,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useActions } from "../../../hooks/useActions";
 import { CouponModel } from "../../../Models/CouponModel";
+import globals, { host } from "../../../utils/globals";
 import notify from "../../../utils/Notify";
 import getAuthHeaders, { setStoredToken } from "../../../utils/tokenUtils";
 import "./CartCoupon.css";
@@ -35,10 +36,7 @@ function CartCoupon(props: cartItemProps): JSX.Element {
    */
   useEffect(() => {
     axios
-      .get(
-        `http://localhost:8080/customer/checkCoupon/${props.coupon.id}`,
-        getAuthHeaders()
-      )
+      .get(`${host}/customer/checkCoupon`, getAuthHeaders())
       .then((res) => {
         setStoredToken(res);
         setCoupon(res.data);

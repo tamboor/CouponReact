@@ -20,6 +20,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useActions } from "../../../hooks/useActions";
 import { CouponModel } from "../../../Models/CouponModel";
 import { refetchCoupons } from "../../../utils/fetchCompanyCoupons";
+import globals, { host } from "../../../utils/globals";
 import notify from "../../../utils/Notify";
 
 import getAuthHeaders, { setStoredToken } from "../../../utils/tokenUtils";
@@ -86,12 +87,7 @@ function CouponForm(props: CouponFormProps): JSX.Element {
         console.log(addData);
 
         axios
-          .post(
-            `http://localhost:8080/company/addCoupon`,
-
-            addData,
-            getAuthHeaders()
-          )
+          .post(`${host}/company/addCoupon`, addData, getAuthHeaders())
           .then((res: AxiosResponse) => {
             console.log(res.request);
             setStoredToken(res);
@@ -117,7 +113,7 @@ function CouponForm(props: CouponFormProps): JSX.Element {
         };
         axios
           .put(
-            `http://localhost:8080/company/updateCoupon`,
+            `${host}/company/addCoupon`,
             { ...props.coupon, ...updateData },
             getAuthHeaders()
           )

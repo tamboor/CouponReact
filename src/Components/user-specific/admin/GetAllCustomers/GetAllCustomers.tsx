@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useActions } from "../../../../hooks/useActions";
 import { useTypedSelector } from "../../../../hooks/useTypedSelector";
 import { setFetchMethodCustomers } from "../../../../utils/fetchAdminUsers";
+import { host } from "../../../../utils/globals";
 import notify from "../../../../utils/Notify";
 import getAuthHeaders, { setStoredToken } from "../../../../utils/tokenUtils";
 import CustomerTable from "../CustomerTable/CustomerTable";
@@ -15,7 +16,7 @@ function GetAllCustomers(): JSX.Element {
   const { admin, users } = useTypedSelector((state) => state);
 
   const fetchCustomers = () => {
-    const url = "http://localhost:8080/admin/getAllCustomers";
+    const url = `${host}/admin/getAllCustomers`;
     axios
       .get(url, getAuthHeaders())
       .then((response) => {

@@ -3,6 +3,7 @@ import axios, { AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
 import { useTypedSelector } from "../../../../hooks/useTypedSelector";
 import { CouponModel } from "../../../../Models/CouponModel";
+import { host } from "../../../../utils/globals";
 import notify from "../../../../utils/Notify";
 import getAuthHeaders, {
   getStoredToken,
@@ -38,7 +39,7 @@ function CustomerHomepage(): JSX.Element {
     console.log(getStoredToken());
 
     axios
-      .get("http://localhost:8080/guest/getAllCoupons")
+      .get(`${host}/guest/getAllCoupons`)
       .then((response: AxiosResponse) => {
         setAllCoupons(response.data as CouponModel[]);
       })
@@ -49,10 +50,7 @@ function CustomerHomepage(): JSX.Element {
   }
   function fetchCustomerCoupons(): void {
     axios
-      .get(
-        "http://localhost:8080/customer/getCustomerCoupons",
-        getAuthHeaders()
-      )
+      .get(`${host}/customer/getCustomerCoupons`, getAuthHeaders())
       .then((response: AxiosResponse) => {
         setCustomerCoupons(response.data as CouponModel[]);
       })

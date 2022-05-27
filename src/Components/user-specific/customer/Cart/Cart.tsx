@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useActions } from "../../../../hooks/useActions";
 import { useTypedSelector } from "../../../../hooks/useTypedSelector";
 import { CouponModel } from "../../../../Models/CouponModel";
+import { host } from "../../../../utils/globals";
 import notify from "../../../../utils/Notify";
 import getAuthHeaders, { getStoredToken } from "../../../../utils/tokenUtils";
 import CartCoupon from "../../../cards/CartCoupon/CartCoupon";
@@ -55,14 +56,11 @@ function Cart(): JSX.Element {
   //todo: change error callback to bigger scoped
   function checkCouponAndBuy(coupon: CouponModel) {
     axios
-      .get(
-        `http://localhost:8080/customer/checkCoupon/${coupon.id}`,
-        getAuthHeaders()
-      )
+      .get(`${host}/customer/checkCoupon/${coupon.id}`, getAuthHeaders())
       .then((res) => {
         axios
           .post(
-            "http://localhost:8080/customer/newPurchase",
+            `${host}/customer/newPurchase`,
             { ...coupon },
             {
               headers: { Authorization: getStoredToken() },

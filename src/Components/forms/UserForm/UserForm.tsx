@@ -14,6 +14,7 @@ import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { CompanyModel } from "../../../Models/CompanyModel";
 import { CustomerModel } from "../../../Models/CustomerModel";
 import { UserModel } from "../../../Models/UserModel";
+import { host } from "../../../utils/globals";
 import notify from "../../../utils/Notify";
 import getAuthHeaders, { setStoredToken } from "../../../utils/tokenUtils";
 import { AdminVerbs } from "../../user-specific/admin/AdminVerbs";
@@ -70,7 +71,7 @@ function UserForm(props: IFormProps): JSX.Element {
           case "admin":
             axios
               .post(
-                `http://localhost:8080/admin/add${userTypeUrl}`,
+                `${host}/admin/add${userTypeUrl}`,
                 { ...data, id: 0 },
                 getAuthHeaders()
               )
@@ -93,7 +94,7 @@ function UserForm(props: IFormProps): JSX.Element {
             break;
           case "guest":
             axios
-              .post(`http://localhost:8080/guest/register`, { ...data, id: 0 })
+              .post(`${host}/guest/register`, { ...data, id: 0 })
               .then((res: AxiosResponse) => {
                 setStoredToken(res);
                 props.userType === "customer" &&
@@ -110,7 +111,7 @@ function UserForm(props: IFormProps): JSX.Element {
       case AdminVerbs.UPDATE:
         axios
           .put(
-            `http://localhost:8080/admin/update${userTypeUrl}`,
+            `${host}/admin/update${userTypeUrl}`,
             { ...props.user, ...data },
             getAuthHeaders()
           )

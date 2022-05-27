@@ -13,6 +13,7 @@ import notify from "../../../../utils/Notify";
 import getAuthHeaders, { setStoredToken } from "../../../../utils/tokenUtils";
 import { useTypedSelector } from "../../../../hooks/useTypedSelector";
 import { useActions } from "../../../../hooks/useActions";
+import { host } from "../../../../utils/globals";
 
 interface companySingleProp {
   singleCompany: CompanyModel;
@@ -33,7 +34,7 @@ function CompanyRow(props: companySingleProp): JSX.Element {
     }
     axios
       .get(
-        `http://localhost:8080/admin/getCompanyByEmail/${props.singleCompany.email}`,
+        `${host}/admin/getCompanyByEmail/${props.singleCompany.email}`,
         getAuthHeaders()
       )
       .then((res) => {
@@ -46,7 +47,7 @@ function CompanyRow(props: companySingleProp): JSX.Element {
   }, []);
 
   const loadCoupons = () => {
-    const url = `http://localhost:8080/admin/getCompanyCoupons/${props.singleCompany.id}`;
+    const url = `${host}/admin/getCompanyCoupons/${props.singleCompany.id}`;
     axios
       .get(url, getAuthHeaders())
       .then((response) => {

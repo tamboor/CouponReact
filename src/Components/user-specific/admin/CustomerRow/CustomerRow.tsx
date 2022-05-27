@@ -22,6 +22,7 @@ import ActionUserForm from "../../../forms/AcionUserForm/ActionUserForm";
 import notify from "../../../../utils/Notify";
 import getAuthHeaders, { setStoredToken } from "../../../../utils/tokenUtils";
 import { useActions } from "../../../../hooks/useActions";
+import { host } from "../../../../utils/globals";
 interface customerSingleProp {
   singleCustomer: CustomerModel;
 }
@@ -37,7 +38,7 @@ function CustomerRow(props: customerSingleProp): JSX.Element {
     axios
       .get(
         //TODO: change to globals
-        `http://localhost:8080/admin/getCustomerByEmail/${props.singleCustomer.email}`,
+        `${host}/admin/getCustomerByEmail/${props.singleCustomer.email}`,
         getAuthHeaders()
       )
       .then((res) => {

@@ -5,6 +5,7 @@ import {
   Button,
 } from "@mui/material";
 import axios from "axios";
+import { host } from "../../../utils/globals";
 import notify from "../../../utils/Notify";
 import getAuthHeaders, { setStoredToken } from "../../../utils/tokenUtils";
 import { DeleteableEntity } from "../DeleteableEntities";
@@ -30,11 +31,11 @@ function DeletePrompt(props: PromptProps): JSX.Element {
     const getUrl = () => {
       switch (props.targetType) {
         case DeleteableEntity.COMPANY:
-          return `http://localhost:8080/admin/deleteCompany/${props.deleteableID}`;
+          return `${host}/admin/deleteCompany/${props.deleteableID}`;
         case DeleteableEntity.CUSTOMER:
-          return `http://localhost:8080/admin/deleteCustomer/${props.deleteableID}`;
+          return `${host}/admin/deleteCustomer/${props.deleteableID}`;
         case DeleteableEntity.COUPON:
-          return `http://localhost:8080/company/deleteCoupon/${props.deleteableID}`;
+          return `${host}/company/deleteCoupon/${props.deleteableID}`;
       }
     };
     // console.log((getUrl() as string) + props.deleteableID);
