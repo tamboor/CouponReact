@@ -122,6 +122,8 @@ function CouponBrowser(props: ICouponListProps): JSX.Element {
   };
   //TODO: combine all handleChange
   //TODO: handle event anywhere
+
+  //todo: fix checkbox's default check
   const handleChangeSearchbar = (event: any) => {
     setFilterState({ ...filterState, searchbar: event.target.value });
   };

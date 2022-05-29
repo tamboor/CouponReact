@@ -111,9 +111,10 @@ function LoginPanel(props: LoginProps): JSX.Element {
           <TextField
             {...register("userEmail", { required: "this is required" })}
             label="Email"
-            variant="standard"
+            variant="outlined"
           />
           {errors.userEmail && <p>{errors.userEmail.message}</p>}
+          <br />
           <br />
           <TextField
             {...register("userPass", {
@@ -121,9 +122,12 @@ function LoginPanel(props: LoginProps): JSX.Element {
               minLength: { value: 4, message: "Min length is 4" },
             })}
             label="Password"
-            variant="standard"
+            variant="outlined"
           />
           {errors.userPass && <p>{errors.userPass.message}</p>}
+          <br />
+          <br />
+
           <Button type="submit">Login</Button>
         </form>
       </Box>
