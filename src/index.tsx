@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 // import Layout from "./Components/mainarea/Layout/Layout";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, HashRouter, MemoryRouter } from "react-router-dom";
 import { store } from "./Redux";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
@@ -32,13 +32,13 @@ const theme = createTheme({
 
 root.render(
   <ThemeProvider theme={theme}>
-    <BrowserRouter>
+    <MemoryRouter>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <Layout />
         </PersistGate>
       </Provider>
-    </BrowserRouter>
+    </MemoryRouter>
   </ThemeProvider>
 );
 
