@@ -1,4 +1,12 @@
-import { Button, Card, Typography } from "@mui/material";
+import {
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Grid,
+  Typography,
+} from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useActions } from "../../../hooks/useActions";
@@ -7,6 +15,7 @@ import globals, { host } from "../../../utils/globals";
 import notify from "../../../utils/Notify";
 import getAuthHeaders, { setStoredToken } from "../../../utils/tokenUtils";
 import "./CartCoupon.css";
+import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 
 interface cartItemProps {
   coupon: CouponModel;
@@ -55,32 +64,87 @@ function CartCoupon(props: cartItemProps): JSX.Element {
   }, []);
 
   return (
-    <div className="CartCoupon">
+    // <div className="CartCoupon">
+    //   <Card
+    //     sx={{
+    //       margin: "1vh  ",
+    //       ...(couponError.error && couponError.styles),
+    //     }}
+    //   >
+    //     {couponError.error !== null && (
+    //       <Typography color={"red"}>{couponError.error}</Typography>
+    //     )}
+    //     <Typography>{props.coupon.title}</Typography>
+    //     {!couponError.error && (
+    //       <div>
+    //         <Typography>{props.coupon.description}</Typography>
+    //         <Typography>{props.coupon.price}</Typography>
+    //       </div>
+    //     )}
+    //     <Button
+    //       onClick={() => {
+    //         removeItem(props.coupon);
+    //       }}
+    //     >
+    //       Remove Item
+    //     </Button>
+    //   </Card>
+    // </div>
+    <Grid item key={props.coupon.id} xs={12} sm={12} md={4} xl={2.4} lg={3}>
       <Card
         sx={{
-          margin: "1vh  ",
+          height: "50vh",
+          display: "flow",
+          flexDirection: "column",
           ...(couponError.error && couponError.styles),
         }}
       >
-        {couponError.error !== null && (
-          <Typography color={"red"}>{couponError.error}</Typography>
-        )}
-        <Typography>{props.coupon.title}</Typography>
-        {!couponError.error && (
-          <div>
-            <Typography>{coupon.description}</Typography>
-            <Typography>{coupon.price}</Typography>
-          </div>
-        )}
-        <Button
-          onClick={() => {
-            removeItem(props.coupon);
+        <CardMedia
+          component="img"
+          sx={{
+            // 16:9
+            height: "40%",
+            paddingTop: "0%",
+            paddingBottom: "12%",
           }}
-        >
-          Remove Item
-        </Button>
+          image={props.coupon.image}
+          alt="coupon img"
+        />
+
+        <CardContent>
+          {couponError.error !== null && (
+            <Typography color={"red"}>{couponError.error}</Typography>
+          )}
+          <Typography gutterBottom variant="h5" component="h2">
+            {props.coupon.title}
+          </Typography>
+
+          {!couponError.error && (
+            <div>
+              <Typography>{props.coupon.description}</Typography>
+              <Typography gutterBottom variant="h6" component="h2">
+                {props.coupon.price}{" "}
+                <AttachMoneyIcon
+                  sx={{
+                    width: "2rem",
+                    marginRight: 0.5,
+                  }}
+                />
+              </Typography>
+            </div>
+          )}
+        </CardContent>
+        <CardActions sx={{ position: "relative" }}>
+          <Button
+            onClick={() => {
+              removeItem(props.coupon);
+            }}
+          >
+            Remove Item
+          </Button>
+        </CardActions>
       </Card>
-    </div>
+    </Grid>
   );
 }
 
