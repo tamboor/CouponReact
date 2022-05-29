@@ -12,24 +12,24 @@ import { Grid } from "@mui/material";
 function Layout(): JSX.Element {
   return (
     <div className="Layout">
-      <Grid>
-        <header>
-          <Header children={<Main />} />
-        </header>
-        <br />
+      {/* <Grid> */}
+      <header>
+        <Header children={<Main />} />
+      </header>
+      <br />
 
-        {/* <div className="navbar">
+      {/* <div className="navbar">
                 <Navbar />
             </div> */}
 
-        <main>
-          <Main />
-        </main>
+      <main>
+        <Main />
+      </main>
 
-        <footer>
-          <Footer />
-        </footer>
-      </Grid>
+      <footer>
+        <Footer />
+      </footer>
+      {/* </Grid> */}
     </div>
   );
 }

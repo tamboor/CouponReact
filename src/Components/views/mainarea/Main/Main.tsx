@@ -11,9 +11,9 @@ function Main(): JSX.Element {
   return (
     // <div className="Main">
     <Box>
-      <Grid container component="main" position="sticky">
-        <Routing />
-      </Grid>
+      {/* <Grid container component="main" position="sticky"> */}
+      <Routing />
+      {/* </Grid> */}
     </Box>
     // </div>
   );
