@@ -171,7 +171,7 @@ function CouponBrowser(props: ICouponListProps): JSX.Element {
 
   return (
     <div className="CouponBrowser">
-      <Box paddingY={3}>
+      <Box>
         <Container>
           <Box sx={{ display: "flex" }}>
             <Box sx={{ flexGrow: 4 }}>

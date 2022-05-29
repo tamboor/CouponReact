@@ -1,4 +1,4 @@
-import { Button, Grid, Paper, Typography } from "@mui/material";
+import { Box, Button, Grid, Paper, Typography } from "@mui/material";
 import axios, { AxiosError } from "axios";
 import { useState } from "react";
 import { useActions } from "../../../../hooks/useActions";
@@ -83,10 +83,15 @@ function Cart(): JSX.Element {
 
   //TODO: CART DOESNT SEND PURCHASE REQUEST!
   return (
-    <div className="CouponPurchase">
+    // <div className="CouponPurchase">
+    <Box>
+      <br />
+      <br />
+      <br />
       <Button onClick={clearCart} disabled={isProcessing}>
         Clear Cart
       </Button>
+
       <Grid container spacing={3}>
         <Grid item xs={9} sx={styles}>
           {coupons.map((c: CouponModel, index: number) => (
@@ -105,7 +110,9 @@ function Cart(): JSX.Element {
           </Paper>
         </Grid>
       </Grid>
-    </div>
+    </Box>
+
+    // </div>
   );
 }
 

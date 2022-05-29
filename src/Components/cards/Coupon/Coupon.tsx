@@ -1,5 +1,9 @@
 import {
   Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
   Container,
   Dialog,
   Grid,
@@ -115,46 +119,106 @@ function Coupon(props: couponProps): JSX.Element {
   ) : (
     //TODO: move gridItem to showCoupons
 
-    <Grid item xs={3}>
-      <Paper elevation={12} sx={props?.styles}>
-        <Box paddingX={2} paddingY={1}>
-          <img
-            // src="https://m.gagam.co.il/wp-content/uploads/2017/10/מגנה-הדפסת-תמונה-על-מגנט-תמונות-על-מגנט-2.jpg"
-            src={props.coupon.image}
-            alt=""
-            className="img"
-          />
-          <Grid item xs={3}>
-            <Typography variant="h6" component="h6">
-              {props.coupon.category}
-            </Typography>
-          </Grid>
-          {/* <Grid item xs={3}> */}
-          <Typography variant="h4" component="h2">
+    // <Grid item xs={3}>
+    //   <Paper elevation={12} sx={props?.styles}>
+    //     <Box paddingX={2} paddingY={1}>
+    //       <img src={props.coupon.image} alt="" className="img" />
+    //       <Grid item xs={3}>
+    //         <Typography variant="h6" component="h6">
+    //           {props.coupon.category}
+    //         </Typography>
+    //       </Grid>
+    //       {/* <Grid item xs={3}> */}
+    //       <Typography variant="h4" component="h2">
+    //         {props.coupon.title}
+    //       </Typography>
+    //       {/* </Grid> */}
+    //       <Typography variant="h4" component="h2">
+    //         {props.coupon.price}
+    //         <AttachMoneyIcon
+    //           sx={{
+    //             width: "2rem",
+    //             marginRight: 0.5,
+    //           }}
+    //         />
+    //       </Typography>
+    //       <Typography variant="h6" component="h2">
+    //         {props.coupon.description}
+    //       </Typography>
+    //       {/* <Box> */}
+    //       <Typography variant="h6" component="p">
+    //         <EventAvailableIcon
+    //           sx={{
+    //             width: "2rem",
+    //             marginRight: 0.5,
+    //           }}
+    //         />
+    //         {props.coupon.startDate}
+    //       </Typography>
+    //       <Typography variant="h6" component="p">
+    //         <EventBusyIcon
+    //           sx={{
+    //             width: "2rem",
+    //             marginRight: 0.5,
+    //           }}
+    //         />
+    //         {props.coupon.endDate}
+    //       </Typography>
+    //       {/* </Box> */}
+    //       <Typography variant="h6" component="p">
+    //         <Inventory2OutlinedIcon
+    //           sx={{
+    //             width: "2rem",
+    //             marginRight: 0.5,
+    //           }}
+    //         />
+    //         {props.coupon.amount}
+    //       </Typography>
+    //       {renderSwitch()}
+    //     </Box>
+    //   </Paper>
+    //   <Dialog open={open} onClose={handleClose}>
+    //     <DeletePrompt
+    //       handleClose={handleClose}
+    //       deleteableID={props.coupon.id as number}
+    //       targetType={DeleteableEntity.COUPON}
+    //       deleteFunc={() => {
+    //         deleteCoupon(props.coupon);
+    //       }}
+    //     >
+    //       {/* {props.formType} */}
+    //     </DeletePrompt>
+    //   </Dialog>
+    // </Grid>
+
+    <Grid item key={props.coupon.id} xs={12} sm={12} md={4} xl={2.4} lg={3}>
+      <Card sx={{ height: "70vh", display: "flow", flexDirection: "column" }}>
+        <CardMedia
+          component="img"
+          sx={{
+            // 16:9
+            height: "40%",
+            paddingTop: "0%",
+            paddingBottom: "12%",
+          }}
+          image={props.coupon.image}
+          alt="coupon img"
+        />
+        {/* <CardContent sx={{ flexGrow: 20, height: 115 }}> */}
+
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="h2">
             {props.coupon.title}
           </Typography>
-          {/* </Grid> */}
-          <Typography variant="h4" component="h2">
-            {props.coupon.price}
+          <Typography>{props.coupon.description}</Typography>
+          <Typography gutterBottom variant="h6" component="h2">
+            {props.coupon.price}{" "}
             <AttachMoneyIcon
               sx={{
                 width: "2rem",
                 marginRight: 0.5,
               }}
             />
-          </Typography>
-          <Typography variant="h6" component="h2">
-            {props.coupon.description}
-          </Typography>
-          {/* <Box> */}
-          <Typography variant="h6" component="p">
-            <EventAvailableIcon
-              sx={{
-                width: "2rem",
-                marginRight: 0.5,
-              }}
-            />
-            {props.coupon.startDate}
           </Typography>
           <Typography variant="h6" component="p">
             <EventBusyIcon
@@ -165,31 +229,11 @@ function Coupon(props: couponProps): JSX.Element {
             />
             {props.coupon.endDate}
           </Typography>
-          {/* </Box> */}
-          <Typography variant="h6" component="p">
-            <Inventory2OutlinedIcon
-              sx={{
-                width: "2rem",
-                marginRight: 0.5,
-              }}
-            />
-            {props.coupon.amount}
-          </Typography>
+        </CardContent>
+        <CardActions sx={{ position: "relative" }}>
           {renderSwitch()}
-        </Box>
-      </Paper>
-      <Dialog open={open} onClose={handleClose}>
-        <DeletePrompt
-          handleClose={handleClose}
-          deleteableID={props.coupon.id as number}
-          targetType={DeleteableEntity.COUPON}
-          deleteFunc={() => {
-            deleteCoupon(props.coupon);
-          }}
-        >
-          {/* {props.formType} */}
-        </DeletePrompt>
-      </Dialog>
+        </CardActions>
+      </Card>
     </Grid>
   );
 }

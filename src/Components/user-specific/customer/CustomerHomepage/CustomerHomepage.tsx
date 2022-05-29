@@ -62,7 +62,7 @@ function CustomerHomepage(): JSX.Element {
   return (
     <div className="customerHomepage">
       {browse ? (
-        <Box>
+        <Box padding={8}>
           <Button onClick={openMyCoupons}>My Coupons</Button>
           {/* <FeaturedCoupons allCoupons={allCoupons} /> */}
           <CouponBrowser
@@ -71,7 +71,7 @@ function CustomerHomepage(): JSX.Element {
           />
         </Box>
       ) : (
-        <Box>
+        <Box padding={8}>
           <Button onClick={openBrowser}>Coupon Browser</Button>
           <MyCoupons coupons={customerCoupons} />
         </Box>
