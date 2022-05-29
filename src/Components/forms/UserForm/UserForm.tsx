@@ -99,7 +99,7 @@ function UserForm(props: IFormProps): JSX.Element {
                 setStoredToken(res);
                 props.userType === "customer" &&
                   addCustomer({ ...data } as CustomerModel);
-                navigate("/login");
+                navigate("/loginPage");
               })
               .catch((error: any) => {
                 notify.error(error.response.data.description);

@@ -10,6 +10,7 @@ import { CompanyModel } from "../../../../Models/CompanyModel";
 import { CustomerModel } from "../../../../Models/CustomerModel";
 import notify from "../../../../utils/Notify";
 import getAuthHeaders, { setStoredToken } from "../../../../utils/tokenUtils";
+import { host } from "../../../../utils/globals";
 // import { CompanyModel } from "../../../Models/CompanyModel";
 // import { CustomerModel } from "../../../Models/CustomerModel";
 // import notify from "../../../utils/Notify";
@@ -28,7 +29,7 @@ function UserInfo(): JSX.Element {
     let url = "";
     switch (state.users.userRole) {
       case "customer":
-        url = "http://localhost:8080/customer/getCustomerDetails";
+        url = `${host}/customer/getCustomerDetails`;
         axios
           .get(url, getAuthHeaders())
           .then((res) => {
@@ -41,7 +42,7 @@ function UserInfo(): JSX.Element {
 
         break;
       case "company":
-        url = "http://localhost:8080/company/getCompanyDetails";
+        url = `${host}/company/getCompanyDetails`;
         axios
           .get(url, getAuthHeaders())
           .then((res) => {

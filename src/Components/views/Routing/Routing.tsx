@@ -1,6 +1,6 @@
 import "./Routing.css";
 import Notfound from "../contents/notfound/notfound";
-import { Route, Routes } from "react-router-dom";
+import { Route, Router, Routes } from "react-router-dom";
 import UserInfo from "../contents/UserInfo/UserInfo";
 import Cart from "../../user-specific/customer/Cart/Cart";
 import Login from "../../user-specific/guest/Login/Login";
@@ -12,7 +12,7 @@ function Routing(): JSX.Element {
   return (
     <div className="Routing">
       <Routes>
-        <Route path="/login" element={<Login />} />
+        <Route path="/loginPage" element={<Login />} />
         <Route path="/purchase-coupons" element={<Cart />} />
         <Route path="/my-account" element={<UserInfo />} />
         <Route path="/company-home" element={<CompanyHomepage />} />

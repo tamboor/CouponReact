@@ -7,11 +7,17 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useState } from "react";
 import { Button } from "@mui/material";
 import { useTypedSelector } from "../../../../hooks/useTypedSelector";
+import { useNavigate } from "react-router-dom";
 function ShoppingCart(): JSX.Element {
   const state = useTypedSelector((state) => state);
   //   const [items, setItems] = useState<Number>(0);
+  const navigate = useNavigate();
   return (
-    <Button href="/purchase-coupons">
+    <Button
+      onClick={() => {
+        navigate("/purchase-coupons");
+      }}
+    >
       <Stack spacing={4} direction="row" sx={{ color: "action.active" }}>
         <Badge
           color="secondary"
