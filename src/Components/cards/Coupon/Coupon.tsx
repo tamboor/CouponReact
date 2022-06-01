@@ -98,11 +98,11 @@ function Coupon(props: couponProps): JSX.Element {
       case "company":
         return (
           <Box>
-            <Button variant="outlined" onClick={handleEditCoupon}>
+            <Button onClick={handleEditCoupon}>
               <EditIcon />
             </Button>
             {/* <ActionUserForm verb={AdminVerbs.DELETE} formType="coupon" /> */}
-            <Button variant="outlined" onClick={handleClickOpen}>
+            <Button onClick={handleClickOpen}>
               <DeleteIcon />
             </Button>
           </Box>
@@ -206,34 +206,91 @@ function Coupon(props: couponProps): JSX.Element {
         />
         {/* <CardContent sx={{ flexGrow: 20, height: 115 }}> */}
 
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
+        <CardContent sx={{ height: "50%" }}>
+          <Grid container spacing={2}>
+            <Grid item xs={8}>
+              <Box
+                display="flex"
+                flexDirection="row"
+                alignContent="center"
+                justifyContent="flex-start"
+                height="15vh"
+              >
+                <Typography gutterBottom variant="h5" component="h2">
+                  {props.coupon.title}
+                </Typography>
+              </Box>
+            </Grid>
+            <Grid item xs={4}>
+              <Box
+                display="flex"
+                flexDirection="row"
+                alignContent="center"
+                justifyContent="space-between"
+              >
+                <Typography gutterBottom variant="h6" component="h2">
+                  {props.coupon.price}{" "}
+                </Typography>
+                <AttachMoneyIcon
+                  sx={{
+                    width: "2rem",
+                    marginRight: 0.5,
+                    marginTop: 0.5,
+                  }}
+                />
+              </Box>
+            </Grid>
+          </Grid>
+
+          {/* <Typography gutterBottom variant="h5" component="h2">
             {props.coupon.title}
-          </Typography>
-          <Typography>{props.coupon.description}</Typography>
-          <Typography gutterBottom variant="h6" component="h2">
-            {props.coupon.price}{" "}
-            <AttachMoneyIcon
-              sx={{
-                width: "2rem",
-                marginRight: 0.5,
-              }}
-            />
-          </Typography>
-          <Typography variant="h6" component="p">
-            <EventBusyIcon
-              sx={{
-                width: "2rem",
-                marginRight: 0.5,
-              }}
-            />
-            {props.coupon.endDate}
-          </Typography>
+          </Typography> */}
+          <Box height="20vh">
+            <Box height="10vh">
+              <Typography>{props.coupon.description}</Typography>
+            </Box>
+            {/* <Box display="flex" flexDirection="row" alignContent="center">
+              <Typography gutterBottom variant="h6" component="h2">
+                {props.coupon.price}{" "}
+              </Typography>
+              <AttachMoneyIcon
+                sx={{
+                  width: "2rem",
+                  marginRight: 0.5,
+                  marginTop: 0.5,
+                }}
+              />
+            </Box> */}
+            <Box display="flex" flexDirection="row" alignContent="center">
+              <EventBusyIcon
+                sx={{
+                  width: "2rem",
+                  marginRight: 0.5,
+                  marginTop: 0.5,
+                }}
+              />
+              <Typography variant="h6" component="p">
+                {props.coupon.endDate}
+              </Typography>
+            </Box>
+          </Box>
         </CardContent>
         <CardActions sx={{ position: "relative" }}>
           {renderSwitch()}
         </CardActions>
       </Card>
+      <Dialog open={open} onClose={handleClose}>
+        <DeletePrompt
+          handleClose={handleClose}
+          deleteableID={props.coupon.id as number}
+          targetType={DeleteableEntity.COUPON}
+          deleteFunc={() => {
+            deleteCoupon(props.coupon);
+          }}
+        >
+          {/* {props.formType} */}
+        </DeletePrompt>
+      </Dialog>
     </Grid>
   );
 }

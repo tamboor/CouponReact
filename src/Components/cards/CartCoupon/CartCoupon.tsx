@@ -93,7 +93,7 @@ function CartCoupon(props: cartItemProps): JSX.Element {
     <Grid item key={props.coupon.id} xs={12} sm={12} md={4} xl={2.4} lg={3}>
       <Card
         sx={{
-          height: "50vh",
+          height: "60vh",
           display: "flow",
           flexDirection: "column",
           ...(couponError.error && couponError.styles),
@@ -105,7 +105,7 @@ function CartCoupon(props: cartItemProps): JSX.Element {
             // 16:9
             height: "40%",
             paddingTop: "0%",
-            paddingBottom: "12%",
+            paddingBottom: "0%",
           }}
           image={props.coupon.image}
           alt="coupon img"
@@ -134,7 +134,7 @@ function CartCoupon(props: cartItemProps): JSX.Element {
             </div>
           )}
         </CardContent>
-        <CardActions sx={{ position: "relative" }}>
+        <CardActions sx={{ position: "relative", alignContent: "flex-end" }}>
           <Button
             onClick={() => {
               removeItem(props.coupon);

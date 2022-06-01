@@ -1,4 +1,4 @@
-import { Box, Button, Grid, Paper, Typography } from "@mui/material";
+import { Box, Button, Container, Grid, Paper, Typography } from "@mui/material";
 import axios, { AxiosError } from "axios";
 import { useState } from "react";
 import { useActions } from "../../../../hooks/useActions";
@@ -89,28 +89,51 @@ function Cart(): JSX.Element {
       <br />
       <br />
       <br />
-      <Button onClick={clearCart} disabled={isProcessing}>
-        Clear Cart
-      </Button>
 
-      <Grid container spacing={3}>
-        <Grid item xs={9} sx={styles}>
-          {coupons.map((c: CouponModel, index: number) => (
-            <CartCoupon coupon={c} key={index} />
-          ))}
-        </Grid>
-        <Grid item xs={3} sx={styles}>
-          <Paper elevation={2}>
-            <Typography variant="h4">Subtotal:</Typography>
-            <Typography variant="h4">{getSubTotal()}</Typography>
-          </Paper>
-          <Paper elevation={2}>
-            <Button onClick={handlePurchase} disabled={isProcessing}>
-              Purchase
-            </Button>
-          </Paper>
-        </Grid>
-      </Grid>
+      <Container>
+        <Box sx={{ display: "flex", flexDirection: "column" }}>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              p: 1,
+              m: 1,
+              bgcolor: "background.paper",
+              borderRadius: 1,
+            }}
+          >
+            <Box sx={{ alignContent: "flex-end", flexGrow: 1 }}>
+              <Button onClick={clearCart} disabled={isProcessing}>
+                Clear Cart
+              </Button>
+            </Box>
+            <Box sx={{ alignContent: "flex-end", flexGrow: 1 }}>
+              {/* <Grid item xs={3} sx={styles}> */}
+              <Paper elevation={2}>
+                <Typography variant="h4">Subtotal:</Typography>
+                <Typography variant="h4">{getSubTotal()}</Typography>
+              </Paper>
+              <Paper elevation={2}>
+                <Button onClick={handlePurchase} disabled={isProcessing}>
+                  Purchase
+                </Button>
+              </Paper>
+              {/* </Grid> */}
+            </Box>
+          </Box>
+
+          <Box>
+            <Grid container spacing={3}>
+              {/* <Grid item xs={9} sx={styles}> */}
+              <Grid container spacing={5} marginTop={0.005}>
+                {coupons.map((c: CouponModel, index: number) => (
+                  <CartCoupon coupon={c} key={index} />
+                ))}
+              </Grid>
+            </Grid>
+          </Box>
+        </Box>
+      </Container>
     </Box>
 
     // </div>

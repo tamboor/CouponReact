@@ -10,6 +10,7 @@ import {
   Select,
   SelectChangeEvent,
   Button,
+  Card,
 } from "@mui/material";
 import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
@@ -136,8 +137,8 @@ function CouponForm(props: CouponFormProps): JSX.Element {
 
   return (
     <div className="CouponForm">
-      <Grid>
-        <Paper elevation={12}>
+      <Grid item>
+        <Card elevation={12} sx={{ display: "flow", flexDirection: "column" }}>
           <form onSubmit={handleSubmit(useSubmit, onError)}>
             <Box paddingX={2} paddingY={1}>
               <TextField
@@ -239,7 +240,7 @@ function CouponForm(props: CouponFormProps): JSX.Element {
             <Button onClick={(data: any) => props.handleClose()}>Cancel</Button>
             <Button type="submit">{props.verb}</Button>
           </form>
-        </Paper>
+        </Card>
       </Grid>
     </div>
   );
