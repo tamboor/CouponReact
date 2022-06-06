@@ -6,7 +6,7 @@ import "./Main.css";
 function Main(): JSX.Element {
   return (
     // <div className="Main">
-    <Box>
+    <Box minHeight="100vh">
       {/* <Grid container component="main" position="sticky"> */}
       <Routing />
       {/* </Grid> */}

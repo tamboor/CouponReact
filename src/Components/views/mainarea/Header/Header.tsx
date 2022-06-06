@@ -74,7 +74,7 @@ function Header(props: Props): JSX.Element {
       <HideOnScroll {...props}>
         <AppBar>
           <Toolbar>
-            <Typography
+            {/* <Typography
               variant="h6"
               component="div"
               sx={{
@@ -93,12 +93,19 @@ function Header(props: Props): JSX.Element {
                   case "admin":
                     navigate("/admin-home");
                     break;
+                  case "guest":
+                    navigate("/");
+                    break;
                 }
               }}
             >
               Coupon Mania
-            </Typography>
+            </Typography> */}
 
+            <img
+              src="C:\Users\User\Desktop\CouponReact\src\Assets\images\logo.png"
+              alt="logo"
+            />
             {state.users.userRole === "customer" && <ShoppingCart />}
             {state.users.userRole === "guest" && <RegisterButton />}
             {state.users.userRole === "guest" ? <LoginButton /> : <UserMenu />}

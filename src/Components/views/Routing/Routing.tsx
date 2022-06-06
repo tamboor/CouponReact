@@ -7,11 +7,13 @@ import Login from "../../user-specific/guest/Login/Login";
 import CompanyHomepage from "../../user-specific/company/CompanyHomepage/CompanyHomepage";
 import CustomerHomepage from "../../user-specific/customer/CustomerHomepage/CustomerHomepage";
 import AdminHomepage from "../../user-specific/admin/AdminHomepage/AdminHomepage";
+import GuestHomepage from "../../user-specific/guest/GuestHomepage/GuestHomepage";
 
 function Routing(): JSX.Element {
   return (
     <div className="Routing">
       <Routes>
+        <Route path="/" element={<GuestHomepage />} />
         <Route path="/loginPage" element={<Login />} />
         <Route path="/purchase-coupons" element={<Cart />} />
         <Route path="/my-account" element={<UserInfo />} />

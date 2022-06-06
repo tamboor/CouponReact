@@ -31,7 +31,8 @@ function Login(): JSX.Element {
 
   return (
     <ThemeProvider theme={theme}>
-      <Grid container component="main" sx={{ height: "90vh" }}>
+      {/* <Grid container component="main" sx={{ height: "90vh" }}> */}
+      <Grid container component="main" sx={{ height: "100vh" }}>
         <CssBaseline />
         <Grid
           item
