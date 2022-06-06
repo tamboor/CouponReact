@@ -55,7 +55,7 @@ function Login(): JSX.Element {
           md={5}
           component={Paper}
           elevation={6}
-          sx={{ backgroundColor: colors.LIGHT_PURPLE }}
+          sx={{ backgroundColor: colors.LIGHT_BLUE }}
           square
         >
           <Box
@@ -75,9 +75,9 @@ function Login(): JSX.Element {
             }}
           >
             <Tabs onChange={handleChange} value={value} variant="fullWidth">
-              <Tab label="Customer Login" value="customer" />
-              <Tab label="Company Login" value="company" />
-              <Tab label="Admin Login" value="admin" />
+              <Tab label="Customer" value="customer" />
+              <Tab label="Company" value="company" />
+              <Tab label="Admin" value="admin" />
             </Tabs>
             <br />
             <LoginPanel userType={value} />

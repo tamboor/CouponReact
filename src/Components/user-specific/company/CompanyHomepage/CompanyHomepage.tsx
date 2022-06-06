@@ -83,22 +83,25 @@ export default function BasicTabs() {
   }, [users.userRole]);
 
   return (
-    <Box sx={{ width: "100%" }}>
-      <Tabs
-        value={value}
-        onChange={handleChange}
-        aria-label="basic tabs example"
-        centered
-      >
-        <Tab label="My Coupons" {...a11yProps(0)} />
-        <Tab label="Add Coupon" {...a11yProps(1)} />
-        <Tab label="Item Three" {...a11yProps(2)} />
-      </Tabs>
-      <TabPanel value={value} index={0}>
-        <CouponBrowser allCoupons={coupons} />
-      </TabPanel>
-      <TabPanel value={value} index={1}></TabPanel>
-      <TabPanel value={value} index={2}></TabPanel>
+    // <Box sx={{ width: "100%" }}>
+    //   <Tabs
+    //     value={value}
+    //     onChange={handleChange}
+    //     aria-label="basic tabs example"
+    //     centered
+    //   >
+    //     <Tab label="My Coupons" {...a11yProps(0)} />
+    //     <Tab label="Add Coupon" {...a11yProps(1)} />
+    //     <Tab label="Item Three" {...a11yProps(2)} />
+    //   </Tabs>
+    //   <TabPanel value={value} index={0}>
+    //     <CouponBrowser allCoupons={coupons} />
+    //   </TabPanel>
+    //   <TabPanel value={value} index={1}></TabPanel>
+    //   <TabPanel value={value} index={2}></TabPanel>
+    // </Box>
+    <Box padding={8}>
+      <CouponBrowser allCoupons={coupons} />
     </Box>
   );
 }

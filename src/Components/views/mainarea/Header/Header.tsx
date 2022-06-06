@@ -4,6 +4,7 @@ import {
   Button,
   CssBaseline,
   Fab,
+  Grid,
   Slide,
   Toolbar,
   Typography,
@@ -20,6 +21,7 @@ import LoginButton from "../../header-content/LoginButton/LoginButton";
 import RegisterButton from "../../header-content/RegisterButton/RegisterButton";
 import ShoppingCart from "../../header-content/ShoppingCart/ShoppingCart";
 import UserMenu from "../../header-content/UserMenu/UserMenu";
+import logo from "../../../../Assets/images/logo.png";
 import "./Header.css";
 
 interface Props {
@@ -46,67 +48,62 @@ function Header(props: Props): JSX.Element {
 
   const navigate = useNavigate();
 
-  function renderSwitch() {
-    switch (state.users.userRole) {
-      case "customer":
-        return <Box></Box>;
-      case "company":
-        return (
-          <Box>
-            <Button color="inherit">hello company</Button>
-            <Button color="inherit">hello company 2</Button>
-          </Box>
-        );
-      case "admin":
-        return <Box></Box>;
-      default:
-        return (
-          <Box>
-            <Button color="inherit">hello guest</Button>
-            <Button color="inherit">hello guest 2</Button>
-            <Button>Register</Button>
-          </Box>
-        );
-    }
-  }
-
   return (
     <React.Fragment>
       <CssBaseline />
       <HideOnScroll {...props}>
-        <AppBar sx={{ backgroundColor: colors.PURPLE }}>
+        <AppBar
+          sx={{
+            backgroundColor: colors.PURPLE,
+          }}
+        >
           <Toolbar>
-            <Typography
-              variant="h6"
-              component="div"
-              sx={{
-                flexGrow: 1,
-                fontFamily: "Abril Fatface",
-                "&:hover": { cursor: "pointer" },
-              }}
-              onClick={() => {
-                switch (state.users.userRole) {
-                  case "customer":
-                    navigate("/customer-home");
-                    break;
-                  case "company":
-                    navigate("/company-home");
-                    break;
-                  case "admin":
-                    navigate("/admin-home");
-                    break;
-                  case "guest":
-                    navigate("/");
-                    break;
-                }
-              }}
-            >
-              Coupon Mania
-            </Typography>
+            <Grid container spacing={2}>
+              <Grid item xs={8}>
+                <Box
+                  component="img"
+                  onClick={() => {
+                    switch (state.users.userRole) {
+                      case "customer":
+                        navigate("/customer-home");
+                        break;
+                      case "company":
+                        navigate("/company-home");
+                        break;
+                      case "admin":
+                        navigate("/admin-home");
+                        break;
+                      case "guest":
+                        navigate("/");
+                        break;
+                    }
+                  }}
+                  sx={{
+                    // flexGrow: 1,
+                    height: 64,
+                    "&:hover": { cursor: "pointer" },
+                  }}
+                  alt="logo."
+                  src={logo}
+                />
+              </Grid>
+              {/* <Grid item xs={4}></Grid> */}
+            </Grid>
 
-            {state.users.userRole === "customer" && <ShoppingCart />}
-            {state.users.userRole === "guest" && <RegisterButton />}
-            {state.users.userRole === "guest" ? <LoginButton /> : <UserMenu />}
+            <Box component="span">
+              {state.users.userRole === "customer" && <ShoppingCart />}
+            </Box>
+            <Box component="span">
+              {state.users.userRole === "guest" && <RegisterButton />}
+            </Box>
+            <Box component="span">
+              {" "}
+              {state.users.userRole === "guest" ? (
+                <LoginButton />
+              ) : (
+                <UserMenu />
+              )}
+            </Box>
           </Toolbar>
         </AppBar>
       </HideOnScroll>

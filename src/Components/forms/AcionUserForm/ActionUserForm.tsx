@@ -10,6 +10,7 @@ import UserForm from "../UserForm/UserForm";
 import DeletePrompt from "../DeletePrompt/DeletePrompt";
 import { DeleteableEntity } from "../DeleteableEntities";
 import { useActions } from "../../../hooks/useActions";
+import { colors } from "../../../utils/colors";
 //TODO: change usertype to enum
 interface CustomerForm {
   id: number;
@@ -67,8 +68,16 @@ function ActionUserForm(props: IUserProps): JSX.Element {
             return (
               <Button
                 color="inherit"
-                variant="outlined"
                 onClick={handleClickOpen}
+                variant="contained"
+                sx={{
+                  color: colors.WHITE,
+                  backgroundColor: colors.PINK,
+                  border: 2,
+                  borderColor: colors.PURPLE,
+                  margin: 2,
+                  "&:hover": { color: "black" },
+                }}
               >
                 REGISTER
               </Button>
