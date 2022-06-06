@@ -181,7 +181,6 @@ function CouponBrowser(props: ICouponListProps): JSX.Element {
                 sx={{
                   color: colors.WHITE,
                   backgroundColor: colors.LIGHT_PURPLE,
-                  background,
                 }}
               >
                 Refine
