@@ -15,7 +15,7 @@ import "./Coupon.css";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import { CouponModel } from "../../../Models/CouponModel";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
-import { useState } from "react";
+import React, { useState } from "react";
 import { addItem } from "../../../Redux/action-creators";
 import { useActions } from "../../../hooks/useActions";
 import EventAvailableIcon from "@mui/icons-material/EventAvailable";
@@ -110,15 +110,18 @@ function Coupon(props: couponProps): JSX.Element {
   }
 
   return showForm ? (
+    // <Grid item key={props.coupon.id} xs={12} sm={12} md={4} xl={2.4} lg={3}>
     <CouponForm
       verb={AdminVerbs.UPDATE}
       coupon={props.coupon}
       handleClose={handleCancel}
     />
   ) : (
+    // </Grid>
     //TODO: move gridItem to showCoupons
 
-    <Grid item key={props.coupon.id} xs={12} sm={12} md={4} xl={2.4} lg={3}>
+    // <Grid item key={props.coupon.id} xs={12} sm={12} md={4} xl={2.4} lg={3}>
+    <React.Fragment>
       <Card sx={{ height: "70vh", display: "flow", flexDirection: "column" }}>
         <CardMedia
           component="img"
@@ -202,7 +205,7 @@ function Coupon(props: couponProps): JSX.Element {
           children={undefined}
         />
       </Dialog>
-    </Grid>
+    </React.Fragment>
   );
 }
 

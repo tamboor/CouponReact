@@ -47,7 +47,6 @@ interface ICouponListProps {
   allCoupons: CouponModel[];
   customerCoupons?: CouponModel[];
 }
-//TODO: add an option to filter out customercoupons
 function CouponBrowser(props: ICouponListProps): JSX.Element {
   const state = useTypedSelector((state) => state);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -120,7 +119,6 @@ function CouponBrowser(props: ICouponListProps): JSX.Element {
   //TODO: combine all handleChange
   //TODO: handle event anywhere
 
-  //todo: fix checkbox's default check
   const handleChangeSearchbar = (event: any) => {
     setFilterState({ ...filterState, searchbar: event.target.value });
   };
@@ -185,7 +183,8 @@ function CouponBrowser(props: ICouponListProps): JSX.Element {
                       control={
                         <Checkbox
                           name="xtreme"
-                          defaultChecked={true}
+                          // defaultChecked={true}
+                          checked={filterState.categories.xtreme}
                           onChange={handleCheckbox}
                         />
                       }
@@ -195,7 +194,8 @@ function CouponBrowser(props: ICouponListProps): JSX.Element {
                       control={
                         <Checkbox
                           name="tattoos"
-                          defaultChecked={true}
+                          // defaultChecked={true}
+                          checked={filterState.categories.tattoos}
                           onChange={handleCheckbox}
                         />
                       }
@@ -205,7 +205,8 @@ function CouponBrowser(props: ICouponListProps): JSX.Element {
                       control={
                         <Checkbox
                           name="food"
-                          defaultChecked={true}
+                          // defaultChecked={true}
+                          checked={filterState.categories.food}
                           onChange={handleCheckbox}
                         />
                       }
@@ -215,7 +216,8 @@ function CouponBrowser(props: ICouponListProps): JSX.Element {
                       control={
                         <Checkbox
                           name="vacation"
-                          defaultChecked={true}
+                          // defaultChecked={true}
+                          checked={filterState.categories.vacation}
                           onChange={handleCheckbox}
                         />
                       }
@@ -225,7 +227,8 @@ function CouponBrowser(props: ICouponListProps): JSX.Element {
                       control={
                         <Checkbox
                           name="cars"
-                          defaultChecked={true}
+                          // defaultChecked={true}
+                          checked={filterState.categories.cars}
                           onChange={handleCheckbox}
                         />
                       }
@@ -273,25 +276,45 @@ function CouponBrowser(props: ICouponListProps): JSX.Element {
           </Box>
           <Grid container spacing={5} marginTop={0.005}>
             {state.users.userRole === "company" && (
-              <Grid item xs={3}>
+              // <Grid item xs={3}>
+              <Grid item key={0} xs={12} sm={12} md={4} xl={2.4} lg={3}>
                 <AddCoupon />
               </Grid>
             )}
             {state.users.userRole === "customer"
               ? getSortedCoupons()
                   .map((coupon: CouponModel, index: number) => (
-                    <Coupon
-                      coupon={coupon}
-                      isPurchased={
-                        customerCoupons.includes(coupon.id) ||
-                        cartCoupons.includes(coupon.id)
-                      }
-                      key={index}
-                    />
+                    <Grid
+                      item
+                      key={index + 1}
+                      xs={12}
+                      sm={12}
+                      md={4}
+                      xl={2.4}
+                      lg={3}
+                    >
+                      <Coupon
+                        coupon={coupon}
+                        isPurchased={
+                          customerCoupons.includes(coupon.id) ||
+                          cartCoupons.includes(coupon.id)
+                        }
+                      />
+                    </Grid>
                   ))
                   .sort()
-              : getSortedCoupons().map((coupon: CouponModel) => (
-                  <Coupon coupon={coupon} isPurchased={false} key={coupon.id} />
+              : getSortedCoupons().map((coupon: CouponModel, index: number) => (
+                  <Grid
+                    item
+                    key={index + 1}
+                    xs={12}
+                    sm={12}
+                    md={4}
+                    xl={2.4}
+                    lg={3}
+                  >
+                    <Coupon coupon={coupon} isPurchased={false} />
+                  </Grid>
                 ))}
           </Grid>
           <Pagination

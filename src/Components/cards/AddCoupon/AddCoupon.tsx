@@ -1,6 +1,6 @@
 import "./AddCoupon.css";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
-import { Box } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import { useState } from "react";
 import CouponForm from "../../forms/CouponForm/CouponForm";
 import { AdminVerbs } from "../../user-specific/admin/AdminVerbs";
@@ -17,7 +17,7 @@ function AddCoupon(): JSX.Element {
     setShowForm(false);
   };
 
-  return showForm ? (
+  const render = showForm ? (
     <Box
       sx={{
         cursor: "pointer",
@@ -43,6 +43,8 @@ function AddCoupon(): JSX.Element {
       <AddCircleOutlineIcon color="primary" />
     </Box>
   );
+
+  return render;
 }
 
 export default AddCoupon;

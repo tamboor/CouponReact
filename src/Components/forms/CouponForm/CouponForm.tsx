@@ -109,7 +109,7 @@ function CouponForm(props: CouponFormProps): JSX.Element {
         };
         axios
           .put(
-            `${host}/company/addCoupon`,
+            `${host}/company/updateCoupon`,
             { ...props.coupon, ...updateData },
             getAuthHeaders()
           )
