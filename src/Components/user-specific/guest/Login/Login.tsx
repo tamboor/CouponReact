@@ -13,8 +13,10 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import LoginPanel from "../LoginPanel/LoginPanel";
+import imgLogin from "../../../../Assets/images/login_pic.png";
 
 import "./Login.css";
+import { colors } from "../../../../utils/colors";
 // import { Provider } from "react-redux";
 // import { store } from "../../../state";
 
@@ -54,14 +56,15 @@ function Login(): JSX.Element {
           sx={{
             // backgroundImage: `url("https://wallpaperaccess.com/full/39610.jpg")`,
             // backgroundImage: `url("https://wallpaperaccess.com/full/1112518.jpg")`,
-            backgroundImage: `url("https://wallpaperaccess.com/full/234831.jpg")`,
+            // backgroundImage: `url("https://wallpaperaccess.com/full/234831.jpg")`,
+            backgroundImage: `url(${imgLogin})`,
             backgroundRepeat: "no-repeat",
             backgroundColor: (t) =>
               t.palette.mode === "light"
                 ? t.palette.grey[50]
                 : t.palette.grey[900],
             backgroundSize: "cover",
-            backgroundPosition: "center",
+            backgroundPosition: "100% 100%",
           }}
         />
         <Grid
@@ -71,7 +74,7 @@ function Login(): JSX.Element {
           md={5}
           component={Paper}
           elevation={6}
-          sx={{ backgroundColor: "#15bfa3" }}
+          sx={{ backgroundColor: colors.LIGHT_PURPLE }}
           square
         >
           <Box
