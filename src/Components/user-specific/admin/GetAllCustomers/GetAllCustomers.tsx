@@ -32,7 +32,6 @@ function GetAllCustomers(): JSX.Element {
     fetchCustomers();
   });
 
-  //TODO: ask alon how this works
   useEffect(() => {
     fetchCustomers();
   }, [users.userRole]);
