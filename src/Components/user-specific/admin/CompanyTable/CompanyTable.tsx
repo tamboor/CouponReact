@@ -9,15 +9,10 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import CompanyRow from "../CompanyRow/CompanyRow";
 import { CompanyModel } from "../../../../Models/CompanyModel";
-import {
-  invokeFetchCompanies,
-  // invokeFetchCustomers,
-} from "../../../../utils/fetchAdminUsers";
+import { invokeFetchCompanies } from "../../../../utils/fetchAdminUsers";
 
 interface companyProps {
   companies: CompanyModel[];
-  // addFunction: Function;
-  // deleteFunction: Function;
 }
 
 function CompanyTable(props: companyProps): JSX.Element {
@@ -25,10 +20,6 @@ function CompanyTable(props: companyProps): JSX.Element {
     console.log("fetching companiesfrom table");
     invokeFetchCompanies();
   }, []);
-  // const [companies, setCompanies] = React.useState<CompanyModel[]>([]);
-  // React.useEffect(() => {
-  //   setCompanies(props.companies);
-  // }, []);
 
   return (
     <TableContainer component={Paper}>

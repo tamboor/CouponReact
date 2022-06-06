@@ -17,8 +17,6 @@ import imgLogin from "../../../../Assets/images/login_pic.png";
 
 import "./Login.css";
 import { colors } from "../../../../utils/colors";
-// import { Provider } from "react-redux";
-// import { store } from "../../../state";
 
 //todo: check if Provider needs to be moved to App
 //TODO: add admin login
@@ -32,19 +30,6 @@ function Login(): JSX.Element {
   console.log("here");
 
   return (
-    // <Container sx={{ marginTop: 5 }}>
-    //   <Card>
-    //     <Box sx={{ borderBottom: 1, borderStyle: "solid", padding: 2 }}>
-    //       <Tabs onChange={handleChange} value={value}>
-    //         <Tab label="Customer Login" value="customer" />
-    //         <Tab label="Company Login" value="company" />
-    //         <Tab label="Admin Login" value="admin" />
-    //       </Tabs>
-
-    //       <LoginPanel userType={value} />
-    //     </Box>
-    //   </Card>
-    // </Container>
     <ThemeProvider theme={theme}>
       <Grid container component="main" sx={{ height: "90vh" }}>
         <CssBaseline />
@@ -54,9 +39,6 @@ function Login(): JSX.Element {
           sm={4}
           md={7}
           sx={{
-            // backgroundImage: `url("https://wallpaperaccess.com/full/39610.jpg")`,
-            // backgroundImage: `url("https://wallpaperaccess.com/full/1112518.jpg")`,
-            // backgroundImage: `url("https://wallpaperaccess.com/full/234831.jpg")`,
             backgroundImage: `url(${imgLogin})`,
             backgroundRepeat: "no-repeat",
             backgroundColor: (t) =>
@@ -88,29 +70,12 @@ function Login(): JSX.Element {
                 t.palette.mode === "light"
                   ? t.palette.grey[50]
                   : t.palette.grey[900],
-              // backgroundColor: "pink",
+
               backgroundSize: "cover",
               backgroundPosition: "center",
             }}
           >
-            <Tabs
-              onChange={handleChange}
-              value={value}
-              variant="fullWidth"
-              // sx={{
-              //   my: 8,
-              //   mx: 4,
-              //   display: "flex",
-              //   flexDirection: "column",
-              //   alignItems: "center",
-              //   backgroundColor: (t) =>
-              //     t.palette.mode === "light"
-              //       ? t.palette.grey[50]
-              //       : t.palette.grey[900],
-              //   backgroundSize: "cover",
-              //   backgroundPosition: "center",
-              // }}
-            >
+            <Tabs onChange={handleChange} value={value} variant="fullWidth">
               <Tab label="Customer Login" value="customer" />
               <Tab label="Company Login" value="company" />
               <Tab label="Admin Login" value="admin" />

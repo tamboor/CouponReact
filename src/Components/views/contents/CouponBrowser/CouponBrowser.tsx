@@ -33,7 +33,6 @@ interface ICouponListFilterState {
   };
   valueRange: number[];
   searchbar: string;
-  // showPurchaseable: boolean;
 }
 
 interface ICouponListSortState {
@@ -50,13 +49,11 @@ interface ICouponListProps {
 }
 //TODO: add an option to filter out customercoupons
 function CouponBrowser(props: ICouponListProps): JSX.Element {
-  //   console.log(props.allCoupons);
   const state = useTypedSelector((state) => state);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const getMinMaxPrice = () => {
     const mapped = props.allCoupons.map((coupon) => coupon.price);
     if (mapped.length === 0) return [0, 500];
-    // console.log(mapped);
     return [Math.min(...mapped), Math.max(...mapped)];
   };
   const [minPrice, maxPrice] = getMinMaxPrice();
@@ -151,11 +148,6 @@ function CouponBrowser(props: ICouponListProps): JSX.Element {
   function getSortedCoupons() {
     const filtered = getFilteredCoupons();
     const startIndex = (sortState.page - 1) * sortState.limit;
-    // console.log(
-    //   filtered
-    //     .sort(sortState.compareMethod)
-    //     .slice(startIndex, startIndex + sortState.limit)
-    // );
 
     return filtered
       .sort(sortState.compareMethod)
@@ -166,8 +158,6 @@ function CouponBrowser(props: ICouponListProps): JSX.Element {
     ? props.customerCoupons.map((c) => c.id)
     : [];
   const cartCoupons = state.users.cart.map((c) => c.id);
-
-  // const showCoupons = getSortedCoupons()
 
   return (
     <div className="CouponBrowser">

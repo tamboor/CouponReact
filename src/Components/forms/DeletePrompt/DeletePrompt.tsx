@@ -13,7 +13,7 @@ import "./DeletePrompt.css";
 
 interface PromptProps {
   deleteableID: number;
-  children: React.ReactNode;
+  children?: React.ReactNode;
   handleClose: Function;
   targetType: DeleteableEntity;
   deleteFunc?: Function;
@@ -38,7 +38,6 @@ function DeletePrompt(props: PromptProps): JSX.Element {
           return `${host}/company/deleteCoupon/${props.deleteableID}`;
       }
     };
-    // console.log((getUrl() as string) + props.deleteableID);
     const url = getUrl() as string;
     axios
       .delete(url, getAuthHeaders())
@@ -54,7 +53,6 @@ function DeletePrompt(props: PromptProps): JSX.Element {
       });
   };
   return (
-    // <form onSubmit={handleSubmit(onSubmit)}>
     <div>
       <DialogContent>
         <DialogContentText>
@@ -67,7 +65,6 @@ function DeletePrompt(props: PromptProps): JSX.Element {
         <Button onClick={onDelete}>Delete</Button>
       </DialogActions>
     </div>
-    // </form>
   );
 }
 

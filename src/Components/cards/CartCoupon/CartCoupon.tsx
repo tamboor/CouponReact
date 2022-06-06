@@ -64,32 +64,6 @@ function CartCoupon(props: cartItemProps): JSX.Element {
   }, []);
 
   return (
-    // <div className="CartCoupon">
-    //   <Card
-    //     sx={{
-    //       margin: "1vh  ",
-    //       ...(couponError.error && couponError.styles),
-    //     }}
-    //   >
-    //     {couponError.error !== null && (
-    //       <Typography color={"red"}>{couponError.error}</Typography>
-    //     )}
-    //     <Typography>{props.coupon.title}</Typography>
-    //     {!couponError.error && (
-    //       <div>
-    //         <Typography>{props.coupon.description}</Typography>
-    //         <Typography>{props.coupon.price}</Typography>
-    //       </div>
-    //     )}
-    //     <Button
-    //       onClick={() => {
-    //         removeItem(props.coupon);
-    //       }}
-    //     >
-    //       Remove Item
-    //     </Button>
-    //   </Card>
-    // </div>
     <Grid item key={props.coupon.id} xs={12} sm={12} md={4} xl={2.4} lg={3}>
       <Card
         sx={{

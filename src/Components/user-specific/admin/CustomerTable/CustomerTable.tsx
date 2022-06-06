@@ -13,17 +13,9 @@ import CustomerRow from "../CustomerRow/CustomerRow";
 import "./CustomerTable.css";
 interface customerProps {
   customers: CustomerModel[];
-  // addFunction: Function;
-  // deleteFunction: Function;
 }
 //todo: move ADD button from "manage users" to here
 function CustomerTable(props: customerProps): JSX.Element {
-  // const [customers, setCustomers] = React.useState<CustomerModel[]>([]);
-  // useEffect(() => {
-  //   setCustomers(props.customers);
-  //   // props.updateFunc();
-  // }, []);
-
   const handleFormSubmit = (data: CustomerModel) => {};
   return (
     <TableContainer component={Paper}>
@@ -39,12 +31,7 @@ function CustomerTable(props: customerProps): JSX.Element {
         </TableHead>
         <TableBody>
           {props.customers.map((customer, index) => (
-            <CustomerRow
-              singleCustomer={customer}
-              key={index}
-              // deleteFunc={() => props.deleteFunction(customer.id)}
-              // addFunc={() => props.addFunction(customer.id)}
-            />
+            <CustomerRow singleCustomer={customer} key={index} />
           ))}
         </TableBody>
       </Table>

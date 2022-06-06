@@ -15,36 +15,13 @@ interface myCouponsProps {
 }
 
 function MyCoupons(props: myCouponsProps): JSX.Element {
-  // const state = useTypedSelector((state) => state);
-  // const [coupons, setCoupons] = useState<CouponModel[]>([]);
-  // const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   if (state.users.userRole !== "customer") {
-  //     navigate("/");
-  //     return;
-  //   }
-  //   const url = "http://localhost:8080/customer/getCustomerCoupons";
-  //   axios
-  //     .get(url, getAuthHeaders())
-  //     .then((response) => {
-  //       setStoredToken(response);
-  //       setCoupons(response.data);
-  //     })
-  //     .catch((error: any) => {
-  //       notify.error(error.response.data.description);
-  //       console.log(error);
-  //     });
-  // }, []);
   return (
     <div className="MyCoupons">
       <Typography>My Coupons</Typography>
       <Container>
         <Grid container spacing={5} marginTop={0.005}>
           {props.coupons.map((c: CouponModel, index: number) => (
-            // <React.Fragment key={index}>
             <PurchasedCoupon coupon={c} key={index} />
-            // </React.Fragment>
           ))}
         </Grid>
       </Container>

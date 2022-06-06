@@ -84,7 +84,6 @@ function Cart(): JSX.Element {
   //TODO: CART DOESNT SEND PURCHASE REQUEST!
   //todo: design cart page to be responsive
   return (
-    // <div className="CouponPurchase">
     <Box>
       <br />
       <br />

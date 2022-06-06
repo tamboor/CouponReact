@@ -45,9 +45,7 @@ function a11yProps(index: number) {
 
 export default function BasicTabs() {
   const [value, setValue] = React.useState(0);
-  // const [companyCoupons, setCompanyCoupons] = React.useState<CouponModel[]>([]);
   const { users } = useTypedSelector((state) => state);
-  // const { setCoupons } = useActions();
   const [coupons, setCoupons] = React.useState<CouponModel[]>(
     [] as CouponModel[]
   );
@@ -96,7 +94,6 @@ export default function BasicTabs() {
         <Tab label="Add Coupon" {...a11yProps(1)} />
         <Tab label="Item Three" {...a11yProps(2)} />
       </Tabs>
-      {/* </Box> */}
       <TabPanel value={value} index={0}>
         <CouponBrowser allCoupons={coupons} />
       </TabPanel>

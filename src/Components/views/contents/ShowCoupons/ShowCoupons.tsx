@@ -27,7 +27,6 @@ import usePagination from "@mui/material/usePagination/usePagination";
 //TODO: handle searchbar
 //TODO: fixx guest access
 interface CouponsState {
-  // coupons: CouponModel[];
   couponsFiltered: CouponModel[];
   categories: {
     xtreme: boolean;
@@ -45,11 +44,9 @@ interface IShowCouponsProps {
 }
 
 function ShowCoupons(props: IShowCouponsProps): JSX.Element {
-  // const { items } = usePagination({ count: 3 });
   const state = useTypedSelector((state) => state);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [showState, setShowState] = useState<CouponsState>({
-    // coupons: props.couponsInitial,
     couponsFiltered: props.couponsInitial,
     categories: {
       xtreme: true,

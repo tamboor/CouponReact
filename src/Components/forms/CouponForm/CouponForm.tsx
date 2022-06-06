@@ -48,14 +48,10 @@ interface CouponForm {
 }
 
 function CouponForm(props: CouponFormProps): JSX.Element {
-  // const { addCoupon, refetchCoupons } = useActions();
-
   const {
     register,
     formState: { errors },
     handleSubmit,
-    // getValues,
-    // control,
   } = useForm<CouponForm>();
 
   const [category, setCategory] = React.useState(
@@ -64,7 +60,6 @@ function CouponForm(props: CouponFormProps): JSX.Element {
 
   const [startDate, setStartDate] = React.useState<Date | null>(new Date());
   const [endDate, setEndDate] = React.useState<Date | null>(new Date());
-  // const [isError, setIsError] = React.useState(false);
 
   const handleChange = (event: SelectChangeEvent) => {
     setCategory(event.target.value as string);

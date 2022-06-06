@@ -77,10 +77,8 @@ function UserForm(props: IFormProps): JSX.Element {
               )
               .then((res: AxiosResponse) => {
                 setStoredToken(res);
-                // props.addFunction?.({ ...data });
                 switch (props.userType) {
                   case "customer":
-                    // console.log({ ...data } as CustomerModel);
                     addCustomer({ ...data } as CustomerModel);
                     break;
                   case "company":
@@ -117,7 +115,6 @@ function UserForm(props: IFormProps): JSX.Element {
           )
           .then((res: AxiosResponse) => {
             setStoredToken(res);
-            // props.updateFunction && props.updateFunction(data);
             switch (props.userType) {
               case "customer":
                 updateCustomer({ ...props.user, ...data } as CustomerModel);
@@ -166,7 +163,6 @@ function UserForm(props: IFormProps): JSX.Element {
         {...register("name", { required: "this is required" })}
         label="Company Name"
         variant="standard"
-        // defaultValue={(props.user && (props.user as CompanyForm))?.name}
       />
     );
 
@@ -178,8 +174,6 @@ function UserForm(props: IFormProps): JSX.Element {
         defaultValue={props.user?.email}
       />
     );
-
-    // console.log(handleSubmit);
 
     switch (props.verb) {
       case AdminVerbs.ADD:

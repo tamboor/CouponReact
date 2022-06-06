@@ -57,7 +57,6 @@ function CompanyRow(props: companySingleProp): JSX.Element {
       })
       .catch((error: any) => {
         notify.error(error.response.data.description);
-        // console.log(error);
       });
   };
 

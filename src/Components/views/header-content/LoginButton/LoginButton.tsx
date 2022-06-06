@@ -5,10 +5,6 @@ import "./LoginButton.css";
 function LoginButton(): JSX.Element {
   const navigate = useNavigate();
 
-  // function handleClick() {
-  //   navigate("/loginPage");
-  // }
-
   return (
     <Button
       color="inherit"

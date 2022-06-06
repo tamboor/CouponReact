@@ -35,14 +35,6 @@ function UserMenu(): JSX.Element {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  // const handleLogout = () => {
-  //   tryLogout();
-  //   navigate("/");
-  // };
-
-  // const handleMyAcount = () => {
-  //   navigate("/user");
-  // };
 
   return (
     <React.Fragment>

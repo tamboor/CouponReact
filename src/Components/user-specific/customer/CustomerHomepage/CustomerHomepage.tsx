@@ -10,7 +10,6 @@ import getAuthHeaders, {
   setStoredToken,
 } from "../../../../utils/tokenUtils";
 import CouponBrowser from "../../../views/contents/CouponBrowser/CouponBrowser";
-import FeaturedCoupons from "../FeaturedCoupons/FeaturedCoupons";
 import MyCoupons from "../MyCoupons/MyCoupons";
 import "./CustomerHomepage.css";
 
@@ -64,7 +63,6 @@ function CustomerHomepage(): JSX.Element {
       {browse ? (
         <Box padding={8}>
           <Button onClick={openMyCoupons}>My Coupons</Button>
-          {/* <FeaturedCoupons allCoupons={allCoupons} /> */}
           <CouponBrowser
             allCoupons={allCoupons}
             customerCoupons={customerCoupons}
