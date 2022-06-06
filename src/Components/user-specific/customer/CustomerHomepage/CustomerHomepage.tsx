@@ -3,6 +3,7 @@ import axios, { AxiosResponse } from "axios";
 import { useEffect, useState } from "react";
 import { useTypedSelector } from "../../../../hooks/useTypedSelector";
 import { CouponModel } from "../../../../Models/CouponModel";
+import { colors } from "../../../../utils/colors";
 import { host } from "../../../../utils/globals";
 import notify from "../../../../utils/Notify";
 import getAuthHeaders, {
@@ -59,7 +60,19 @@ function CustomerHomepage(): JSX.Element {
     <div className="customerHomepage">
       {browse ? (
         <Box padding={8}>
-          <Button onClick={openMyCoupons}>My Coupons</Button>
+          <Button
+            onClick={openMyCoupons}
+            variant="contained"
+            sx={{
+              color: colors.WHITE,
+              backgroundColor: colors.PINK,
+              border: 2,
+              borderColor: colors.PURPLE,
+              margin: 2,
+            }}
+          >
+            My Coupons
+          </Button>
           <CouponBrowser
             allCoupons={allCoupons}
             customerCoupons={customerCoupons}
@@ -67,7 +80,19 @@ function CustomerHomepage(): JSX.Element {
         </Box>
       ) : (
         <Box padding={8}>
-          <Button onClick={openBrowser}>Coupon Browser</Button>
+          <Button
+            onClick={openBrowser}
+            variant="contained"
+            sx={{
+              color: colors.WHITE,
+              backgroundColor: colors.PINK,
+              border: 2,
+              borderColor: colors.PURPLE,
+              margin: 2,
+            }}
+          >
+            Coupon Browser
+          </Button>
           <MyCoupons coupons={customerCoupons} />
         </Box>
       )}

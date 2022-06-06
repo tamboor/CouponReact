@@ -177,10 +177,12 @@ function CouponBrowser(props: ICouponListProps): JSX.Element {
                 aria-haspopup="true"
                 aria-expanded={open ? "true" : undefined}
                 disableElevation
-                variant="outlined"
+                variant="contained"
                 sx={{
                   color: colors.WHITE,
                   backgroundColor: colors.LIGHT_PURPLE,
+                  border: 2,
+                  borderColor: colors.PURPLE,
                 }}
               >
                 Refine
@@ -271,6 +273,11 @@ function CouponBrowser(props: ICouponListProps): JSX.Element {
                 label="Limit"
                 onChange={(e) => {
                   setSortState({ ...sortState, limit: Number(e.target.value) });
+                }}
+                sx={{
+                  backgroundColor: colors.LIGHT_PURPLE,
+                  border: 2,
+                  borderColor: colors.PURPLE,
                 }}
               >
                 <MenuItem value={8}>8</MenuItem>

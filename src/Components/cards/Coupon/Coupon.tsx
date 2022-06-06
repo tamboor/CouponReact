@@ -32,18 +32,8 @@ import { DeleteableEntity } from "../../forms/DeleteableEntities";
 import EditIcon from "@mui/icons-material/Edit";
 import { deleteCoupon } from "../../../utils/fetchCompanyCoupons";
 import { colors } from "../../../utils/colors";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 
-// interface couponProps {
-//   amount: number;
-//   category: string;
-//   description: string;
-//   endDate: number;
-//   id: number;
-//   image: string;
-//   price: number;
-//   startDate: number;
-//   title: string;
-// }
 interface couponProps {
   coupon: CouponModel;
   isPurchased: boolean;
@@ -80,8 +70,12 @@ function Coupon(props: couponProps): JSX.Element {
     switch (state.users.userRole) {
       case "customer":
         return (
-          <Button onClick={handleAddToCart} disabled={props.isPurchased}>
-            Add to cart
+          <Button
+            onClick={handleAddToCart}
+            disabled={props.isPurchased}
+            sx={{ color: colors.PURPLE }}
+          >
+            <AddShoppingCartIcon />
           </Button>
         );
       case "company":
