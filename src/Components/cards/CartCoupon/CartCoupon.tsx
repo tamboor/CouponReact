@@ -47,7 +47,7 @@ function CartCoupon(props: cartItemProps): JSX.Element {
     axios
       .get(`${host}/customer/checkCoupon`, getAuthHeaders())
       .then((res) => {
-        setStoredToken(res);
+        // setStoredToken(res);
         setCoupon(res.data);
       })
       .catch((error) => {

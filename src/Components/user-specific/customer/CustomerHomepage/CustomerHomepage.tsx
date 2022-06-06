@@ -38,7 +38,6 @@ function CustomerHomepage(): JSX.Element {
       .get(`${host}/guest/getAllCoupons`)
       .then((response: AxiosResponse) => {
         setAllCoupons(response.data as CouponModel[]);
-        setStoredToken(response);
       })
       .catch((error) => {
         notify.error(error.response.data.description);
@@ -49,8 +48,10 @@ function CustomerHomepage(): JSX.Element {
       .get(`${host}/customer/getCustomerCoupons`, getAuthHeaders())
       .then((response: AxiosResponse) => {
         setCustomerCoupons(response.data as CouponModel[]);
+        setStoredToken(response);
       })
       .catch((error) => {
+        console.log(error);
         notify.error(error.response.data.description);
       });
   }

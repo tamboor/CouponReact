@@ -9,10 +9,12 @@ export function getStoredToken(): string {
 
 export function setStoredToken(res: AxiosResponse): void {
   // res.headers.A
+  console.log(res.headers.authorization);
   const headers = res.headers;
-  return localStorage.setItem("token", headers.authorization);
+  localStorage.setItem("token", headers.authorization);
 }
 
 export default function getAuthHeaders(): any {
+  const token = getStoredToken();
   return { headers: { Authorization: getStoredToken() } };
 }

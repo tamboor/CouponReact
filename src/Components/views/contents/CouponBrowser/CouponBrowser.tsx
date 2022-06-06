@@ -92,8 +92,10 @@ function CouponBrowser(props: ICouponListProps): JSX.Element {
     },
     (c: CouponModel) => {
       return (
-        c.description.includes(filterState.searchbar) ||
-        c.title.includes(filterState.searchbar)
+        c.description
+          .toLowerCase()
+          .includes(filterState.searchbar.toLowerCase()) ||
+        c.title.toLowerCase().includes(filterState.searchbar.toLowerCase())
       );
     },
   ];
@@ -118,8 +120,6 @@ function CouponBrowser(props: ICouponListProps): JSX.Element {
   const handleChangeSlider = (event: Event, newValue: number | number[]) => {
     setFilterState({ ...filterState, valueRange: newValue as number[] });
   };
-  //TODO: combine all handleChange
-  //TODO: handle event anywhere
 
   const handleChangeSearchbar = (event: any) => {
     setFilterState({ ...filterState, searchbar: event.target.value });

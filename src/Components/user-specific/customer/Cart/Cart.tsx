@@ -67,7 +67,6 @@ function Cart(): JSX.Element {
             }
           )
           .then((res) => {
-            setStoredToken(res);
             removeItem(coupon);
             notify.success(coupon.title + " was successfully purchased");
           })
