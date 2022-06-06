@@ -6,7 +6,10 @@ import { useTypedSelector } from "../../../../hooks/useTypedSelector";
 import { CouponModel } from "../../../../Models/CouponModel";
 import { host } from "../../../../utils/globals";
 import notify from "../../../../utils/Notify";
-import getAuthHeaders, { getStoredToken } from "../../../../utils/tokenUtils";
+import getAuthHeaders, {
+  getStoredToken,
+  setStoredToken,
+} from "../../../../utils/tokenUtils";
 import CartCoupon from "../../../cards/CartCoupon/CartCoupon";
 import "./Cart.css";
 
@@ -15,7 +18,6 @@ const styles = {
   height: "100vh",
 };
 
-//TODO: move cart to external file
 function Cart(): JSX.Element {
   const { clearCart, removeItem } = useActions();
 
@@ -52,8 +54,6 @@ function Cart(): JSX.Element {
     console.log(e);
   };
 
-  //TODO: place token after request
-  //todo: change error callback to bigger scoped
   function checkCouponAndBuy(coupon: CouponModel) {
     axios
       .get(`${host}/customer/checkCoupon/${coupon.id}`, getAuthHeaders())
@@ -67,6 +67,7 @@ function Cart(): JSX.Element {
             }
           )
           .then((res) => {
+            setStoredToken(res);
             removeItem(coupon);
             notify.success(coupon.title + " was successfully purchased");
           })
@@ -81,8 +82,6 @@ function Cart(): JSX.Element {
       });
   }
 
-  //TODO: CART DOESNT SEND PURCHASE REQUEST!
-  //todo: design cart page to be responsive
   return (
     <Box>
       <br />

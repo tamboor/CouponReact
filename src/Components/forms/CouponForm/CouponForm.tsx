@@ -92,8 +92,6 @@ function CouponForm(props: CouponFormProps): JSX.Element {
             refetchCoupons();
           })
           .catch((error: any) => {
-            //TODO: handle error
-            console.log(error);
             notify.error(error.response?.data.description as string);
           });
         break;
@@ -121,9 +119,6 @@ function CouponForm(props: CouponFormProps): JSX.Element {
             refetchCoupons();
           })
           .catch((error: AxiosError) => {
-            //TODO: handle error
-            console.log(error);
-
             notify.error(error.response?.data as string);
           });
         break;

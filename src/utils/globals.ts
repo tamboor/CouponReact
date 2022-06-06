@@ -1,5 +1,3 @@
-//TODO: globals for heroku
-
 class Globals {}
 
 class DevelopmentGlobals extends Globals {

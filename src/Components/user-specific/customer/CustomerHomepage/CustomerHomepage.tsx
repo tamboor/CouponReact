@@ -33,18 +33,15 @@ function CustomerHomepage(): JSX.Element {
     fetchCustomerCoupons();
   }, [users.userRole]);
 
-  //TODO: handle errors
   function fetchCoupons(): void {
-    console.log(getStoredToken());
-
     axios
       .get(`${host}/guest/getAllCoupons`)
       .then((response: AxiosResponse) => {
         setAllCoupons(response.data as CouponModel[]);
+        setStoredToken(response);
       })
       .catch((error) => {
         notify.error(error.response.data.description);
-        console.log(error);
       });
   }
   function fetchCustomerCoupons(): void {

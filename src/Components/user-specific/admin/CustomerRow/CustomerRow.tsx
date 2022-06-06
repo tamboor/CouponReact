@@ -37,7 +37,6 @@ function CustomerRow(props: customerSingleProp): JSX.Element {
     }
     axios
       .get(
-        //TODO: change to globals
         `${host}/admin/getCustomerByEmail/${props.singleCustomer.email}`,
         getAuthHeaders()
       )
@@ -46,7 +45,7 @@ function CustomerRow(props: customerSingleProp): JSX.Element {
         addCustomer(res.data);
       })
       .catch((err: AxiosError) => {
-        //TODO: handle error
+        notify.error("Error getting customer from server");
       });
   }, []);
   useEffect(() => {}, []);
@@ -63,9 +62,7 @@ function CustomerRow(props: customerSingleProp): JSX.Element {
         notify.error(error.response.data.description);
       });
   };
-  const handleFormSubmit = (data: CustomerModel) => {
-    //TODO: change to update
-  };
+
   return (
     <React.Fragment>
       <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
@@ -94,7 +91,6 @@ function CustomerRow(props: customerSingleProp): JSX.Element {
                 verb={AdminVerbs.UPDATE}
                 user={props.singleCustomer}
                 formType="customer"
-                updateFunc={handleFormSubmit}
               />
             </TableCell>
             <TableCell>

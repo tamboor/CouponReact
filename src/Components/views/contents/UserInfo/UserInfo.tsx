@@ -11,20 +11,14 @@ import { CustomerModel } from "../../../../Models/CustomerModel";
 import notify from "../../../../utils/Notify";
 import getAuthHeaders, { setStoredToken } from "../../../../utils/tokenUtils";
 import { host } from "../../../../utils/globals";
-// import { CompanyModel } from "../../../Models/CompanyModel";
-// import { CustomerModel } from "../../../Models/CustomerModel";
-// import notify from "../../../utils/Notify";
 
-//TODO: move axios to an import
 function UserInfo(): JSX.Element {
   const state = useTypedSelector((state) => state);
   const navigate = useNavigate();
 
   const [customer, setCustomer] = useState<CustomerModel>();
   const [company, setCompany] = useState<CompanyModel>();
-  const token = localStorage.getItem("token") as string;
 
-  //todo: and 'catch' after every 'then'
   useEffect(() => {
     let url = "";
     switch (state.users.userRole) {
@@ -50,9 +44,7 @@ function UserInfo(): JSX.Element {
             setCompany(res.data);
           })
           .catch((error) => {
-            console.log(error.response.status);
             notify.error(error.response.data.description);
-            console.log(error);
           });
 
         break;
@@ -60,7 +52,6 @@ function UserInfo(): JSX.Element {
         navigate("/404");
         break;
     }
-    // const value = localStorage.getItem("token")
   }, []);
 
   function renderSwitch() {
@@ -103,18 +94,7 @@ function UserInfo(): JSX.Element {
     }
   }
 
-  //   if (state.users.userRole !== "admin") {
-  //     const url = ``;
-  //   }
-  //todo: return a <UserDetails> component with 'user' as props
   return <Container sx={{ marginTop: 5 }}>{renderSwitch()}</Container>;
 }
 
 export default UserInfo;
-// function useEffect(arg0: () => void, arg1: never[]) {
-//   throw new Error("Function not implemented.");
-// }
-
-// function setCoupons(data: any) {
-//   throw new Error("Function not implemented.");
-// }

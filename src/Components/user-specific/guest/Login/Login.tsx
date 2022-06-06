@@ -18,8 +18,6 @@ import imgLogin from "../../../../Assets/images/login_pic.png";
 import "./Login.css";
 import { colors } from "../../../../utils/colors";
 
-//todo: check if Provider needs to be moved to App
-//TODO: add admin login
 function Login(): JSX.Element {
   const [value, setValue] = useState<string>("customer");
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {

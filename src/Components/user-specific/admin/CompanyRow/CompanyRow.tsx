@@ -42,7 +42,7 @@ function CompanyRow(props: companySingleProp): JSX.Element {
         addCompany(res.data);
       })
       .catch((err: AxiosError) => {
-        //TODO: handle error
+        notify.error("Error getting company from server");
       });
   }, []);
 

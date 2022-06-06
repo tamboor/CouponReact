@@ -13,7 +13,6 @@ import { useActions } from "../../../hooks/useActions";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
 import { CompanyModel } from "../../../Models/CompanyModel";
 import { CustomerModel } from "../../../Models/CustomerModel";
-import { UserModel } from "../../../Models/UserModel";
 import { host } from "../../../utils/globals";
 import notify from "../../../utils/Notify";
 import getAuthHeaders, { setStoredToken } from "../../../utils/tokenUtils";
@@ -25,7 +24,7 @@ interface IFormProps {
   user?: CompanyForm | CustomerForm;
   userType: string;
   handleClose: Function;
-  updateFunction?: Function;
+  // updateFunction?: Function;
   // addFunction?: Function;
 }
 

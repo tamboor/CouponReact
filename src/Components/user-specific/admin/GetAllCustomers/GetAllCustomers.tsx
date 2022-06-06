@@ -9,8 +9,6 @@ import getAuthHeaders, { setStoredToken } from "../../../../utils/tokenUtils";
 import CustomerTable from "../CustomerTable/CustomerTable";
 import "./GetAllCustomers.css";
 
-//todo: what is setLoad
-//TODO: check why this only works after 2 refreshes
 function GetAllCustomers(): JSX.Element {
   const { setCustomers } = useActions();
   const { admin, users } = useTypedSelector((state) => state);

@@ -27,5 +27,3 @@ function Routing(): JSX.Element {
 }
 
 export default Routing;
-
-//TODO: add 404 to * route

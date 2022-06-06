@@ -9,7 +9,6 @@ import getAuthHeaders, { setStoredToken } from "../../../../utils/tokenUtils";
 // import { CompanyModel } from "../../../Models/CompanyModel";
 import CompanyTable from "../CompanyTable/CompanyTable";
 import "./GetAllCompanies.css";
-//TODO: change to admin homepage architecture
 //TODO: add pagination
 function GetAllCompanies(): JSX.Element {
   const { setCompanies } = useActions();

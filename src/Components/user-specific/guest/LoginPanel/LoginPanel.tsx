@@ -9,6 +9,7 @@ import { useTypedSelector } from "../../../../hooks/useTypedSelector";
 import getAuthHeaders, { setStoredToken } from "../../../../utils/tokenUtils";
 import axios, { AxiosError, AxiosResponse } from "axios";
 import globals, { host } from "../../../../utils/globals";
+import notify from "../../../../utils/Notify";
 
 interface LoginProps {
   children?: JSX.Element;
@@ -72,8 +73,7 @@ function LoginPanel(props: LoginProps): JSX.Element {
           data.userEmail,
           data.userPass,
           (err: AxiosError) => {
-            //TODO: change to not found
-            navigate("/notFound");
+            notify.error("Invalid username or password");
           }
         );
         break;
@@ -84,7 +84,7 @@ function LoginPanel(props: LoginProps): JSX.Element {
           data.userEmail,
           data.userPass,
           (err: AxiosError) => {
-            navigate("/notFound");
+            notify.error("Invalid username or password");
           }
         );
         break;
@@ -95,7 +95,7 @@ function LoginPanel(props: LoginProps): JSX.Element {
           data.userEmail,
           data.userPass,
           (err: AxiosError) => {
-            navigate("/notFound");
+            notify.error("Invalid username or password");
           }
         );
         break;

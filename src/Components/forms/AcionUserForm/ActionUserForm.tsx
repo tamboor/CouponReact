@@ -1,20 +1,7 @@
-import {
-  Button,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogContentText,
-  TextField,
-  DialogActions,
-} from "@mui/material";
+import { Button, Dialog } from "@mui/material";
 import React from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
 import { useTypedSelector } from "../../../hooks/useTypedSelector";
-import { CustomerModel } from "../../../Models/CustomerModel";
-import notify from "../../../utils/Notify";
 import { AdminVerbs } from "../../user-specific/admin/AdminVerbs";
-// import ActionCustomerForm from "../ActionCustomerForm/ActionCustomerForm";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import "./AcionUserForm.css";
@@ -23,11 +10,7 @@ import UserForm from "../UserForm/UserForm";
 import DeletePrompt from "../DeletePrompt/DeletePrompt";
 import { DeleteableEntity } from "../DeleteableEntities";
 import { useActions } from "../../../hooks/useActions";
-import { userInfo } from "os";
-import { refetchCoupons } from "../../../utils/fetchCompanyCoupons";
-// import CouponForm from "../CouponForm/CouponForm";
 //TODO: change usertype to enum
-//TODO: complete functionality to delete a coupon
 interface CustomerForm {
   id: number;
   email: string;
@@ -163,7 +146,6 @@ function ActionUserForm(props: IUserProps): JSX.Element {
             handleClose={handleClose}
             user={props?.user}
             userType={props.formType}
-            updateFunction={props?.updateFunc}
             // addFunction={(data: any) => props.addFunc?.(data)}
           />
         )}

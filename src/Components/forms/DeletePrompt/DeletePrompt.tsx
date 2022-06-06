@@ -26,8 +26,6 @@ function DeletePrompt(props: PromptProps): JSX.Element {
     handleClose();
   };
   const onDelete = () => {
-    //TODO:find way to use getter
-    //TODO: make a .env file and switch all occurances of localhost:8080 to a global value
     const getUrl = () => {
       switch (props.targetType) {
         case DeleteableEntity.COMPANY:
@@ -48,8 +46,6 @@ function DeletePrompt(props: PromptProps): JSX.Element {
       })
       .catch((error) => {
         notify.error(error.response.data.description);
-        //TODO: handle error
-        console.log(error);
       });
   };
   return (

@@ -56,7 +56,6 @@ function Coupon(props: couponProps): JSX.Element {
   const state = useTypedSelector((state) => state);
   const { removeCoupon } = useActions();
 
-  // console.log("type from coupon: " + typeof state.users.cart);
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -71,20 +70,10 @@ function Coupon(props: couponProps): JSX.Element {
     console.log("edit");
     setShowForm(true);
   };
-  //  (event: any) => {
-  //   return (
-  //     <CouponForm
-  //       verb={AdminVerbs.UPDATE}
-  //       coupon={props.coupon}
-  //       handleClose={() => {}}
-  //     />
-  //   );
-  // };
+
   const handleCancel = () => {
     setShowForm(false);
   };
-
-  // console.log(state.users.cart.includes(props.coupon));
 
   function renderSwitch() {
     switch (state.users.userRole) {
@@ -100,7 +89,6 @@ function Coupon(props: couponProps): JSX.Element {
             <Button onClick={handleEditCoupon}>
               <EditIcon />
             </Button>
-            {/* <ActionUserForm verb={AdminVerbs.DELETE} formType="coupon" /> */}
             <Button onClick={handleClickOpen}>
               <DeleteIcon />
             </Button>
@@ -110,17 +98,12 @@ function Coupon(props: couponProps): JSX.Element {
   }
 
   return showForm ? (
-    // <Grid item key={props.coupon.id} xs={12} sm={12} md={4} xl={2.4} lg={3}>
     <CouponForm
       verb={AdminVerbs.UPDATE}
       coupon={props.coupon}
       handleClose={handleCancel}
     />
   ) : (
-    // </Grid>
-    //TODO: move gridItem to showCoupons
-
-    // <Grid item key={props.coupon.id} xs={12} sm={12} md={4} xl={2.4} lg={3}>
     <React.Fragment>
       <Card sx={{ height: "70vh", display: "flow", flexDirection: "column" }}>
         <CardMedia
