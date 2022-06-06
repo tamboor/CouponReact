@@ -277,5 +277,3 @@ export const updateCompany = (company: CompanyModel) => {
     });
   };
 };
-
-//TODO: delete coupons state
