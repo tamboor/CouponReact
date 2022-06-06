@@ -11,13 +11,27 @@ import {
 import CopyrightIcon from "@mui/icons-material/Copyright";
 import React, { Component } from "react";
 import { colors } from "../../../../utils/colors";
+import { useNavigate } from "react-router-dom";
 
 function Footer(): JSX.Element {
+  const navigate = useNavigate();
+
   return (
     <React.Fragment>
       <AppBar position="sticky" sx={{ backgroundColor: colors.BLACK }}>
         <Toolbar>
-          hello
+          <Typography
+            onClick={() => {
+              navigate("/aboutUs");
+            }}
+            sx={{
+              flexGrow: 1,
+              fontFamily: "Abril Fatface",
+              "&:hover": { cursor: "pointer" },
+            }}
+          >
+            About us
+          </Typography>
           {/* <IconButton color="inherit" aria-label="open drawer">
               <MenuIcon />
             </IconButton>

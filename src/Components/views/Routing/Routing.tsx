@@ -8,6 +8,7 @@ import CompanyHomepage from "../../user-specific/company/CompanyHomepage/Company
 import CustomerHomepage from "../../user-specific/customer/CustomerHomepage/CustomerHomepage";
 import AdminHomepage from "../../user-specific/admin/AdminHomepage/AdminHomepage";
 import GuestHomepage from "../../user-specific/guest/GuestHomepage/GuestHomepage";
+import AboutUs from "../contents/AboutUs/AboutUs";
 
 function Routing(): JSX.Element {
   return (
@@ -20,6 +21,7 @@ function Routing(): JSX.Element {
         <Route path="/company-home" element={<CompanyHomepage />} />
         <Route path="/customer-home" element={<CustomerHomepage />} />
         <Route path="/admin-home" element={<AdminHomepage />} />
+        <Route path="/AboutUs" element={<AboutUs />} />
         <Route path="*" element={<Notfound />} />
       </Routes>
     </div>
