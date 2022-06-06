@@ -9,5 +9,4 @@ export enum colors {
   YELLOW = "#F0EB64",
   MUSTARD = "#FCC60B",
   ORANGE = "#FE6D24",
-  //   ORANGE = "orange",
 }
