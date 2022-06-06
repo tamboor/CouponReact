@@ -17,7 +17,6 @@ interface myCouponsProps {
 function MyCoupons(props: myCouponsProps): JSX.Element {
   return (
     <div className="MyCoupons">
-      <Typography>My Coupons</Typography>
       <Container>
         <Grid container spacing={5} marginTop={0.005}>
           {props.coupons.map((c: CouponModel, index: number) => (
