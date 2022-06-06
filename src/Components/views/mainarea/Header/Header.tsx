@@ -7,12 +7,14 @@ import {
   Slide,
   Toolbar,
   Typography,
+  useColorScheme,
   useScrollTrigger,
   Zoom,
 } from "@mui/material";
 import React from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useTypedSelector } from "../../../../hooks/useTypedSelector";
+import { colors } from "../../../../utils/colors";
 
 import LoginButton from "../../header-content/LoginButton/LoginButton";
 import RegisterButton from "../../header-content/RegisterButton/RegisterButton";
@@ -72,9 +74,9 @@ function Header(props: Props): JSX.Element {
     <React.Fragment>
       <CssBaseline />
       <HideOnScroll {...props}>
-        <AppBar>
+        <AppBar sx={{ backgroundColor: colors.PURPLE }}>
           <Toolbar>
-            {/* <Typography
+            <Typography
               variant="h6"
               component="div"
               sx={{
@@ -100,12 +102,8 @@ function Header(props: Props): JSX.Element {
               }}
             >
               Coupon Mania
-            </Typography> */}
+            </Typography>
 
-            <img
-              src="C:\Users\User\Desktop\CouponReact\src\Assets\images\logo.png"
-              alt="logo"
-            />
             {state.users.userRole === "customer" && <ShoppingCart />}
             {state.users.userRole === "guest" && <RegisterButton />}
             {state.users.userRole === "guest" ? <LoginButton /> : <UserMenu />}

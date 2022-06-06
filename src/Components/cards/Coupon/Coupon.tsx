@@ -31,6 +31,7 @@ import DeletePrompt from "../../forms/DeletePrompt/DeletePrompt";
 import { DeleteableEntity } from "../../forms/DeleteableEntities";
 import EditIcon from "@mui/icons-material/Edit";
 import { deleteCoupon } from "../../../utils/fetchCompanyCoupons";
+import { colors } from "../../../utils/colors";
 
 // interface couponProps {
 //   amount: number;
@@ -105,7 +106,16 @@ function Coupon(props: couponProps): JSX.Element {
     />
   ) : (
     <React.Fragment>
-      <Card sx={{ height: "70vh", display: "flow", flexDirection: "column" }}>
+      {/* <Box sx={{ border: 1, borderColor: "secondary.main" }}> */}
+      <Card
+        sx={{
+          height: "70vh",
+          display: "flow",
+          flexDirection: "column",
+          border: 5,
+          borderColor: colors.LIGHT_PURPLE,
+        }}
+      >
         <CardMedia
           component="img"
           sx={{
@@ -177,6 +187,8 @@ function Coupon(props: couponProps): JSX.Element {
           {renderSwitch()}
         </CardActions>
       </Card>
+      {/* </Box> */}
+
       <Dialog open={open} onClose={handleClose}>
         <DeletePrompt
           handleClose={handleClose}

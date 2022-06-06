@@ -10,11 +10,12 @@ import {
 } from "@mui/material";
 import CopyrightIcon from "@mui/icons-material/Copyright";
 import React, { Component } from "react";
+import { colors } from "../../../../utils/colors";
 
 function Footer(): JSX.Element {
   return (
     <React.Fragment>
-      <AppBar position="sticky" color="primary" sx={{ top: "auto", bottom: 0 }}>
+      <AppBar position="sticky" sx={{ backgroundColor: colors.BLACK }}>
         <Toolbar>
           hello
           {/* <IconButton color="inherit" aria-label="open drawer">

@@ -14,10 +14,12 @@ import {
   Pagination,
   MenuItem,
   Select,
+  useColorScheme,
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useTypedSelector } from "../../../../hooks/useTypedSelector";
 import { CouponModel } from "../../../../Models/CouponModel";
+import { colors } from "../../../../utils/colors";
 import AddCoupon from "../../../cards/AddCoupon/AddCoupon";
 import Coupon from "../../../cards/Coupon/Coupon";
 import "./CouponBrowser.css";
@@ -159,15 +161,28 @@ function CouponBrowser(props: ICouponListProps): JSX.Element {
 
   return (
     <div className="CouponBrowser">
-      <Box>
+      <Box
+        sx={{
+          backgroundColor: colors.LIGHT_BLUE,
+          border: 5,
+          borderRadius: "1%",
+          borderColor: colors.PURPLE,
+        }}
+      >
         <Container>
-          <Box sx={{ display: "flex" }}>
+          <Box margin={2} sx={{ display: "flex" }}>
             <Box sx={{ flexGrow: 4 }}>
               <Button
                 onClick={handleClick}
                 aria-haspopup="true"
                 aria-expanded={open ? "true" : undefined}
                 disableElevation
+                variant="outlined"
+                sx={{
+                  color: colors.WHITE,
+                  backgroundColor: colors.LIGHT_PURPLE,
+                  background,
+                }}
               >
                 Refine
               </Button>
@@ -266,12 +281,13 @@ function CouponBrowser(props: ICouponListProps): JSX.Element {
             </Box>
           </Box>
 
-          <Box sx={{ flexGrow: 1 }}>
+          <Box sx={{ flexGrow: 1, position: "center" }}>
             <TextField
               id="outlined-basic"
               label="Search"
               variant="outlined"
               onChange={handleChangeSearchbar}
+              sx={{ backgroundColor: "white", borderRadius: "5%" }}
             />
           </Box>
           <Grid container spacing={5} marginTop={0.005}>
