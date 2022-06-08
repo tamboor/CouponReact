@@ -22,6 +22,7 @@ import { CouponModel } from "../../../../Models/CouponModel";
 import { colors } from "../../../../utils/colors";
 import AddCoupon from "../../../cards/AddCoupon/AddCoupon";
 import Coupon from "../../../cards/Coupon/Coupon";
+import CouponList from "../CouponList/CouponList";
 import "./CouponBrowser.css";
 
 interface ICouponListFilterState {
@@ -73,7 +74,7 @@ function CouponBrowser(props: ICouponListProps): JSX.Element {
   const [sortState, setSortState] = useState<ICouponListSortState>({
     compareMethod: compareCouponsByEndDate,
     couponsSorted: filterState.couponsFiltered,
-    limit: 8,
+    limit: state.users.userRole === "company" ? 7 : 8,
     order: 1,
     page: 1,
   });
@@ -154,19 +155,16 @@ function CouponBrowser(props: ICouponListProps): JSX.Element {
       .slice(startIndex, startIndex + sortState.limit);
   }
 
-  const customerCoupons = props.customerCoupons
+  const customerCoupons: number[] = props.customerCoupons
     ? props.customerCoupons.map((c) => c.id)
     : [];
-  const cartCoupons = state.users.cart.map((c) => c.id);
+  const cartCoupons: number[] = state.users.cart.map((c) => c.id);
 
   return (
     <div className="CouponBrowser">
       <Box
         sx={{
-          backgroundColor: colors.LIGHT_BLUE,
           border: 5,
-          borderRadius: "1%",
-          borderColor: colors.PURPLE,
         }}
       >
         <Container>
@@ -199,7 +197,6 @@ function CouponBrowser(props: ICouponListProps): JSX.Element {
                       control={
                         <Checkbox
                           name="xtreme"
-                          // defaultChecked={true}
                           checked={filterState.categories.xtreme}
                           onChange={handleCheckbox}
                         />
@@ -210,7 +207,6 @@ function CouponBrowser(props: ICouponListProps): JSX.Element {
                       control={
                         <Checkbox
                           name="tattoos"
-                          // defaultChecked={true}
                           checked={filterState.categories.tattoos}
                           onChange={handleCheckbox}
                         />
@@ -221,7 +217,6 @@ function CouponBrowser(props: ICouponListProps): JSX.Element {
                       control={
                         <Checkbox
                           name="food"
-                          // defaultChecked={true}
                           checked={filterState.categories.food}
                           onChange={handleCheckbox}
                         />
@@ -232,7 +227,6 @@ function CouponBrowser(props: ICouponListProps): JSX.Element {
                       control={
                         <Checkbox
                           name="vacation"
-                          // defaultChecked={true}
                           checked={filterState.categories.vacation}
                           onChange={handleCheckbox}
                         />
@@ -243,7 +237,6 @@ function CouponBrowser(props: ICouponListProps): JSX.Element {
                       control={
                         <Checkbox
                           name="cars"
-                          // defaultChecked={true}
                           checked={filterState.categories.cars}
                           onChange={handleCheckbox}
                         />
@@ -296,50 +289,13 @@ function CouponBrowser(props: ICouponListProps): JSX.Element {
               sx={{ backgroundColor: "white", borderRadius: "5%" }}
             />
           </Box>
-          <Grid container spacing={5} marginTop={0.005}>
-            {state.users.userRole === "company" && (
-              // <Grid item xs={3}>
-              <Grid item key={0} xs={12} sm={12} md={4} xl={2.4} lg={3}>
-                <AddCoupon />
-              </Grid>
-            )}
-            {state.users.userRole === "customer"
-              ? getSortedCoupons()
-                  .map((coupon: CouponModel, index: number) => (
-                    <Grid
-                      item
-                      key={index + 1}
-                      xs={12}
-                      sm={12}
-                      md={4}
-                      xl={2.4}
-                      lg={3}
-                    >
-                      <Coupon
-                        coupon={coupon}
-                        isPurchased={
-                          customerCoupons.includes(coupon.id) ||
-                          cartCoupons.includes(coupon.id)
-                        }
-                      />
-                    </Grid>
-                  ))
-                  .sort()
-              : getSortedCoupons().map((coupon: CouponModel, index: number) => (
-                  <Grid
-                    item
-                    key={index + 1}
-                    xs={12}
-                    sm={12}
-                    md={4}
-                    xl={2.4}
-                    lg={3}
-                  >
-                    <Coupon coupon={coupon} isPurchased={false} />
-                  </Grid>
-                ))}
-          </Grid>
+          <AddCoupon />
+          <CouponList
+            coupons={getSortedCoupons()}
+            ignoredCoupons={customerCoupons.concat(cartCoupons)}
+          />
           <Pagination
+            sx={{ display: "flex", justifyContent: "center" }}
             count={Math.ceil(props.allCoupons.length / sortState.limit)}
             onChange={(event, value) => {
               setSortState({ ...sortState, page: value });
@@ -352,3 +308,47 @@ function CouponBrowser(props: ICouponListProps): JSX.Element {
 }
 //TODO: add chose sort method
 export default CouponBrowser;
+
+{
+  /* <Grid container spacing={5} marginTop={0.005}> */
+}
+// {state.users.userRole === "company" && (
+// <Grid item xs={3}>
+// <Grid item key={0} xs={12} sm={12} md={4} xl={2.4} lg={3}>
+//   <AddCoupon />
+// </Grid>
+//   )}
+//   {state.users.userRole === "customer"
+//     ? getSortedCoupons().map((coupon: CouponModel, index: number) => (
+//         <Grid
+//           item
+//           key={index + 1}
+//           xs={12}
+//           sm={12}
+//           md={4}
+//           xl={2.4}
+//           lg={3}
+//         >
+//           <Coupon
+//             coupon={coupon}
+//             isPurchased={
+//               customerCoupons.includes(coupon.id) ||
+//               cartCoupons.includes(coupon.id)
+//             }
+//           />
+//         </Grid>
+//       ))
+//     : getSortedCoupons().map((coupon: CouponModel, index: number) => (
+//         <Grid
+//           item
+//           key={index + 1}
+//           xs={12}
+//           sm={12}
+//           md={4}
+//           xl={2.4}
+//           lg={3}
+//         >
+//           <Coupon coupon={coupon} isPurchased={false} />
+//         </Grid>
+//       ))}
+// </Grid>

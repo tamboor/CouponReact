@@ -1,12 +1,10 @@
-import { Box, Card, Grid, makeStyles, Typography } from "@mui/material";
+import { Box, Card, Grid, Link, makeStyles, Typography } from "@mui/material";
 import "./AboutUs.css";
 
 interface CardValues {
   title: string;
-  description: string;
+  // description: string;
   email: string;
-  phone: string;
-  city: string;
   githubLink: string;
   linkedinLink: string;
 }
@@ -16,14 +14,19 @@ function AboutUs(): JSX.Element {
     //TODO: sort css
     return (
       <Grid item xs={6}>
-        <Card style={{ padding: "3vh" }}>
+        <Card style={{ padding: "3vh", margin: "2vh" }}>
           <Typography sx={{ padding: "1vh" }}>{values.title}</Typography>
-          <Typography sx={{ padding: "1vh" }}>{values.description}</Typography>
+          {/* <Typography sx={{ padding: "1vh" }}>{values.description}</Typography> */}
           <Typography sx={{ padding: "1vh" }}>{values.email}</Typography>
-          <Typography sx={{ padding: "1vh" }}>{values.phone}</Typography>
-          <Typography sx={{ padding: "1vh" }}>{values.city}</Typography>
-          <Typography sx={{ padding: "1vh" }}>{values.githubLink}</Typography>
-          <Typography sx={{ padding: "1vh" }}>{values.linkedinLink}</Typography>
+          {/* <Typography sx={{ padding: "1vh" }}>{values.githubLink}</Typography> */}
+          {/* <Typography sx={{ padding: "1vh" }}>{values.linkedinLink}</Typography> */}
+          <Link target="_blank" href={values.githubLink}>
+            Github
+          </Link>
+          <br />
+          <Link target="_blank" href={values.linkedinLink}>
+            Linkedin
+          </Link>
         </Card>
       </Grid>
     );
@@ -38,13 +41,22 @@ function AboutUs(): JSX.Element {
         style={{ padding: "5vh" }}
       >
         {getUsCard({
+          title: "Nir Katz",
+          email: "nirkatz20exc@gmail.com",
+          githubLink: "https://github.com/tamboor",
+          linkedinLink: "https://www.linkedin.com/in/nir-katz20/",
+        })}
+        {getUsCard({
           title: "Alon Mintz",
-          description: "Fullstack Developer",
-          email: "alon mail",
-          phone: "054-1234567(Fake)",
-          city: "Tel Aviv",
-          githubLink: "githubLink",
-          linkedinLink: "LinkedinLink",
+          email: "alonmintz@gmail.com",
+          githubLink: "https://github.com/alonmintz",
+          linkedinLink: "https://www.linkedin.com/in/alon-mintz/",
+        })}
+        {getUsCard({
+          title: "Ran Manor",
+          email: "Raran937@gmail.com",
+          githubLink: "https://github.com/ran-manor",
+          linkedinLink: "https://www.linkedin.com/in/ran-manor-7b86ab186/",
         })}
       </Grid>
     </div>

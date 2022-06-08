@@ -22,7 +22,7 @@ function Footer(): JSX.Element {
         <Toolbar>
           <Typography
             onClick={() => {
-              navigate("/aboutUs");
+              navigate("/AboutUs");
             }}
             sx={{
               flexGrow: 1,

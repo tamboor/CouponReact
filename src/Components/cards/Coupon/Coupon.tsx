@@ -70,13 +70,23 @@ function Coupon(props: couponProps): JSX.Element {
     switch (state.users.userRole) {
       case "customer":
         return (
-          <Button
-            onClick={handleAddToCart}
-            disabled={props.isPurchased}
-            sx={{ color: colors.PURPLE }}
+          <CardActions
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              backgroundColor: colors.LIGHT_BLUE,
+            }}
           >
-            <AddShoppingCartIcon />
-          </Button>
+            <Grid container justifyContent={"center"}>
+              <Button
+                onClick={handleAddToCart}
+                disabled={props.isPurchased}
+                sx={{ color: colors.PURPLE }}
+              >
+                ADD TO MY SHOPPING CART{" "}
+              </Button>
+            </Grid>
+          </CardActions>
         );
       case "company":
         return (
@@ -100,21 +110,17 @@ function Coupon(props: couponProps): JSX.Element {
     />
   ) : (
     <React.Fragment>
-      {/* <Box sx={{ border: 1, borderColor: "secondary.main" }}> */}
       <Card
         sx={{
-          height: "70vh",
+          height: "100%",
           display: "flow",
           flexDirection: "column",
-          border: 5,
-          borderColor: colors.LIGHT_PURPLE,
         }}
       >
         <CardMedia
           component="img"
           sx={{
-            // 16:9
-            height: "40%",
+            height: "35%",
             paddingTop: "0%",
             paddingBottom: "12%",
           }}
@@ -130,7 +136,7 @@ function Coupon(props: couponProps): JSX.Element {
                 flexDirection="row"
                 alignContent="center"
                 justifyContent="flex-start"
-                height="15vh"
+                height="10vh"
               >
                 <Typography gutterBottom variant="h5" component="h2">
                   {props.coupon.title}
@@ -158,8 +164,8 @@ function Coupon(props: couponProps): JSX.Element {
             </Grid>
           </Grid>
 
-          <Box height="20vh">
-            <Box height="10vh">
+          <Box height="15vh">
+            <Box height="50%">
               <Typography>{props.coupon.description}</Typography>
             </Box>
 
@@ -177,12 +183,8 @@ function Coupon(props: couponProps): JSX.Element {
             </Box>
           </Box>
         </CardContent>
-        <CardActions sx={{ position: "relative" }}>
-          {renderSwitch()}
-        </CardActions>
+        {renderSwitch()}
       </Card>
-      {/* </Box> */}
-
       <Dialog open={open} onClose={handleClose}>
         <DeletePrompt
           handleClose={handleClose}

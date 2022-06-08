@@ -51,7 +51,7 @@ function CustomerRow(props: customerSingleProp): JSX.Element {
   useEffect(() => {}, []);
 
   const loadCoupons = () => {
-    const url = `http://localhost:8080/admin/getCustomerCoupons/${props.singleCustomer.id}`;
+    const url = `${host}/admin/getCustomerCoupons/${props.singleCustomer.id}`;
     axios
       .get(url, getAuthHeaders())
       .then((response) => {

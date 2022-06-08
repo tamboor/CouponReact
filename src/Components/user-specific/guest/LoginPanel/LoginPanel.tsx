@@ -121,6 +121,7 @@ function LoginPanel(props: LoginProps): JSX.Element {
             })}
             label="Password"
             variant="outlined"
+            type="password"
           />
           {errors.userPass && <p>{errors.userPass.message}</p>}
           <br />

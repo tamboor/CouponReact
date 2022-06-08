@@ -32,13 +32,13 @@ const theme = createTheme({
 
 root.render(
   <ThemeProvider theme={theme}>
-    <BrowserRouter>
+    <MemoryRouter>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <Layout />
         </PersistGate>
       </Provider>
-    </BrowserRouter>
+    </MemoryRouter>
   </ThemeProvider>
 );
 

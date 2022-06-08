@@ -3,6 +3,7 @@ import { Box, Grid } from "@mui/material";
 import Routing from "../../Routing/Routing";
 import "./Main.css";
 import background from "../../../../Assets/images/bg_shapes.png";
+import { colors } from "../../../../utils/colors";
 
 function Main(): JSX.Element {
   return (
@@ -10,7 +11,8 @@ function Main(): JSX.Element {
     <Box
       minHeight="100vh"
       paddingTop={5}
-      sx={{ backgroundImage: `url(${background})` }}
+      sx={{ backgroundColor: colors.WHITE }}
+      // sx={{ backgroundColor:  }}
     >
       {/* <Grid container component="main" position="sticky"> */}
       <Routing />
