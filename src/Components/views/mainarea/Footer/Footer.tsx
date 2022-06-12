@@ -32,6 +32,10 @@ function Footer(): JSX.Element {
           >
             About us
           </Typography>
+          <Typography variant="body1" style={{ fontSize: "0.7rem" }}>
+            <CopyrightIcon fontSize="small" />
+            Nir Katz, Alon Mintz & Ran Manor
+          </Typography>
           {/* <IconButton color="inherit" aria-label="open drawer">
               <MenuIcon />
             </IconButton>

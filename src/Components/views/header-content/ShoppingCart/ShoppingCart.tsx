@@ -5,9 +5,10 @@ import Badge from "@mui/material/Badge";
 import MailIcon from "@mui/icons-material/Mail";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useState } from "react";
-import { Button } from "@mui/material";
+import { Button, useColorScheme } from "@mui/material";
 import { useTypedSelector } from "../../../../hooks/useTypedSelector";
 import { useNavigate } from "react-router-dom";
+import { colors } from "../../../../utils/colors";
 function ShoppingCart(): JSX.Element {
   const state = useTypedSelector((state) => state);
   //   const [items, setItems] = useState<Number>(0);
@@ -19,11 +20,7 @@ function ShoppingCart(): JSX.Element {
       }}
     >
       <Stack spacing={4} direction="row" sx={{ color: "action.active" }}>
-        <Badge
-          color="secondary"
-          badgeContent={state.users.cart.length}
-          max={99}
-        >
+        <Badge color="primary" badgeContent={state.users.cart.length} max={99}>
           <ShoppingCartIcon />
         </Badge>
       </Stack>
