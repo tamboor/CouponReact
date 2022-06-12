@@ -289,7 +289,7 @@ function CouponBrowser(props: ICouponListProps): JSX.Element {
               sx={{ backgroundColor: "white", borderRadius: "5%" }}
             />
           </Box>
-          <AddCoupon />
+          {state.users.userRole === "company" && <AddCoupon />}
           <CouponList
             coupons={getSortedCoupons()}
             ignoredCoupons={customerCoupons.concat(cartCoupons)}

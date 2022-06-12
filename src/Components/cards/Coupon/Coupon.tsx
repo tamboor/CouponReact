@@ -163,25 +163,29 @@ function Coupon(props: couponProps): JSX.Element {
               </Box>
             </Grid>
           </Grid>
-
-          <Box height="15vh">
-            <Box height="50%">
-              <Typography>{props.coupon.description}</Typography>
-            </Box>
-
-            <Box display="flex" flexDirection="row" alignContent="center">
+          <Box height="50%">
+            <Typography>{props.coupon.description}</Typography>
+          </Box>
+          <Grid container spacing={2}>
+            {/* <Box height="15vh"> */}
+            {/* <Box display="sticky" flexDirection="row" alignContent="center"> */}
+            <Grid item xs={2}>
               <EventBusyIcon
                 sx={{
                   width: "2rem",
                   marginRight: 0.5,
                   marginTop: 0.5,
                 }}
-              />
+              />{" "}
+            </Grid>
+            <Grid item xs={10}>
               <Typography variant="h6" component="p">
                 {props.coupon.endDate}
               </Typography>
-            </Box>
-          </Box>
+            </Grid>
+            {/* </Box> */}
+            {/* </Box> */}
+          </Grid>
         </CardContent>
         {renderSwitch()}
       </Card>
